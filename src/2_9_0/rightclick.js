@@ -28,15 +28,16 @@
   var l = () => {
     $(() => {
       $('#doubleclick, #chromeosdouble').click(() => {
-        i({ blockDoubleclickAlert: !0 }), window.close()
+        i({ blockDoubleclickAlert: true }), window.close()
       }),
         $('#installplugin').click(() => {
-          i({ blockDoubleclickAlert: !1 }),
+          i({ blockDoubleclickAlert: false }),
             chrome.permissions.request(
               { permissions: ['nativeMessaging'] },
               (t) => {
                 if (t || n.forceInstallRightclick) {
-                  n.forceInstallRightclick && i({ forceInstallRightclick: !1 }),
+                  n.forceInstallRightclick &&
+                    i({ forceInstallRightclick: false }),
                     chrome.runtime.getBackgroundPage((t) => {
                       t.connectNative(10)
                     })

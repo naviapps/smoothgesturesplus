@@ -8,6 +8,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   rules: {
-    //yoda: ['error', 'always']
+    curly: ['error', 'multi-line'],
+    yoda: 'error'
   }
 }

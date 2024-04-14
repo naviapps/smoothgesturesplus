@@ -105,7 +105,7 @@
             o && a(o[1], 300)
           })
         var o = $.fx.off
-        ;($.fx.off = !0), i(), c(), ($.fx.off = o)
+        ;($.fx.off = true), i(), c(), ($.fx.off = o)
       })
     },
     show: a,

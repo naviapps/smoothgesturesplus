@@ -707,47 +707,60 @@ var SmoothGestures = () => {
     }
   }
 
-  _this.drawGesture = (gesture, width, height, lineWidth) => {
-    var context = ''
-    if (gesture[0] == 's') {
+  _this.drawGesture = (
+    gesture: string,
+    width: number,
+    height: number,
+    lineWidth: number,
+  ) => {
+    let context = ''
+    if (gesture[0] === 's') {
       context = 's'
-      gesture = gesture.substr(1)
-    } else if (gesture[0] == 'l') {
+      gesture = gesture.substring(1)
+    } else if (gesture[0] === 'l') {
       context = 'l'
-      gesture = gesture.substr(1)
-    } else if (gesture[0] == 'i') {
+      gesture = gesture.substring(1)
+    } else if (gesture[0] === 'i') {
       context = 'i'
-      gesture = gesture.substr(1)
+      gesture = gesture.substring(1)
     }
 
-    var c
-    if (gesture[0] == 'r') c = drawRocker(gesture, width)
-    else if (gesture[0] == 'w') c = drawWheel(gesture, width)
-    else if (gesture[0] == 'k') c = drawKey(gesture, width)
-    else c = drawLine(gesture, width, height, lineWidth)
+    let c
+    if (gesture[0] === 'r') {
+      c = drawRocker(gesture, width)
+    } else if (gesture[0] === 'w') {
+      c = drawWheel(gesture, width)
+    } else if (gesture[0] === 'k') {
+      c = drawKey(gesture, width)
+    } else {
+      c = drawLine(gesture, width, height, lineWidth)
+    }
     $(c).css({ 'min-height': '2em', overflow: 'hidden' })
 
     var mess = null
-    if (context == 's')
+    if (context === 's') {
       mess = '* ' + chrome.i18n.getMessage('context_with_selection')
-    else if (context == 'l')
+    } else if (context === 'l') {
       mess = '* ' + chrome.i18n.getMessage('context_on_link')
-    else if (context == 'i')
+    } else if (context === 'i') {
       mess = '* ' + chrome.i18n.getMessage('context_on_image')
-    else if (bg) {
-      //if have reference to the background page (when we are in the options page)
-      if (bg.gestures['s' + gesture])
-        mess = '* ' + chrome.i18n.getMessage('context_not_selection') //skipping some combinations..
-      else if (bg.gestures['l' + gesture] && bg.gestures['i' + gesture])
+    } else if (bg) {
+      // if have reference to the background page (when we are in the options page)
+      if (bg.gestures['s' + gesture]) {
+        mess = '* ' + chrome.i18n.getMessage('context_not_selection')
+        //skipping some combinations..
+      } else if (bg.gestures['l' + gesture] && bg.gestures['i' + gesture]) {
         mess = '* ' + chrome.i18n.getMessage('context_not_links_images')
-      else if (bg.gestures['l' + gesture])
+      } else if (bg.gestures['l' + gesture]) {
         mess = '* ' + chrome.i18n.getMessage('context_not_link')
-      else if (bg.gestures['i' + gesture])
+      } else if (bg.gestures['i' + gesture]) {
         mess = '* ' + chrome.i18n.getMessage('context_not_image')
+      }
     }
 
-    if (!mess) return c
-    else
+    if (!mess) {
+      return c
+    } else {
       return $('<div>')
         .css({ width: width + 'px', overflow: 'hidden' })
         .append(
@@ -761,9 +774,10 @@ var SmoothGestures = () => {
             .text(mess),
         )
         .append(c)
+    }
   }
   const drawLine = (
-    gesture,
+    gesture: string,
     width: number,
     height: number,
     lineWidth: number,
@@ -782,7 +796,7 @@ var SmoothGestures = () => {
       ',' +
       settings.trailColor.a +
       ')'
-    ctx.lineWidth = lineWidth ? lineWidth : 3
+    ctx.lineWidth = lineWidth || 3
     ctx.lineCap = 'butt'
     let step: number = 10
     let tight: number = 2
@@ -793,7 +807,7 @@ var SmoothGestures = () => {
     const max: { x: number, y: number } = { x: 0, y: 0 }
     const min: { x: number, y: number } = { x: 0, y: 0 }
 
-    const tip = (dir) => {
+    const tip = (dir: string): void => {
       prev = curr
       ctx.lineTo(prev.x, prev.y)
       if (dir === 'U') {
@@ -816,7 +830,7 @@ var SmoothGestures = () => {
       ctx.lineTo(curr.x, curr.y)
       minmax()
     }
-    var curve = (dir) => {
+    const curve = (dir): void => {
       prev = curr
       ctx.lineTo(prev.x, prev.y)
       if (dir === 'UD') {
@@ -825,25 +839,25 @@ var SmoothGestures = () => {
         ctx.lineTo(prev.x, prev.y - step)
         ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false)
         ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir === 'UL')
+      } else if (dir === 'UL') {
         ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true)
-      else if (dir === 'UR')
+      } else if (dir === 'UR') {
         ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false)
-      else if (dir === 'DU') {
+      } else if (dir === 'DU') {
         curr = { x: prev.x, y: prev.y + step }
         minmax()
         ctx.lineTo(prev.x, prev.y + step)
         ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true)
         ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir === 'DL')
+      } else if (dir === 'DL') {
         ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false)
-      else if (dir === 'DR')
+      } else if (dir === 'DR') {
         ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true)
-      else if (dir === 'LU')
+      } else if (dir === 'LU') {
         ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false)
-      else if (dir === 'LD')
+      } else if (dir === 'LD') {
         ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true)
-      else if (dir === 'LR') {
+      } else if (dir === 'LR') {
         curr = { x: prev.x - step, y: prev.y }
         minmax()
         ctx.lineTo(prev.x - step, prev.y)
@@ -913,17 +927,22 @@ var SmoothGestures = () => {
 
     ctx.beginPath()
     tip(gesture[0])
-    for (i = 0; i < gesture.length - 1; i++) curve(gesture[i] + gesture[i + 1])
+    for (let i = 0; i < gesture.length - 1; i++) {
+      curve(gesture[i] + gesture[i + 1])
+    }
     tip(gesture[gesture.length - 1])
     ctx.stroke()
 
-    var center = { x: (max.x + min.x) / 2, y: (max.y + min.y) / 2 }
-    var wr = (max.x - min.x + step) / width
-    var hr = (max.y - min.y + step) / height
-    var ratio = hr > wr ? hr : wr
-    step = step / ratio
-    sep = sep / ratio
-    tight = tight / ratio
+    const center: { x: number, y: number } = {
+      x: (max.x + min.x) / 2,
+      y: (max.y + min.y) / 2,
+    }
+    const wr: number = (max.x - min.x + step) / width
+    const hr: number = (max.y - min.y + step) / height
+    const ratio: number = hr > wr ? hr : wr
+    step /= ratio
+    sep /= ratio
+    tight /= ratio
     if (tight > 6) tight = 6
     curr = { x: 0, y: 0 }
 
@@ -932,7 +951,9 @@ var SmoothGestures = () => {
     ctx.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio)
     ctx.beginPath()
     tip(gesture[0])
-    for (i = 0; i < gesture.length - 1; i++) curve(gesture[i] + gesture[i + 1])
+    for (let i = 0; i < gesture.length - 1; i++) {
+      curve(gesture[i] + gesture[i + 1])
+    }
     tip(gesture[gesture.length - 1])
     ctx.stroke()
     ctx.fillStyle =
@@ -946,35 +967,35 @@ var SmoothGestures = () => {
       settings.trailColor.a +
       ')'
     ctx.beginPath()
-    if (gesture[gesture.length - 1] == 'U') {
+    if (gesture[gesture.length - 1] === 'U') {
       ctx.moveTo(curr.x - 5, curr.y + 2)
       ctx.lineTo(curr.x + 5, curr.y + 2)
       ctx.lineTo(curr.x, curr.y - 3)
-    } else if (gesture[gesture.length - 1] == 'D') {
+    } else if (gesture[gesture.length - 1] === 'D') {
       ctx.moveTo(curr.x - 5, curr.y - 2)
       ctx.lineTo(curr.x + 5, curr.y - 2)
       ctx.lineTo(curr.x, curr.y + 3)
-    } else if (gesture[gesture.length - 1] == 'L') {
+    } else if (gesture[gesture.length - 1] === 'L') {
       ctx.moveTo(curr.x + 2, curr.y - 5)
       ctx.lineTo(curr.x + 2, curr.y + 5)
       ctx.lineTo(curr.x - 3, curr.y)
-    } else if (gesture[gesture.length - 1] == 'R') {
+    } else if (gesture[gesture.length - 1] === 'R') {
       ctx.moveTo(curr.x - 2, curr.y - 5)
       ctx.lineTo(curr.x - 2, curr.y + 5)
       ctx.lineTo(curr.x + 3, curr.y)
-    } else if (gesture[gesture.length - 1] == '1') {
+    } else if (gesture[gesture.length - 1] === '1') {
       ctx.moveTo(curr.x - 2, curr.y - 6)
       ctx.lineTo(curr.x + 6, curr.y + 2)
       ctx.lineTo(curr.x - 2, curr.y + 2)
-    } else if (gesture[gesture.length - 1] == '3') {
+    } else if (gesture[gesture.length - 1] === '3') {
       ctx.moveTo(curr.x + 2, curr.y - 6)
       ctx.lineTo(curr.x - 6, curr.y + 2)
       ctx.lineTo(curr.x + 2, curr.y + 2)
-    } else if (gesture[gesture.length - 1] == '7') {
+    } else if (gesture[gesture.length - 1] === '7') {
       ctx.moveTo(curr.x - 2, curr.y + 6)
       ctx.lineTo(curr.x + 6, curr.y - 2)
       ctx.lineTo(curr.x - 2, curr.y - 2)
-    } else if (gesture[gesture.length - 1] == '9') {
+    } else if (gesture[gesture.length - 1] === '9') {
       ctx.moveTo(curr.x + 2, curr.y + 6)
       ctx.lineTo(curr.x - 6, curr.y - 2)
       ctx.lineTo(curr.x + 2, curr.y - 2)
@@ -985,9 +1006,10 @@ var SmoothGestures = () => {
 
     return c
   }
-  var drawRocker = (gesture, width) => {
-    var first = gesture[1] == 'L' ? 0 : gesture[1] == 'M' ? 1 : 2
-    var second = gesture[2] == 'L' ? 0 : gesture[2] == 'M' ? 1 : 2
+
+  const drawRocker = (gesture: string, width: number) => {
+    const first: number = gesture[1] === 'L' ? 0 : gesture[1] === 'M' ? 1 : 2
+    const second: number = gesture[2] === 'L' ? 0 : gesture[2] === 'M' ? 1 : 2
     return $('<div>')
       .css({ width: width + 'px' })
       .append(
@@ -1015,7 +1037,8 @@ var SmoothGestures = () => {
           }),
       )
   }
-  var drawWheel = (gesture, width) => {
+
+  const drawWheel = (gesture: string, width: number) => {
     return $('<div>')
       .css({ width: width + 'px' })
       .append(
@@ -1038,6 +1061,7 @@ var SmoothGestures = () => {
           }),
       )
   }
+
   const codeCharMap = {}
   codeCharMap[8] = 'Backspace'
   codeCharMap[9] = 'Tab'
@@ -1160,7 +1184,7 @@ var SmoothGestures = () => {
     }
   }
 
-  var enable = () => {
+  const enable = (): void => {
     if (enabled) return
     enabled = true
 
@@ -1173,7 +1197,7 @@ var SmoothGestures = () => {
     window.addEventListener('keydown', keyDownCapture, true)
   }
 
-  _this.disable = () => {
+  _this.disable = (): void => {
     if (!enabled) return
     enabled = false
 
@@ -1204,19 +1228,26 @@ var SmoothGestures = () => {
 
 if (
   window.SGinjectscript &&
-  window.SGinjectscript.constructor == HTMLScriptElement
+  window.SGinjectscript.constructor === HTMLScriptElement
 ) {
-  var match = window.SGinjectscript.src.match(/([^a-p]|^)([a-p]{32})([^a-p]|$)/)
-  if (match) window.SGextId = match[2]
-  var scripts = document.querySelectorAll(
+  const match = window.SGinjectscript.src.match(
+    /([^a-p]|^)([a-p]{32})([^a-p]|$)/,
+  )
+  if (match) {
+    window.SGextId = match[2]
+  }
+  const scripts = document.querySelectorAll(
     'script[src^=chrome-extension\\:\\/\\/]',
   )
-  for (var i = 0; i < scripts.length; i++)
+  for (let i = 0; i < scripts.length; i++) {
     scripts[i].parentNode.removeChild(scripts[i])
+  }
 }
 
 if (window.SG) {
-  if (!window.SG.enabled()) window.SG.connect()
+  if (!window.SG.enabled()) {
+    window.SG.connect()
+  }
 } else {
   window.SG = new SmoothGestures()
 }

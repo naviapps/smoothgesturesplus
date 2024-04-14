@@ -162,18 +162,18 @@
         var o = document.createEvent('MouseEvents')
         o.initMouseEvent(
           'click',
-          !0,
-          !1,
+          true,
+          false,
           window,
           0,
           0,
           0,
           0,
           0,
-          !1,
-          !1,
-          !1,
-          !1,
+          false,
+          false,
+          false,
+          false,
           0,
           null,
         ),
@@ -202,13 +202,13 @@
                         '<',
                       ))
                     var s = JSON.parse(e)
-                    if ('Smooth Gestures Settings' != s.title) return !1
+                    if ('Smooth Gestures Settings' != s.title) return false
                     for (var o in (s.gestures && (l.gestures = s.gestures),
                     s.settings))
                       -1 != a.indexOf(o) && (l[o] = s.settings[o])
-                    return i(l), alert('Import Successful'), !0
+                    return i(l), alert('Import Successful'), true
                   } catch (e) {}
-                  return !1
+                  return false
                 })(t) || alert('Import Failed')
               }
               if (n) {
@@ -240,7 +240,7 @@
     o = () => {
       $(() => {
         var e = location.hash.replace(/^#(.+)$/, '$1') || l.lastpage || 'config'
-        ;($.fx.off = !0),
+        ;($.fx.off = true),
           pages.init(),
           $('.upgradebutton').remove(),
           d.init(),
@@ -257,7 +257,7 @@
                     chrome.runtime.getManifest().version,
                   ]),
                 ),
-                i({ showNoteUpdated: !1 }))
+                i({ showNoteUpdated: false }))
               : $('#note_updated').css({ display: 'none' })
             var e =
               336 - Math.ceil((Date.now() - l.firstinstalled) / 1e3 / 60 / 60)
@@ -290,12 +290,12 @@
                 $('.note_remindrate').css({ display: 'none' }),
               $('.note_remindrate .close').click(() => {
                 $('.note_remindrate').css({ display: 'none' }),
-                  i({ hideNoteRemindRate: !0 })
+                  i({ hideNoteRemindRate: true })
               }),
               l.hideNotePrint && $('#note_print').css({ display: 'none' }),
               $('#note_print .close').click(() => {
                 $('#note_print').css({ display: 'none' }),
-                  i({ hideNotePrint: !0 })
+                  i({ hideNotePrint: true })
               }),
               $('#note_print .button').click(() => {
                 window.print()
@@ -362,7 +362,7 @@
                 i({ blockDoubleclickAlert: 0 == $(this).val() })
               }),
               $('#installplugin,#updateplugin').click(() => {
-                i({ blockDoubleclickAlert: !1 }),
+                i({ blockDoubleclickAlert: false }),
                   chrome.permissions.request(
                     { permissions: ['nativeMessaging'] },
                     (e) => {
@@ -411,7 +411,7 @@
             pages.show(e)
           }, 500),
           setTimeout(() => {
-            pages.show(e), ($.fx.off = !1)
+            pages.show(e), ($.fx.off = false)
           }, 900)
       })
     },
@@ -421,7 +421,7 @@
           descrip: 'Go to Google',
           code: 'location.href = "http://www.google.com";',
           env: 'page',
-          share: !0,
+          share: true,
           context: '',
         },
         t = 'custom' + Math.floor(Math.random() * Math.pow(2, 30)).toString(32)
@@ -510,7 +510,7 @@
             for (var t in e.categories)
               if (e.categories[t].actions) {
                 $('#chooseaction').append(
-                  $('<option>').text(c(t)).prop('disabled', !0),
+                  $('<option>').text(c(t)).prop('disabled', true),
                 )
                 for (var n = 0; n < e.categories[t].actions.length; n++)
                   $('#chooseaction').append(
@@ -520,7 +520,7 @@
                   )
               } else if (e.categories[t].customActions)
                 for (var s in ($('#chooseaction').append(
-                  $('<option>').text('Custom Actions').prop('disabled', !0),
+                  $('<option>').text('Custom Actions').prop('disabled', true),
                 ),
                 l.customactions))
                   $('#chooseaction').append(
@@ -535,8 +535,8 @@
           (d.gesture = null),
           (window.SG.callback = null),
           $('#drawingcanvas').css({ display: 'none' }),
-          window.removeEventListener('mousewheel', d.blockevent, !1),
-          document.removeEventListener('keydown', d.blockevent, !0)
+          window.removeEventListener('mousewheel', d.blockevent, false),
+          document.removeEventListener('keydown', d.blockevent, true)
       },
       choose: () => {
         d.action &&
@@ -577,7 +577,7 @@
             : ($('#doaddgesture').css({ display: 'none' }),
               $('#chooseaction').css({ display: 'block' }),
               $('#chooseaction option:nth-child(1)')
-                .prop('disabled', !0)
+                .prop('disabled', true)
                 .text(t)),
             $('#canvasdescrip').css({ display: 'none' }),
             $('#nowwhat').css({ display: 'block' })
@@ -598,8 +598,8 @@
           !window.SG.callback &&
           ((d.action = e),
           (d.gesture = null),
-          window.addEventListener('mousewheel', d.blockevent, !1),
-          document.addEventListener('keydown', d.blockevent, !0),
+          window.addEventListener('mousewheel', d.blockevent, false),
+          document.addEventListener('keydown', d.blockevent, true),
           $('#canvastitle').text(
             c(
               'options_addgesture_title',
@@ -975,9 +975,9 @@
         ),
         setTimeout(() => {
           i({
-            license_showactivated: !1,
-            license_showexpired: !1,
-            license_showdeactivated: !1,
+            license_showactivated: false,
+            license_showexpired: false,
+            license_showdeactivated: false,
           })
         }, 1e3),
         'full' == l.license

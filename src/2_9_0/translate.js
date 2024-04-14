@@ -274,7 +274,7 @@ var loadpage = () => {
                         { height: 'show', opacity: 1 },
                         200,
                       )),
-                  !1
+                  false
                 )
               }),
           ),

@@ -9,11 +9,11 @@
     if ('local' == t) for (key in e) o[key] = e[key].newValue
   })
   var s = () => {
-    chrome.tabs.reload({ bypassCache: !0 }), window.close()
+    chrome.tabs.reload({ bypassCache: true }), window.close()
   }
   init = () => {
     chrome.runtime.getBackgroundPage((o) => {
-      chrome.tabs.query({ active: !0, lastFocusedWindow: !0 }, (e) => {
+      chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
         var t = e[0]
         o.getTabStatus(t.id, (e) => {
           console.log(t, e),
