@@ -1,1 +1,1 @@
-# smoothgesturesplus
+# Smooth Gestures Plus
