@@ -51,7 +51,7 @@ var langs = {
     zh_TW: 'Chinese: Traditional',
   },
   accept = []
-chrome.i18n.getAcceptLanguages(function (e) {
+chrome.i18n.getAcceptLanguages((e) => {
   for (
     -1 != e.indexOf(window.navigator.language.replace('-', '_')) &&
       e.splice(e.indexOf(window.navigator.language.replace('-', '_')), 1),
@@ -97,7 +97,7 @@ chrome.i18n.getAcceptLanguages(function (e) {
             $('<select>')
               .append(t)
               .append(a)
-              .change(function (e) {
+              .change((e) => {
                 ;(language = $(this).val()), loadpage()
               }),
           ),
@@ -110,7 +110,7 @@ chrome.i18n.getAcceptLanguages(function (e) {
           $('<input>')
             .attr('type', 'button')
             .val('Submit >')
-            .click(function () {
+            .click(() => {
               var e = new Date(),
                 t =
                   e.getUTCFullYear().toString() +
@@ -137,21 +137,21 @@ chrome.i18n.getAcceptLanguages(function (e) {
                       lang: language,
                       tran: JSON.stringify(a),
                     },
-                    success: function (e) {
+                    success: (e) => {
                       $('#generatediv input').val('Submit >'),
                         'success' == e
-                          ? setTimeout(function () {
+                          ? setTimeout(() => {
                               alert(
                                 'Translation Sent. Thanks!\n\nFeel free to email smoothgestures@fujan.name to notify the developer that you have submitted a translation.',
                               )
                             }, 0)
-                          : setTimeout(function () {
+                          : setTimeout(() => {
                               alert('Error Sending Translation')
                             }, 0)
                     },
-                    error: function () {
+                    error: () => {
                       $('#generatediv input').val('Submit >'),
-                        setTimeout(function () {
+                        setTimeout(() => {
                           alert('Error Sending Translation')
                         }, 0)
                     },
@@ -160,13 +160,9 @@ chrome.i18n.getAcceptLanguages(function (e) {
             }),
         ),
     ),
-    $.get(
-      chrome.runtime.getURL('_locales/en/messages.json'),
-      null,
-      function (e) {
-        ;(src = JSON.parse(e)), loadpage()
-      },
-    )
+    $.get(chrome.runtime.getURL('_locales/en/messages.json'), null, (e) => {
+      ;(src = JSON.parse(e)), loadpage()
+    })
 })
 var src = null,
   res = null,
@@ -179,16 +175,16 @@ var src = null,
       '<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>',
     ),
   )
-var loadpage = function () {
+var loadpage = () => {
     $.get(
       chrome.runtime.getURL('_locales/' + language + '/messages.json'),
       null,
-      function (e) {
+      (e) => {
         ;(res = e && '' != e ? JSON.parse(e) : {}), formpage()
       },
     )
   },
-  formpage = function () {
+  formpage = () => {
     var e = JSON.parse(JSON.stringify(res))
     for (id in ((words = []), src))
       '_' != id &&
@@ -224,7 +220,7 @@ var loadpage = function () {
     }
     buildpage()
   },
-  buildpage = function () {
+  buildpage = () => {
     var e = {}
     for (c in tree.empty)
       for (
@@ -253,7 +249,7 @@ var loadpage = function () {
     for (r.sort(), i = 0; i < r.length; i++) a.append(e[r[i]])
     $('body').append(a)
   },
-  completedwords = function (e) {
+  completedwords = (e) => {
     var t = Math.random().toString().substr(2)
     return $('<div>')
       .attr('class', 'rowgroup')
@@ -265,7 +261,7 @@ var loadpage = function () {
             $('<a>')
               .attr('href', '#')
               .text('show')
-              .click(function () {
+              .click(() => {
                 return (
                   'hide' == $(this).text()
                     ? ($(this).text('show'),
@@ -290,7 +286,7 @@ var loadpage = function () {
           .css({ display: 'none' }),
       )
   },
-  buildword = function (e) {
+  buildword = (e) => {
     return e.src
       ? $('<div>')
           .attr('class', 'wordrow')

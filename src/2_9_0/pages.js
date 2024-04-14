@@ -1,7 +1,7 @@
-!(function () {
+!(() => {
   var t = null,
     n = { elem: null, offset: 0 },
-    c = function () {
+    c = () => {
       $('#sidebar').css({ display: 'none' }),
         (n.elem = document.elementFromPoint(
           0.6 * window.innerWidth,
@@ -16,7 +16,7 @@
           $(n.elem).offset().top),
         $('#sidebar').css({ display: '' })
     },
-    o = function () {
+    o = () => {
       if (n.elem) {
         var o =
           Math.max(
@@ -29,7 +29,7 @@
           (document.documentElement.scrollTop += n.offset - o)
       }
     },
-    e = function () {
+    e = () => {
       if (!$('html, body').is(':animated')) {
         c(), $('html, body').stop()
         for (var o = $('.page'), n = 0; n < o.length; n++) {
@@ -62,20 +62,20 @@
         }
       }
     },
-    i = function () {
+    i = () => {
       'function' == typeof pages.onresize && pages.onresize(), o(), e()
     },
-    s = function (o) {
+    s = (o) => {
       ;(t = o),
         (location.hash = '#' + o),
         $('.navbutton.active').removeClass('active'),
         $('.navbutton[nav=' + o + ']').addClass('active'),
         'function' == typeof pages.onactive && pages.onactive(o)
     }
-  $.easing.easeInExp = function (o, n, e, t, i) {
+  $.easing.easeInExp = (o, n, e, t, i) => {
     return 0 == n ? e : t * Math.pow(2, 10 * (n / i - 1)) + e
   }
-  var a = function (o, n) {
+  var a = (o, n) => {
     o =
       o ||
       location.hash.replace(/^#(.+)$/, '$1') ||
@@ -90,17 +90,17 @@
           .animate({ scrollTop: e.position().top }, n || 0, 'easeInExp'))
   }
   window.pages = {
-    init: function () {
-      $(function () {
-        $(window).on('mousewheel', function (o) {
+    init: () => {
+      $(() => {
+        $(window).on('mousewheel', (o) => {
           $('html, body').stop()
         }),
           $(window).on('scroll', e),
           $(window).on('resize', i),
-          $('.navbutton').on('click', function () {
+          $('.navbutton').on('click', () => {
             a($(this).attr('nav'), 300)
           }),
-          $(window).on('hashchange', function () {
+          $(window).on('hashchange', () => {
             var o = location.hash.match(/^#(.+)$/)
             o && a(o[1], 300)
           })

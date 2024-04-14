@@ -1,20 +1,20 @@
-!(function () {
+!(() => {
   'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {})
+    (console.log = console.error = () => {})
   var o = {}
-  chrome.storage.local.get(null, function (n) {
+  chrome.storage.local.get(null, (n) => {
     ;(o = n), e()
   })
-  chrome.storage.onChanged.addListener(function (n, e) {
+  chrome.storage.onChanged.addListener((n, e) => {
     if ('local' == e) for (key in n) o[key] = n[key].newValue
   })
   var n = location.hash.substr(1).split(',')
   '' == n[0] && window.close(),
-    chrome.permissions.contains({ permissions: n }, function (n) {
+    chrome.permissions.contains({ permissions: n }, (n) => {
       n && window.close()
     })
-  var e = function () {
-    $(function () {
+  var e = () => {
+    $(() => {
       $('body')
         .append(
           $(
@@ -25,10 +25,10 @@
         $('body').append(
           $('<div id=continue class=button>')
             .text('Continue')
-            .click(function () {
-              chrome.permissions.request({ permissions: n }, function (n) {
+            .click(() => {
+              chrome.permissions.request({ permissions: n }, (n) => {
                 n &&
-                  chrome.runtime.getBackgroundPage(function (n) {
+                  chrome.runtime.getBackgroundPage((n) => {
                     n.continue_permissions(), window.close()
                   })
               })

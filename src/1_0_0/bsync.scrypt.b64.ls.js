@@ -1,6 +1,6 @@
 //localStorage access
 var lscache = {}
-var ls = function (name, val, init) {
+var ls = (name, val, init) => {
   if (val === undefined) {
     if (lscache[name]) return lscache[name]
     try {
@@ -83,7 +83,7 @@ Base64.map = [
   '+',
   '/',
 ]
-Base64.fromBinArray = function (arr) {
+Base64.fromBinArray = (arr) => {
   var str = ''
   for (var i = 0; i + 2 < arr.length; i += 3) {
     var n = arr[i] * 256 * 256 + arr[i + 1] * 256 + arr[i + 2]
@@ -103,7 +103,7 @@ Base64.fromBinArray = function (arr) {
   }
   return str
 }
-Base64.toBinArray = function (str) {
+Base64.toBinArray = (str) => {
   var arr = []
   var eq = str.indexOf('=')
   if (eq >= 0) str = str.substr(0, eq)
@@ -129,12 +129,12 @@ Base64.toBinArray = function (str) {
   }
   return arr
 }
-Base64.fromString = function (str) {
+Base64.fromString = (str) => {
   var arr = []
   for (var i = 0; i < str.length; i++) arr.push(str.charCodeAt(i))
   return Base64.fromBinArray(arr)
 }
-Base64.toString = function (str) {
+Base64.toString = (str) => {
   var arr = Base64.toBinArray(str)
   str = ''
   for (var i = 0; i < arr.length; i++) str += String.fromCharCode(arr[i])
@@ -143,7 +143,7 @@ Base64.toString = function (str) {
 
 //encoding [depends: Base64]
 var SimpleCrypt = {}
-SimpleCrypt.encode = function (str, key) {
+SimpleCrypt.encode = (str, key) => {
   if (!key) return Base64.fromString(str)
   key = Base64.toBinArray(key)
   var s = key[0]
@@ -152,7 +152,7 @@ SimpleCrypt.encode = function (str, key) {
     cyp.push((str.charCodeAt((i + s) % str.length) + key[i % key.length]) % 256)
   return Base64.fromBinArray(cyp)
 }
-SimpleCrypt.decode = function (str, key) {
+SimpleCrypt.decode = (str, key) => {
   if (!key) return Base64.toString(str)
   key = Base64.toBinArray(key)
   var cyp = Base64.toBinArray(str)
@@ -167,7 +167,7 @@ SimpleCrypt.decode = function (str, key) {
     )
   return pla
 }
-SimpleCrypt.makeKey = function (pass) {
+SimpleCrypt.makeKey = (pass) => {
   if (typeof pass == 'string') {
     var b64 = Base64.fromString(pass)
     var eq = b64.indexOf('=')

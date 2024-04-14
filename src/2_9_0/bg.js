@@ -1,16 +1,16 @@
-!(function (n) {
+!((n) => {
   var o = {}
-  function i(e) {
+  const i = (e) => {
     if (o[e]) return o[e].exports
     var t = (o[e] = { i: e, l: !1, exports: {} })
     return n[e].call(t.exports, t, t.exports, i), (t.l = !0), t.exports
   }
   ;(i.m = n),
     (i.c = o),
-    (i.i = function (e) {
+    (i.i = (e) => {
       return e
     }),
-    (i.d = function (e, t, n) {
+    (i.d = (e, t, n) => {
       i.o(e, t) ||
         Object.defineProperty(e, t, {
           configurable: !1,
@@ -18,32 +18,32 @@
           get: n,
         })
     }),
-    (i.n = function (e) {
+    (i.n = (e) => {
       var t =
         e && e.__esModule
-          ? function () {
+          ? () => {
               return e.default
             }
-          : function () {
+          : () => {
               return e
             }
       return i.d(t, 'a', t), t
     }),
-    (i.o = function (e, t) {
+    (i.o = (e, t) => {
       return Object.prototype.hasOwnProperty.call(e, t)
     }),
     (i.p = ''),
     i((i.s = 0))
 })([
-  function (e, t, n) {
-    !(function () {
+  (e, t, n) => {
+    !(() => {
       var e = {}
       for (a in console) e[a] = console[a]
       if ('update_url' in chrome.runtime.getManifest())
-        for (a in console) console[a] = function () {}
+        for (a in console) console[a] = () => {}
       var s = {},
         r = {},
-        c = function (e, t) {
+        c = (e, t) => {
           var n = Date.now()
           for (key in e)
             (s[key] = e[key]),
@@ -52,7 +52,7 @@
           chrome.storage.local.set(e, t)
         },
         l = { initcount: 2 }
-      chrome.storage.local.get(null, function (e) {
+      chrome.storage.local.get(null, (e) => {
         chrome.runtime.lastError
           ? (l.failed ||
               alert(
@@ -64,7 +64,7 @@
           : ((s = e), (localStorage.local = JSON.stringify(e))),
           0 == --l.initcount && l.init()
       }),
-        chrome.storage.sync.get(null, function (e) {
+        chrome.storage.sync.get(null, (e) => {
           chrome.runtime.lastError
             ? (l.failed ||
                 alert(
@@ -76,7 +76,7 @@
             : ((r = e), (localStorage.sync = JSON.stringify(e))),
             0 == --l.initcount && l.init()
         }),
-        (l.changed = function (e, t) {
+        (l.changed = (e, t) => {
           if ('local' == t) {
             var n = {}
             for (key in (console.log('localchanged', e), e))
@@ -108,7 +108,7 @@
           }
         }),
         chrome.storage.onChanged.addListener(l.changed),
-        (l.init = function () {
+        (l.init = () => {
           for (key in (r.firstinstalled ||
             ((r.firstinstalled = Date.now()),
             (r.sync = { firstinstalled: !0 })),
@@ -136,7 +136,7 @@
               },
             }),
               (s.externalactions = {}),
-              setTimeout(function () {
+              setTimeout(() => {
                 chrome.tabs.create({ url: 'options.html' })
               }, 1e3)
           }
@@ -170,11 +170,11 @@
               'width=750,height=320,top=' + t + ',left=' + n,
             )
           }
-          chrome.storage.sync.set(r, function () {
+          chrome.storage.sync.set(r, () => {
             chrome.storage.local.set(s, F)
           })
         }),
-        (l.localChanged = function (e) {
+        (l.localChanged = (e) => {
           e.gestures && A(),
             e.license_expires &&
               e.license_expires.oldValue < Date.now() &&
@@ -189,19 +189,19 @@
                     license_showactivated: !!o,
                     license_showdeactivated: !o && !s.license_showexpired,
                   },
-                  function () {},
+                  () => {},
                 ),
             e.version &&
               '2.8.1' == s.version &&
               e.version.oldValue &&
               '2.8.1' != e.version.oldValue &&
-              c({ showNoteUpdated: !0 }, function () {
+              c({ showNoteUpdated: !0 }, () => {
                 chrome.tabs.create({
                   url: chrome.runtime.getURL('/options.html#changelog'),
                 })
               })
         }),
-        (l.syncChanged = function () {})
+        (l.syncChanged = () => {})
       navigator.platform.indexOf('Win')
       var d = -1 != navigator.platform.indexOf('Mac'),
         u = -1 != navigator.platform.indexOf('Linux'),
@@ -329,16 +329,16 @@
           'find-next': 's',
         },
         L = {
-          'new-tab': function (e, n) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
+          'new-tab': (e, n) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
               var t = { openerTabId: e.id, windowId: e.windowId }
               'homepage' != s.newTabUrl && (t.url = s.newTabUrl),
                 s.newTabRight && (t.index = e.index + 1),
                 chrome.tabs.create(t, n)
             })
           },
-          'new-tab-link': function (e, o, i) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
+          'new-tab-link': (e, o, i) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
               for (var t = 0; t < i.links.length; t++) {
                 var n = {
                   openerTabId: e.id,
@@ -350,8 +350,8 @@
               }
             })
           },
-          'new-tab-back': function (e, o, i) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
+          'new-tab-back': (e, o, i) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
               for (var t = 0; t < i.links.length; t++) {
                 var n = {
                   openerTabId: e.id,
@@ -364,19 +364,19 @@
               }
             })
           },
-          'navigate-tab': function (e, t) {
+          'navigate-tab': (e, t) => {
             chrome.tabs.update(
               h[e].detail.tabId,
               { url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 },
               t,
             )
           },
-          'close-tab': function (t, n) {
-            chrome.tabs.get(h[t].detail.tabId, function (e) {
+          'close-tab': (t, n) => {
+            chrome.tabs.get(h[t].detail.tabId, (e) => {
               e.pinned
                 ? n()
                 : s.closeLastBlock
-                  ? chrome.windows.getAll({ populate: !0 }, function (e) {
+                  ? chrome.windows.getAll({ populate: !0 }, (e) => {
                       1 == e.length && 1 == e[0].tabs.length
                         ? chrome.tabs.update(
                             h[t].detail.tabId,
@@ -393,18 +393,18 @@
                   : chrome.tabs.remove(h[t].detail.tabId, n)
             })
           },
-          'close-other-tabs': function (e, n) {
-            chrome.tabs.get(h[e].detail.tabId, function (t) {
-              chrome.tabs.query({ windowId: t.windowId }, function (e) {
+          'close-other-tabs': (e, n) => {
+            chrome.tabs.get(h[e].detail.tabId, (t) => {
+              chrome.tabs.query({ windowId: t.windowId }, (e) => {
                 for (i = 0; i < e.length; i++)
                   e[i].id == t.id || e[i].pinned || chrome.tabs.remove(e[i].id)
                 n()
               })
             })
           },
-          'close-left-tabs': function (e, n) {
-            chrome.tabs.get(h[e].detail.tabId, function (t) {
-              chrome.tabs.query({ windowId: t.windowId }, function (e) {
+          'close-left-tabs': (e, n) => {
+            chrome.tabs.get(h[e].detail.tabId, (t) => {
+              chrome.tabs.query({ windowId: t.windowId }, (e) => {
                 for (i = 0; i < e.length; i++)
                   e[i].index < t.index &&
                     !t.pinned &&
@@ -413,9 +413,9 @@
               })
             })
           },
-          'close-right-tabs': function (e, n) {
-            chrome.tabs.get(h[e].detail.tabId, function (t) {
-              chrome.tabs.query({ windowId: t.windowId }, function (e) {
+          'close-right-tabs': (e, n) => {
+            chrome.tabs.get(h[e].detail.tabId, (t) => {
+              chrome.tabs.query({ windowId: t.windowId }, (e) => {
                 for (i = 0; i < e.length; i++)
                   e[i].index > t.index &&
                     !t.pinned &&
@@ -424,7 +424,7 @@
               })
             })
           },
-          'undo-close': function (e, t) {
+          'undo-close': (e, t) => {
             if (0 < f.closed.length) {
               var n = f.closed.pop()
               chrome.tabs.create(
@@ -438,25 +438,25 @@
               )
             }
           },
-          'reload-tab': function (e, t) {
+          'reload-tab': (e, t) => {
             chrome.tabs.reload(h[e].detail.tabId, { bypassCache: !1 }, t)
           },
-          'reload-tab-full': function (e, t) {
+          'reload-tab-full': (e, t) => {
             chrome.tabs.reload(h[e].detail.tabId, { bypassCache: !0 }, t)
           },
-          'reload-all-tabs': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.tabs.query({ windowId: e.windowId }, function (e) {
+          'reload-all-tabs': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.tabs.query({ windowId: e.windowId }, (e) => {
                 for (i = 0; i < e.length; i++) chrome.tabs.reload(e[i].id)
                 t()
               })
             })
           },
-          stop: function (e, t) {
+          stop: (e, t) => {
             h[e].postMessage({ action: { id: 'stop' } }, t)
           },
-          'view-source': function (t, n) {
-            chrome.tabs.get(h[t].detail.tabId, function (e) {
+          'view-source': (t, n) => {
+            chrome.tabs.get(h[t].detail.tabId, (e) => {
               chrome.tabs.create(
                 {
                   url:
@@ -469,9 +469,9 @@
               )
             })
           },
-          'prev-tab': function (e, o) {
-            chrome.tabs.get(h[e].detail.tabId, function (n) {
-              chrome.tabs.query({ windowId: n.windowId }, function (e) {
+          'prev-tab': (e, o) => {
+            chrome.tabs.get(h[e].detail.tabId, (n) => {
+              chrome.tabs.query({ windowId: n.windowId }, (e) => {
                 var t = null
                 for (i = e.length - 1; 0 <= i; i--)
                   if (((t = e[(n.index + i) % e.length].id), C(t)))
@@ -480,9 +480,9 @@
               })
             })
           },
-          'next-tab': function (e, o) {
-            chrome.tabs.get(h[e].detail.tabId, function (n) {
-              chrome.tabs.query({ windowId: n.windowId }, function (e) {
+          'next-tab': (e, o) => {
+            chrome.tabs.get(h[e].detail.tabId, (n) => {
+              chrome.tabs.query({ windowId: n.windowId }, (e) => {
                 var t = null
                 for (i = 1; i <= e.length; i++)
                   if (((t = e[(n.index + i) % e.length].id), C(t)))
@@ -491,36 +491,36 @@
               })
             })
           },
-          'page-back': function (e, t) {
+          'page-back': (e, t) => {
             h[e].postMessage({ action: { id: 'page-back' } }, t)
           },
-          'page-forward': function (e, t) {
+          'page-forward': (e, t) => {
             h[e].postMessage({ action: { id: 'page-forward' } }, t)
           },
-          'new-window': function (e, t) {
+          'new-window': (e, t) => {
             chrome.windows.create(
               { url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 },
               t,
             )
           },
-          'new-window-link': function (e, t, n) {
+          'new-window-link': (e, t, n) => {
             for (var o = 0; o < n.links.length; o++)
               chrome.windows.create(
                 { url: n.links[o].src },
                 o == n.links.length - 1 ? t : null,
               )
           },
-          'close-window': function (e, t) {
-            chrome.windows.getCurrent(function (e) {
+          'close-window': (e, t) => {
+            chrome.windows.getCurrent((e) => {
               chrome.windows.remove(e.id, t)
             })
           },
-          'split-tabs': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (n) {
-              chrome.tabs.query({ windowId: n.windowId }, function (t) {
+          'split-tabs': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (n) => {
+              chrome.tabs.query({ windowId: n.windowId }, (t) => {
                 chrome.windows.create(
                   { tabId: n.id, focused: !0, incognito: n.incognito },
-                  function (e) {
+                  (e) => {
                     for (i = n.index + 1; i < t.length; i++)
                       chrome.tabs.move(t[i].id, {
                         windowId: e.id,
@@ -531,13 +531,13 @@
               })
             })
           },
-          'merge-tabs': function (e, r) {
-            chrome.tabs.get(h[e].detail.tabId, function (a) {
-              chrome.tabs.query({ windowId: a.windowId }, function (e) {
+          'merge-tabs': (e, r) => {
+            chrome.tabs.get(h[e].detail.tabId, (a) => {
+              chrome.tabs.query({ windowId: a.windowId }, (e) => {
                 var t = []
                 for (var n in b) 0 < b[n].focused && t.push([n, b[n]])
                 if (!(t.length < 2)) {
-                  t.sort(function (e, t) {
+                  t.sort((e, t) => {
                     return e.focused > t.focused
                       ? 1
                       : e.focused < t.focused
@@ -548,7 +548,7 @@
                   if (o) {
                     for (i = 0; i < e.length; i++)
                       chrome.tabs.move(e[i].id, { windowId: o, index: 1e6 })
-                    chrome.tabs.update(a.id, { active: !0 }, function () {
+                    chrome.tabs.update(a.id, { active: !0 }, () => {
                       chrome.windows.update(o, { focused: !0 }, r)
                     })
                   }
@@ -556,8 +556,8 @@
               })
             })
           },
-          options: function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
+          options: (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
               chrome.tabs.create(
                 {
                   url: chrome.runtime.getURL('options.html'),
@@ -567,7 +567,7 @@
               )
             })
           },
-          'page-back-close': function (e, t) {
+          'page-back-close': (e, t) => {
             h[e].postMessage(
               {
                 action: {
@@ -578,34 +578,34 @@
               t,
             )
           },
-          'goto-top': function (e, t, n) {
+          'goto-top': (e, t, n) => {
             h[e].postMessage(
               { action: { id: 'goto-top', startPoint: n.startPoint } },
               t,
             )
           },
-          'goto-bottom': function (e, t, n) {
+          'goto-bottom': (e, t, n) => {
             h[e].postMessage(
               { action: { id: 'goto-bottom', startPoint: n.startPoint } },
               t,
             )
           },
-          'page-up': function (e, t, n) {
+          'page-up': (e, t, n) => {
             h[e].postMessage(
               { action: { id: 'page-up', startPoint: n.startPoint } },
               t,
             )
           },
-          'page-down': function (e, t, n) {
+          'page-down': (e, t, n) => {
             h[e].postMessage(
               { action: { id: 'page-down', startPoint: n.startPoint } },
               t,
             )
           },
-          'page-next': function (e, t) {
+          'page-next': (e, t) => {
             O(
               e,
-              function () {
+              () => {
                 var e = null
                 if ((e = document.querySelector('link[rel=next][href]')))
                   location.href = e.href
@@ -625,10 +625,10 @@
               t,
             )
           },
-          'page-prev': function (e, t) {
+          'page-prev': (e, t) => {
             O(
               e,
-              function () {
+              () => {
                 var e = null
                 if ((e = document.querySelector('link[rel=prev][href]')))
                   location.href = e.href
@@ -648,9 +648,9 @@
               t,
             )
           },
-          'fullscreen-window': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.windows.get(e.windowId, function (e) {
+          'fullscreen-window': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.windows.get(e.windowId, (e) => {
                 b[e.id] || (b[e.id] = {}),
                   chrome.windows.update(
                     e.id,
@@ -666,9 +666,9 @@
               })
             })
           },
-          'minimize-window': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.windows.get(e.windowId, function (e) {
+          'minimize-window': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.windows.get(e.windowId, (e) => {
                 b[e.id] || (b[e.id] = {}),
                   chrome.windows.update(
                     e.id,
@@ -684,9 +684,9 @@
               })
             })
           },
-          'maximize-window': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.windows.get(e.windowId, function (e) {
+          'maximize-window': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.windows.get(e.windowId, (e) => {
                 b[e.id] || (b[e.id] = {}),
                   chrome.windows.update(
                     e.id,
@@ -697,14 +697,14 @@
               })
             })
           },
-          'open-screenshot': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.tabs.update(e.id, { active: !0 }, function () {
-                setTimeout(function () {
+          'open-screenshot': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.tabs.update(e.id, { active: !0 }, () => {
+                setTimeout(() => {
                   chrome.tabs.captureVisibleTab(
                     e.windowId,
                     { format: 'png' },
-                    function (e) {
+                    (e) => {
                       chrome.tabs.create({ url: e }, t)
                     },
                   )
@@ -712,14 +712,14 @@
               })
             })
           },
-          'save-screenshot': function (e, o) {
-            chrome.tabs.get(h[e].detail.tabId, function (n) {
-              chrome.tabs.update(n.id, { active: !0 }, function () {
-                setTimeout(function () {
+          'save-screenshot': (e, o) => {
+            chrome.tabs.get(h[e].detail.tabId, (n) => {
+              chrome.tabs.update(n.id, { active: !0 }, () => {
+                setTimeout(() => {
                   chrome.tabs.captureVisibleTab(
                     n.windowId,
                     { format: 'png' },
-                    function (e) {
+                    (e) => {
                       var t = n.url.match(/\/\/([^\/]+)\//)[1]
                       T(e, 'screenshot' + (t ? '-' + t : '') + '.png'), o()
                     },
@@ -728,30 +728,30 @@
               })
             })
           },
-          'open-screenshot-full': function (e, t) {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              U(e, function (e) {
+          'open-screenshot-full': (e, t) => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              U(e, (e) => {
                 chrome.tabs.create({ url: URL.createObjectURL(e) }), t()
               })
             })
           },
-          'save-screenshot-full': function (e, o) {
-            chrome.tabs.get(h[e].detail.tabId, function (n) {
-              U(n, function (e) {
+          'save-screenshot-full': (e, o) => {
+            chrome.tabs.get(h[e].detail.tabId, (n) => {
+              U(n, (e) => {
                 var t = n.url.match(/\/\/([^\/]+)\//)[1]
                 D(e, 'screenshot' + (t ? '-' + t : '') + '.png'), o()
               })
             })
           },
         },
-        U = function (c, l) {
-          chrome.tabs.update(c.id, { active: !0 }, function () {
+        U = (c, l) => {
+          chrome.tabs.update(c.id, { active: !0 }, () => {
             chrome.tabs.executeScript(
               c.id,
               {
                 code: 'var ssfo=document.body.style.overflow;document.body.style.overflow="hidden";var ssf={top:document.body.scrollTop,left:document.body.scrollLeft,height:document.body.scrollHeight,width:document.body.scrollWidth,screenh:window.innerHeight,screenw:window.innerWidth,overflow:ssfo};ssf;',
               },
-              function (e) {
+              (e) => {
                 var t = e[0],
                   n = document.createElement('canvas')
                 ;(n.height = Math.min(t.height, 32768)),
@@ -760,7 +760,7 @@
                   i = n.getContext('2d'),
                   a = 0,
                   r = 0,
-                  s = function () {
+                  s = () => {
                     chrome.tabs.executeScript(
                       c.id,
                       {
@@ -771,12 +771,12 @@
                           r * t.screenw +
                           ';',
                       },
-                      function () {
-                        setTimeout(function () {
+                      () => {
+                        setTimeout(() => {
                           chrome.tabs.captureVisibleTab(
                             c.windowId,
                             { format: 'png' },
-                            function (e) {
+                            (e) => {
                               o.src = e
                             },
                           )
@@ -784,7 +784,7 @@
                       },
                     )
                   }
-                o.addEventListener('load', function () {
+                o.addEventListener('load', () => {
                   i.drawImage(
                     o,
                     0,
@@ -812,7 +812,7 @@
                                 t.overflow +
                                 '"',
                             },
-                            function () {
+                            () => {
                               l(S(n.toDataURL()))
                             },
                           )
@@ -822,13 +822,13 @@
             )
           })
         },
-        S = function (e) {
+        S = (e) => {
           var t = e.indexOf(','),
             n = e.substr(0, t).match(/^data:([^;]+)(;.*)?$/),
             o = e.substr(t + 1)
           return (
             ';base64' == n[2] &&
-              (o = (function (e) {
+              (o = ((e) => {
                 for (
                   var t = atob(e), n = new Array(t.length), o = 0;
                   o < t.length;
@@ -840,11 +840,11 @@
             new Blob([o], { type: n[1] })
           )
         },
-        D = function (e, t) {
+        D = (e, t) => {
           var n = URL.createObjectURL(e)
           T(n, t), URL.revokeObjectURL(n)
         },
-        T = function (e, t) {
+        T = (e, t) => {
           var n = document.createElement('a')
           ;(n.href = e), (n.download = t || 'download')
           var o = document.createEvent('MouseEvents')
@@ -867,10 +867,10 @@
           ),
             n.dispatchEvent(o)
         }
-      ;(L['clone-tab'] = function (e, t, n) {
+      ;(L['clone-tab'] = (e, t, n) => {
         chrome.tabs.duplicate(h[e].detail.tabId, t)
       }),
-        (L['zoom-in'] = function (e, t) {
+        (L['zoom-in'] = (e, t) => {
           m
             ? (m.postMessage({
                 key: { keys: ['='], mod: [d ? 'meta' : 'ctrl'] },
@@ -879,7 +879,7 @@
               t())
             : h[e].postMessage({ action: { id: 'zoom-in-hack' } }, t)
         }),
-        (L['zoom-out'] = function (e, t) {
+        (L['zoom-out'] = (e, t) => {
           m
             ? (m.postMessage({
                 key: { keys: ['-'], mod: [d ? 'meta' : 'ctrl'] },
@@ -888,7 +888,7 @@
               t())
             : h[e].postMessage({ action: { id: 'zoom-out-hack' } }, t)
         }),
-        (L['zoom-zero'] = function (e, t) {
+        (L['zoom-zero'] = (e, t) => {
           m
             ? (m.postMessage({
                 key: { keys: ['0'], mod: [d ? 'meta' : 'ctrl'] },
@@ -897,36 +897,36 @@
               t())
             : h[e].postMessage({ action: { id: 'zoom-zero-hack' } }, t)
         }),
-        (L['zoom-img-in'] = function (e, t, n) {
+        (L['zoom-img-in'] = (e, t, n) => {
           h[e].postMessage(
             { action: { id: 'zoom-img-in', images: n.images } },
             t,
           )
         }),
-        (L['zoom-img-out'] = function (e, t, n) {
+        (L['zoom-img-out'] = (e, t, n) => {
           h[e].postMessage(
             { action: { id: 'zoom-img-out', images: n.images } },
             t,
           )
         }),
-        (L['zoom-img-zero'] = function (e, t, n) {
+        (L['zoom-img-zero'] = (e, t, n) => {
           h[e].postMessage(
             { action: { id: 'zoom-img-zero', images: n.images } },
             t,
           )
         }),
-        (L['tab-to-left'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['tab-to-left'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.move(e.id, { index: 0 < e.index ? e.index - 1 : 0 })
           })
         }),
-        (L['tab-to-right'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['tab-to-right'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.move(e.id, { index: e.index + 1 })
           })
         }),
-        (L['parent-dir'] = function (e, o) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['parent-dir'] = (e, o) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             var t = e.url.split('#')[0].split('?')[0].split('/')
             '' == t[t.length - 1] && (t = t.slice(0, t.length - 1))
             var n = null
@@ -938,40 +938,40 @@
               : o()
           })
         }),
-        (L['open-history'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['open-history'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.create(
               { url: 'chrome://history/', windowId: e.windowId },
               t,
             )
           })
         }),
-        (L['open-downloads'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['open-downloads'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.create(
               { url: 'chrome://downloads/', windowId: e.windowId },
               t,
             )
           })
         }),
-        (L['open-extensions'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['open-extensions'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.create(
               { url: 'chrome://extensions/', windowId: e.windowId },
               t,
             )
           })
         }),
-        (L['open-bookmarks'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['open-bookmarks'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.create(
               { url: 'chrome://bookmarks/', windowId: e.windowId },
               t,
             )
           })
         }),
-        (L['open-image'] = function (e, n, o) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['open-image'] = (e, n, o) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             for (var t = 0; t < o.images.length; t++)
               chrome.tabs.create(
                 {
@@ -983,8 +983,8 @@
               )
           })
         }),
-        (L['save-image'] = function (e, o, i) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['save-image'] = (e, o, i) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             for (var t = 0; t < i.images.length; t++) {
               var n = i.images[t].src.match(/([^\/?]{1,255})\/?(\?.*)?$/)
               T(i.images[t].src, n[1])
@@ -992,21 +992,21 @@
             o()
           })
         }),
-        (L['hide-image'] = function (e, t, n) {
+        (L['hide-image'] = (e, t, n) => {
           h[e].postMessage(
             { action: { id: 'hide-image', images: n.images } },
             t,
           )
         }),
-        (L['show-cookies'] = function (e, t) {
+        (L['show-cookies'] = (e, t) => {
           O(
             e,
             "window.alert('Cookies stored by this host or domain:\\n'+('\\n'+document.cookie).replace(/; /g,';\\n').replace(/\\n(.{192})([^\\n]{5})/gm,\"\\n$1\\n        $2\").replace(/\\n(.{100})([^\\n]{5})/gm,\"\\n$1\\n        $2\"));",
             t,
           )
         }),
-        (L['search-sel'] = function (e, t, n) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['search-sel'] = (e, t, n) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.create(
               {
                 url: 'http://www.google.com/search?q=' + n.selection,
@@ -1018,25 +1018,25 @@
             )
           })
         }),
-        (L.print = function (e, t) {
+        (L.print = (e, t) => {
           h[e].postMessage({ action: { id: 'print', images: a.images } }, t)
         }),
-        (L['toggle-pin'] = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L['toggle-pin'] = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.update(e.id, { pinned: !e.pinned }, t)
           })
         }),
-        (L.pin = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L.pin = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.update(e.id, { pinned: !0 }, t)
           })
         }),
-        (L.unpin = function (e, t) {
-          chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L.unpin = (e, t) => {
+          chrome.tabs.get(h[e].detail.tabId, (e) => {
             chrome.tabs.update(e.id, { pinned: !1 }, t)
           })
         }),
-        (L.copy = function (e, t, n) {
+        (L.copy = (e, t, n) => {
           if (!n.selection) return t()
           var o = document.createElement('textarea')
           ;(o.value = n.selection),
@@ -1046,7 +1046,7 @@
             document.body.removeChild(o),
             t()
         }),
-        (L['copy-link'] = function (e, t, n) {
+        (L['copy-link'] = (e, t, n) => {
           if (0 == n.links.length) return t()
           var o = document.createElement('textarea')
           ;(o.value = n.links[0].src),
@@ -1056,7 +1056,7 @@
             document.body.removeChild(o),
             t()
         }),
-        (L['find-prev'] = function (e, t, n) {
+        (L['find-prev'] = (e, t, n) => {
           if (!n.selection) return t()
           O(
             e,
@@ -1066,7 +1066,7 @@
             t,
           )
         }),
-        (L['find-next'] = function (e, t, n) {
+        (L['find-next'] = (e, t, n) => {
           if (!n.selection) return t()
           O(
             e,
@@ -1076,10 +1076,10 @@
             t,
           )
         }),
-        (L['toggle-bookmark'] = function (e, n) {
-          M(['bookmarks'], function () {
-            chrome.tabs.get(h[e].detail.tabId, function (t) {
-              chrome.bookmarks.search(t.url, function (e) {
+        (L['toggle-bookmark'] = (e, n) => {
+          M(['bookmarks'], () => {
+            chrome.tabs.get(h[e].detail.tabId, (t) => {
+              chrome.bookmarks.search(t.url, (e) => {
                 e.length <= 0
                   ? chrome.bookmarks.create(
                       { parentId: '2', title: t.title, url: t.url },
@@ -1090,9 +1090,9 @@
             })
           })
         }),
-        (L.bookmark = function (e, t) {
-          M(['bookmarks'], function () {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
+        (L.bookmark = (e, t) => {
+          M(['bookmarks'], () => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
               chrome.bookmarks.create(
                 { parentId: '2', title: e.title, url: e.url },
                 t,
@@ -1100,18 +1100,18 @@
             })
           })
         }),
-        (L.unbookmark = function (e, t) {
-          M(['bookmarks'], function () {
-            chrome.tabs.get(h[e].detail.tabId, function (e) {
-              chrome.bookmarks.search(e.url, function (e) {
+        (L.unbookmark = (e, t) => {
+          M(['bookmarks'], () => {
+            chrome.tabs.get(h[e].detail.tabId, (e) => {
+              chrome.bookmarks.search(e.url, (e) => {
                 e.length <= 0 ? t() : chrome.bookmarks.remove(e[0].id, t)
               })
             })
           })
         })
       var R = null,
-        M = function (o, i) {
-          chrome.permissions.contains({ permissions: o }, function (e) {
+        M = (o, i) => {
+          chrome.permissions.contains({ permissions: o }, (e) => {
             if (e) i && i()
             else {
               R = i
@@ -1125,31 +1125,27 @@
             }
           })
         }
-      chrome.runtime.onMessage.addListener(function (e, t, n) {
+      chrome.runtime.onMessage.addListener((e, t, n) => {
         e.getstates
-          ? N(function (e) {
+          ? N((e) => {
               n(JSON.stringify({ states: e }))
             })
           : (e.log && console.log(e.log), n(null))
       }),
-        chrome.runtime.onConnect.addListener(function (e) {
+        chrome.runtime.onConnect.addListener((e) => {
           if (e.sender && e.sender.tab) {
             if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
             ;(e.detail.tabId = e.sender.tab.id), t(e)
           }
         }),
-        chrome.runtime.onMessageExternal.addListener(function (e, t, n) {
+        chrome.runtime.onMessageExternal.addListener((e, t, n) => {
           if (e.getgestures) {
             if (!w)
               return (
-                $.get(
-                  chrome.runtime.getURL('js/gestures.js'),
-                  null,
-                  function (e) {
-                    ;(w = "window.SGextId='" + chrome.runtime.id + "';\n" + e),
-                      n({ gestures: w })
-                  },
-                ),
+                $.get(chrome.runtime.getURL('js/gestures.js'), null, (e) => {
+                  ;(w = "window.SGextId='" + chrome.runtime.id + "';\n" + e),
+                    n({ gestures: w })
+                }),
                 !0
               )
             n({ gestures: w })
@@ -1184,13 +1180,13 @@
             } else n(!1)
           } else n(null)
         }),
-        chrome.runtime.onConnectExternal.addListener(function (e) {
+        chrome.runtime.onConnectExternal.addListener((e) => {
           if ((console.log(e.sender.tab, e.name), e.sender.tab)) {
             if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
             ;(e.detail.tabId = e.sender.tab.id), (e.detail.external = !0), t(e)
           }
         })
-      var t = function (e) {
+      var t = (e) => {
           if (e.sender && e.sender.tab && e.detail.id) {
             var t = e.sender.tab,
               n = e.detail.id
@@ -1221,24 +1217,24 @@
                       'r' == n.gesture[0] &&
                         (p = {
                           rocker: !0,
-                          timeout: setTimeout(function () {
+                          timeout: setTimeout(() => {
                             p = null
                           }, 2e3),
                         }),
                       'w' == n.gesture[0] &&
                         (p = {
                           wheel: !0,
-                          timeout: setTimeout(function () {
+                          timeout: setTimeout(() => {
                             p = null
                           }, 2e3),
                         }),
                       p && n.buttonDown && (p.buttonDown = n.buttonDown),
                       p && n.startPoint && (p.startPoint = n.startPoint)
                     var o = p
-                      ? function () {
+                      ? () => {
                           chrome.tabs.query(
                             { active: !0, lastFocusedWindow: !0 },
-                            function (e) {
+                            (e) => {
                               if (p && e.length)
                                 for (t in ((p.tabId = e[0].id), h))
                                   e[0].id == h[t].detail.tabId &&
@@ -1246,7 +1242,7 @@
                             },
                           )
                         }
-                      : function () {}
+                      : () => {}
                     try {
                       if (L[e]) L[e].call(null, t, o, n)
                       else if (s.externalactions[e.substr(0, 32)])
@@ -1273,10 +1269,10 @@
                       (p &&
                         (p.buttonDown || (p.buttonDown = {}),
                         (p.buttonDown[n.syncButton.id] = n.syncButton.down)),
-                      setTimeout(function () {
+                      setTimeout(() => {
                         chrome.tabs.query(
                           { active: !0, lastFocusedWindow: !0 },
-                          function (e) {
+                          (e) => {
                             for (t in h)
                               e[0].id == h[t].detail.tabId &&
                                 h[t].postMessage({ syncButton: n.syncButton })
@@ -1284,7 +1280,7 @@
                         )
                       }, 20)),
                     n.closetab &&
-                      chrome.tabs.get(h[t].detail.tabId, function (e) {
+                      chrome.tabs.get(h[t].detail.tabId, (e) => {
                         chrome.tabs.remove(e.id)
                       }),
                     n.nativeport && n.nativeport.rightclick)
@@ -1315,7 +1311,7 @@
                   }
                 }.bind(null, n),
               ),
-              h[n].onDisconnect.addListener(function () {
+              h[n].onDisconnect.addListener(() => {
                 delete h[n]
               })
             var o = { enable: !0 }
@@ -1331,7 +1327,7 @@
             h[n].postMessage(o), _(t.id)
           }
         },
-        O = function (e, t, n, o) {
+        O = (e, t, n, o) => {
           h[e] &&
             ('function' == typeof n && ((o = n), (n = void 0)),
             void 0 === n && (n = []),
@@ -1344,7 +1340,7 @@
                 t.toString() +
                 ')(' +
                 n
-                  .map(function (e) {
+                  .map((e) => {
                     return JSON.stringify(e)
                   })
                   .join(',') +
@@ -1358,14 +1354,14 @@
             chrome.tabs.executeScript(
               h[e].sender.tab.id,
               { code: t, allFrames: !0, matchAboutBlank: !0 },
-              function (e) {
+              (e) => {
                 for (var t = 0; t < e.length; t++)
                   if (null !== e[t]) return void o(e[t])
                 o && o()
               },
             ))
         },
-        n = function (e) {
+        n = (e) => {
           if (f.active != e) {
             for (id in h)
               f.active == h[id].detail.tabId &&
@@ -1373,22 +1369,19 @@
             ;(f.prevActive = f.active), (f.active = e)
           }
         }
-      chrome.tabs.onActivated.addListener(function (e) {
+      chrome.tabs.onActivated.addListener((e) => {
         n(e.tabId)
       }),
-        chrome.windows.onFocusChanged.addListener(function (e) {
+        chrome.windows.onFocusChanged.addListener((e) => {
           e != chrome.windows.WINDOW_ID_NONE &&
             (b[e] || (b[e] = {}),
             (b[e].focused = Date.now()),
-            chrome.tabs.query(
-              { active: !0, lastFocusedWindow: !0 },
-              function (e) {
-                e.length && n(e[0].id)
-              },
-            ))
+            chrome.tabs.query({ active: !0, lastFocusedWindow: !0 }, (e) => {
+              e.length && n(e[0].id)
+            }))
         })
-      var z = function (d, u) {
-        chrome.tabs.get(d, function (e) {
+      var z = (d, u) => {
+        chrome.tabs.get(d, (e) => {
           if (!chrome.runtime.lastError) {
             if (
               ('https://smoothgesturesplus.com/thanks' == e.url && V(),
@@ -1430,7 +1423,7 @@
                 }),
                 chrome.pageAction.show(d)),
               'complete' == e.status &&
-                setTimeout(function () {
+                setTimeout(() => {
                   _(d)
                 }, 100)
           }
@@ -1439,15 +1432,15 @@
       chrome.tabs.onUpdated.addListener(z),
         chrome.tabs.onMoved.addListener(z),
         chrome.tabs.onAttached.addListener(z),
-        chrome.tabs.onRemoved.addListener(function (e) {
+        chrome.tabs.onRemoved.addListener((e) => {
           for (f.tab[e] && f.closed.push(f.tab[e]); 50 < f.closed.length; )
             f.closed.shift()
           delete f.tab[e]
         }),
-        chrome.windows.onRemoved.addListener(function (e) {
+        chrome.windows.onRemoved.addListener((e) => {
           delete b[e]
         })
-      var A = function () {
+      var A = () => {
           var e = {}
           for (g in s.gestures)
             if (
@@ -1465,7 +1458,7 @@
             }
           c({ validGestures: e })
         },
-        C = function (e) {
+        C = (e) => {
           var t = null
           for (id in h)
             if (e == h[id].detail.tabId) {
@@ -1474,14 +1467,14 @@
             }
           return t
         },
-        N = function (r) {
+        N = (r) => {
           var s = {}
           for (id in h) {
             var e = h[id].detail.tabId
             s[e] || (s[e] = { root: !1, frames: 0 }),
               h[id].detail.frame ? (s[e].frames += 1) : (s[e].root = !0)
           }
-          chrome.windows.getAll({ populate: !0 }, function (e) {
+          chrome.windows.getAll({ populate: !0 }, (e) => {
             var t = {}
             for (j = 0; j < e.length; j++) {
               var n = e[j]
@@ -1506,11 +1499,11 @@
             r(t)
           })
         },
-        G = function (e, t) {
+        G = (e, t) => {
           C(e)
           C(e)
             ? t('working')
-            : chrome.tabs.get(e, function (e) {
+            : chrome.tabs.get(e, (e) => {
                 e &&
                 e.url.match(
                   /^(chrome:\/\/|chrome-extension:\/\/|https:\/\/chrome\.google\.com|file:\/\/|[^:\/]+:[^:\/]+)/,
@@ -1519,8 +1512,8 @@
                   : t('broken')
               })
         },
-        _ = function (t) {
-          G(t, function (e) {
+        _ = (t) => {
+          G(t, (e) => {
             'unable' == e
               ? (chrome.pageAction.setIcon({
                   tabId: t,
@@ -1550,9 +1543,9 @@
               chrome.pageAction.show(t)
           })
         },
-        J = function () {
-          chrome.runtime.requestUpdateCheck(function () {}),
-            setTimeout(function () {
+        J = () => {
+          chrome.runtime.requestUpdateCheck(() => {}),
+            setTimeout(() => {
               window.open(
                 '/update.html',
                 'sgupdate',
@@ -1564,11 +1557,11 @@
             }, 2e3)
         },
         q = {},
-        E = function () {
+        E = () => {
           for (var e in q) delete q[e], 'ping' == e && V()
         }
       window.addEventListener('online', E, !0)
-      var V = function (t) {
+      var V = (t) => {
           navigator.onLine
             ? (delete q.ping,
               $.ajax({
@@ -1586,7 +1579,7 @@
                   storagefailed: l.failed,
                 }),
               })
-                .done(function (e) {
+                .done((e) => {
                   if (!e) return (q.ping = !0), void setTimeout(E, 3e5)
                   'string' == typeof e && (e = JSON.parse(e)),
                     e.alert && alert(e.alert),
@@ -1620,29 +1613,29 @@
                     c({ license: o, license_expires: e.expires }),
                     t && t()
                 })
-                .fail(function () {
+                .fail(() => {
                   q.ping = !0
                 }))
             : (q.ping = !0)
         },
         B = null,
-        P = function (o) {
+        P = (o) => {
           m ||
             chrome.permissions.contains(
               { permissions: ['nativeMessaging'] },
-              function (e) {
+              (e) => {
                 if ((console.log('connectNative', e), e)) {
                   B = !0
                   try {
                     ;(m = chrome.runtime.connectNative(
                       'com.smoothgesturesplus.extras',
-                    )).onMessage.addListener(function (e) {
+                    )).onMessage.addListener((e) => {
                       console.log('nativemessage', e),
                         m &&
                           (n && (clearTimeout(n), (n = null), t()),
                           e.version && (m.version = e.version))
                     }),
-                      m.onDisconnect.addListener(function () {
+                      m.onDisconnect.addListener(() => {
                         m &&
                           ((m = null),
                           console.log('nativedisconnect: retryTimeout: ', o),
@@ -1650,7 +1643,7 @@
                           (n = null),
                           0 < o && o < 6e4 && setTimeout(P, o, 1.01 * o))
                       })
-                    var t = function () {
+                    var t = () => {
                         for (
                           var e = chrome.extension.getViews(), t = 0;
                           t < e.length;
@@ -1663,7 +1656,7 @@
                   } catch (e) {
                     console.error('connectNative', B, e),
                       B &&
-                        setTimeout(function () {
+                        setTimeout(() => {
                           chrome.runtime.reload()
                         }, 1e3)
                   }
@@ -1672,11 +1665,11 @@
             )
         }
       P(1e3)
-      var W = function () {
-          chrome.windows.getAll({ populate: !0 }, function (e) {
+      var W = () => {
+          chrome.windows.getAll({ populate: !0 }, (e) => {
             for (x in e)
               for (y in ((b[e[x].id] = {}), e[x].tabs))
-                !(function (e) {
+                !((e) => {
                   ;(f.tab[e.id] = {
                     winId: e.windowId,
                     index: e.index,
@@ -1691,29 +1684,29 @@
                         matchAboutBlank: !0,
                         code: 'if(window.SG) { if(window.SG.enabled()) window.SG.disable(); delete window.SG; }',
                       }),
-                      setTimeout(function () {
+                      setTimeout(() => {
                         chrome.tabs.executeScript(e.id, {
                           allFrames: !0,
                           matchAboutBlank: !0,
                           file: 'js/gestures.js',
                         })
                       }, 200)),
-                    setTimeout(function () {
+                    setTimeout(() => {
                       _(e.id)
                     }, 100)
                 })(e[x].tabs[y])
-            chrome.windows.getLastFocused(function (e) {
+            chrome.windows.getLastFocused((e) => {
               b[e.id] = { focused: Date.now() }
             })
           })
         },
-        F = function () {
+        F = () => {
           for (id in s.customactions) I[id] = s.customactions[id].context
           for (id in s.externalactions)
             for (i = 0; i < s.externalactions[id].actions.length; i++)
               I[id + '-' + s.externalactions[id].actions[i].id] =
                 s.externalactions[id].actions[i].context
-          for (id in ((function (e, t) {
+          for (id in (((e, t) => {
             ;(e = e.split('.')), (t = t.split('.'))
             for (var n = 0; n < e.length && n < t.length; n++)
               if (parseInt(e[n]) != parseInt(t[n]))
@@ -1729,15 +1722,12 @@
               c({ externalactions: s.externalactions }),
               chrome.runtime.sendMessage(id, { getexternalactions: !0 })
           setTimeout(W, 0),
-            chrome.tabs.query(
-              { active: !0, lastFocusedWindow: !0 },
-              function (e) {
-                e.length && (f.active = e[0].id)
-              },
-            ),
+            chrome.tabs.query({ active: !0, lastFocusedWindow: !0 }, (e) => {
+              e.length && (f.active = e[0].id)
+            }),
             V()
         }
-      chrome.runtime.onUpdateAvailable.addListener(function (e) {
+      chrome.runtime.onUpdateAvailable.addListener((e) => {
         chrome.runtime.reload()
       }),
         (window.defaults = k),
@@ -1832,10 +1822,10 @@
         }),
         (window.contexts = I),
         (window.ensure_permissions = M),
-        (window.continue_permissions = function () {
-          setTimeout(function () {
+        (window.continue_permissions = () => {
+          setTimeout(() => {
             R && R(),
-              setTimeout(function () {
+              setTimeout(() => {
                 chrome.runtime.reload()
               }, 500)
           }, 0)
@@ -1845,10 +1835,10 @@
         (window.refreshPageAction = _),
         (window.ping = V),
         (window.connectNative = P),
-        (window.disconnectNative = function (e) {
+        (window.disconnectNative = (e) => {
           m && (m.disconnect(), (m = null))
         }),
-        (window.isNative = function () {
+        (window.isNative = () => {
           return (
             !!m &&
             (m.version ? { loaded: !0, version: m.version } : { loaded: !1 })

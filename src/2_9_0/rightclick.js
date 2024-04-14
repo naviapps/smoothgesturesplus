@@ -1,14 +1,14 @@
-!(function () {
+!(() => {
   'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {})
+    (console.log = console.error = () => {})
   var n = {}
-  chrome.storage.local.get(null, function (t) {
+  chrome.storage.local.get(null, (t) => {
     ;(n = t), l()
   })
-  chrome.storage.onChanged.addListener(function (t, e) {
+  chrome.storage.onChanged.addListener((t, e) => {
     if ('local' == e) for (key in t) n[key] = t[key].newValue
   })
-  var i = function (t, e) {
+  var i = (t, e) => {
       var i = Date.now()
       for (key in t)
         (n[key] = t[key]),
@@ -20,27 +20,24 @@
       -1 != navigator.platform.indexOf('Mac')),
     t = -1 != navigator.platform.indexOf('CrOS'),
     e = -1 != navigator.platform.indexOf('Linux')
-  chrome.permissions.contains(
-    { permissions: ['nativeMessaging'] },
-    function (t) {
-      chrome.runtime.getBackgroundPage(function (t) {
-        t.connectNative()
-      })
-    },
-  )
-  var l = function () {
-    $(function () {
-      $('#doubleclick, #chromeosdouble').click(function () {
+  chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (t) => {
+    chrome.runtime.getBackgroundPage((t) => {
+      t.connectNative()
+    })
+  })
+  var l = () => {
+    $(() => {
+      $('#doubleclick, #chromeosdouble').click(() => {
         i({ blockDoubleclickAlert: !0 }), window.close()
       }),
-        $('#installplugin').click(function () {
+        $('#installplugin').click(() => {
           i({ blockDoubleclickAlert: !1 }),
             chrome.permissions.request(
               { permissions: ['nativeMessaging'] },
-              function (t) {
+              (t) => {
                 if (t || n.forceInstallRightclick) {
                   n.forceInstallRightclick && i({ forceInstallRightclick: !1 }),
-                    chrome.runtime.getBackgroundPage(function (t) {
+                    chrome.runtime.getBackgroundPage((t) => {
                       t.connectNative(10)
                     })
                   var e = document.createElement('a')

@@ -1,15 +1,15 @@
 if (!pluginnetwork) var pluginnetwork = {}
-pluginnetwork.helpers = (function () {
+pluginnetwork.helpers = (() => {
   return {
-    getMonthFormatted: function (date) {
+    getMonthFormatted: (date) => {
       var month = date.getMonth() + 1
       return month < 10 ? '0' + month : month // ('' + month) for string result
     },
-    getDayFormatted: function (date) {
+    getDayFormatted: (date) => {
       var month = date.getDate()
       return month < 10 ? '0' + month : month // ('' + month) for string result
     },
-    getDayDelta: function (incomingYear, incomingMonth, incomingDay) {
+    getDayDelta: (incomingYear, incomingMonth, incomingDay) => {
       var incomingDate = new Date(incomingYear, incomingMonth - 1, incomingDay),
         today = new Date(),
         delta
@@ -25,7 +25,7 @@ pluginnetwork.helpers = (function () {
       delta = incomingDate - today
       return Math.round(delta / 1000 / 60 / 60 / 24)
     },
-    IsJsonString: function (str) {
+    IsJsonString: (str) => {
       try {
         JSON.parse(str)
       } catch (e) {

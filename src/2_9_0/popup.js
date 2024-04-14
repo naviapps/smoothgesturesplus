@@ -1,21 +1,21 @@
-!(function () {
+!(() => {
   'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {})
+    (console.log = console.error = () => {})
   var o = {}
-  chrome.storage.local.get(null, function (e) {
+  chrome.storage.local.get(null, (e) => {
     ;(o = e), init()
   })
-  chrome.storage.onChanged.addListener(function (e, t) {
+  chrome.storage.onChanged.addListener((e, t) => {
     if ('local' == t) for (key in e) o[key] = e[key].newValue
   })
-  var s = function () {
+  var s = () => {
     chrome.tabs.reload({ bypassCache: !0 }), window.close()
   }
-  init = function () {
-    chrome.runtime.getBackgroundPage(function (o) {
-      chrome.tabs.query({ active: !0, lastFocusedWindow: !0 }, function (e) {
+  init = () => {
+    chrome.runtime.getBackgroundPage((o) => {
+      chrome.tabs.query({ active: !0, lastFocusedWindow: !0 }, (e) => {
         var t = e[0]
-        o.getTabStatus(t.id, function (e) {
+        o.getTabStatus(t.id, (e) => {
           console.log(t, e),
             'broken' == e
               ? $('body')
@@ -34,7 +34,7 @@
                     $('<div class=button>')
                       .text(chrome.i18n.getMessage('popup_button_options'))
                       .css({ float: 'right' })
-                      .click(function () {
+                      .click(() => {
                         chrome.tabs.create({ url: 'options.html' }),
                           window.close()
                       }),
@@ -87,7 +87,7 @@
                     $('<div class=button>')
                       .text(chrome.i18n.getMessage('popup_button_options'))
                       .css({ float: 'right' })
-                      .click(function () {
+                      .click(() => {
                         chrome.tabs.create({ url: 'options.html' }),
                           window.close()
                       }),
@@ -108,7 +108,7 @@
                       $('<div class=button>')
                         .text(chrome.i18n.getMessage('popup_button_options'))
                         .css({ float: 'right' })
-                        .click(function () {
+                        .click(() => {
                           chrome.tabs.create({ url: 'options.html' }),
                             window.close()
                         }),

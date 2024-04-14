@@ -7,33 +7,33 @@ var sjcl = {
   misc: {},
   codec: {},
   exception: {
-    corrupt: function (t) {
-      ;(this.toString = function () {
+    corrupt: (t) => {
+      ;(this.toString = () => {
         return 'CORRUPT: ' + this.message
       }),
         (this.message = t)
     },
-    invalid: function (t) {
-      ;(this.toString = function () {
+    invalid: (t) => {
+      ;(this.toString = () => {
         return 'INVALID: ' + this.message
       }),
         (this.message = t)
     },
-    bug: function (t) {
-      ;(this.toString = function () {
+    bug: (t) => {
+      ;(this.toString = () => {
         return 'BUG: ' + this.message
       }),
         (this.message = t)
     },
-    notReady: function (t) {
-      ;(this.toString = function () {
+    notReady: (t) => {
+      ;(this.toString = () => {
         return 'NOT READY: ' + this.message
       }),
         (this.message = t)
     },
   },
 }
-function n(t, r) {
+const n = (t, r) => {
   var i,
     n,
     e,
@@ -77,13 +77,13 @@ function n(t, r) {
 }
 'undefined' != typeof module && module.exports && (module.exports = sjcl),
   (sjcl.bitArray = {
-    bitSlice: function (t, r, i) {
+    bitSlice: (t, r, i) => {
       return (
         (t = sjcl.bitArray.d(t.slice(r / 32), 32 - (31 & r)).slice(1)),
         void 0 === i ? t : sjcl.bitArray.clamp(t, i - r)
       )
     },
-    extract: function (t, r, i) {
+    extract: (t, r, i) => {
       var n = Math.floor((-r - i) & 31)
       return (
         (-32 & ((r + i - 1) ^ r)
@@ -92,7 +92,7 @@ function n(t, r) {
         ((1 << i) - 1)
       )
     },
-    concat: function (t, r) {
+    concat: (t, r) => {
       if (0 === t.length || 0 === r.length) return t.concat(r)
       var i = t[t.length - 1],
         n = sjcl.bitArray.getPartial(i)
@@ -100,11 +100,11 @@ function n(t, r) {
         ? t.concat(r)
         : sjcl.bitArray.d(r, n, 0 | i, t.slice(0, t.length - 1))
     },
-    bitLength: function (t) {
+    bitLength: (t) => {
       var r = t.length
       return 0 === r ? 0 : 32 * (r - 1) + sjcl.bitArray.getPartial(t[r - 1])
     },
-    clamp: function (t, r) {
+    clamp: (t, r) => {
       if (32 * t.length < r) return t
       var i = (t = t.slice(0, Math.ceil(r / 32))).length
       return (
@@ -119,20 +119,20 @@ function n(t, r) {
         t
       )
     },
-    partial: function (t, r, i) {
+    partial: (t, r, i) => {
       return 32 === t ? r : (i ? 0 | r : r << (32 - t)) + 1099511627776 * t
     },
-    getPartial: function (t) {
+    getPartial: (t) => {
       return Math.round(t / 1099511627776) || 32
     },
-    equal: function (t, r) {
+    equal: (t, r) => {
       if (sjcl.bitArray.bitLength(t) !== sjcl.bitArray.bitLength(r)) return !1
       var i,
         n = 0
       for (i = 0; i < t.length; i++) n |= t[i] ^ r[i]
       return 0 === n
     },
-    d: function (t, r, i, n) {
+    d: (t, r, i, n) => {
       var e
       for (void (e = 0) === n && (n = []); 32 <= r; r -= 32) n.push(i), (i = 0)
       if (0 === r) return n.concat(t)
@@ -147,12 +147,12 @@ function n(t, r) {
         n
       )
     },
-    g: function (t, r) {
+    g: (t, r) => {
       return [t[0] ^ r[0], t[1] ^ r[1], t[2] ^ r[2], t[3] ^ r[3]]
     },
   }),
   (sjcl.codec.utf8String = {
-    fromBits: function (t) {
+    fromBits: (t) => {
       var r,
         i,
         n = '',
@@ -163,7 +163,7 @@ function n(t, r) {
           (i <<= 8)
       return decodeURIComponent(escape(n))
     },
-    toBits: function (t) {
+    toBits: (t) => {
       t = unescape(encodeURIComponent(t))
       var r,
         i = [],
@@ -174,14 +174,14 @@ function n(t, r) {
     },
   }),
   (sjcl.codec.hex = {
-    fromBits: function (t) {
+    fromBits: (t) => {
       var r,
         i = ''
       for (r = 0; r < t.length; r++)
         i += (0xf00000000000 + (0 | t[r])).toString(16).substr(4)
       return i.substr(0, sjcl.bitArray.bitLength(t) / 4)
     },
-    toBits: function (t) {
+    toBits: (t) => {
       var r,
         i,
         n = []
@@ -194,20 +194,20 @@ function n(t, r) {
       return sjcl.bitArray.clamp(n, 4 * i)
     },
   }),
-  (sjcl.hash.sha1 = function (t) {
+  (sjcl.hash.sha1 = (t) => {
     t
       ? ((this.c = t.c.slice(0)), (this.b = t.b.slice(0)), (this.a = t.a))
       : this.reset()
   }),
-  (sjcl.hash.sha1.hash = function (t) {
+  (sjcl.hash.sha1.hash = (t) => {
     return new sjcl.hash.sha1().update(t).finalize()
   }),
   (sjcl.hash.sha1.prototype = {
     blockSize: 512,
-    reset: function () {
+    reset: () => {
       return (this.c = this.e.slice(0)), (this.b = []), (this.a = 0), this
     },
-    update: function (t) {
+    update: (t) => {
       'string' == typeof t && (t = sjcl.codec.utf8String.toBits(t))
       var r,
         i = (this.b = sjcl.bitArray.concat(this.b, t))
@@ -221,7 +221,7 @@ function n(t, r) {
         n(this, i.splice(0, 16))
       return this
     },
-    finalize: function () {
+    finalize: () => {
       var t,
         r = this.b,
         i = this.c

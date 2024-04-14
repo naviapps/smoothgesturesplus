@@ -10,13 +10,13 @@ if (
   var titles = JSON.parse(unescape(parts[1]))
   var urls = JSON.parse(unescape(parts[2]))
   var index = location.search.substr(7) * 1
-  var decodetext = function (code) {
+  var decodetext = (code) => {
     var text = ''
     for (var j = 0; j < code.length; j++)
       text += String.fromCharCode(code.charCodeAt(j) - 10)
     return text
   }
-  chrome.extension.sendRequest({ loadhistory: index, id: id }, function (resp) {
+  chrome.extension.sendRequest({ loadhistory: index, id: id }, (resp) => {
     if (resp) {
       location.replace(decodetext(urls[index]))
     } else {
@@ -32,11 +32,11 @@ if (
   })
 }
 
-chrome.extension.onRequest.addListener(function (req, sender, callback) {
+chrome.extension.onRequest.addListener((req, sender, callback) => {
   if (req.ping) callback()
 })
 
-var SmoothGestures = function () {
+var SmoothGestures = () => {
   ///////////////////////////////////////////////////////////
   // Local Variables ////////////////////////////////////////
   ///////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@ var SmoothGestures = function () {
   ///////////////////////////////////////////////////////////
   // Extension Communication ////////////////////////////////
   ///////////////////////////////////////////////////////////
-  _this.connect = function () {
+  _this.connect = () => {
     var mess = {
       name: JSON.stringify({
         name: 'smoothgestures.tab',
@@ -93,7 +93,7 @@ var SmoothGestures = function () {
     port.onDisconnect.addListener(_this.disable)
   }
 
-  var receiveMessage = function (mess) {
+  var receiveMessage = (mess) => {
     var mess = JSON.parse(mess)
     if (mess.enable) enable()
     if (mess.disable) _this.disable()
@@ -144,7 +144,7 @@ var SmoothGestures = function () {
   ///////////////////////////////////////////////////////////
   // Page Events ////////////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var mouseDownCapture = function (t) {
+  var mouseDownCapture = (t) => {
     blockClick[t.button] = false
     blockContext = t.button != 2
 
@@ -201,7 +201,7 @@ var SmoothGestures = function () {
         (validGestures['r'][first] && validGestures['r'][first][second])
       ) {
         syncButtons = {
-          timeout: setTimeout(function () {
+          timeout: setTimeout(() => {
             syncButtons = false
           }, 500),
         }
@@ -257,7 +257,7 @@ var SmoothGestures = function () {
     )
   }
 
-  var mouseUpCapture = function (t) {
+  var mouseUpCapture = (t) => {
     if (t.button == settings.holdButton) {
       if (gesture.line) moveGesture(t, true)
       if (gesture.line && gesture.line.code != '') {
@@ -281,7 +281,7 @@ var SmoothGestures = function () {
       navigator.platform.indexOf('Win') == -1
     ) {
       forceContext = true
-      setTimeout(function () {
+      setTimeout(() => {
         forceContext = false
       }, 600)
       if (sgplugin) {
@@ -309,7 +309,7 @@ var SmoothGestures = function () {
     if (!buttonDown[0] && !buttonDown[2]) gesture.rocker = null
   }
 
-  var mouseClickCapture = function (t) {
+  var mouseClickCapture = (t) => {
     if (blockClick[t.button]) {
       t.preventDefault()
       t.stopPropagation()
@@ -317,7 +317,7 @@ var SmoothGestures = function () {
     blockClick[t.button] = false
   }
 
-  var doContextMenu = function (t) {
+  var doContextMenu = (t) => {
     if (
       (blockContext ||
         (buttonDown[2] && (gesture.line || gesture.rocker || gesture.wheel))) &&
@@ -333,7 +333,7 @@ var SmoothGestures = function () {
     }
   }
 
-  var doSelectStart = function (t) {
+  var doSelectStart = (t) => {
     if (
       settings.holdButton == 0 &&
       keyMod[0] == '0' &&
@@ -345,16 +345,16 @@ var SmoothGestures = function () {
     }
   }
 
-  var canvasResize = function () {
+  var canvasResize = () => {
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
   }
 
-  var keyDownCapture = function (t) {
+  var keyDownCapture = (t) => {
     if (t.keyCode == 27) {
       endGesture()
       keyEscape = true
-      var keyUp = function (t2) {
+      var keyUp = (t2) => {
         keyEscape = false
         window.removeEventListener('keyup', keyUp, true)
       }
@@ -389,7 +389,7 @@ var SmoothGestures = function () {
                     : null
       if (i != null) {
         mod = mod.substr(0, i) + '1' + mod.substr(i + 1)
-        var keyUp = function (t2) {
+        var keyUp = (t2) => {
           keyMod = keyMod.substr(0, i) + '0' + keyMod.substr(i + 1)
           window.removeEventListener('keyup', keyUp, true)
         }
@@ -412,18 +412,18 @@ var SmoothGestures = function () {
     }
   }
 
-  var focusCapture = function (t) {
+  var focusCapture = (t) => {
     if (t.target.nodeName) focus = t.target
   }
 
-  var blurCapture = function (t) {
+  var blurCapture = (t) => {
     if (t.target.nodeName) focus = null
   }
 
   ///////////////////////////////////////////////////////////
   // Start/End Gestures /////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var startGesture = function (point, target, line, rocker, wheel, time) {
+  var startGesture = (point, target, line, rocker, wheel, time) => {
     endGesture()
     if (!gesture.events) {
       window.addEventListener('mousemove', moveGesture, true)
@@ -432,7 +432,7 @@ var SmoothGestures = function () {
     }
     if (location.hostname == 'mail.google.com') {
       var elem = document.body.children[1]
-      var domListen = function () {
+      var domListen = () => {
         endGesture()
         elem.removeEventListener('DOMSubtreeModified', domListen, true)
       }
@@ -469,7 +469,7 @@ var SmoothGestures = function () {
       document.body.appendChild(htmlclear)
   }
 
-  var moveGesture = function (t, diagonal) {
+  var moveGesture = (t, diagonal) => {
     if (!gesture.startPoint) gesture.startPoint = { x: t.clientX, y: t.clientY }
 
     if (gesture.rocker || gesture.wheel)
@@ -559,7 +559,7 @@ var SmoothGestures = function () {
     }
   }
 
-  var wheelGesture = function (t) {
+  var wheelGesture = (t) => {
     if (t.target.nodeName == 'IFRAME' || t.target.nodeName == 'FRAME')
       endGesture()
     moveGesture(t)
@@ -567,7 +567,7 @@ var SmoothGestures = function () {
     var dir = t.wheelDelta > 0 ? 'U' : 'D'
     if (_this.callback || validGestures['w'][dir]) {
       syncButtons = {
-        timeout: setTimeout(function () {
+        timeout: setTimeout(() => {
           syncButtons = false
         }, 500),
       }
@@ -581,7 +581,7 @@ var SmoothGestures = function () {
     }
   }
 
-  var sendGesture = function (code) {
+  var sendGesture = (code) => {
     if (code) {
       if (_this.callback) {
         _this.callback(code)
@@ -642,7 +642,7 @@ var SmoothGestures = function () {
     } else endGesture()
   }
 
-  var endGesture = function () {
+  var endGesture = () => {
     if (gesture.events) {
       window.removeEventListener('mousemove', moveGesture, true)
       window.removeEventListener('mousewheel', wheelGesture, true)
@@ -666,7 +666,7 @@ var SmoothGestures = function () {
   ///////////////////////////////////////////////////////////
   // Helpers ////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var getLink = function (elem) {
+  var getLink = (elem) => {
     while (elem) {
       if (elem.href) return elem.href
       elem = elem.parentNode
@@ -674,14 +674,14 @@ var SmoothGestures = function () {
     return null
   }
 
-  var refreshLineAsync = function () {
+  var refreshLineAsync = () => {
     if (refreshLineAsync.timeout) return
-    refreshLineAsync.timeout = setTimeout(function () {
+    refreshLineAsync.timeout = setTimeout(() => {
       refreshLine()
       refreshLineAsync.timeout = null
     }, 200)
   }
-  var refreshLine = function () {
+  var refreshLine = () => {
     if (!canvas.getContext) return
     var ctx = canvas.getContext('2d')
     ctx.strokeStyle =
@@ -707,7 +707,7 @@ var SmoothGestures = function () {
     }
   }
 
-  _this.drawGesture = function (gesture, width, height, lineWidth) {
+  _this.drawGesture = (gesture, width, height, lineWidth) => {
     var context = ''
     if (gesture[0] == 's') {
       context = 's'
@@ -762,13 +762,16 @@ var SmoothGestures = function () {
         )
         .append(c)
   }
-  var drawLine = function (gesture, width, height, lineWidth) {
-    var scale = lineWidth ? lineWidth / 3 : 1
-
-    var c = document.createElement('canvas')
+  const drawLine = (
+    gesture,
+    width: number,
+    height: number,
+    lineWidth: number,
+  ): HTMLCanvasElement => {
+    const c: HTMLCanvasElement = document.createElement('canvas')
     c.width = width
     c.height = height
-    ctx = c.getContext('2d')
+    const ctx = c.getContext('2d')
     ctx.strokeStyle =
       'rgba(' +
       settings.trailColor.r +
@@ -781,61 +784,66 @@ var SmoothGestures = function () {
       ')'
     ctx.lineWidth = lineWidth ? lineWidth : 3
     ctx.lineCap = 'butt'
-    var step = 10
-    var tight = 2
-    var sep = 3
+    let step: number = 10
+    let tight: number = 2
+    let sep: number = 3
 
-    var prev = { x: 0, y: 0 }
-    var curr = { x: 0, y: 0 }
-    var max = { x: 0, y: 0 }
-    var min = { x: 0, y: 0 }
+    let prev: { x: number, y: number } = { x: 0, y: 0 }
+    let curr: { x: number, y: number } = { x: 0, y: 0 }
+    const max: { x: number, y: number } = { x: 0, y: 0 }
+    const min: { x: number, y: number } = { x: 0, y: 0 }
 
-    var tip = function (dir) {
+    const tip = (dir) => {
       prev = curr
       ctx.lineTo(prev.x, prev.y)
-      if (dir == 'U') curr = { x: prev.x, y: prev.y - step * 0.75 }
-      else if (dir == 'D') curr = { x: prev.x, y: prev.y + step * 0.75 }
-      else if (dir == 'L') curr = { x: prev.x - step * 0.75, y: prev.y }
-      else if (dir == 'R') curr = { x: prev.x + step * 0.75, y: prev.y }
-      else if (dir == '1')
+      if (dir === 'U') {
+        curr = { x: prev.x, y: prev.y - step * 0.75 }
+      } else if (dir === 'D') {
+        curr = { x: prev.x, y: prev.y + step * 0.75 }
+      } else if (dir === 'L') {
+        curr = { x: prev.x - step * 0.75, y: prev.y }
+      } else if (dir === 'R') {
+        curr = { x: prev.x + step * 0.75, y: prev.y }
+      } else if (dir === '1') {
         curr = { x: prev.x - step * 0.5, y: prev.y + step * 0.5 }
-      else if (dir == '3')
+      } else if (dir === '3') {
         curr = { x: prev.x + step * 0.5, y: prev.y + step * 0.5 }
-      else if (dir == '7')
+      } else if (dir === '7') {
         curr = { x: prev.x - step * 0.5, y: prev.y - step * 0.5 }
-      else if (dir == '9')
+      } else if (dir === '9') {
         curr = { x: prev.x + step * 0.5, y: prev.y - step * 0.5 }
+      }
       ctx.lineTo(curr.x, curr.y)
       minmax()
     }
-    var curve = function (dir) {
+    var curve = (dir) => {
       prev = curr
       ctx.lineTo(prev.x, prev.y)
-      if (dir == 'UD') {
+      if (dir === 'UD') {
         curr = { x: prev.x, y: prev.y - step }
         minmax()
         ctx.lineTo(prev.x, prev.y - step)
         ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false)
         ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir == 'UL')
+      } else if (dir === 'UL')
         ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true)
-      else if (dir == 'UR')
+      else if (dir === 'UR')
         ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false)
-      else if (dir == 'DU') {
+      else if (dir === 'DU') {
         curr = { x: prev.x, y: prev.y + step }
         minmax()
         ctx.lineTo(prev.x, prev.y + step)
         ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true)
         ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir == 'DL')
+      } else if (dir === 'DL')
         ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false)
-      else if (dir == 'DR')
+      else if (dir === 'DR')
         ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true)
-      else if (dir == 'LU')
+      else if (dir === 'LU')
         ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false)
-      else if (dir == 'LD')
+      else if (dir === 'LD')
         ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true)
-      else if (dir == 'LR') {
+      else if (dir === 'LR') {
         curr = { x: prev.x - step, y: prev.y }
         minmax()
         ctx.lineTo(prev.x - step, prev.y)
@@ -848,11 +856,11 @@ var SmoothGestures = function () {
           true,
         )
         ctx.lineTo(prev.x, prev.y + tight * 2)
-      } else if (dir == 'RU')
+      } else if (dir === 'RU') {
         ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true)
-      else if (dir == 'RD')
+      } else if (dir === 'RD') {
         ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, 0, false)
-      else if (dir == 'RL') {
+      } else if (dir === 'RL') {
         curr = { x: prev.x + step, y: prev.y }
         minmax()
         ctx.lineTo(prev.x + step, prev.y)
@@ -869,21 +877,34 @@ var SmoothGestures = function () {
         tip(dir[0])
         tip(dir[1])
       }
-      if (dir == 'UD') curr = { x: prev.x + tight * 2, y: prev.y + sep }
-      else if (dir == 'UL') curr = { x: prev.x - step, y: prev.y - step }
-      else if (dir == 'UR') curr = { x: prev.x + step + sep, y: prev.y - step }
-      else if (dir == 'DU') curr = { x: prev.x + tight * 2, y: prev.y }
-      else if (dir == 'DL') curr = { x: prev.x - step, y: prev.y + step }
-      else if (dir == 'DR') curr = { x: prev.x + step + sep, y: prev.y + step }
-      else if (dir == 'LU') curr = { x: prev.x - step, y: prev.y - step }
-      else if (dir == 'LD') curr = { x: prev.x - step, y: prev.y + step + sep }
-      else if (dir == 'LR') curr = { x: prev.x + sep, y: prev.y + tight * 2 }
-      else if (dir == 'RU') curr = { x: prev.x + step, y: prev.y - step }
-      else if (dir == 'RD') curr = { x: prev.x + step, y: prev.y + step + sep }
-      else if (dir == 'RL') curr = { x: prev.x, y: prev.y + tight * 2 }
+      if (dir === 'UD') {
+        curr = { x: prev.x + tight * 2, y: prev.y + sep }
+      } else if (dir === 'UL') {
+        curr = { x: prev.x - step, y: prev.y - step }
+      } else if (dir === 'UR') {
+        curr = { x: prev.x + step + sep, y: prev.y - step }
+      } else if (dir === 'DU') {
+        curr = { x: prev.x + tight * 2, y: prev.y }
+      } else if (dir === 'DL') {
+        curr = { x: prev.x - step, y: prev.y + step }
+      } else if (dir === 'DR') {
+        curr = { x: prev.x + step + sep, y: prev.y + step }
+      } else if (dir === 'LU') {
+        curr = { x: prev.x - step, y: prev.y - step }
+      } else if (dir === 'LD') {
+        curr = { x: prev.x - step, y: prev.y + step + sep }
+      } else if (dir === 'LR') {
+        curr = { x: prev.x + sep, y: prev.y + tight * 2 }
+      } else if (dir === 'RU') {
+        curr = { x: prev.x + step, y: prev.y - step }
+      } else if (dir === 'RD') {
+        curr = { x: prev.x + step, y: prev.y + step + sep }
+      } else if (dir === 'RL') {
+        curr = { x: prev.x, y: prev.y + tight * 2 }
+      }
       minmax()
     }
-    var minmax = function () {
+    const minmax = (): void => {
       if (curr.x > max.x) max.x = curr.x
       if (curr.y > max.y) max.y = curr.y
       if (curr.x < min.x) min.x = curr.x
@@ -964,7 +985,7 @@ var SmoothGestures = function () {
 
     return c
   }
-  var drawRocker = function (gesture, width) {
+  var drawRocker = (gesture, width) => {
     var first = gesture[1] == 'L' ? 0 : gesture[1] == 'M' ? 1 : 2
     var second = gesture[2] == 'L' ? 0 : gesture[2] == 'M' ? 1 : 2
     return $('<div>')
@@ -994,7 +1015,7 @@ var SmoothGestures = function () {
           }),
       )
   }
-  var drawWheel = function (gesture, width) {
+  var drawWheel = (gesture, width) => {
     return $('<div>')
       .css({ width: width + 'px' })
       .append(
@@ -1017,7 +1038,7 @@ var SmoothGestures = function () {
           }),
       )
   }
-  var codeCharMap = {}
+  const codeCharMap = {}
   codeCharMap[8] = 'Backspace'
   codeCharMap[9] = 'Tab'
   codeCharMap[13] = 'Enter'
@@ -1063,7 +1084,7 @@ var SmoothGestures = function () {
   codeCharMap[220] = '\\'
   codeCharMap[221] = ']'
   codeCharMap[222] = "'"
-  var codeButton = function (code) {
+  var codeButton = (code) => {
     var code = code.split(':')
     var id = code[1]
     var key = code[2]
@@ -1073,16 +1094,16 @@ var SmoothGestures = function () {
     if (ch) return ch
     return eval('"\\u' + id.substr(2) + '"')
   }
-  var drawKey = function (gesture, width) {
+  var drawKey = (gesture, width) => {
     return $('<div>')
       .css({ width: width + 'px' })
       .append(
         $('<div>')
           .text(
-            (gesture[1] == '1' ? 'Ctrl + ' : '') +
-              (gesture[2] == '1' ? 'Alt + ' : '') +
-              (gesture[3] == '1' ? 'Shift + ' : '') +
-              (gesture[4] == '1' ? 'META + ' : '') +
+            (gesture[1] === '1' ? 'Ctrl + ' : '') +
+              (gesture[2] === '1' ? 'Alt + ' : '') +
+              (gesture[3] === '1' ? 'Shift + ' : '') +
+              (gesture[4] === '1' ? 'META + ' : '') +
               codeButton(gesture),
           )
           .css({
@@ -1095,7 +1116,7 @@ var SmoothGestures = function () {
   }
 
   var messageNode = null
-  var insertMessage = function (message) {
+  var insertMessage = (message) => {
     document.title = message + ' ' + document.title
     var mess = document.createElement('span')
     mess.innerHTML = message + ' '
@@ -1118,7 +1139,7 @@ var SmoothGestures = function () {
   ///////////////////////////////////////////////////////////
   // Enable/Disable /////////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var init = function () {
+  var init = () => {
     window.addEventListener('focus', focusCapture, true)
     window.addEventListener('blur', blurCapture, true)
 
@@ -1139,7 +1160,7 @@ var SmoothGestures = function () {
     }
   }
 
-  var enable = function () {
+  var enable = () => {
     if (enabled) return
     enabled = true
 
@@ -1152,7 +1173,7 @@ var SmoothGestures = function () {
     window.addEventListener('keydown', keyDownCapture, true)
   }
 
-  _this.disable = function () {
+  _this.disable = () => {
     if (!enabled) return
     enabled = false
 
@@ -1168,13 +1189,13 @@ var SmoothGestures = function () {
     port.onDisconnect.removeListener(_this.disable)
   }
 
-  _this.enabled = function () {
+  _this.enabled = () => {
     return enabled
   }
-  _this.extVersion = function () {
+  _this.extVersion = () => {
     return extVersion
   }
-  _this.setSettings = function (s) {
+  _this.setSettings = (s) => {
     settings = s
   }
 

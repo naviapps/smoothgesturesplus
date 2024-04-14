@@ -1,5 +1,5 @@
-var reloadPage = function () {
-  chrome.tabs.getSelected(null, function (tab) {
+var reloadPage = () => {
+  chrome.tabs.getSelected(null, (tab) => {
     chrome.tabs.update(tab.id, { url: tab.url })
     window.close()
   })
@@ -13,8 +13,8 @@ if (bg.popupMessage == 'updated') {
   )
   bg.popupMessage == null
 } else {
-  chrome.tabs.getSelected(null, function (tab) {
-    bg.getTabStatus(tab.id, function (stat) {
+  chrome.tabs.getSelected(null, (tab) => {
+    bg.getTabStatus(tab.id, (stat) => {
       if (stat == 'broken') {
         $('body')
           .append('<div id=statuslight class=red>')
@@ -26,7 +26,7 @@ if (bg.popupMessage == 'updated') {
             $('<div class=sgbutton>')
               .text(chrome.i18n.getMessage('popup_button_options'))
               .css({ float: 'right' })
-              .click(function () {
+              .click(() => {
                 chrome.tabs.create({ url: 'options.html' })
                 window.close()
               }),
@@ -71,7 +71,7 @@ if (bg.popupMessage == 'updated') {
           $('<div class=sgbutton>')
             .text(chrome.i18n.getMessage('popup_button_options'))
             .css({ float: 'right' })
-            .click(function () {
+            .click(() => {
               chrome.tabs.create({ url: 'options.html' })
               window.close()
             }),
@@ -89,7 +89,7 @@ if (bg.popupMessage == 'updated') {
             $('<div class=sgbutton>')
               .text(chrome.i18n.getMessage('popup_button_options'))
               .css({ float: 'right' })
-              .click(function () {
+              .click(() => {
                 chrome.tabs.create({ url: 'options.html' })
                 window.close()
               }),
@@ -98,10 +98,10 @@ if (bg.popupMessage == 'updated') {
             $('<div class=sgbutton>')
               .text(chrome.i18n.getMessage('popup_button_hidepageaction'))
               .css({ float: 'left' })
-              .click(function () {
+              .click(() => {
                 bg.settings.hidePageAction = true
                 bg.saveOptions(bg.profile)
-                chrome.windows.getAll({ populate: true }, function (wins) {
+                chrome.windows.getAll({ populate: true }, (wins) => {
                   for (i in wins)
                     for (j in wins[i].tabs)
                       bg.refreshPageAction(wins[i].tabs[j].id)

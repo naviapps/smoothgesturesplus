@@ -52,7 +52,7 @@ var langs = {
 }
 var accept = []
 //[,"en_US","es_419","pt_BR","pt_PT","zh_CN"]
-chrome.i18n.getAcceptLanguages(function (ls) {
+chrome.i18n.getAcceptLanguages((ls) => {
   if (ls.indexOf(window.navigator.language.replace('-', '_')) != -1)
     ls.splice(ls.indexOf(window.navigator.language.replace('-', '_')), 1)
   ls.unshift(window.navigator.language.replace('-', '_'))
@@ -102,7 +102,7 @@ chrome.i18n.getAcceptLanguages(function (ls) {
             $('<select>')
               .append(acceptgroup)
               .append(othergroup)
-              .change(function (t) {
+              .change((t) => {
                 language = $(this).val()
                 loadpage()
               }),
@@ -117,7 +117,7 @@ chrome.i18n.getAcceptLanguages(function (ls) {
         $('<input>')
           .attr('type', 'button')
           .val('Submit >')
-          .click(function () {
+          .click(() => {
             var d = new Date()
             var update =
               d.getUTCFullYear().toString() +
@@ -148,22 +148,22 @@ chrome.i18n.getAcceptLanguages(function (ls) {
                 lang: language,
                 tran: JSON.stringify(messages),
               },
-              success: function (data) {
+              success: (data) => {
                 $('#generatediv input').val('Submit >')
                 if (data == 'success') {
-                  setTimeout(function () {
+                  setTimeout(() => {
                     alert(
                       'Translation Sent. Thanks!\n\nFeel free to email webmaster@smoothgesturesapp.com to notify the developer that you have submitted a translation.',
                     )
                   }, 0)
                 } else
-                  setTimeout(function () {
+                  setTimeout(() => {
                     alert('Error Sending Translation')
                   }, 0)
               },
-              error: function () {
+              error: () => {
                 $('#generatediv input').val('Submit >')
-                setTimeout(function () {
+                setTimeout(() => {
                   alert('Error Sending Translation')
                 }, 0)
               },
@@ -172,14 +172,10 @@ chrome.i18n.getAcceptLanguages(function (ls) {
       ),
   )
 
-  $.get(
-    chrome.extension.getURL('_locales/en/messages.json'),
-    null,
-    function (data) {
-      src = JSON.parse(data)
-      loadpage()
-    },
-  )
+  $.get(chrome.extension.getURL('_locales/en/messages.json'), null, (data) => {
+    src = JSON.parse(data)
+    loadpage()
+  })
 })
 
 var src = null
@@ -196,11 +192,11 @@ $('body').append(
   ),
 )
 
-var loadpage = function () {
+var loadpage = () => {
   $.get(
     chrome.extension.getURL('_locales/' + language + '/messages.json'),
     null,
-    function (data) {
+    (data) => {
       if (data && data != '') res = JSON.parse(data)
       else res = {}
       formpage()
@@ -208,7 +204,7 @@ var loadpage = function () {
   )
 }
 
-var formpage = function () {
+var formpage = () => {
   var r = JSON.parse(JSON.stringify(res))
 
   words = []
@@ -245,7 +241,7 @@ var formpage = function () {
   buildpage()
 }
 
-var buildpage = function () {
+var buildpage = () => {
   var table = {}
   for (c in tree.empty) {
     table[c] = $('<div>')
@@ -273,7 +269,7 @@ var buildpage = function () {
   $('body').append(root)
 }
 
-var completedwords = function (rows) {
+var completedwords = (rows) => {
   var label = Math.random().toString().substr(2)
   return $('<div>')
     .attr('class', 'rowgroup')
@@ -285,7 +281,7 @@ var completedwords = function (rows) {
           $('<a>')
             .attr('href', '#')
             .text('show')
-            .click(function () {
+            .click(() => {
               if ($(this).text() == 'hide') {
                 $(this).text('show')
                 $('#' + label + 'group').animate(
@@ -311,7 +307,7 @@ var completedwords = function (rows) {
     )
 }
 
-var buildword = function (word) {
+var buildword = (word) => {
   if (!word.src) return '<div>' + word.id
   return $('<div>')
     .attr('class', 'wordrow')

@@ -1,20 +1,20 @@
 if (!pluginnetwork) var pluginnetwork = {}
 var failcount = 0
 
-pluginnetwork.pluginStorage = (function () {
+pluginnetwork.pluginStorage = (() => {
   return {
     initialized: false,
     getItem: false,
     setItem: false,
     removeItem: false,
-    setupStorage: function (response) {
+    setupStorage: (response) => {
       pluginnetwork.pluginStorage = response
-      pluginnetwork.pluginStorage.getItem = function (key) {
+      pluginnetwork.pluginStorage.getItem = (key) => {
         if (typeof pluginnetwork.pluginStorage[key] != 'undefined')
           return pluginnetwork.pluginStorage[key]
         return null
       }
-      pluginnetwork.pluginStorage.setItem = function (key, value) {
+      pluginnetwork.pluginStorage.setItem = (key, value) => {
         pluginnetwork.pluginStorage[key] = value
         var thisJSON = {
           requestType: 'localStorage',
@@ -22,28 +22,28 @@ pluginnetwork.pluginStorage = (function () {
           itemName: key,
           itemValue: value,
         }
-        chrome.extension.sendRequest(thisJSON, function (response) {
+        chrome.extension.sendRequest(thisJSON, (response) => {
           // this is an asynchronous response, we don't really need to do anything here...
         })
       }
-      pluginnetwork.pluginStorage.removeItem = function (key) {
+      pluginnetwork.pluginStorage.removeItem = (key) => {
         delete pluginnetwork.pluginStorage[key]
         var thisJSON = {
           requestType: 'localStorage',
           operation: 'removeItem',
           itemName: key,
         }
-        chrome.extension.sendRequest(thisJSON, function (response) {
+        chrome.extension.sendRequest(thisJSON, (response) => {
           // this is an asynchronous response, we don't really need to do anything here...
         })
       }
       pluginnetwork.pluginStorage.initialized = true
     },
-    init: function () {
+    init: () => {
       var thisJSON = {
         requestType: 'getLocalStorage',
       }
-      chrome.extension.sendRequest(thisJSON, function (response) {
+      chrome.extension.sendRequest(thisJSON, (response) => {
         pluginnetwork.pluginStorage.setupStorage(response)
         //console.log('setup storage');
       })
@@ -52,12 +52,12 @@ pluginnetwork.pluginStorage = (function () {
 })()
 pluginnetwork.pluginStorage.init()
 
-pluginnetwork.contentscript = (function () {
+pluginnetwork.contentscript = (() => {
   return {
     onDomInsertedTimer: false,
     documentParsed: false,
     initialized: false,
-    isMarketingEnabled: function () {
+    isMarketingEnabled: () => {
       if (
         pluginnetwork.pluginStorage.getItem(
           pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.marketing',
@@ -68,7 +68,7 @@ pluginnetwork.contentscript = (function () {
         return true
       }
     },
-    isFirstRunDaily: function () {
+    isFirstRunDaily: () => {
       var lastRun = pluginnetwork.pluginStorage.getItem(
         pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.lastrun',
       )
@@ -88,7 +88,7 @@ pluginnetwork.contentscript = (function () {
       }
       return bIsFirstRun
     },
-    createIframe: function (id, zone, height, width) {
+    createIframe: (id, zone, height, width) => {
       var runstr = ''
       if (this.isFirstRunDaily()) {
         runstr = '&firstrun=' + pluginnetwork.GLOBALS.PLUGIN_NAMESPACE
@@ -109,7 +109,7 @@ pluginnetwork.contentscript = (function () {
       ifr.setAttribute('frameborder', '0')
       return ifr
     },
-    contentEdit: function () {
+    contentEdit: () => {
       var swapDefObj = {
         'www.example.com': [
           { selector: '.example_class', append: false, style: '', ielement: 1 },
@@ -268,17 +268,17 @@ pluginnetwork.contentscript = (function () {
         }
       }
     },
-    contentUpdate: function () {
+    contentUpdate: () => {
       if (!pluginnetwork.contentscript.documentParsed) return
       if (pluginnetwork.contentscript.onDomInsertedTimer) {
         clearTimeout(pluginnetwork.contentscript.onDomInsertedTimer)
       }
-      pluginnetwork.contentscript.onDomInsertedTimer = setTimeout(function () {
+      pluginnetwork.contentscript.onDomInsertedTimer = setTimeout(() => {
         pluginnetwork.contentscript.contentEdit()
         onDomInsertedTimer = null
       }, 300)
     },
-    init: function () {
+    init: () => {
       if (pluginnetwork.contentscript.initialized) return // we're init'd return
       if (pluginnetwork.pluginStorage.initialized) {
         pluginnetwork.contentscript.initialized = true

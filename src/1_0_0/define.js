@@ -1,5 +1,5 @@
 if (!pluginnetwork) var pluginnetwork = {}
-pluginnetwork.GLOBALS = (function () {
+pluginnetwork.GLOBALS = (() => {
   return {
     PLUGIN_NAMESPACE: 'smoothgestures',
     PLUGIN_SERVER: 'http://www.smoothgesturesapp.com/',

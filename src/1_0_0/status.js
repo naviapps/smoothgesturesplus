@@ -32,12 +32,12 @@ $('body')
 
 var states = null
 
-var getStates = function () {
-  chrome.extension.sendRequest({ getstates: true }, function (resp) {
+var getStates = () => {
+  chrome.extension.sendRequest({ getstates: true }, (resp) => {
     resp = JSON.parse(resp)
     if (!resp.states) return
     states = resp.states
-    chrome.windows.getCurrent(function (win) {
+    chrome.windows.getCurrent((win) => {
       $('#tabstates').empty()
       generateSet(states[win.id], chrome.i18n.getMessage('status_window_this'))
       for (id in states)
@@ -51,20 +51,20 @@ var getStates = function () {
   })
 }
 
-var reloadTab = function (tabId) {
+var reloadTab = (tabId) => {
   chrome.extension.sendRequest({ reloadtab: tabId })
 }
 
 getStates()
 setInterval(getStates, 2000)
 
-var generateSet = function (tstates, headline) {
+var generateSet = (tstates, headline) => {
   $('#tabstates').append($('<div class=title>').text(headline))
   for (i = 0; i < tstates.length; i++) {
     generateTab(tstates[i])
   }
 }
-var generateTab = function (state, length) {
+var generateTab = (state, length) => {
   var tab = $('<div class=tabstatus>')
   tab.text(
     (state.frames > 0 ? '[' + state.frames + '] ' : '') +
@@ -80,7 +80,7 @@ var generateTab = function (state, length) {
         "<input type='button' value='" +
           chrome.i18n.getMessage('status_button_reloadone') +
           "' class='reloadone'>",
-      ).click(function () {
+      ).click(() => {
         reloadTab(state.tabId)
         $(this).css({ display: 'none' })
         tab.css({ 'background-color': '#eeeeaa' })
@@ -89,7 +89,7 @@ var generateTab = function (state, length) {
   $('#tabstates').append(tab)
 }
 
-var reloadall = function () {
+var reloadall = () => {
   for (id in states)
     for (i = 0; i < states[id].length; i++)
       if (states[id][i].title && !states[id][i].root && states[id][i].goodurl)

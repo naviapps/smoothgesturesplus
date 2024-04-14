@@ -1,16 +1,16 @@
-!(function (n) {
+!((n) => {
   var o = {}
-  function i(e) {
+  const i = (e) => {
     if (o[e]) return o[e].exports
     var t = (o[e] = { i: e, l: !1, exports: {} })
     return n[e].call(t.exports, t, t.exports, i), (t.l = !0), t.exports
   }
   ;(i.m = n),
     (i.c = o),
-    (i.i = function (e) {
+    (i.i = (e) => {
       return e
     }),
-    (i.d = function (e, t, n) {
+    (i.d = (e, t, n) => {
       i.o(e, t) ||
         Object.defineProperty(e, t, {
           configurable: !1,
@@ -18,30 +18,30 @@
           get: n,
         })
     }),
-    (i.n = function (e) {
+    (i.n = (e) => {
       var t =
         e && e.__esModule
-          ? function () {
+          ? () => {
               return e.default
             }
-          : function () {
+          : () => {
               return e
             }
       return i.d(t, 'a', t), t
     }),
-    (i.o = function (e, t) {
+    (i.o = (e, t) => {
       return Object.prototype.hasOwnProperty.call(e, t)
     }),
     (i.p = ''),
     i((i.s = 1))
 })([
   ,
-  function (e, t) {
-    !(function () {
+  (e, t) => {
+    !(() => {
       var e = {}
       for (a in console) e[a] = console[a]
       if ('update_url' in chrome.runtime.getManifest())
-        for (a in console) console[a] = function () {}
+        for (a in console) console[a] = () => {}
       var A = 'Smooth Gestures Plus' != chrome.runtime.getManifest().short_name,
         B =
           'update_url' in chrome.runtime.getManifest()
@@ -49,30 +49,30 @@
             : (chrome.runtime.id, 'ijgdgeacmjiigjjepffiijkleklaapfl'),
         O = {}
       if (A)
-        chrome.extension.sendMessage(B, { storage: !0 }, function (e) {
+        chrome.extension.sendMessage(B, { storage: !0 }, (e) => {
           e && e.gestures && e.validGestures && ((O = e), l())
         })
       else {
-        chrome.storage.local.get(null, function (e) {
+        chrome.storage.local.get(null, (e) => {
           ;(O = e), l()
         })
-        chrome.storage.onChanged.addListener(function (e, t) {
+        chrome.storage.onChanged.addListener((e, t) => {
           if ('local' == t) for (key in e) O[key] = e[key].newValue
         })
       }
-      chrome.runtime.onMessage.addListener(function (e, t, n) {
+      chrome.runtime.onMessage.addListener((e, t, n) => {
         e.ping && n({ pong: !0 })
       })
-      var t = function () {
+      var t = () => {
         var g = this
         g.callback = null
         var n =
           Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
           Math.floor(Math.random() * Math.pow(2, 30)).toString(32)
-        g.isId = function (e) {
+        g.isId = (e) => {
           return n == e
         }
-        var e = !(g.postMessage = function (e, t) {
+        var e = !(g.postMessage = (e, t) => {
             n == e && s && s.postMessage(t)
           }),
           s = null,
@@ -87,7 +87,7 @@
           l = '0000',
           u = !1,
           m = null
-        g.connect = function () {
+        g.connect = () => {
           var e = {
             name: JSON.stringify({
               name: 'smoothgestures.tab',
@@ -103,7 +103,7 @@
               (s.onMessage.addListener(t),
               s.onDisconnect.addListener(g.disable))
         }
-        var t = function (e) {
+        var t = (e) => {
           'enable' in e && (e.enable ? R() : g.disable()),
             e.disable && g.disable(),
             e.action && localAction(e.action),
@@ -133,14 +133,14 @@
             e.syncButton && (a[e.syncButton.id] = e.syncButton.down),
             e.displayAlert && alert(e.displayAlert)
         }
-        localAction = function (e) {
+        localAction = (e) => {
           if ('page-back' == e.id) history.back()
           else if ('page-forward' == e.id) history.forward()
           else if ('page-back-close' == e.id) {
             var t = location.href
             history.back(),
               e.has_history ||
-                setTimeout(function () {
+                setTimeout(() => {
                   t == location.href && s.postMessage({ closetab: !0 })
                 }, 400)
           } else if ('stop' == e.id) window.stop()
@@ -292,7 +292,7 @@
                 display: 'none',
               })
         }
-        var h = function (e) {
+        var h = (e) => {
             if (
               ((o[e.button] = !1),
               (d = 2 != e.button),
@@ -328,7 +328,7 @@
                 )
                   return (
                     (r = {
-                      timeout: setTimeout(function () {
+                      timeout: setTimeout(() => {
                         r = !1
                       }, 500),
                     }),
@@ -370,7 +370,7 @@
                   )))
             }
           },
-          y = function (e) {
+          y = (e) => {
             if (
               (e.button == O.holdButton &&
                 (f.line && T(e, !0),
@@ -394,7 +394,7 @@
               ))
             ) {
               ;(i = !0),
-                setTimeout(function () {
+                setTimeout(() => {
                   i = !1
                 }, 600)
               var t = { x: e.screenX, y: e.screenY }
@@ -417,19 +417,19 @@
               a[0] || a[2] || (f.rocker = null),
               f.rocker || H()
           },
-          p = function (e) {
+          p = (e) => {
             a = {}
           },
-          v = function (e) {
+          v = (e) => {
             o[e.button] && (e.preventDefault(), e.stopPropagation()),
               (o[e.button] = !1)
           },
-          b = function (e) {
+          b = (e) => {
             ;(d || (a[2] && (f.line || f.rocker || f.wheel))) && !i
               ? (e.preventDefault(), e.stopPropagation(), (d = !1))
               : (H(), (a = {}))
           },
-          x = function (e) {
+          x = (e) => {
             0 != O.holdButton ||
               '0' != l[0] ||
               '0' != l[1] ||
@@ -437,13 +437,13 @@
               u ||
               window.getSelection().removeAllRanges()
           },
-          M = function () {
+          M = () => {
             ;(w.width = window.innerWidth), (w.height = window.innerHeight)
           },
-          k = function (e) {
+          k = (e) => {
             if (27 == e.keyCode) {
               H(), (u = !0)
-              var t = function (e) {
+              var t = (e) => {
                 ;(u = !1), window.removeEventListener('keyup', t, !0)
               }
               window.addEventListener('keyup', t, !0)
@@ -476,7 +476,7 @@
                         null)
               if (null != o) {
                 n = n.substr(0, o) + '1' + n.substr(o + 1)
-                t = function (e) {
+                t = (e) => {
                   ;(l = l.substr(0, o) + '0' + l.substr(o + 1)),
                     window.removeEventListener('keyup', t, !0)
                 }
@@ -499,13 +499,13 @@
                 e.preventDefault(),
                 e.stopPropagation())
           },
-          P = function (e) {
+          P = (e) => {
             e.target.nodeName && (m = e.target)
           },
-          E = function (e) {
+          E = (e) => {
             e.target.nodeName && (m = null)
           },
-          L = function (e, t, n, o, i, l) {
+          L = (e, t, n, o, i, l) => {
             if (
               (H(),
               f.events ||
@@ -515,7 +515,7 @@
               'mail.google.com' == location.hostname)
             ) {
               var r = document.body.children[1],
-                s = function () {
+                s = () => {
                   H(), r.removeEventListener('DOMSubtreeModified', s, !0)
                 }
               r.addEventListener('DOMSubtreeModified', s, !0)
@@ -545,7 +545,7 @@
                 !c.parentNode &&
                 document.body.appendChild(c)
           },
-          T = function (e, t) {
+          T = (e, t) => {
             if (
               (f.startPoint || (f.startPoint = { x: e.clientX, y: e.clientY }),
               (f.rocker || f.wheel) &&
@@ -581,7 +581,7 @@
                     : (H(), (d = !0)))
             }
           },
-          C = function (e, t) {
+          C = (e, t) => {
             var n = t.x - e.x,
               o = t.y - e.y
             return Math.abs(n) > 2 * Math.abs(o)
@@ -600,7 +600,7 @@
                     ? '3'
                     : '1'
           },
-          D = function (e) {
+          D = (e) => {
             if (
               (('IFRAME' != e.target.nodeName &&
                 'FRAME' != e.target.nodeName) ||
@@ -611,7 +611,7 @@
               var t = 0 < e.wheelDelta ? 'U' : 'D'
               ;(g.callback || O.validGestures.w[t]) &&
                 ((r = {
-                  timeout: setTimeout(function () {
+                  timeout: setTimeout(() => {
                     r = !1
                   }, 500),
                 }),
@@ -623,7 +623,7 @@
                 e.stopPropagation())
             }
           },
-          S = function (e) {
+          S = (e) => {
             if (e)
               if (g.callback) g.callback(e), (g.callback = null)
               else {
@@ -676,7 +676,7 @@
               H()
             }
           },
-          H = function () {
+          H = () => {
             f.events &&
               (window.removeEventListener('mousemove', T, !0),
               window.removeEventListener('mousewheel', D, !0),
@@ -693,25 +693,25 @@
               (f.rocker = null),
               (f.wheel = null)
           },
-          N = function (e) {
+          N = (e) => {
             for (; e; ) {
               if (e.href) return e.href
               e = e.parentNode
             }
             return null
           },
-          G = function () {
+          G = () => {
             if (!G.timeout) {
               var e = Date.now() - z.lasttime,
                 t = Math.min(500, 4 * z.runtime)
               t < e
                 ? z()
-                : (G.timeout = setTimeout(function () {
+                : (G.timeout = setTimeout(() => {
                     z(), (G.timeout = null)
                   }, t - e))
             }
           },
-          z = function () {
+          z = () => {
             if (w.getContext) {
               var e = Date.now(),
                 t = w.getContext('2d')
@@ -832,7 +832,7 @@
               }
             }
           },
-          R = function () {
+          R = () => {
             e ||
               ((e = !0),
               window.addEventListener('mousedown', h, !0),
@@ -844,7 +844,7 @@
               window.addEventListener('resize', M, !0),
               window.addEventListener('keydown', k, !0))
           }
-        ;(g.disable = function () {
+        ;(g.disable = () => {
           e &&
             ((e = !1),
             window.removeEventListener('mousedown', h, !0),
@@ -858,10 +858,10 @@
             s.onMessage.removeListener(t),
             s.onDisconnect.removeListener(g.disable))
         }),
-          (g.enabled = function () {
+          (g.enabled = () => {
             return e
           }),
-          (function () {
+          (() => {
             if ('smoothgesturesplus.com' == location.hostname) {
               var e = document.createElement('script')
               ;(e.innerText =
@@ -907,7 +907,7 @@
         )
           o[i].parentNode.removeChild(o[i])
       }
-      var l = function () {
+      var l = () => {
         window.SG
           ? window.SG.enabled() || window.SG.connect()
           : (window.SG = new t())

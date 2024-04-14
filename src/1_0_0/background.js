@@ -269,8 +269,8 @@ var contexts = {
 }
 
 var actions = {
-  'new-tab': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'new-tab': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       var prop = {
         url: settings.newTabUrl != 'homepage' ? settings.newTabUrl : undefined,
         windowId: tab.windowId,
@@ -279,8 +279,8 @@ var actions = {
       chrome.tabs.create(prop, call)
     })
   },
-  'new-tab-link': function (id, call, a) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'new-tab-link': (id, call, a) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       for (var i = 0; i < a.links.length; i++) {
         var prop = { url: a.links[i].src, windowId: tab.windowId }
         if (settings.newTabLinkRight) prop.index = tab.index + 1 + i
@@ -288,8 +288,8 @@ var actions = {
       }
     })
   },
-  'new-tab-back': function (id, call, a) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'new-tab-back': (id, call, a) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       for (var i = 0; i < a.links.length; i++) {
         var prop = {
           url: a.links[i].src,
@@ -301,7 +301,7 @@ var actions = {
       }
     })
   },
-  'navigate-tab': function (id, call) {
+  'navigate-tab': (id, call) => {
     chrome.tabs.update(
       contents[id].detail.tabId,
       {
@@ -310,11 +310,11 @@ var actions = {
       call,
     )
   },
-  'close-tab': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'close-tab': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       if (tab.pinned) call()
       else if (settings.closeLastBlock) {
-        chrome.windows.getAll({ populate: true }, function (wins) {
+        chrome.windows.getAll({ populate: true }, (wins) => {
           if (wins.length == 1 && wins[0].tabs.length == 1)
             chrome.tabs.update(
               contents[id].detail.tabId,
@@ -331,9 +331,9 @@ var actions = {
       } else chrome.tabs.remove(contents[id].detail.tabId, call)
     })
   },
-  'close-other-tabs': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(tab.windowId, function (tabs) {
+  'close-other-tabs': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(tab.windowId, (tabs) => {
         for (i = 0; i < tabs.length; i++)
           if (tabs[i].id != tab.id && !tab.pinned)
             chrome.tabs.remove(tabs[i].id)
@@ -341,9 +341,9 @@ var actions = {
       })
     })
   },
-  'close-left-tabs': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(tab.windowId, function (tabs) {
+  'close-left-tabs': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(tab.windowId, (tabs) => {
         for (i = 0; i < tabs.length; i++)
           if (tabs[i].index < tab.index && !tab.pinned)
             chrome.tabs.remove(tabs[i].id)
@@ -351,9 +351,9 @@ var actions = {
       })
     })
   },
-  'close-right-tabs': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(tab.windowId, function (tabs) {
+  'close-right-tabs': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(tab.windowId, (tabs) => {
         for (i = 0; i < tabs.length; i++)
           if (tabs[i].index > tab.index && !tab.pinned)
             chrome.tabs.remove(tabs[i].id)
@@ -361,7 +361,7 @@ var actions = {
       })
     })
   },
-  'undo-close': function (id, call) {
+  'undo-close': (id, call) => {
     if (pluginport) {
       pluginport.postMessage(
         JSON.stringify({
@@ -372,7 +372,7 @@ var actions = {
     } else {
       var t = closedTabs.pop()
       if (t)
-        chrome.windows.get(t.winId, function (win) {
+        chrome.windows.get(t.winId, (win) => {
           if (win)
             chrome.tabs.create(
               {
@@ -385,7 +385,7 @@ var actions = {
           else
             chrome.windows.create(
               { url: t.history[t.history.length - 1] },
-              function (win2) {
+              (win2) => {
                 for (var i = 0; i < closedTabs.length; i++)
                   if (closedTabs[i].winId == t.winId)
                     closedTabs[i].winId = win2.id
@@ -396,7 +396,7 @@ var actions = {
       else call()
     }
   },
-  'undo-close-hack': function (id, call) {
+  'undo-close-hack': (id, call) => {
     var t = closedTabs.pop()
     var maxhist = 10
     var start = t.history.length > maxhist ? t.history.length - maxhist : 0
@@ -405,7 +405,7 @@ var actions = {
     t.history = t.history.slice(start)
     t.titles = t.titles.slice(start)
     if (t)
-      chrome.windows.get(t.winId, function (win) {
+      chrome.windows.get(t.winId, (win) => {
         if (t.history.length > 1) {
           var r = Math.random() + ''
           loadHistory[r] = t.history.length
@@ -437,7 +437,7 @@ var actions = {
             call,
           )
         else
-          chrome.windows.create({ url: url }, function (win2) {
+          chrome.windows.create({ url: url }, (win2) => {
             for (var i = 0; i < closedTabs.length; i++)
               if (closedTabs[i].winId == t.winId) closedTabs[i].winId = win2.id
             call()
@@ -445,29 +445,29 @@ var actions = {
       })
     else call()
   },
-  'reload-tab': function (id, call) {
+  'reload-tab': (id, call) => {
     runJS(id, 'location.reload()')
     call()
   },
-  'reload-tab-full': function (id, call) {
+  'reload-tab-full': (id, call) => {
     runJS(id, 'location.reload(true)')
     call()
   },
-  'reload-all-tabs': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(tab.windowId, function (tabs) {
+  'reload-all-tabs': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(tab.windowId, (tabs) => {
         for (i = 0; i < tabs.length; i++)
           chrome.tabs.update(tabs[i].id, { url: tabs[i].url })
         call()
       })
     })
   },
-  stop: function (id, call) {
+  stop: (id, call) => {
     runJS(id, 'window.stop()')
     call()
   },
-  'view-source': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'view-source': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         {
           url:
@@ -480,9 +480,9 @@ var actions = {
       )
     })
   },
-  'prev-tab': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(null, function (tabs) {
+  'prev-tab': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(null, (tabs) => {
         var newId = null
         for (i = tabs.length - 1; i >= 0; i--) {
           newId = tabs[(tab.index + i) % tabs.length].id
@@ -492,9 +492,9 @@ var actions = {
       })
     })
   },
-  'next-tab': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.tabs.getAllInWindow(null, function (tabs) {
+  'next-tab': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.tabs.getAllInWindow(null, (tabs) => {
         var newId = null
         for (i = 1; i <= tabs.length; i++) {
           newId = tabs[(tab.index + i) % tabs.length].id
@@ -504,15 +504,15 @@ var actions = {
       })
     })
   },
-  'page-back': function (id, call) {
+  'page-back': (id, call) => {
     runJS(id, 'history.back()')
     call()
   },
-  'page-forward': function (id, call) {
+  'page-forward': (id, call) => {
     runJS(id, 'history.forward()')
     call()
   },
-  'new-window': function (id, call) {
+  'new-window': (id, call) => {
     chrome.windows.create(
       {
         url: settings.newTabUrl != 'homepage' ? settings.newTabUrl : undefined,
@@ -520,7 +520,7 @@ var actions = {
       call,
     )
   },
-  'new-window-link': function (id, call, a) {
+  'new-window-link': (id, call, a) => {
     for (var i = 0; i < a.links.length; i++) {
       chrome.windows.create(
         { url: a.links[i].src },
@@ -528,36 +528,33 @@ var actions = {
       )
     }
   },
-  'close-window': function (id, call) {
-    chrome.windows.getCurrent(function (win) {
+  'close-window': (id, call) => {
+    chrome.windows.getCurrent((win) => {
       chrome.windows.remove(win.id, call)
     })
   },
-  'split-tabs': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.windows.get(tab.windowId, function (win) {
-        chrome.tabs.getAllInWindow(win.id, function (tabs) {
-          chrome.windows.create(
-            { incognito: win.incognito },
-            function (newwin) {
-              for (i = tab.index; i < tabs.length; i++) {
-                chrome.tabs.move(tabs[i].id, {
-                  windowId: newwin.id,
-                  index: i - tab.index,
-                })
-              }
-              chrome.tabs.getAllInWindow(newwin.id, function (newtabs) {
-                chrome.tabs.remove(newtabs[newtabs.length - 1].id)
-                chrome.tabs.update(newtabs[0].id, { selected: true }, call)
+  'split-tabs': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.windows.get(tab.windowId, (win) => {
+        chrome.tabs.getAllInWindow(win.id, (tabs) => {
+          chrome.windows.create({ incognito: win.incognito }, (newwin) => {
+            for (i = tab.index; i < tabs.length; i++) {
+              chrome.tabs.move(tabs[i].id, {
+                windowId: newwin.id,
+                index: i - tab.index,
               })
-            },
-          )
+            }
+            chrome.tabs.getAllInWindow(newwin.id, (newtabs) => {
+              chrome.tabs.remove(newtabs[newtabs.length - 1].id)
+              chrome.tabs.update(newtabs[0].id, { selected: true }, call)
+            })
+          })
         })
       })
     })
   },
-  'merge-tabs': function (id, call) {
-    chrome.tabs.getAllInWindow(null, function (tabs) {
+  'merge-tabs': (id, call) => {
+    chrome.tabs.getAllInWindow(null, (tabs) => {
       var winId = focusedWindows[focusedWindows.length - 2]
       if (winId) {
         for (i = 0; i < tabs.length; i++)
@@ -566,8 +563,8 @@ var actions = {
       }
     })
   },
-  options: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  options: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         {
           url: chrome.extension.getURL('options.html'),
@@ -577,15 +574,15 @@ var actions = {
       )
     })
   },
-  status: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  status: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         { url: chrome.extension.getURL('status.html'), windowId: tab.windowId },
         call,
       )
     })
   },
-  'page-back-close': function (id, call) {
+  'page-back-close': (id, call) => {
     runJS(
       id,
       'history.back();' +
@@ -595,7 +592,7 @@ var actions = {
     )
     call()
   },
-  'goto-top': function (id, call, a) {
+  'goto-top': (id, call, a) => {
     runJS(
       id,
       a.startPoint
@@ -608,7 +605,7 @@ var actions = {
     )
     call()
   },
-  'goto-bottom': function (id, call, a) {
+  'goto-bottom': (id, call, a) => {
     runJS(
       id,
       a.startPoint
@@ -621,7 +618,7 @@ var actions = {
     )
     call()
   },
-  'page-up': function (id, call, a) {
+  'page-up': (id, call, a) => {
     runJS(
       id,
       a.startPoint
@@ -634,7 +631,7 @@ var actions = {
     )
     call()
   },
-  'page-down': function (id, call, a) {
+  'page-down': (id, call, a) => {
     runJS(
       id,
       a.startPoint
@@ -647,7 +644,7 @@ var actions = {
     )
     call()
   },
-  'page-next': function (id, call) {
+  'page-next': (id, call) => {
     runJS(
       id,
       'var url = null;' +
@@ -666,7 +663,7 @@ var actions = {
     )
     call()
   },
-  'page-prev': function (id, call) {
+  'page-prev': (id, call) => {
     runJS(
       id,
       'var url = null;' +
@@ -685,8 +682,8 @@ var actions = {
     )
     call()
   },
-  'clone-tab': function (id, call, a) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'clone-tab': (id, call, a) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         {
           url: tab.url,
@@ -698,7 +695,7 @@ var actions = {
       )
     })
   },
-  'clone-tab-hack': function (id, call) {
+  'clone-tab-hack': (id, call) => {
     var t = activeTabs[contents[id].detail.tabId]
     var maxhist = 10
     var start = t.history.length > maxhist ? t.history.length - maxhist : 0
@@ -707,7 +704,7 @@ var actions = {
     var tabhistory = t.history.slice(start)
     var tabtitles = t.titles.slice(start)
     if (t)
-      chrome.windows.get(t.winId, function (win) {
+      chrome.windows.get(t.winId, (win) => {
         if (tabhistory.length > 1) {
           var r = Math.random() + ''
           loadHistory[r] = tabhistory.length
@@ -740,16 +737,16 @@ var actions = {
       })
     else call()
   },
-  'prev-window': function (id, call) {
+  'prev-window': (id, call) => {
     if (focusedWindows.length <= 1) call()
     else focusWindow(focusedWindows[focusedWindows.length - 2], call)
   },
-  'next-window': function (id, call) {
+  'next-window': (id, call) => {
     if (focusedWindows.length <= 1) call()
     else focusWindow(focusedWindows[0], call)
   },
-  'maximize-x': function (id, call) {
-    chrome.windows.getLastFocused(function (win) {
+  'maximize-x': (id, call) => {
+    chrome.windows.getLastFocused((win) => {
       if (!maximizeXWindow[win.id]) {
         maximizeXWindow[win.id] = { dim: win }
         chrome.windows.update(
@@ -779,8 +776,8 @@ var actions = {
             width: dim.width,
             height: dim.height,
           },
-          function () {
-            setTimeout(function () {
+          () => {
+            setTimeout(() => {
               chrome.windows.update(
                 win.id,
                 {
@@ -797,8 +794,8 @@ var actions = {
       }
     })
   },
-  'minimize-x': function (id, call) {
-    chrome.windows.getLastFocused(function (mwin) {
+  'minimize-x': (id, call) => {
+    chrome.windows.getLastFocused((mwin) => {
       chrome.windows.update(
         mwin.id,
         {
@@ -807,8 +804,8 @@ var actions = {
           width: 10,
           height: 10,
         },
-        function () {
-          setTimeout(function () {
+        () => {
+          setTimeout(() => {
             chrome.windows.update(
               mwin.id,
               {
@@ -817,8 +814,8 @@ var actions = {
                 width: 10,
                 height: 10,
               },
-              function () {
-                var restore = function (winId, call2) {
+              () => {
+                var restore = (winId, call2) => {
                   if (winId != mwin.id) {
                     call2()
                     return
@@ -852,7 +849,7 @@ var actions = {
       )
     })
   },
-  'zoom-in': function (id, call) {
+  'zoom-in': (id, call) => {
     if (pluginport) {
       pluginport.postMessage(
         JSON.stringify({
@@ -868,7 +865,7 @@ var actions = {
       call()
     }
   },
-  'zoom-out': function (id, call) {
+  'zoom-out': (id, call) => {
     if (pluginport) {
       pluginport.postMessage(
         JSON.stringify({
@@ -884,7 +881,7 @@ var actions = {
       call()
     }
   },
-  'zoom-zero': function (id, call) {
+  'zoom-zero': (id, call) => {
     if (pluginport) {
       pluginport.postMessage(
         JSON.stringify({
@@ -897,7 +894,7 @@ var actions = {
       call()
     }
   },
-  'zoom-img-in': function (id, call, a) {
+  'zoom-img-in': (id, call, a) => {
     for (var i = 0; i < a.images.length; i++) {
       runJS(
         id,
@@ -908,7 +905,7 @@ var actions = {
     }
     call()
   },
-  'zoom-img-out': function (id, call, a) {
+  'zoom-img-out': (id, call, a) => {
     for (var i = 0; i < a.images.length; i++) {
       runJS(
         id,
@@ -919,7 +916,7 @@ var actions = {
     }
     call()
   },
-  'zoom-img-zero': function (id, call, a) {
+  'zoom-img-zero': (id, call, a) => {
     for (var i = 0; i < a.images.length; i++) {
       runJS(
         id,
@@ -930,18 +927,18 @@ var actions = {
     }
     call()
   },
-  'tab-to-left': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'tab-to-left': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.move(tab.id, { index: tab.index > 0 ? tab.index - 1 : 0 })
     })
   },
-  'tab-to-right': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'tab-to-right': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.move(tab.id, { index: tab.index + 1 })
     })
   },
-  'parent-dir': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'parent-dir': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       var parts = tab.url.split('#')[0].split('?')[0].split('/')
       if (parts[parts.length - 1] == '')
         parts = parts.slice(0, parts.length - 1)
@@ -953,40 +950,40 @@ var actions = {
       else call()
     })
   },
-  'open-history': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'open-history': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         { url: 'chrome://history/', windowId: tab.windowId },
         call,
       )
     })
   },
-  'open-downloads': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'open-downloads': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         { url: 'chrome://downloads/', windowId: tab.windowId },
         call,
       )
     })
   },
-  'open-extensions': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'open-extensions': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         { url: 'chrome://extensions/', windowId: tab.windowId },
         call,
       )
     })
   },
-  'open-bookmarks': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'open-bookmarks': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         { url: 'chrome://bookmarks/', windowId: tab.windowId },
         call,
       )
     })
   },
-  'open-image': function (id, call, a) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'open-image': (id, call, a) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       for (var i = 0; i < a.images.length; i++) {
         chrome.tabs.create(
           { url: a.images[i].src, windowId: tab.windowId },
@@ -995,7 +992,7 @@ var actions = {
       }
     })
   },
-  'hide-image': function (id, call, a) {
+  'hide-image': (id, call, a) => {
     for (var i = 0; i < a.images.length; i++) {
       runJS(
         id,
@@ -1006,7 +1003,7 @@ var actions = {
     }
     call()
   },
-  'show-cookies': function (id, call) {
+  'show-cookies': (id, call) => {
     var l = 100
     var m = 5
     runJS(
@@ -1024,8 +1021,8 @@ var actions = {
     )
     call()
   },
-  'search-sel': function (id, call, a) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'search-sel': (id, call, a) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.tabs.create(
         {
           url: 'http://www.google.com/search?q=' + a.selection,
@@ -1036,12 +1033,12 @@ var actions = {
       )
     })
   },
-  print: function (id, call) {
+  print: (id, call) => {
     runJS(id, 'window.print()')
     call()
   },
-  translate: function (id, call, a) {
-    chrome.i18n.getAcceptLanguages(function (ls) {
+  translate: (id, call, a) => {
+    chrome.i18n.getAcceptLanguages((ls) => {
       $.post(
         'http://ajax.googleapis.com/ajax/services/language/translate',
         {
@@ -1050,7 +1047,7 @@ var actions = {
           format: 'html',
           q: a.selectionHTML,
         },
-        function (data) {
+        (data) => {
           try {
             data = JSON.parse(data)
             var resp = data.responseData
@@ -1062,24 +1059,24 @@ var actions = {
     })
     call()
   },
-  'toggle-pin': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  'toggle-pin': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       if (chromeVersion >= 9)
         chrome.tabs.update(tab.id, { pinned: !tab.pinned }, call)
     })
   },
-  pin: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  pin: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       if (chromeVersion >= 9) chrome.tabs.update(tab.id, { pinned: true }, call)
     })
   },
-  unpin: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  unpin: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       if (chromeVersion >= 9)
         chrome.tabs.update(tab.id, { pinned: false }, call)
     })
   },
-  copy: function (id, call, a) {
+  copy: (id, call, a) => {
     if (!a.selection) return call()
     var txt = document.createElement('textarea')
     txt.value = a.selection
@@ -1089,9 +1086,9 @@ var actions = {
     document.body.removeChild(txt)
     call()
   },
-  'toggle-bookmark': function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.bookmarks.search(tab.url, function (bmks) {
+  'toggle-bookmark': (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.bookmarks.search(tab.url, (bmks) => {
         if (bmks.length <= 0)
           chrome.bookmarks.create(
             { parentId: '2', title: tab.title, url: tab.url },
@@ -1101,17 +1098,17 @@ var actions = {
       })
     })
   },
-  bookmark: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
+  bookmark: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
       chrome.bookmarks.create(
         { parentId: '2', title: tab.title, url: tab.url },
         call,
       )
     })
   },
-  unbookmark: function (id, call) {
-    chrome.tabs.get(contents[id].detail.tabId, function (tab) {
-      chrome.bookmarks.search(tab.url, function (bmks) {
+  unbookmark: (id, call) => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
+      chrome.bookmarks.search(tab.url, (bmks) => {
         if (bmks.length <= 0) call()
         else chrome.bookmarks.remove(bmks[0].id, call)
       })
@@ -1119,7 +1116,7 @@ var actions = {
   },
 }
 
-var runCustomAction = function (action, id, call, mess) {
+var runCustomAction = (action, id, call, mess) => {
   var action = customActions[action]
   if (!action) return
   if (action.env == 'page') {
@@ -1137,13 +1134,13 @@ var runCustomAction = function (action, id, call, mess) {
 ///////////////////////////////////////////////////////////
 var minimizeXWindow = {}
 var maximizeXWindow = {}
-var focusWindow = function (winId, call) {
+var focusWindow = (winId, call) => {
   if (focusedWindows.length <= 1) call()
   else
-    chrome.tabs.getSelected(winId, function (tab) {
-      chrome.tabs.getAllInWindow(winId, function (tabs) {
+    chrome.tabs.getSelected(winId, (tab) => {
+      chrome.tabs.getAllInWindow(winId, (tabs) => {
         ;(minimizeXWindow[winId]
-          ? function (winId, setDim) {
+          ? (winId, setDim) => {
               if (minimizeXWindow[winId].listener)
                 chrome.windows.onFocusChanged.removeListener(
                   minimizeXWindow[winId].listener,
@@ -1152,7 +1149,7 @@ var focusWindow = function (winId, call) {
               minimizeXWindow[winId] = null
               setDim(dim)
             }
-          : chrome.windows.get)(winId, function (win) {
+          : chrome.windows.get)(winId, (win) => {
           chrome.windows.create(
             {
               left: win.left,
@@ -1160,11 +1157,11 @@ var focusWindow = function (winId, call) {
               width: win.width,
               height: win.height,
             },
-            function (newwin) {
+            (newwin) => {
               for (i = 0; i < tabs.length; i++) {
                 chrome.tabs.move(tabs[i].id, { windowId: newwin.id, index: i })
               }
-              chrome.tabs.getAllInWindow(newwin.id, function (newtabs) {
+              chrome.tabs.getAllInWindow(newwin.id, (newtabs) => {
                 chrome.tabs.remove(newtabs[newtabs.length - 1].id)
                 chrome.tabs.update(tab.id, { selected: true }, call)
               })
@@ -1178,9 +1175,9 @@ var focusWindow = function (winId, call) {
 ///////////////////////////////////////////////////////////
 // Communication //////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-chrome.extension.onRequest.addListener(function (request, sender, respond) {
+chrome.extension.onRequest.addListener((request, sender, respond) => {
   if (request.getstates) {
-    getTabStates(function (states) {
+    getTabStates((states) => {
       respond(JSON.stringify({ states: states }))
     })
   } else if (request.log) {
@@ -1235,7 +1232,7 @@ chrome.extension.onRequest.addListener(function (request, sender, respond) {
     }
   } else if (request.reloadtab) {
     if (request.reloadtab == true) request.reloadtab = sender.tab.id
-    chrome.tabs.get(request.reloadtab, function (tab) {
+    chrome.tabs.get(request.reloadtab, (tab) => {
       chrome.tabs.update(tab.id, { url: tab.url }, respond)
     })
   } else {
@@ -1243,7 +1240,7 @@ chrome.extension.onRequest.addListener(function (request, sender, respond) {
   }
 })
 
-chrome.extension.onConnect.addListener(function (port) {
+chrome.extension.onConnect.addListener((port) => {
   if (port.sender && port.sender.tab) {
     port.detail = JSON.parse(port.name)
     if (!port.detail.id) return
@@ -1254,44 +1251,41 @@ chrome.extension.onConnect.addListener(function (port) {
 
 // External ///////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-chrome.extension.onRequestExternal.addListener(
-  function (request, sender, respond) {
-    //return js/gestures.js code
-    if (request.getgestures) {
-      if (gesturesjs) respond({ gestures: gesturesjs })
-      else {
-        $.get(chrome.extension.getURL('js/gestures.js'), null, function (data) {
-          gesturesjs = "window.SGextId='" + extId + "';\n" + data
-          respond({ gestures: gesturesjs })
-        })
-      }
-    } else if (request.externalactions) {
-      var ex = request.externalactions
-      if (ex.name && ex.actions) {
-        if (ex.actions.length > 0) {
-          externalActions[sender.id] = ex
-          for (i = 0; i < externalActions[sender.id].actions.length; i++)
-            contexts[
-              sender.id + '-' + externalActions[sender.id].actions[i].id
-            ] = externalActions[sender.id].actions[i].context
-        } else delete externalActions[sender.id]
-        saveExternalActions()
-        respond(true)
-      } else respond(false)
-    } else {
-      respond(null)
+chrome.extension.onRequestExternal.addListener((request, sender, respond) => {
+  //return js/gestures.js code
+  if (request.getgestures) {
+    if (gesturesjs) respond({ gestures: gesturesjs })
+    else {
+      $.get(chrome.extension.getURL('js/gestures.js'), null, (data) => {
+        gesturesjs = "window.SGextId='" + extId + "';\n" + data
+        respond({ gestures: gesturesjs })
+      })
     }
-  },
-)
-chrome.extension.onConnectExternal.addListener(function (port) {
+  } else if (request.externalactions) {
+    var ex = request.externalactions
+    if (ex.name && ex.actions) {
+      if (ex.actions.length > 0) {
+        externalActions[sender.id] = ex
+        for (i = 0; i < externalActions[sender.id].actions.length; i++)
+          contexts[sender.id + '-' + externalActions[sender.id].actions[i].id] =
+            externalActions[sender.id].actions[i].context
+      } else delete externalActions[sender.id]
+      saveExternalActions()
+      respond(true)
+    } else respond(false)
+  } else {
+    respond(null)
+  }
+})
+chrome.extension.onConnectExternal.addListener((port) => {
   if (
     port.name == 'sgplugin' &&
     (port.sender.id == 'bkojnmffeemeacfnhgiighecdfojgpdm' ||
       port.sender.id == 'apagmdofhjomjncpiebpaaonngppcpcl')
   ) {
     pluginport = port
-    pluginport.onMessage.addListener(function (mess) {})
-    pluginport.onDisconnect.addListener(function () {
+    pluginport.onMessage.addListener((mess) => {})
+    pluginport.onDisconnect.addListener(() => {
       pluginport = null
       for (id in contents)
         contents[id].postMessage(JSON.stringify({ sgplugin: false }))
@@ -1309,7 +1303,7 @@ chrome.extension.onConnectExternal.addListener(function (port) {
 
 // Handle Gesture /////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var contentMessage = function (id, mess) {
+var contentMessage = (id, mess) => {
   mess = JSON.parse(mess)
   if (
     mess.selection &&
@@ -1332,14 +1326,14 @@ var contentMessage = function (id, mess) {
     if (mess.gesture[0] == 'r')
       chainGesture = {
         rocker: true,
-        timeout: setTimeout(function () {
+        timeout: setTimeout(() => {
           chainGesture = null
         }, 2000),
       }
     if (mess.gesture[0] == 'w')
       chainGesture = {
         wheel: true,
-        timeout: setTimeout(function () {
+        timeout: setTimeout(() => {
           chainGesture = null
         }, 2000),
       }
@@ -1349,8 +1343,8 @@ var contentMessage = function (id, mess) {
       chainGesture.startPoint = mess.startPoint
     var call = !chainGesture
       ? null
-      : function () {
-          chrome.tabs.getSelected(null, function (tab) {
+      : () => {
+          chrome.tabs.getSelected(null, (tab) => {
             if (!chainGesture) return
             chainGesture.tabId = tab.id
             for (id in contents)
@@ -1387,8 +1381,8 @@ var contentMessage = function (id, mess) {
       if (!chainGesture.buttonDown) chainGesture.buttonDown = {}
       chainGesture.buttonDown[mess.syncButton.id] = mess.syncButton.down
     }
-    setTimeout(function () {
-      chrome.tabs.getSelected(null, function (tab) {
+    setTimeout(() => {
+      chrome.tabs.getSelected(null, (tab) => {
         for (id in contents)
           if (tab.id == contents[id].detail.tabId)
             contents[id].postMessage(
@@ -1418,7 +1412,7 @@ var contentMessage = function (id, mess) {
   }
   if (mess.closetab) {
     if (mess.closetab == true) mess.closetab = contents[id].detail.tabId
-    chrome.tabs.get(mess.closetab, function (tab) {
+    chrome.tabs.get(mess.closetab, (tab) => {
       chrome.tabs.remove(tab.id)
     })
   }
@@ -1430,15 +1424,15 @@ var contentMessage = function (id, mess) {
 
 // Connect Tabs ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var initConnectTab = function (port) {
+var initConnectTab = (port) => {
   if (!port.sender || !port.sender.tab || !port.detail.id) return
   var tab = port.sender.tab
   var id = port.detail.id
   contents[id] = port
-  contents[id].onMessage.addListener(function (mess) {
+  contents[id].onMessage.addListener((mess) => {
     contentMessage(id, mess)
   })
-  contents[id].onDisconnect.addListener(function () {
+  contents[id].onDisconnect.addListener(() => {
     delete contents[id]
   })
   var mess = {
@@ -1466,7 +1460,7 @@ var initConnectTab = function (port) {
 
 // Execute Code on Tab ////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var runJS = function (id, JS) {
+var runJS = (id, JS) => {
   var mess = { eval: JS }
   if (contents[id]) contents[id].postMessage(JSON.stringify(mess))
 }
@@ -1477,7 +1471,7 @@ var runJS = function (id, JS) {
 
 // Tab Selection //////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var selectionChanged = function (tabId) {
+var selectionChanged = (tabId) => {
   if (selectedTabId == tabId) return
   for (id in contents)
     if (selectedTabId == contents[id].detail.tabId)
@@ -1486,22 +1480,22 @@ var selectionChanged = function (tabId) {
   selectedTabId = tabId
 }
 chrome.tabs.onSelectionChanged.addListener(selectionChanged)
-chrome.windows.onFocusChanged.addListener(function (winId) {
-  focusedWindows = focusedWindows.filter(function (el) {
+chrome.windows.onFocusChanged.addListener((winId) => {
+  focusedWindows = focusedWindows.filter((el) => {
     return el != winId
   })
   focusedWindows.push(winId)
   if (focusedWindows.length > 50) focusedWindows.shift()
 
-  chrome.tabs.getSelected(null, function (tab) {
+  chrome.tabs.getSelected(null, (tab) => {
     selectionChanged(tab.id)
   })
 })
 
 // Tab Arangement /////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var updateActiveTab = function (tabId, change) {
-  chrome.tabs.get(tabId, function (tab) {
+var updateActiveTab = (tabId, change) => {
+  chrome.tabs.get(tabId, (tab) => {
     if (change && change.url) {
       tab.url = change.url
       tab.title = change.url
@@ -1549,7 +1543,7 @@ var updateActiveTab = function (tabId, change) {
       chrome.pageAction.show(tabId)
     }
     if (tab.status == 'complete') {
-      setTimeout(function () {
+      setTimeout(() => {
         refreshPageAction(tabId)
       }, 100)
     }
@@ -1572,13 +1566,13 @@ chrome.tabs.onAttached.addListener(updateActiveTab)
 
 // Tab Removal ////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-chrome.tabs.onRemoved.addListener(function (tabId) {
+chrome.tabs.onRemoved.addListener((tabId) => {
   if (activeTabs[tabId]) closedTabs.push(activeTabs[tabId])
   if (closedTabs.length > 50) closedTabs.shift()
   delete activeTabs[tabId]
 })
-chrome.windows.onRemoved.addListener(function (winId) {
-  focusedWindows = focusedWindows.filter(function (el) {
+chrome.windows.onRemoved.addListener((winId) => {
+  focusedWindows = focusedWindows.filter((el) => {
     return el != winId
   })
 })
@@ -1586,7 +1580,7 @@ chrome.windows.onRemoved.addListener(function (winId) {
 ///////////////////////////////////////////////////////////
 // Utilities //////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var clipboardCopy = function (text) {
+var clipboardCopy = (text) => {
   if (!text) return
   var txt = document.createElement('textarea')
   txt.value = text
@@ -1596,7 +1590,7 @@ var clipboardCopy = function (text) {
   document.body.removeChild(txt)
 }
 
-var updateValidGestures = function () {
+var updateValidGestures = () => {
   validGestures = {}
   for (g in gestures) {
     if (g[0] == 'l' || g[0] == 'i' || g[0] == 's') g = g.substr(1)
@@ -1616,7 +1610,7 @@ var updateValidGestures = function () {
   }
 }
 
-var contentForTab = function (tabId) {
+var contentForTab = (tabId) => {
   var frameContent = null
   for (id in contents) {
     if (tabId == contents[id].detail.tabId) {
@@ -1630,7 +1624,7 @@ var contentForTab = function (tabId) {
 ///////////////////////////////////////////////////////////
 // Tab Status /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var getTabStates = function (callback) {
+var getTabStates = (callback) => {
   var tabs = {}
   for (id in contents) {
     var tabId = contents[id].detail.tabId
@@ -1641,7 +1635,7 @@ var getTabStates = function (callback) {
       tabs[tabId].root = true
     }
   }
-  chrome.windows.getAll({ populate: true }, function (windows) {
+  chrome.windows.getAll({ populate: true }, (windows) => {
     var states = {}
     for (j = 0; j < windows.length; j++) {
       var win = windows[j]
@@ -1671,10 +1665,10 @@ var getTabStates = function (callback) {
   })
 }
 
-var getTabStatus = function (tabId, callback) {
+var getTabStatus = (tabId, callback) => {
   var content = contentForTab(tabId)
   if (!content) {
-    chrome.tabs.get(tabId, function (tab) {
+    chrome.tabs.get(tabId, (tab) => {
       if (!tab) callback('broken') //fix for "no tab with id:"
       if (
         tab.url.match(
@@ -1694,8 +1688,8 @@ var getTabStatus = function (tabId, callback) {
   }
 }
 
-var refreshPageAction = function (tabId) {
-  getTabStatus(tabId, function (stat) {
+var refreshPageAction = (tabId) => {
+  getTabStatus(tabId, (stat) => {
     if (stat == 'unable') {
       chrome.pageAction.setIcon({
         tabId: tabId,
@@ -1732,14 +1726,14 @@ var refreshPageAction = function (tabId) {
 ///////////////////////////////////////////////////////////
 // Send Usage Stats ///////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var ping = function (force) {}
-var sendStats = function () {}
+var ping = (force) => {}
+var sendStats = () => {}
 
 ///////////////////////////////////////////////////////////
 // Setting Storage ////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
-var getValue = function (id) {
+var getValue = (id) => {
   var val = null
   try {
     val = localStorage.getItem(id)
@@ -1750,20 +1744,20 @@ var getValue = function (id) {
   }
   return val && val[0] == '{' ? JSON.parse(val) : val
 }
-var setValue = function (id, val, oldparam, call) {
+var setValue = (id, val, oldparam, call) => {
   if (typeof val != 'string') val = JSON.stringify(val)
   localCopy[id] = val
   localStorage.setItem(id, val)
   if (call) call()
 }
-var removeValue = function (id) {
+var removeValue = (id) => {
   localStorage.removeItem(id)
   delete localCopy[id]
 }
 
 // Save Options ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var saveOptions = function (profile, call) {
+var saveOptions = (profile, call) => {
   updateValidGestures()
   //update all tabs
   for (id in contents)
@@ -1778,14 +1772,14 @@ var saveOptions = function (profile, call) {
     call,
   )
   if (bookmarksync)
-    bookmarksync.get(function (m, value) {
+    bookmarksync.get((m, value) => {
       if (!value) value = {}
       value.gestures = gestures
       value.settings = settings
       bookmarksync.set(value)
     })
 }
-var loadOptions = function (profile, call) {
+var loadOptions = (profile, call) => {
   gestures = JSON.parse(defaults['Smooth Gestures'].gestures)
   settings = JSON.parse(defaults['Smooth Gestures'].settings)
   var options = getValue('profile-' + profile)
@@ -1799,10 +1793,10 @@ var loadOptions = function (profile, call) {
 
 // Save Actions ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var saveCustomActions = function (call) {
+var saveCustomActions = (call) => {
   setValue('actions', customActions, false, call)
 }
-var loadCustomActions = function () {
+var loadCustomActions = () => {
   var actions = getValue('actions')
   if (actions) {
     for (id in actions) {
@@ -1822,10 +1816,10 @@ var loadCustomActions = function () {
   }
   return true
 }
-var saveExternalActions = function (call) {
+var saveExternalActions = (call) => {
   setValue('exactions', externalActions, false, call)
 }
-var loadExternalActions = function () {
+var loadExternalActions = () => {
   var actions = getValue('exactions')
   if (!actions) return false
   for (id in actions) {
@@ -1839,10 +1833,10 @@ var loadExternalActions = function () {
 
 // Save Log ///////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var saveLog = function () {
+var saveLog = () => {
   setValue('log', log)
 }
-var loadLog = function (fromdefault) {
+var loadLog = (fromdefault) => {
   try {
     var templog = getValue('log')
     if (templog) log = templog
@@ -1853,7 +1847,7 @@ var loadLog = function (fromdefault) {
 
 // Restore LocalStorage (if deleted -- live)  /////////////
 ///////////////////////////////////////////////////////////
-var checkLocalStorage = function () {
+var checkLocalStorage = () => {
   var val = null
   try {
     val = localStorage.getItem('id')
@@ -1863,10 +1857,10 @@ var checkLocalStorage = function () {
 
 // Backup LocalStorage ////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var enableSync = function () {
+var enableSync = () => {
   return //block bsync for now
 }
-var disableSync = function () {
+var disableSync = () => {
   if (bookmarksync) bookmarksync.destroy()
   bookmarksync = null
 }
@@ -1875,7 +1869,7 @@ var disableSync = function () {
 // Initialize /////////////////////////////////////////////
 ///////////////////////////////////////////////////////////
 
-var initialize = function () {
+var initialize = () => {
   setValue('date_started', new Date().toString())
   //detect and update first run on this browser
   var firstRun =
@@ -1905,14 +1899,14 @@ var initialize = function () {
   //reconnect to any tabs that already run js/gestures.js
   setTimeout(connectExistingTabs, 0)
   //init selectedTabId
-  chrome.tabs.getSelected(null, function (tab) {
+  chrome.tabs.getSelected(null, (tab) => {
     selectedTabId = tab.id
   })
   //send stats if it has been at least a week
   if (settings.sendStats) sendStats()
   //detect tabs connection states to selectivly show welcome message or tab status page
-  setTimeout(function () {
-    getTabStates(function (states) {
+  setTimeout(() => {
+    getTabStates((states) => {
       var brokentab = false
       var connectedtab = false
       var blockedtab = false
@@ -1926,7 +1920,7 @@ var initialize = function () {
         chrome.tabs.create({ url: chrome.extension.getURL('options.html') })
       }
       //UPDATE FIXES
-      chrome.bookmarks.getTree(function (tree) {
+      chrome.bookmarks.getTree((tree) => {
         var other = tree[0].children[1]
         for (var i = 0; i < other.children.length; i++)
           if (
@@ -1945,13 +1939,13 @@ var initialize = function () {
   }, 1500)
 }
 
-var connectExistingTabs = function () {
-  chrome.windows.getAll({ populate: true }, function (wins) {
+var connectExistingTabs = () => {
+  chrome.windows.getAll({ populate: true }, (wins) => {
     for (x in wins) {
       if (focusedWindows.indexOf(wins[x].id) < 0)
         focusedWindows.push(wins[x].id)
       for (y in wins[x].tabs) {
-        ;(function (tab) {
+        ;((tab) => {
           activeTabs[tab.id] = {
             winId: tab.windowId,
             index: tab.index,
@@ -1968,21 +1962,21 @@ var connectExistingTabs = function () {
               allFrames: true,
               code: 'if(window.SG) { if(window.SG.enabled()) window.SG.disable(); delete window.SG; }',
             })
-            setTimeout(function () {
+            setTimeout(() => {
               chrome.tabs.executeScript(tab.id, {
                 allFrames: true,
                 file: 'js/gestures.js',
               })
             }, 200)
           }
-          setTimeout(function () {
+          setTimeout(() => {
             refreshPageAction(tab.id)
           }, 100)
         })(wins[x].tabs[y])
       }
     }
-    chrome.windows.getLastFocused(function (win) {
-      focusedWindows = focusedWindows.filter(function (el) {
+    chrome.windows.getLastFocused((win) => {
+      focusedWindows = focusedWindows.filter((el) => {
         return el != win.id
       })
       focusedWindows.push(win.id)
@@ -1996,7 +1990,7 @@ for (var i = 0; i < localStorage.length; i++)
 instanceId = getValue('id') || ('' + Math.random()).substr(2)
 profile = getValue('profile') || 'Default'
 
-loadOptions(profile, function () {
+loadOptions(profile, () => {
   loadCustomActions()
   loadExternalActions()
 
@@ -2010,7 +2004,7 @@ loadOptions(profile, function () {
   setTimeout(ping, 1000)
   setInterval(ping, 60 * 60 * 1000) //once an hour
 
-  $.getJSON(chrome.extension.getURL('manifest.json'), null, function (data) {
+  $.getJSON(chrome.extension.getURL('manifest.json'), null, (data) => {
     extVersion = data.version
 
     initialize()

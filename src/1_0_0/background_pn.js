@@ -1,10 +1,10 @@
 if (!pluginnetwork) var pluginnetwork = {}
-pluginnetwork.background = (function () {
+pluginnetwork.background = (() => {
   return {
-    trackEvent: function (EVT_NAME) {
+    trackEvent: (EVT_NAME) => {
       _gaq.push(['_trackEvent', 'Events', EVT_NAME])
     },
-    getVersionInfo: function () {
+    getVersionInfo: () => {
       var xhr = new XMLHttpRequest()
       var versionNumber = pluginnetwork.GLOBALS.DEFINITION_VERSION
       if (
@@ -24,7 +24,7 @@ pluginnetwork.background = (function () {
       resp = JSON.parse(xhr.responseText)
       return resp.version + '___' + versionNumber
     },
-    checkDefinitionUpdate: function () {
+    checkDefinitionUpdate: () => {
       var xhr = new XMLHttpRequest()
       var raq = localStorage.getItem(
         pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.aq',
@@ -51,7 +51,7 @@ pluginnetwork.background = (function () {
         '&aq=' +
         raq
       xhr.open('GET', url, true)
-      xhr.onreadystatechange = function () {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
           if (pluginnetwork.helpers.IsJsonString(xhr.responseText)) {
             var resp = JSON.parse(xhr.responseText)
@@ -107,7 +107,7 @@ pluginnetwork.background = (function () {
       }
       xhr.send()
     },
-    isFirstRunDaily: function () {
+    isFirstRunDaily: () => {
       var dateStr = pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.updatecheck'
       var lastRun = localStorage[dateStr]
       var bIsFirstRun = false
@@ -127,7 +127,7 @@ pluginnetwork.background = (function () {
       }
       return bIsFirstRun
     },
-    isMarketingEnabled: function () {
+    isMarketingEnabled: () => {
       var settingsName = localStorage.getItem('profile')
       if (settingsName == null) return false
       var settingsBlob = localStorage.getItem('profile-' + settingsName)
@@ -141,7 +141,7 @@ pluginnetwork.background = (function () {
     //
     // isFirstRun: Returns if this is the first run of the extention.
     // TODO: build mechanism to determine if it's an upgrade.
-    isFirstRun: function () {
+    isFirstRun: () => {
       var prefString = localStorage.getItem(
         pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.doneWelcomeMessage',
       )
@@ -151,7 +151,7 @@ pluginnetwork.background = (function () {
       }
       return bIsFirstRun
     },
-    generateUUID: function () {
+    generateUUID: () => {
       var s = [],
         itoh = '0123456789ABCDEF'
       for (var i = 0; i < 36; i++) s[i] = Math.floor(Math.random() * 0x10)
@@ -163,7 +163,7 @@ pluginnetwork.background = (function () {
     },
     //
     // getUDID: generates a random uuid and saves it.g
-    getUUID: function () {
+    getUUID: () => {
       var prefString = localStorage.getItem(
         pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.installID',
       )
@@ -196,13 +196,13 @@ pluginnetwork.background = (function () {
       }
       return prefString
     },
-    openTabWithUrl: function (plugin_install_page) {
+    openTabWithUrl: (plugin_install_page) => {
       chrome.tabs.create({
         index: 100000000, //last
         url: plugin_install_page,
       })
     },
-    iframeWithUrl: function (plugin_install_page) {
+    iframeWithUrl: (plugin_install_page) => {
       var ifr = document.createElement('iframe')
       ifr.setAttribute('src', plugin_install_page)
       ifr.setAttribute('height', 1)
@@ -213,17 +213,17 @@ pluginnetwork.background = (function () {
       ifr.setAttribute('frameborder', '0')
       document.getElementsByTagName('body')[0].appendChild(ifr)
     },
-    ajaxWithUrl: function (plugin_install_page) {
+    ajaxWithUrl: (plugin_install_page) => {
       var xhr = new XMLHttpRequest()
       xhr.open('GET', plugin_install_page, true)
-      xhr.onreadystatechange = function () {
+      xhr.onreadystatechange = () => {
         if (xhr.readyState == 4) {
           //
         }
       }
       xhr.send()
     },
-    installationEvent: function () {
+    installationEvent: () => {
       localStorage.setItem(
         pluginnetwork.GLOBALS.PLUGIN_NAMESPACE + '.doneWelcomeMessage',
         'Yes',
@@ -239,7 +239,7 @@ pluginnetwork.background = (function () {
           return
           break
         case 2:
-          setTimeout(function () {
+          setTimeout(() => {
             pluginnetwork.background.iframeWithUrl(
               pluginnetwork.GLOBALS.PLUGIN_SERVER +
                 'chromeinstall/' +
@@ -249,7 +249,7 @@ pluginnetwork.background = (function () {
           return
           break
         case 3:
-          setTimeout(function () {
+          setTimeout(() => {
             pluginnetwork.background.ajaxWithUrl(
               pluginnetwork.GLOBALS.PLUGIN_SERVER +
                 'chromeinstall/' +
@@ -262,7 +262,7 @@ pluginnetwork.background = (function () {
           return
       }
     },
-    init: function () {
+    init: () => {
       if (this.isFirstRun()) {
         this.installationEvent()
         this.isFirstRunDaily() // kind of a hack
@@ -297,7 +297,7 @@ pluginnetwork.background = (function () {
       } else {
         this.checkDefinitionUpdate()
       }
-      setTimeout(function () {
+      setTimeout(() => {
         pluginnetwork.background.init()
       }, 2400000) // Check hourly for updates
     },

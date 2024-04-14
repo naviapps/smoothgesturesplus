@@ -1,18 +1,18 @@
-!(function () {
+!(() => {
   'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {})
+    (console.log = console.error = () => {})
   var e = {}
-  chrome.storage.local.get(null, function (s) {
+  chrome.storage.local.get(null, (s) => {
     ;(e = s), a()
   })
-  chrome.storage.onChanged.addListener(function (s, a) {
+  chrome.storage.onChanged.addListener((s, a) => {
     if ('local' == a) for (key in s) e[key] = s[key].newValue
   }),
-    chrome.runtime.getBackgroundPage(function (s) {
+    chrome.runtime.getBackgroundPage((s) => {
       s.ping()
     })
-  var a = function () {
-    $(function () {
+  var a = () => {
+    $(() => {
       var s = 336 - Math.ceil((Date.now() - e.firstinstalled) / 1e3 / 60 / 60)
       $('body')
         .append(
@@ -68,7 +68,7 @@
                     (e.license ? 'Buy' : 'Activate') +
                     ' <span class=sgtitle>Smooth Gestures <span class=sgplus>plus<span class=arrow></span></span></span></span>',
                 )
-                  .click(function () {
+                  .click(() => {
                     chrome.tabs.create(
                       {
                         url:
@@ -78,15 +78,15 @@
                           e.firstinstalled +
                           '&n=/pay/',
                       },
-                      function () {
+                      () => {
                         window.close()
                       },
                     )
                   })
-                  .mouseenter(function () {
+                  .mouseenter(() => {
                     $('.sgplus', this).stop().animate({ left: '.4em' }, 100)
                   })
-                  .mouseleave(function () {
+                  .mouseleave(() => {
                     $('.sgplus', this).stop().animate({ left: '0' }, 200)
                   }),
               ),

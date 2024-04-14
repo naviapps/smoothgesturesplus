@@ -1,4 +1,4 @@
-var scrollto = function (name) {
+var scrollto = (name) => {
   var destination = $('a[name=' + name + ']').offset().top - 80
   $('html:not(:animated),body:not(:animated)').animate(
     { scrollTop: destination },
@@ -6,7 +6,7 @@ var scrollto = function (name) {
     'swing',
   )
 }
-var getText = function (name, param) {
+var getText = (name, param) => {
   if (name.substr(0, 13) == 'action_custom') {
     var parts = name.split('_')
     if (bg.customActions[parts[1]])
@@ -17,7 +17,7 @@ var getText = function (name, param) {
 }
 
 var bg = chrome.extension.getBackgroundPage()
-var optionsUpdated = function (blockGenerate) {
+var optionsUpdated = (blockGenerate) => {
   bg.saveOptions(bg.profile)
   //refresh page
   if (!blockGenerate) generateOptions()
@@ -78,7 +78,7 @@ $('body')
               chrome.i18n.getMessage('options_button_startaddgesture'),
           )
           .attr('tabindex', 0)
-          .click(function () {
+          .click(() => {
             addGesture(null)
           }),
       ),
@@ -94,7 +94,7 @@ if (bg.settings.sendStats == undefined)
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_sendStats').remove()
             bg.settings.sendStats = false
             refreshSendStats()
@@ -111,7 +111,7 @@ if (bg.settings.sendStats == undefined)
             float: 'right',
             'margin-right': '.5em',
           })
-          .click(function () {
+          .click(() => {
             $('#note_sendStats').remove()
             bg.settings.sendStats = true
             refreshSendStats()
@@ -132,7 +132,7 @@ if (bg.settings.hidePageAction == undefined)
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_hidePageAction').remove()
             bg.settings.hidePageAction = false
             refreshHidePageAction()
@@ -149,7 +149,7 @@ if (bg.settings.hidePageAction == undefined)
             float: 'right',
             'margin-right': '.5em',
           })
-          .click(function () {
+          .click(() => {
             $('#note_hidePageAction').remove()
             bg.settings.hidePageAction = true
             refreshHidePageAction()
@@ -173,7 +173,7 @@ if (
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_translate').remove()
             bg.settings.hideNoteTranslate = true
             bg.saveOptions(bg.profile)
@@ -202,7 +202,7 @@ if (!bg.settings.hideNotePrint)
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_print').remove()
             bg.settings.hideNotePrint = true
             bg.saveOptions(bg.profile)
@@ -218,7 +218,7 @@ if (!bg.settings.hideNotePrint)
             float: 'right',
             'margin-right': '.5em',
           })
-          .click(function () {
+          .click(() => {
             window.print()
           }),
       )
@@ -236,7 +236,7 @@ if (!bg.settings.hideNoteWelcome)
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_welcome').remove()
             bg.settings.hideNoteWelcome = true
             bg.saveOptions(bg.profile)
@@ -282,7 +282,7 @@ if (
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_remindrate').remove()
             bg.settings.hideNoteRemindRate = true
             bg.saveOptions(bg.profile)
@@ -312,7 +312,7 @@ if (bg.settings.showNoteUpdated) {
           .attr('class', 'close')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             $('#note_updated').remove()
           }),
       )
@@ -323,7 +323,7 @@ if (bg.settings.showNoteUpdated) {
   bg.saveOptions(bg.profile)
 }
 
-var generateOptions = function () {
+var generateOptions = () => {
   $('#alloptions, #contentsactions *, #contentssettings *').remove()
   var root = $('<div>').attr('id', 'alloptions')
 
@@ -359,7 +359,7 @@ var generateOptions = function () {
   refreshContextOnLink()
   refreshBlacklist()
 }
-var generateTable = function (cat) {
+var generateTable = (cat) => {
   var table = $('<div>')
     .attr('class', 'optiontable')
     .attr('id', cat)
@@ -369,7 +369,7 @@ var generateTable = function (cat) {
     $('#contentsactions').append(
       $('<div>').append(
         $("<a href='#'>")
-          .click(function () {
+          .click(() => {
             scrollto(cat)
             return false
           })
@@ -402,7 +402,7 @@ var generateTable = function (cat) {
     $('#contentsactions').append(
       $('<div>').append(
         $("<a href='#'>")
-          .click(function () {
+          .click(() => {
             scrollto(cat)
             return false
           })
@@ -417,7 +417,7 @@ var generateTable = function (cat) {
             chrome.i18n.getMessage('options_button_addcustomaction'),
         )
         .attr('tabindex', 0)
-        .click(function () {
+        .click(() => {
           addCustom()
         }),
     )
@@ -452,7 +452,7 @@ var generateTable = function (cat) {
       $('#contentsactions').append(
         $('<div>').append(
           $("<a href='#'>")
-            .click(function () {
+            .click(() => {
               scrollto(cat)
               return false
             })
@@ -463,7 +463,7 @@ var generateTable = function (cat) {
     $('#contentssettings').append(
       $('<div>').append(
         $("<a href='#'>")
-          .click(function () {
+          .click(() => {
             scrollto(cat)
             return false
           })
@@ -517,7 +517,7 @@ var generateTable = function (cat) {
   }
   return table
 }
-var actionGroup = function (title, label, show, rows) {
+var actionGroup = (title, label, show, rows) => {
   return $('<div>')
     .attr('class', 'rowgroup')
     .append(
@@ -532,7 +532,7 @@ var actionGroup = function (title, label, show, rows) {
                 ? getText('setting_group_hide')
                 : getText('setting_group_show'),
             )
-            .click(function () {
+            .click(() => {
               if (!bg.settings['hide-' + label]) {
                 $(this).text(getText('setting_group_show'))
                 $('#' + label + 'Group').animate(
@@ -561,7 +561,7 @@ var actionGroup = function (title, label, show, rows) {
         .css({ display: !bg.settings['hide-' + label] ? 'block' : 'none' }),
     )
 }
-var generateGRow = function (action) {
+var generateGRow = (action) => {
   return $('<div>')
     .attr('class', 'actionrow')
     .append(
@@ -574,7 +574,7 @@ var generateGRow = function (action) {
         .attr('class', 'gesture-add')
         .attr('tabindex', 0)
         .text('+')
-        .click(function () {
+        .click(() => {
           addGesture(action)
         }),
     )
@@ -608,7 +608,7 @@ var generateGRow = function (action) {
     )
     .append($('<div>').attr('class', 'clearall'))
 }
-var generateExternalRow = function (action, title, descrip) {
+var generateExternalRow = (action, title, descrip) => {
   return $('<div>')
     .attr('class', 'actionrow')
     .append(
@@ -621,7 +621,7 @@ var generateExternalRow = function (action, title, descrip) {
         .attr('class', 'gesture-add')
         .attr('tabindex', 0)
         .text('+')
-        .click(function () {
+        .click(() => {
           addGesture(action)
         }),
     )
@@ -630,7 +630,7 @@ var generateExternalRow = function (action, title, descrip) {
     .append($('<div>').attr('class', 'clearall'))
 }
 
-var generateCustomRow = function (id) {
+var generateCustomRow = (id) => {
   return $('<div>')
     .attr('class', 'actionrow')
     .append(
@@ -643,7 +643,7 @@ var generateCustomRow = function (id) {
         .attr('class', 'gesture-add')
         .attr('tabindex', 0)
         .text('+')
-        .click(function () {
+        .click(() => {
           addGesture(id)
         }),
     )
@@ -656,7 +656,7 @@ var generateCustomRow = function (id) {
             .attr('class', 'editcustom')
             .attr('tabindex', 0)
             .text('edit')
-            .click(function () {
+            .click(() => {
               editCustom(id)
             }),
         )
@@ -665,7 +665,7 @@ var generateCustomRow = function (id) {
             .attr('class', 'delcustom')
             .attr('tabindex', 0)
             .html('&times;')
-            .click(function () {
+            .click(() => {
               delCustom(id)
             }),
         ),
@@ -677,7 +677,7 @@ var generateCustomRow = function (id) {
     )
     .append($('<div>').attr('class', 'clearall'))
 }
-var editCustom = function (id) {
+var editCustom = (id) => {
   var a = bg.customActions[id]
   var row = $('#action-' + id)
     .parent()
@@ -690,7 +690,7 @@ var editCustom = function (id) {
         .attr('class', 'savecustom')
         .attr('tabindex', 0)
         .text('save')
-        .click(function () {
+        .click(() => {
           saveCustom(id)
         }),
     )
@@ -699,7 +699,7 @@ var editCustom = function (id) {
         .attr('class', 'undocustom')
         .attr('tabindex', 0)
         .text('cancel')
-        .click(function () {
+        .click(() => {
           edit.remove()
           row.css({ display: 'block' })
         }),
@@ -754,7 +754,7 @@ var editCustom = function (id) {
   $('.cxtcustom', edit).val(a.context)
   $('.envcustom', edit).val(a.env)
 }
-var saveCustom = function (id) {
+var saveCustom = (id) => {
   var a = bg.customActions[id]
   $('#action-' + id)
     .parent()
@@ -772,7 +772,7 @@ var saveCustom = function (id) {
   bg.saveCustomActions()
   generateOptions()
 }
-var addCustom = function () {
+var addCustom = () => {
   var id = 'custom' + ('' + Math.random()).substr(2)
   bg.customActions[id] = {}
   var a = bg.customActions[id]
@@ -789,7 +789,7 @@ var addCustom = function () {
   generateOptions()
   editCustom(id)
 }
-var delCustom = function (id) {
+var delCustom = (id) => {
   if (!confirm('Delete this custom action?')) return
 
   for (g in bg.gestures) if (bg.gestures[g] == id) removeGesture(g)
@@ -802,7 +802,7 @@ var delCustom = function (id) {
   generateOptions()
 }
 
-var settingsGroup = function (title, label, rows) {
+var settingsGroup = (title, label, rows) => {
   return $('<div>')
     .attr('class', 'rowgroup')
     .append(
@@ -817,7 +817,7 @@ var settingsGroup = function (title, label, rows) {
                 ? getText('setting_group_hide')
                 : getText('setting_group_show'),
             )
-            .click(function () {
+            .click(() => {
               if (bg.settings[label]) {
                 bg.settings[label] = false
                 $(this).text(getText('setting_group_show'))
@@ -846,7 +846,7 @@ var settingsGroup = function (title, label, rows) {
     )
 }
 
-var rowReset = function () {
+var rowReset = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -869,14 +869,14 @@ var rowReset = function () {
         .text(getText('setting_reset_descrip')),
     )
 }
-var doReset = function () {
+var doReset = () => {
   if (confirm(getText('setting_warning_reset'))) {
     bg.gestures = JSON.parse(bg.defaults['Smooth Gestures'].gestures)
     optionsUpdated()
   }
 }
 
-var rowImport = function () {
+var rowImport = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -902,7 +902,7 @@ var rowImport = function () {
             .attr('type', 'button')
             .val(getText('setting_button_export'))
             .css({ 'min-width': '5em', 'font-weight': 'bold' })
-            .click(function (t) {
+            .click((t) => {
               chrome.tabs.create({ url: 'Smooth_Gestures_Settings.html' })
             }),
         ),
@@ -916,16 +916,16 @@ var rowImport = function () {
         .text(getText('setting_import_descrip')),
     )
 }
-var htmlDecode = function (input) {
+var htmlDecode = (input) => {
   var e = document.createElement('div')
   e.innerHTML = input.replace(/</g, '[leftangle]')
   return e.childNodes[0].nodeValue.replace(/\[leftangle\]/g, '<')
 }
-var doImport = function () {
+var doImport = () => {
   var finput = this
   if (this.files.length <= 0) return
   var reader = new FileReader()
-  reader.onload = function (e) {
+  reader.onload = (e) => {
     var res = reader.result
     res = res.substring(res.indexOf('{'), res.lastIndexOf('}') + 1)
     alert(res)
@@ -946,7 +946,7 @@ var doImport = function () {
   reader.readAsText(this.files[0])
 }
 
-var rowContextOnLink = function () {
+var rowContextOnLink = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -971,15 +971,15 @@ var rowContextOnLink = function () {
         .text(getText('setting_force_context_descrip')),
     )
 }
-var updateContextOnLink = function () {
+var updateContextOnLink = () => {
   bg.settings.contextOnLink = $('#contextOnLink').val() == 1
   optionsUpdated()
 }
-var refreshContextOnLink = function () {
+var refreshContextOnLink = () => {
   $('#contextOnLink').val(bg.settings.contextOnLink ? 1 : 0)
 }
 
-var rowHoldButton = function () {
+var rowHoldButton = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1010,29 +1010,27 @@ var rowHoldButton = function () {
         .text(getText('setting_hold_button_descrip')),
     )
 }
-var updateHoldButton = function () {
+var updateHoldButton = () => {
   bg.settings.holdButton = $('#holdButton').val()
   optionsUpdated()
 }
-var refreshHoldButton = function () {
+var refreshHoldButton = () => {
   $('#holdButton').val(bg.settings.holdButton)
 }
 
-var rowTrailColor = function () {
+var rowTrailColor = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
       $('<div>')
         .attr('class', 'settingcontrol')
         .append(
-          $('<div>')
-            .attr('id', 'trailColor')
-            .css({
-              float: 'right',
-              width: '15px',
-              height: '140px',
-              border: '1px solid gray',
-            }),
+          $('<div>').attr('id', 'trailColor').css({
+            float: 'right',
+            width: '15px',
+            height: '140px',
+            border: '1px solid gray',
+          }),
         )
         .append($('<div>').css({ width: '200px' }))
         .append(
@@ -1105,13 +1103,13 @@ var rowTrailColor = function () {
     )
     .append($('<div>').attr('class', 'clearall'))
 }
-var updateTrailColor = function () {
+var updateTrailColor = () => {
   refreshTrailColor()
   if (window.updateOptionsTimeout) clearTimeout(window.updateOptionsTimeout)
   window.updateOptionsTimeout = setTimeout(optionsUpdated, 500)
   optionsUpdated(true)
 }
-var refreshTrailColor = function () {
+var refreshTrailColor = () => {
   $('#trailColorR, #trailColorG, #trailColorB, #trailColorA')
     .css({
       margin: '5px',
@@ -1150,7 +1148,7 @@ var refreshTrailColor = function () {
   )
 }
 
-var rowNewTabUrl = function () {
+var rowNewTabUrl = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1165,14 +1163,11 @@ var rowNewTabUrl = function () {
             .append($('<option>').val('custom').text('Custom page')),
         )
         .append(
-          $('<input>')
-            .attr('id', 'newTabUrlCustom')
-            .attr('type', 'text')
-            .css({
-              width: '160px',
-              border: '1px solid gray',
-              margin: '0 .8em',
-            }),
+          $('<input>').attr('id', 'newTabUrlCustom').attr('type', 'text').css({
+            width: '160px',
+            border: '1px solid gray',
+            margin: '0 .8em',
+          }),
         )
         .append(
           $('<input>')
@@ -1193,7 +1188,7 @@ var rowNewTabUrl = function () {
     )
     .append($('<div>').attr('class', 'clearall'))
 }
-var updateNewTabUrl = function () {
+var updateNewTabUrl = () => {
   bg.settings.newTabUrl =
     $('#newTabUrl').val() != 'custom'
       ? $('#newTabUrl').val()
@@ -1210,7 +1205,7 @@ var updateNewTabUrl = function () {
   refreshNewTabUrl()
   optionsUpdated()
 }
-var refreshNewTabUrl = function () {
+var refreshNewTabUrl = () => {
   $('#newTabUrl').val(bg.settings.newTabUrl)
   if ($('#newTabUrl').val() != bg.settings.newTabUrl) {
     $('#newTabUrl').val('custom')
@@ -1221,7 +1216,7 @@ var refreshNewTabUrl = function () {
   }
 }
 
-var rowNewTabLinkRight = function () {
+var rowNewTabLinkRight = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1246,15 +1241,15 @@ var rowNewTabLinkRight = function () {
         .text(getText('setting_newtab_linkright_descrip')),
     )
 }
-var updateNewTabLinkRight = function () {
+var updateNewTabLinkRight = () => {
   bg.settings.newTabLinkRight = $('#newTabLinkRight').val() == 1
   optionsUpdated()
 }
-var refreshNewTabLinkRight = function () {
+var refreshNewTabLinkRight = () => {
   $('#newTabLinkRight').val(bg.settings.newTabLinkRight ? 1 : 0)
 }
 
-var rowNewTabRight = function () {
+var rowNewTabRight = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1279,15 +1274,15 @@ var rowNewTabRight = function () {
         .text(getText('setting_newtab_right_descrip')),
     )
 }
-var updateNewTabRight = function () {
+var updateNewTabRight = () => {
   bg.settings.newTabRight = $('#newTabRight').val() == 1
   optionsUpdated()
 }
-var refreshNewTabRight = function () {
+var refreshNewTabRight = () => {
   $('#newTabRight').val(bg.settings.newTabRight ? 1 : 0)
 }
 
-var rowTrailWidth = function () {
+var rowTrailWidth = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1327,20 +1322,20 @@ var rowTrailWidth = function () {
     )
     .append($('<div>').attr('class', 'clearall'))
 }
-var updateTrailWidth = function () {
+var updateTrailWidth = () => {
   refreshTrailWidth()
   if (window.updateOptionsTimeout) clearTimeout(window.updateOptionsTimeout)
   window.updateOptionsTimeout = setTimeout(optionsUpdated, 500)
   optionsUpdated(true)
 }
-var refreshTrailWidth = function () {
+var refreshTrailWidth = () => {
   bg.settings.trailWidth = $('#trailWidth input').val() * 1
   $('#trailWidthDraw')
     .empty()
     .append(window.SG.drawGesture('URU', 100, 140, bg.settings.trailWidth))
 }
 
-var rowTrailBlock = function () {
+var rowTrailBlock = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1365,15 +1360,15 @@ var rowTrailBlock = function () {
         .text(getText('setting_trail_draw_descrip')),
     )
 }
-var updateTrailBlock = function () {
+var updateTrailBlock = () => {
   bg.settings.trailBlock = $('#trailBlock').val() != 1
   optionsUpdated()
 }
-var refreshTrailBlock = function () {
+var refreshTrailBlock = () => {
   $('#trailBlock').val(bg.settings.trailBlock ? 0 : 1)
 }
 
-var rowCloseLastBlock = function () {
+var rowCloseLastBlock = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1398,15 +1393,15 @@ var rowCloseLastBlock = function () {
         .text(getText('setting_closelastblock_descrip')),
     )
 }
-var updateCloseLastBlock = function () {
+var updateCloseLastBlock = () => {
   bg.settings.closeLastBlock = $('#closeLastBlock').val() == 1
   optionsUpdated()
 }
-var refreshCloseLastBlock = function () {
+var refreshCloseLastBlock = () => {
   $('#closeLastBlock').val(bg.settings.closeLastBlock ? 1 : 0)
 }
 
-var rowSelectToLink = function () {
+var rowSelectToLink = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1431,15 +1426,15 @@ var rowSelectToLink = function () {
         .text(getText('setting_selecttolink_descrip')),
     )
 }
-var updateSelectToLink = function () {
+var updateSelectToLink = () => {
   bg.settings.selectToLink = $('#selectToLink').val() == 1
   optionsUpdated()
 }
-var refreshSelectToLink = function () {
+var refreshSelectToLink = () => {
   $('#selectToLink').val(bg.settings.selectToLink ? 1 : 0)
 }
 
-var rowSendStats = function () {
+var rowSendStats = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1464,16 +1459,16 @@ var rowSendStats = function () {
         .text(getText('setting_sendstats_descrip')),
     )
 }
-var updateSendStats = function () {
+var updateSendStats = () => {
   bg.settings.sendStats = $('#sendStats').val() == 1
   if (bg.settings.sendStats) bg.sendStats()
   optionsUpdated()
 }
-var refreshSendStats = function () {
+var refreshSendStats = () => {
   $('#sendStats').val(bg.settings.sendStats ? 1 : 0)
 }
 
-var rowHidePageAction = function () {
+var rowHidePageAction = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1498,19 +1493,19 @@ var rowHidePageAction = function () {
         .text(getText('setting_hidepageaction_descrip')),
     )
 }
-var updateHidePageAction = function () {
+var updateHidePageAction = () => {
   bg.settings.hidePageAction = $('#hidePageAction').val() == 0
   optionsUpdated()
-  chrome.windows.getAll({ populate: true }, function (wins) {
+  chrome.windows.getAll({ populate: true }, (wins) => {
     for (i in wins)
       for (j in wins[i].tabs) bg.refreshPageAction(wins[i].tabs[j].id)
   })
 }
-var refreshHidePageAction = function () {
+var refreshHidePageAction = () => {
   $('#hidePageAction').val(bg.settings.hidePageAction ? 0 : 1)
 }
 
-var rowMarketingAction = function () {
+var rowMarketingAction = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1533,15 +1528,15 @@ var rowMarketingAction = function () {
         ),
     )
 }
-var updateMarketingAction = function () {
+var updateMarketingAction = () => {
   bg.settings.marketing = $('#hideMarketingAction').val() == 1
   optionsUpdated()
 }
-var refreshMarketingAction = function () {
+var refreshMarketingAction = () => {
   $('#hideMarketingAction').val(bg.settings.marketing ? 1 : 0)
 }
 
-var rowBlacklist = function () {
+var rowBlacklist = () => {
   return $('<div>')
     .attr('class', 'settingrow')
     .append(
@@ -1565,27 +1560,25 @@ var rowBlacklist = function () {
         .text(getText('setting_blacklist_descrip')),
     )
     .append(
-      $('<textarea>')
-        .attr('id', 'blacklist')
-        .css({
-          width: '100%',
-          'margin-top': '.5em',
-          height: '3em',
-          border: '1px solid #999',
-        }),
+      $('<textarea>').attr('id', 'blacklist').css({
+        width: '100%',
+        'margin-top': '.5em',
+        height: '3em',
+        border: '1px solid #999',
+      }),
     )
 }
-var updateBlacklist = function () {
+var updateBlacklist = () => {
   var urls = $('#blacklist').val().split(',')
   for (var i = 0; i < urls.length; i++) urls[i] = urls[i].trim()
   bg.settings.blacklist = urls
   optionsUpdated()
 }
-var refreshBlacklist = function () {
+var refreshBlacklist = () => {
   $('#blacklist').val(bg.settings.blacklist.join(', '))
 }
 
-var displayGesture = function (gesture) {
+var displayGesture = (gesture) => {
   $('#action-' + bg.gestures[gesture]).append(
     $('<div>')
       .attr('id', 'gesture-' + gesture)
@@ -1595,7 +1588,7 @@ var displayGesture = function (gesture) {
           .attr('class', 'gesture-remove')
           .attr('tabindex', 0)
           .html('&times;')
-          .click(function () {
+          .click(() => {
             removeGesture(gesture)
           }),
       )
@@ -1603,9 +1596,9 @@ var displayGesture = function (gesture) {
   )
 }
 
-var addGesture = function (action) {
+var addGesture = (action) => {
   if (window.SG.callback) return
-  var blockEvent = function (t) {
+  var blockEvent = (t) => {
     t.preventDefault()
   }
   window.addEventListener('mousewheel', blockEvent, false)
@@ -1617,7 +1610,7 @@ var addGesture = function (action) {
         .attr('id', 'canvasclose')
         .attr('tabindex', 0)
         .html('&times;')
-        .click(function () {
+        .click(() => {
           window.SG.callback = null
           $('.drawingcanvas').remove()
           window.removeEventListener('mousewheel', blockEvent, false)
@@ -1658,10 +1651,10 @@ var addGesture = function (action) {
         ),
     )
     .appendTo('body')
-  var receiveGesture = function (gesture) {
+  var receiveGesture = (gesture) => {
     if (bg.contexts[action]) gesture = bg.contexts[action] + gesture
     window.SG.callback = null
-    var chooseAction = function (action) {
+    var chooseAction = (action) => {
       if (bg.gestures[gesture]) removeGesture(gesture)
       bg.gestures[gesture] = action
       displayGesture(gesture)
@@ -1684,11 +1677,11 @@ var addGesture = function (action) {
             'min-width': '10em',
             'margin-left': '4em',
           })
-          .click(function () {
+          .click(() => {
             $('#nowwhat').remove()
             $('#gcanvas').remove()
             $('#canvasdescrip').css('display', 'block')
-            setTimeout(function () {
+            setTimeout(() => {
               window.SG.callback = receiveGesture
             }, 0)
           }),
@@ -1708,7 +1701,7 @@ var addGesture = function (action) {
                 'min-width': '10em',
                 'margin-right': '4em',
               })
-              .click(function () {
+              .click(() => {
                 chooseAction(action)
               })
           : $('<select>')
@@ -1719,10 +1712,10 @@ var addGesture = function (action) {
                 'text-align': 'center',
                 'margin-right': '0em',
               })
-              .change(function () {
+              .change(() => {
                 chooseAction($(this).val())
               })
-              .each(function () {
+              .each(() => {
                 $(this).append(
                   $('<option>')
                     .attr('disabled', 'disabled')
@@ -1799,13 +1792,13 @@ var addGesture = function (action) {
   }
   window.SG.callback = receiveGesture
 }
-var removeGesture = function (gesture) {
+var removeGesture = (gesture) => {
   $('#gesture-' + gesture).remove()
   delete bg.gestures[gesture]
   optionsUpdated()
 }
 
-var placeContents = function () {
+var placeContents = () => {
   $('#contents').css(
     'top',
     window.innerHeight <= $('#contents').height()
