@@ -254,7 +254,7 @@ var categories = {
 ///////////////////////////////////////////////////////////
 // Action Functions ///////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var contexts = {
+const contexts = {
   'new-tab-link': 'l',
   'new-tab-back': 'l',
   'new-window-link': 'l',
@@ -1592,17 +1592,25 @@ var clipboardCopy = (text) => {
 
 var updateValidGestures = () => {
   validGestures = {}
-  for (g in gestures) {
-    if (g[0] == 'l' || g[0] == 'i' || g[0] == 's') g = g.substr(1)
-    if (g[0] == 'k') {
-      if (!validGestures['k']) validGestures['k'] = {}
-      var mod = g.substr(1, 4)
-      if (!validGestures['k'][mod]) validGestures['k'][mod] = []
-      validGestures['k'][mod].push(g.substr(6))
+  for (let g in gestures) {
+    if (g[0] === 'l' || g[0] === 'i' || g[0] === 's') {
+      g = g.substring(1)
+    }
+    if (g[0] === 'k') {
+      if (!validGestures['k']) {
+        validGestures['k'] = {}
+      }
+      const mod = g.substring(1, 5)
+      if (!validGestures['k'][mod]) {
+        validGestures['k'][mod] = []
+      }
+      validGestures['k'][mod].push(g.substring(6))
     } else {
       var cur = validGestures
       for (i = 0; i < g.length; i++) {
-        if (!cur[g[i]]) cur[g[i]] = {}
+        if (!cur[g[i]]) {
+          cur[g[i]] = {}
+        }
         cur = cur[g[i]]
       }
       cur[''] = true

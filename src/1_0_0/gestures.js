@@ -1,6 +1,6 @@
 // History forwarding handling
 if (
-  location.hostname == 'www.google.com' &&
+  location.hostname === 'www.google.com' &&
   location.hash.substr(0, 5) == '#:--:' &&
   !window.SGHistory
 ) {
@@ -42,10 +42,6 @@ var SmoothGestures = () => {
   ///////////////////////////////////////////////////////////
   var _this = this
   _this.callback = null
-  var extVersion = null
-  var extId = chrome.extension
-    ? chrome.extension.getURL('').substr(19, 32)
-    : null
   //unique content script ID
   var id = ('' + Math.random()).substr(2)
   var sgplugin
@@ -60,25 +56,29 @@ var SmoothGestures = () => {
   //gesture states
   var gesture = {}
 
-  //button syncing between tabs
-  var syncButtons = false
+  // button syncing between tabs
+  var syncButtons:
+    | {
+        timeout: NodeJS.Timeout,
+      }
+    | boolean = false
 
-  //mouse event states
-  var buttonDown = {}
-  var blockClick = {}
-  var blockContext = true
-  var forceContext = false
-  //key mod down states
-  var keyMod = '0000'
-  var keyEscape = false
-  //focus state
-  var focus = null
+  // mouse event states
+  var buttonDown: { [button: number]: boolean } = {}
+  var blockClick: { [button: number]: boolean } = {}
+  var blockContext: boolean = true
+  var forceContext: boolean = false
+  // key mod down states
+  var keyMod: string = '0000'
+  var keyEscape: boolean = false
+  // focus state
+  var focus: Element | null = null
 
   ///////////////////////////////////////////////////////////
   // Extension Communication ////////////////////////////////
   ///////////////////////////////////////////////////////////
   _this.connect = () => {
-    var mess = {
+    const connectInfo: chrome.runtime.ConnectInfo = {
       name: JSON.stringify({
         name: 'smoothgestures.tab',
         frame: !parent,
@@ -86,8 +86,11 @@ var SmoothGestures = () => {
         url: location.href,
       }),
     }
-    if (window.SGextId) port = chrome.extension.connect(window.SGextId, mess)
-    else port = chrome.extension.connect(mess)
+    if (window.SGextId) {
+      port = chrome.extension.connect(window.SGextId, connectInfo)
+    } else {
+      port = chrome.extension.connect(connectInfo)
+    }
     if (!port) return
     port.onMessage.addListener(receiveMessage)
     port.onDisconnect.addListener(_this.disable)
@@ -97,7 +100,6 @@ var SmoothGestures = () => {
     var mess = JSON.parse(mess)
     if (mess.enable) enable()
     if (mess.disable) _this.disable()
-    if (mess.extVersion && !extVersion) extVersion = mess.extVersion
     if (mess.settings) settings = mess.settings
     if (mess.validGestures) validGestures = mess.validGestures
     if (mess.windowBlurred) {
@@ -144,213 +146,7 @@ var SmoothGestures = () => {
   ///////////////////////////////////////////////////////////
   // Page Events ////////////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var mouseDownCapture = (t) => {
-    blockClick[t.button] = false
-    blockContext = t.button != 2
-
-    //block scrollbars
-    if (
-      t.target &&
-      t.target.nodeName == 'HTML' &&
-      ((document.height > window.innerHeight &&
-        t.clientX > window.innerWidth - 17) ||
-        (document.width > window.innerWidth &&
-          t.clientY > window.innerHeight - 17))
-    ) {
-      endGesture()
-      return
-    }
-
-    if (syncButtons)
-      port.postMessage(
-        JSON.stringify({ syncButton: { id: t.button, down: true } }),
-      )
-    buttonDown[t.button] = true
-
-    if (forceContext) {
-      if (t.button == 2) {
-        endGesture()
-        return
-      } else forceContext = false
-    }
-
-    moveGesture(t)
-    if (
-      gesture.rocker &&
-      (buttonDown[0] ? 1 : 0) +
-        (buttonDown[1] ? 1 : 0) +
-        (buttonDown[2] ? 1 : 0) ==
-        2
-    ) {
-      var first
-      var second
-      if (buttonDown[0]) {
-        if (t.button == 0) second = 'L'
-        else first = 'L'
-      }
-      if (buttonDown[1]) {
-        if (t.button == 1) second = 'M'
-        else first = 'M'
-      }
-      if (buttonDown[2]) {
-        if (t.button == 2) second = 'R'
-        else first = 'R'
-      }
-      if (
-        _this.callback ||
-        (validGestures['r'][first] && validGestures['r'][first][second])
-      ) {
-        syncButtons = {
-          timeout: setTimeout(() => {
-            syncButtons = false
-          }, 500),
-        }
-        sendGesture('r' + first + second)
-
-        window.getSelection().removeAllRanges()
-        blockContext = true
-        blockClick[0] = true
-        blockClick[1] = true
-        blockClick[2] = true
-        t.preventDefault()
-        t.stopPropagation()
-        return
-      }
-    }
-
-    if (settings.contextOnLink && t.button == 2 && getLink(t.target)) return
-    if (
-      settings.holdButton == 0 &&
-      t.button == 0 &&
-      t.target.nodeName == 'SELECT'
-    )
-      return
-    if (
-      settings.holdButton == 0 &&
-      (keyMod[0] != '0' || keyMod[1] != '0' || keyMod[2] != '0' || keyEscape)
-    )
-      return //allow selection
-    if (settings.holdButton == 0 && t.button == 0 && t.target.nodeName == 'IMG')
-      t.preventDefault()
-    //if windows and middle clicked and (middle-click rocker set or options page is setting a gesture) then block autoscrolling with middle
-    if (
-      t.button == 1 &&
-      (validGestures['r']['M'] || window.SG.callback) &&
-      navigator.platform.indexOf('Win') != -1
-    )
-      t.preventDefault()
-
-    startGesture(
-      { x: t.clientX, y: t.clientY },
-      t.target,
-      t.button == settings.holdButton,
-      (buttonDown[0] ? 1 : 0) +
-        (buttonDown[1] ? 1 : 0) +
-        (buttonDown[2] ? 1 : 0) ==
-        1 &&
-        (_this.callback ||
-          (validGestures['r'] &&
-            ((buttonDown[0] && validGestures['r']['L']) ||
-              (buttonDown[1] && validGestures['r']['M']) ||
-              (buttonDown[2] && validGestures['r']['R'])))),
-      t.button == settings.holdButton && (_this.callback || validGestures['w']),
-    )
-  }
-
-  var mouseUpCapture = (t) => {
-    if (t.button == settings.holdButton) {
-      if (gesture.line) moveGesture(t, true)
-      if (gesture.line && gesture.line.code != '') {
-        sendGesture(gesture.line.code)
-        t.preventDefault()
-        if (t.button == 0) window.getSelection().removeAllRanges()
-        if (t.button == 2) blockContext = true
-        blockClick[t.button] = true
-      }
-    }
-    gesture.line = null
-    gesture.wheel = null
-
-    if (t.button != 2) blockContext = true
-    if (
-      t.button == 2 &&
-      !forceContext &&
-      !blockContext &&
-      !buttonDown[0] &&
-      !buttonDown[1] &&
-      navigator.platform.indexOf('Win') == -1
-    ) {
-      forceContext = true
-      setTimeout(() => {
-        forceContext = false
-      }, 600)
-      if (sgplugin) {
-        port.postMessage(JSON.stringify({ sgplugin: { rightclick: true } }))
-      } else {
-        if (!settings.blockDoubleclickAlert)
-          port.postMessage(
-            JSON.stringify({
-              alertDoubleclick: {
-                centerX: window.screenLeft + window.outerWidth / 2,
-                centerY: window.screenTop + window.outerHeight / 2,
-              },
-            }),
-          )
-      }
-    }
-
-    if (blockClick[t.button]) t.preventDefault()
-    buttonDown[t.button] = false
-    if (syncButtons)
-      port.postMessage(
-        JSON.stringify({ syncButton: { id: t.button, down: false } }),
-      )
-
-    if (!buttonDown[0] && !buttonDown[2]) gesture.rocker = null
-  }
-
-  var mouseClickCapture = (t) => {
-    if (blockClick[t.button]) {
-      t.preventDefault()
-      t.stopPropagation()
-    }
-    blockClick[t.button] = false
-  }
-
-  var doContextMenu = (t) => {
-    if (
-      (blockContext ||
-        (buttonDown[2] && (gesture.line || gesture.rocker || gesture.wheel))) &&
-      !forceContext
-    ) {
-      t.preventDefault()
-      t.stopPropagation()
-      blockContext = false
-    } else {
-      //since the context menu is about to be shown, close all open gestures.
-      endGesture()
-      buttonDown = {}
-    }
-  }
-
-  var doSelectStart = (t) => {
-    if (
-      settings.holdButton == 0 &&
-      keyMod[0] == '0' &&
-      keyMod[1] == '0' &&
-      keyMod[2] == '0' &&
-      !keyEscape
-    ) {
-      window.getSelection().removeAllRanges()
-    }
-  }
-
-  var canvasResize = () => {
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-  }
-
-  var keyDownCapture = (t) => {
+  var handleKeyDown = (t) => {
     if (t.keyCode == 27) {
       endGesture()
       keyEscape = true
@@ -412,90 +208,43 @@ var SmoothGestures = () => {
     }
   }
 
-  var focusCapture = (t) => {
-    if (t.target.nodeName) focus = t.target
-  }
-
-  var blurCapture = (t) => {
-    if (t.target.nodeName) focus = null
-  }
-
   ///////////////////////////////////////////////////////////
   // Start/End Gestures /////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var startGesture = (point, target, line, rocker, wheel, time) => {
-    endGesture()
-    if (!gesture.events) {
-      window.addEventListener('mousemove', moveGesture, true)
-      window.addEventListener('mousewheel', wheelGesture, true)
-      gesture.events = true
+  var moveGesture = (event, diagonal): void => {
+    if (!gesture.startPoint) {
+      gesture.startPoint = { x: event.clientX, y: event.clientY }
     }
-    if (location.hostname == 'mail.google.com') {
-      var elem = document.body.children[1]
-      var domListen = () => {
-        endGesture()
-        elem.removeEventListener('DOMSubtreeModified', domListen, true)
-      }
-      elem.addEventListener('DOMSubtreeModified', domListen, true)
-    }
-    gesture.startPoint = point ? { x: point.x, y: point.y } : null
-    gesture.targets = target ? [target] : []
-    gesture.selection = window.getSelection().toString()
-    gesture.selrange =
-      window.getSelection().rangeCount > 0
-        ? window.getSelection().getRangeAt(0)
-        : null
-    gesture.timeout = null
 
-    gesture.line =
-      !line || !point
-        ? null
-        : {
-            code: '',
-            points: [{ x: point.x, y: point.y }],
-            dirPoints: [{ x: point.x, y: point.y }],
-            possibleDirs: validGestures,
-            distance: 0,
-          }
-    gesture.rocker = rocker
-    gesture.wheel = wheel
-
-    if (
-      document.documentElement.offsetHeight <
-        document.documentElement.scrollHeight &&
-      (gesture.line || gesture.wheel) &&
-      !htmlclear.parentNode
-    )
-      document.body.appendChild(htmlclear)
-  }
-
-  var moveGesture = (t, diagonal) => {
-    if (!gesture.startPoint) gesture.startPoint = { x: t.clientX, y: t.clientY }
-
-    if (gesture.rocker || gesture.wheel)
+    if (gesture.rocker || gesture.wheel) {
       if (
-        Math.abs(t.clientX - gesture.startPoint.x) > 0 ||
-        Math.abs(t.clientY - gesture.startPoint.y) > 2
+        Math.abs(event.clientX - gesture.startPoint.x) > 0 ||
+        Math.abs(event.clientY - gesture.startPoint.y) > 2
       ) {
         gesture.rocker = null
         gesture.wheel = null
       }
+    }
 
     if (gesture.line) {
-      var next = { x: t.clientX, y: t.clientY }
-      var prev = gesture.line.points[gesture.line.points.length - 1]
+      const next: { x: number, y: number } = {
+        x: event.clientX,
+        y: event.clientY,
+      }
+      const prev: { x: number, y: number } =
+        gesture.line.points[gesture.line.points.length - 1]
       gesture.line.points.push(next)
       gesture.line.distance += Math.sqrt(
         Math.pow(next.x - prev.x, 2) + Math.pow(next.y - prev.y, 2),
       )
 
-      var diffx =
+      const diffx: number =
         next.x - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].x
-      var diffy =
+      const diffy: number =
         next.y - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].y
 
       if (!settings.trailBlock && canvas.getContext) {
-        var ctx = canvas.getContext('2d')
+        const ctx = canvas.getContext('2d')
         ctx.strokeStyle =
           'rgba(' +
           settings.trailColor.r +
@@ -516,36 +265,51 @@ var SmoothGestures = () => {
         if (
           !canvas.parentNode &&
           (Math.abs(diffx) > 10 || Math.abs(diffy) > 10)
-        )
+        ) {
           document.body.appendChild(canvas)
+        }
       }
 
-      var ldir = gesture.line.code == '' ? 'X' : gesture.line.code.substr(-1, 1)
-      var ndir = null
-      var diagdir = false
+      const ldir: string =
+        gesture.line.code === '' ? 'X' : gesture.line.code.slice(-1)
+      let ndir: string
+      let diagdir = false
       if (Math.abs(diffx) > 2 * Math.abs(diffy)) {
-        if (diffx > 0) ndir = 'R'
-        else ndir = 'L'
+        if (diffx > 0) {
+          ndir = 'R'
+        } else {
+          ndir = 'L'
+        }
       } else if (Math.abs(diffy) > 2 * Math.abs(diffx)) {
-        if (diffy > 0) ndir = 'D'
-        else ndir = 'U'
+        if (diffy > 0) {
+          ndir = 'D'
+        } else {
+          ndir = 'U'
+        }
       } else if (diffy < 0) {
         diagdir = true
-        if (diffx < 0) ndir = '7'
-        else ndir = '9'
+        if (diffx < 0) {
+          ndir = '7'
+        } else {
+          ndir = '9'
+        }
       } else {
         diagdir = true
-        if (diffx < 0) ndir = '1'
-        else ndir = '3'
+        if (diffx < 0) {
+          ndir = '1'
+        } else {
+          ndir = '3'
+        }
       }
-      if (ndir == ldir) {
+      if (ndir === ldir) {
         gesture.line.dirPoints[gesture.line.dirPoints.length - 1] = next
       } else if (
         (!diagdir || diagonal) &&
         (Math.abs(diffx) > 15 || Math.abs(diffy) > 15)
       ) {
-        if (gesture.line.possibleDirs)
+        if (gesture.line.possibleDirs) {
           gesture.line.possibleDirs = gesture.line.possibleDirs[ndir]
+        }
         if (gesture.line.possibleDirs || _this.callback) {
           gesture.line.code += ndir
           if (gesture.line.dirPoints.length > 1)
@@ -559,129 +323,18 @@ var SmoothGestures = () => {
     }
   }
 
-  var wheelGesture = (t) => {
-    if (t.target.nodeName == 'IFRAME' || t.target.nodeName == 'FRAME')
-      endGesture()
-    moveGesture(t)
-    if (!gesture.wheel) return
-    var dir = t.wheelDelta > 0 ? 'U' : 'D'
-    if (_this.callback || validGestures['w'][dir]) {
-      syncButtons = {
-        timeout: setTimeout(() => {
-          syncButtons = false
-        }, 500),
-      }
-      sendGesture('w' + dir)
-
-      if (settings.holdButton == 2) blockContext = true
-      if (settings.holdButton == 0) window.getSelection().removeAllRanges()
-      blockClick[settings.holdButton] = true
-      t.preventDefault()
-      t.stopPropagation()
-    }
-  }
-
-  var sendGesture = (code) => {
-    if (code) {
-      if (_this.callback) {
-        _this.callback(code)
-        _this.callback = null
-      } else {
-        var selectionHTML = null
-        if (gesture.selection.length > 0 && gesture.selrange) {
-          var selcontain = document.createElement('div')
-          selcontain.appendChild(gesture.selrange.cloneContents())
-          selectionHTML = selcontain.innerHTML
-        }
-        var message = {
-          gesture: code,
-          startPoint: gesture.startPoint,
-          targets: [],
-          links: [],
-          images: [],
-          selection: gesture.selection,
-          selectionHTML: selectionHTML,
-        }
-        if (gesture.line && code[0] != 'w' && code[0] != 'r')
-          message.line = {
-            distance: gesture.line.distance,
-            segments: code.length,
-          }
-        if (settings.selectToLink && gesture.selection) {
-          parts = gesture.selection.split('http')
-          for (var i = 1; i < parts.length; i++) {
-            var link = 'http' + parts[i]
-            link = link.split(/[\s"']/)[0]
-            if (link.match(/\/\/.+\..+/)) message.links.push({ src: link })
-          }
-        }
-        for (var i = 0; i < gesture.targets.length; i++) {
-          var gestureid = ('' + Math.random()).substr(2)
-          gesture.targets[i].gestureid = gestureid
-
-          message.targets.push({ gestureid: gestureid })
-          var link = getLink(gesture.targets[i])
-          if (link) message.links.push({ src: link, gestureid: gestureid })
-          if (gesture.targets[i].nodeName == 'IMG')
-            message.images.push({
-              src: gesture.targets[i].src,
-              gestureid: gestureid,
-            })
-        }
-        if (syncButtons) message.buttonDown = buttonDown
-        port.postMessage(JSON.stringify(message))
-        var lastTargets = gesture.targets
-      }
-    }
-    if (code[0] == 'w') {
-      gesture.line = null
-      gesture.rocker = null
-    } else if (code[0] == 'r') {
-      gesture.line = null
-      gesture.wheel = null
-    } else endGesture()
-  }
-
-  var endGesture = () => {
-    if (gesture.events) {
-      window.removeEventListener('mousemove', moveGesture, true)
-      window.removeEventListener('mousewheel', wheelGesture, true)
-      gesture.events = false
-    }
-
-    if (canvas.parentNode) canvas.parentNode.removeChild(canvas)
-    if (canvas.getContext)
-      canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
-
-    if (htmlclear.parentNode) htmlclear.parentNode.removeChild(htmlclear)
-
-    clearTimeout(gesture.timeout)
-    gesture.timeout = null
-
-    gesture.line = null
-    gesture.rocker = null
-    gesture.wheel = null
-  }
-
   ///////////////////////////////////////////////////////////
   // Helpers ////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////
-  var getLink = (elem) => {
-    while (elem) {
-      if (elem.href) return elem.href
-      elem = elem.parentNode
-    }
-    return null
-  }
-
-  var refreshLineAsync = () => {
+  const refreshLineAsync = () => {
     if (refreshLineAsync.timeout) return
     refreshLineAsync.timeout = setTimeout(() => {
       refreshLine()
       refreshLineAsync.timeout = null
     }, 200)
   }
-  var refreshLine = () => {
+
+  const refreshLine = () => {
     if (!canvas.getContext) return
     var ctx = canvas.getContext('2d')
     ctx.strokeStyle =
@@ -706,524 +359,6 @@ var SmoothGestures = () => {
       ctx.stroke()
     }
   }
-
-  _this.drawGesture = (
-    gesture: string,
-    width: number,
-    height: number,
-    lineWidth: number,
-  ) => {
-    let context = ''
-    if (gesture[0] === 's') {
-      context = 's'
-      gesture = gesture.substring(1)
-    } else if (gesture[0] === 'l') {
-      context = 'l'
-      gesture = gesture.substring(1)
-    } else if (gesture[0] === 'i') {
-      context = 'i'
-      gesture = gesture.substring(1)
-    }
-
-    let c
-    if (gesture[0] === 'r') {
-      c = drawRocker(gesture, width)
-    } else if (gesture[0] === 'w') {
-      c = drawWheel(gesture, width)
-    } else if (gesture[0] === 'k') {
-      c = drawKey(gesture, width)
-    } else {
-      c = drawLine(gesture, width, height, lineWidth)
-    }
-    $(c).css({ 'min-height': '2em', overflow: 'hidden' })
-
-    var mess = null
-    if (context === 's') {
-      mess = '* ' + chrome.i18n.getMessage('context_with_selection')
-    } else if (context === 'l') {
-      mess = '* ' + chrome.i18n.getMessage('context_on_link')
-    } else if (context === 'i') {
-      mess = '* ' + chrome.i18n.getMessage('context_on_image')
-    } else if (bg) {
-      // if have reference to the background page (when we are in the options page)
-      if (bg.gestures['s' + gesture]) {
-        mess = '* ' + chrome.i18n.getMessage('context_not_selection')
-        //skipping some combinations..
-      } else if (bg.gestures['l' + gesture] && bg.gestures['i' + gesture]) {
-        mess = '* ' + chrome.i18n.getMessage('context_not_links_images')
-      } else if (bg.gestures['l' + gesture]) {
-        mess = '* ' + chrome.i18n.getMessage('context_not_link')
-      } else if (bg.gestures['i' + gesture]) {
-        mess = '* ' + chrome.i18n.getMessage('context_not_image')
-      }
-    }
-
-    if (!mess) {
-      return c
-    } else {
-      return $('<div>')
-        .css({ width: width + 'px', overflow: 'hidden' })
-        .append(
-          $('<div>')
-            .css({
-              'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-              color: '#888',
-              'text-align': 'right',
-              'margin-right': '.3em',
-            })
-            .text(mess),
-        )
-        .append(c)
-    }
-  }
-  const drawLine = (
-    gesture: string,
-    width: number,
-    height: number,
-    lineWidth: number,
-  ): HTMLCanvasElement => {
-    const c: HTMLCanvasElement = document.createElement('canvas')
-    c.width = width
-    c.height = height
-    const ctx = c.getContext('2d')
-    ctx.strokeStyle =
-      'rgba(' +
-      settings.trailColor.r +
-      ',' +
-      settings.trailColor.g +
-      ',' +
-      settings.trailColor.b +
-      ',' +
-      settings.trailColor.a +
-      ')'
-    ctx.lineWidth = lineWidth || 3
-    ctx.lineCap = 'butt'
-    let step: number = 10
-    let tight: number = 2
-    let sep: number = 3
-
-    let prev: { x: number, y: number } = { x: 0, y: 0 }
-    let curr: { x: number, y: number } = { x: 0, y: 0 }
-    const max: { x: number, y: number } = { x: 0, y: 0 }
-    const min: { x: number, y: number } = { x: 0, y: 0 }
-
-    const tip = (dir: string): void => {
-      prev = curr
-      ctx.lineTo(prev.x, prev.y)
-      if (dir === 'U') {
-        curr = { x: prev.x, y: prev.y - step * 0.75 }
-      } else if (dir === 'D') {
-        curr = { x: prev.x, y: prev.y + step * 0.75 }
-      } else if (dir === 'L') {
-        curr = { x: prev.x - step * 0.75, y: prev.y }
-      } else if (dir === 'R') {
-        curr = { x: prev.x + step * 0.75, y: prev.y }
-      } else if (dir === '1') {
-        curr = { x: prev.x - step * 0.5, y: prev.y + step * 0.5 }
-      } else if (dir === '3') {
-        curr = { x: prev.x + step * 0.5, y: prev.y + step * 0.5 }
-      } else if (dir === '7') {
-        curr = { x: prev.x - step * 0.5, y: prev.y - step * 0.5 }
-      } else if (dir === '9') {
-        curr = { x: prev.x + step * 0.5, y: prev.y - step * 0.5 }
-      }
-      ctx.lineTo(curr.x, curr.y)
-      minmax()
-    }
-    const curve = (dir): void => {
-      prev = curr
-      ctx.lineTo(prev.x, prev.y)
-      if (dir === 'UD') {
-        curr = { x: prev.x, y: prev.y - step }
-        minmax()
-        ctx.lineTo(prev.x, prev.y - step)
-        ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false)
-        ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir === 'UL') {
-        ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true)
-      } else if (dir === 'UR') {
-        ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false)
-      } else if (dir === 'DU') {
-        curr = { x: prev.x, y: prev.y + step }
-        minmax()
-        ctx.lineTo(prev.x, prev.y + step)
-        ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true)
-        ctx.lineTo(prev.x + tight * 2, prev.y)
-      } else if (dir === 'DL') {
-        ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false)
-      } else if (dir === 'DR') {
-        ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true)
-      } else if (dir === 'LU') {
-        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false)
-      } else if (dir === 'LD') {
-        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true)
-      } else if (dir === 'LR') {
-        curr = { x: prev.x - step, y: prev.y }
-        minmax()
-        ctx.lineTo(prev.x - step, prev.y)
-        ctx.arc(
-          prev.x - step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          true,
-        )
-        ctx.lineTo(prev.x, prev.y + tight * 2)
-      } else if (dir === 'RU') {
-        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true)
-      } else if (dir === 'RD') {
-        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, 0, false)
-      } else if (dir === 'RL') {
-        curr = { x: prev.x + step, y: prev.y }
-        minmax()
-        ctx.lineTo(prev.x + step, prev.y)
-        ctx.arc(
-          prev.x + step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          false,
-        )
-        ctx.lineTo(prev.x, prev.y + tight * 2)
-      } else {
-        tip(dir[0])
-        tip(dir[1])
-      }
-      if (dir === 'UD') {
-        curr = { x: prev.x + tight * 2, y: prev.y + sep }
-      } else if (dir === 'UL') {
-        curr = { x: prev.x - step, y: prev.y - step }
-      } else if (dir === 'UR') {
-        curr = { x: prev.x + step + sep, y: prev.y - step }
-      } else if (dir === 'DU') {
-        curr = { x: prev.x + tight * 2, y: prev.y }
-      } else if (dir === 'DL') {
-        curr = { x: prev.x - step, y: prev.y + step }
-      } else if (dir === 'DR') {
-        curr = { x: prev.x + step + sep, y: prev.y + step }
-      } else if (dir === 'LU') {
-        curr = { x: prev.x - step, y: prev.y - step }
-      } else if (dir === 'LD') {
-        curr = { x: prev.x - step, y: prev.y + step + sep }
-      } else if (dir === 'LR') {
-        curr = { x: prev.x + sep, y: prev.y + tight * 2 }
-      } else if (dir === 'RU') {
-        curr = { x: prev.x + step, y: prev.y - step }
-      } else if (dir === 'RD') {
-        curr = { x: prev.x + step, y: prev.y + step + sep }
-      } else if (dir === 'RL') {
-        curr = { x: prev.x, y: prev.y + tight * 2 }
-      }
-      minmax()
-    }
-    const minmax = (): void => {
-      if (curr.x > max.x) max.x = curr.x
-      if (curr.y > max.y) max.y = curr.y
-      if (curr.x < min.x) min.x = curr.x
-      if (curr.y < min.y) min.y = curr.y
-    }
-
-    ctx.beginPath()
-    tip(gesture[0])
-    for (let i = 0; i < gesture.length - 1; i++) {
-      curve(gesture[i] + gesture[i + 1])
-    }
-    tip(gesture[gesture.length - 1])
-    ctx.stroke()
-
-    const center: { x: number, y: number } = {
-      x: (max.x + min.x) / 2,
-      y: (max.y + min.y) / 2,
-    }
-    const wr: number = (max.x - min.x + step) / width
-    const hr: number = (max.y - min.y + step) / height
-    const ratio: number = hr > wr ? hr : wr
-    step /= ratio
-    sep /= ratio
-    tight /= ratio
-    if (tight > 6) tight = 6
-    curr = { x: 0, y: 0 }
-
-    ctx.clearRect(0, 0, c.width, c.height)
-    ctx.save()
-    ctx.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio)
-    ctx.beginPath()
-    tip(gesture[0])
-    for (let i = 0; i < gesture.length - 1; i++) {
-      curve(gesture[i] + gesture[i + 1])
-    }
-    tip(gesture[gesture.length - 1])
-    ctx.stroke()
-    ctx.fillStyle =
-      'rgba(' +
-      settings.trailColor.r +
-      ',' +
-      settings.trailColor.g +
-      ',' +
-      settings.trailColor.b +
-      ',' +
-      settings.trailColor.a +
-      ')'
-    ctx.beginPath()
-    if (gesture[gesture.length - 1] === 'U') {
-      ctx.moveTo(curr.x - 5, curr.y + 2)
-      ctx.lineTo(curr.x + 5, curr.y + 2)
-      ctx.lineTo(curr.x, curr.y - 3)
-    } else if (gesture[gesture.length - 1] === 'D') {
-      ctx.moveTo(curr.x - 5, curr.y - 2)
-      ctx.lineTo(curr.x + 5, curr.y - 2)
-      ctx.lineTo(curr.x, curr.y + 3)
-    } else if (gesture[gesture.length - 1] === 'L') {
-      ctx.moveTo(curr.x + 2, curr.y - 5)
-      ctx.lineTo(curr.x + 2, curr.y + 5)
-      ctx.lineTo(curr.x - 3, curr.y)
-    } else if (gesture[gesture.length - 1] === 'R') {
-      ctx.moveTo(curr.x - 2, curr.y - 5)
-      ctx.lineTo(curr.x - 2, curr.y + 5)
-      ctx.lineTo(curr.x + 3, curr.y)
-    } else if (gesture[gesture.length - 1] === '1') {
-      ctx.moveTo(curr.x - 2, curr.y - 6)
-      ctx.lineTo(curr.x + 6, curr.y + 2)
-      ctx.lineTo(curr.x - 2, curr.y + 2)
-    } else if (gesture[gesture.length - 1] === '3') {
-      ctx.moveTo(curr.x + 2, curr.y - 6)
-      ctx.lineTo(curr.x - 6, curr.y + 2)
-      ctx.lineTo(curr.x + 2, curr.y + 2)
-    } else if (gesture[gesture.length - 1] === '7') {
-      ctx.moveTo(curr.x - 2, curr.y + 6)
-      ctx.lineTo(curr.x + 6, curr.y - 2)
-      ctx.lineTo(curr.x - 2, curr.y - 2)
-    } else if (gesture[gesture.length - 1] === '9') {
-      ctx.moveTo(curr.x + 2, curr.y + 6)
-      ctx.lineTo(curr.x - 6, curr.y - 2)
-      ctx.lineTo(curr.x + 2, curr.y - 2)
-    }
-    ctx.closePath()
-    ctx.fill()
-    ctx.restore()
-
-    return c
-  }
-
-  const drawRocker = (gesture: string, width: number) => {
-    const first: number = gesture[1] === 'L' ? 0 : gesture[1] === 'M' ? 1 : 2
-    const second: number = gesture[2] === 'L' ? 0 : gesture[2] === 'M' ? 1 : 2
-    return $('<div>')
-      .css({ width: width + 'px' })
-      .append(
-        $('<div>')
-          .text(chrome.i18n.getMessage('gesture_' + gesture))
-          .css({
-            'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-            color: '#111',
-            'text-align': 'center',
-            'font-weight': 'bold',
-          }),
-      )
-      .append(
-        $('<div>')
-          .text(
-            chrome.i18n.getMessage('gesture_rocker_descrip', [
-              chrome.i18n.getMessage('options_mousebutton_' + first),
-              chrome.i18n.getMessage('options_mousebutton_' + second),
-            ]),
-          )
-          .css({
-            'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-            color: '#666',
-            'text-align': 'center',
-          }),
-      )
-  }
-
-  const drawWheel = (gesture: string, width: number) => {
-    return $('<div>')
-      .css({ width: width + 'px' })
-      .append(
-        $('<div>')
-          .text(chrome.i18n.getMessage('gesture_' + gesture))
-          .css({
-            'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-            color: '#111',
-            'text-align': 'center',
-            'font-weight': 'bold',
-          }),
-      )
-      .append(
-        $('<div>')
-          .text(chrome.i18n.getMessage('gesture_' + gesture + '_descrip'))
-          .css({
-            'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-            color: '#666',
-            'text-align': 'center',
-          }),
-      )
-  }
-
-  const codeCharMap = {}
-  codeCharMap[8] = 'Backspace'
-  codeCharMap[9] = 'Tab'
-  codeCharMap[13] = 'Enter'
-  codeCharMap[19] = 'Pause'
-  codeCharMap[20] = 'Caps Lock'
-  codeCharMap[27] = 'Esc'
-  codeCharMap[32] = 'Space'
-  codeCharMap[33] = 'Page Up'
-  codeCharMap[34] = 'Page Down'
-  codeCharMap[35] = 'End'
-  codeCharMap[36] = 'Home'
-  codeCharMap[37] = 'Left'
-  codeCharMap[38] = 'Up'
-  codeCharMap[39] = 'Right'
-  codeCharMap[40] = 'Down'
-  codeCharMap[45] = 'Insert'
-  codeCharMap[46] = 'Delete'
-  codeCharMap[96] = 'NP 0'
-  codeCharMap[97] = 'NP 1'
-  codeCharMap[98] = 'NP 2'
-  codeCharMap[99] = 'NP 3'
-  codeCharMap[100] = 'NP 4'
-  codeCharMap[101] = 'NP 5'
-  codeCharMap[102] = 'NP 6'
-  codeCharMap[103] = 'NP 7'
-  codeCharMap[104] = 'NP 8'
-  codeCharMap[105] = 'NP 9'
-  codeCharMap[106] = 'NP *'
-  codeCharMap[107] = 'NP +'
-  codeCharMap[109] = 'NP -'
-  codeCharMap[110] = 'NP .'
-  codeCharMap[111] = 'NP /'
-  codeCharMap[144] = 'Num Lock'
-  codeCharMap[145] = 'Scroll Lock'
-  codeCharMap[186] = ';'
-  codeCharMap[187] = '='
-  codeCharMap[188] = ','
-  codeCharMap[189] = '-'
-  codeCharMap[190] = '.'
-  codeCharMap[191] = '/'
-  codeCharMap[192] = '~'
-  codeCharMap[219] = '['
-  codeCharMap[220] = '\\'
-  codeCharMap[221] = ']'
-  codeCharMap[222] = "'"
-  var codeButton = (code) => {
-    var code = code.split(':')
-    var id = code[1]
-    var key = code[2]
-    if (!id || id == '') return 'empty'
-    if (id.substr(0, 2) != 'U+') return id
-    var ch = codeCharMap[key]
-    if (ch) return ch
-    return eval('"\\u' + id.substr(2) + '"')
-  }
-  var drawKey = (gesture, width) => {
-    return $('<div>')
-      .css({ width: width + 'px' })
-      .append(
-        $('<div>')
-          .text(
-            (gesture[1] === '1' ? 'Ctrl + ' : '') +
-              (gesture[2] === '1' ? 'Alt + ' : '') +
-              (gesture[3] === '1' ? 'Shift + ' : '') +
-              (gesture[4] === '1' ? 'META + ' : '') +
-              codeButton(gesture),
-          )
-          .css({
-            'font-size': 0.8 * Math.sqrt(width / 100) + 'em',
-            color: '#666',
-            'text-align': 'center',
-            'font-weight': 'bold',
-          }),
-      )
-  }
-
-  var messageNode = null
-  var insertMessage = (message) => {
-    document.title = message + ' ' + document.title
-    var mess = document.createElement('span')
-    mess.innerHTML = message + ' '
-    if (!messageNode) {
-      messageNode = document.createElement('div')
-      document.body.appendChild(messageNode)
-      messageNode.style.width = document.width
-      messageNode.style.position = 'absolute'
-      messageNode.style.top = '0'
-      messageNode.style.left = '0'
-      messageNode.style.zIndex = '1000'
-      messageNode.style.display = 'block'
-      messageNode.style.backgroundColor = 'white'
-      messageNode.appendChild(mess)
-    } else {
-      messageNode.insertBefore(mess, messageNode.firstChild)
-    }
-  }
-
-  ///////////////////////////////////////////////////////////
-  // Enable/Disable /////////////////////////////////////////
-  ///////////////////////////////////////////////////////////
-  var init = () => {
-    window.addEventListener('focus', focusCapture, true)
-    window.addEventListener('blur', blurCapture, true)
-
-    _this.connect()
-
-    canvas = document.createElement('canvas')
-    if (canvas.style) {
-      canvas.style.position = 'fixed'
-      canvas.style.top = 0
-      canvas.style.left = 0
-      canvas.style.zIndex = 10001
-    }
-    canvasResize()
-
-    htmlclear = document.createElement('div')
-    if (htmlclear.style) {
-      htmlclear.style.clear = 'both'
-    }
-  }
-
-  const enable = (): void => {
-    if (enabled) return
-    enabled = true
-
-    window.addEventListener('mousedown', mouseDownCapture, true)
-    window.addEventListener('mouseup', mouseUpCapture, true)
-    window.addEventListener('click', mouseClickCapture, true)
-    window.addEventListener('contextmenu', doContextMenu, true)
-    window.addEventListener('selectstart', doSelectStart, true)
-    window.addEventListener('resize', canvasResize, true)
-    window.addEventListener('keydown', keyDownCapture, true)
-  }
-
-  _this.disable = (): void => {
-    if (!enabled) return
-    enabled = false
-
-    window.removeEventListener('mousedown', mouseDownCapture, true)
-    window.removeEventListener('mouseup', mouseUpCapture, true)
-    window.removeEventListener('click', mouseClickCapture, true)
-    window.removeEventListener('contextmenu', doContextMenu, true)
-    window.removeEventListener('selectstart', doSelectStart, true)
-    window.removeEventListener('resize', canvasResize, true)
-    window.removeEventListener('keydown', keyDownCapture, true)
-
-    port.onMessage.removeListener(receiveMessage)
-    port.onDisconnect.removeListener(_this.disable)
-  }
-
-  _this.enabled = () => {
-    return enabled
-  }
-  _this.extVersion = () => {
-    return extVersion
-  }
-  _this.setSettings = (s) => {
-    settings = s
-  }
-
-  init()
 }
 
 if (

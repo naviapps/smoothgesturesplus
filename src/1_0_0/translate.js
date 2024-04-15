@@ -1,4 +1,4 @@
-var langs = {
+const langs = {
   am: 'Amharic',
   ar: 'Arabic',
   bg: 'Bulgarian',
@@ -56,7 +56,7 @@ chrome.i18n.getAcceptLanguages((ls) => {
   if (ls.indexOf(window.navigator.language.replace('-', '_')) != -1)
     ls.splice(ls.indexOf(window.navigator.language.replace('-', '_')), 1)
   ls.unshift(window.navigator.language.replace('-', '_'))
-  for (i = 0; i < ls.length; i++) {
+  for (let i = 0; i < ls.length; i++) {
     if (!langs[ls[i]]) {
       ls.splice(i, 1)
       i--
@@ -307,8 +307,10 @@ var completedwords = (rows) => {
     )
 }
 
-var buildword = (word) => {
-  if (!word.src) return '<div>' + word.id
+const buildword = (word) => {
+  if (!word.src) {
+    return '<div>' + word.id
+  }
   return $('<div>')
     .attr('class', 'wordrow')
     .append(

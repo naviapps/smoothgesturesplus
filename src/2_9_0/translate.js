@@ -1,4 +1,4 @@
-var langs = {
+const langs = {
     am: 'Amharic',
     ar: 'Arabic',
     bg: 'Bulgarian',
@@ -285,26 +285,34 @@ var loadpage = () => {
           .attr('class', 'grouprows')
           .css({ display: 'none' }),
       )
-  },
-  buildword = (e) => {
-    return e.src
-      ? $('<div>')
-          .attr('class', 'wordrow')
-          .append(
-            $('<div>')
-              .attr('class', 'descrip')
-              .text(e.src.description + ' ')
-              .append($('<span>').text('[ ' + e.id + ' ]')),
-          )
-          .append(
-            $('<div>')
-              .attr('class', 'message')
-              .html(e.src.message.replace(/\n/g, '<br>\n')),
-          )
-          .append(
-            $('<textarea>')
-              .attr('id', 'edit-' + e.id)
-              .text(e.res ? e.res.message : res[e.id] ? res[e.id].message : ''),
-          )
-      : '<div>' + e.id
   }
+
+const buildword = (word) => {
+  if (!word.src) {
+    return '<div>' + word.id
+  }
+  return $('<div>')
+    .attr('class', 'wordrow')
+    .append(
+      $('<div>')
+        .attr('class', 'descrip')
+        .text(word.src.description + ' ')
+        .append($('<span>').text('[ ' + word.id + ' ]')),
+    )
+    .append(
+      $('<div>')
+        .attr('class', 'message')
+        .html(word.src.message.replace(/\n/g, '<br>\n')),
+    )
+    .append(
+      $('<textarea>')
+        .attr('id', 'edit-' + word.id)
+        .text(
+          word.res
+            ? word.res.message
+            : res[word.id]
+              ? res[word.id].message
+              : '',
+        ),
+    )
+}
