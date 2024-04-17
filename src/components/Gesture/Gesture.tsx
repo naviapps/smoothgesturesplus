@@ -1,0 +1,504 @@
+import React, { useEffect, useRef } from 'react'
+
+export type GestureProps = {
+  gesture: string
+  width: number
+  height: number
+  lineWidth: number
+  trailColor: { r: number; g: number; b: number; a: number }
+  gestures: { [gesture: string]: string }
+}
+
+export const Gesture = ({
+  gesture,
+  width,
+  height,
+  lineWidth,
+  trailColor,
+  gestures,
+}: GestureProps) => {
+  let context: string = ''
+  if (gesture[0] === 's') {
+    context = 's'
+    gesture = gesture.substring(1)
+  } else if (gesture[0] === 'l') {
+    context = 'l'
+    gesture = gesture.substring(1)
+  } else if (gesture[0] === 'i') {
+    context = 'i'
+    gesture = gesture.substring(1)
+  }
+
+  let c: React.JSX.Element
+  if (gesture[0] === 'r') {
+    c = <Rocker gesture={gesture} width={width} />
+  } else if (gesture[0] === 'w') {
+    c = <Wheel gesture={gesture} width={width} />
+  } else if (gesture[0] === 'k') {
+    c = <Key gesture={gesture} width={width} />
+  } else {
+    c = (
+      <Line
+        gesture={gesture}
+        width={width}
+        height={height}
+        lineWidth={lineWidth}
+        trailColor={trailColor}
+      />
+    )
+  }
+
+  let mess: string | undefined
+  if (context === 's') {
+    mess = '* ' + chrome.i18n.getMessage('context_with_selection')
+  } else if (context === 'l') {
+    mess = '* ' + chrome.i18n.getMessage('context_on_link')
+  } else if (context === 'i') {
+    mess = '* ' + chrome.i18n.getMessage('context_on_image')
+  } else if (gestures['s' + gesture]) {
+    mess = '* ' + chrome.i18n.getMessage('context_not_selection')
+  } else if (gestures['l' + gesture] && gestures['i' + gesture]) {
+    mess = '* ' + chrome.i18n.getMessage('context_not_links_images')
+  } else if (gestures['l' + gesture]) {
+    mess = '* ' + chrome.i18n.getMessage('context_not_link')
+  } else if (gestures['i' + gesture]) {
+    mess = '* ' + chrome.i18n.getMessage('context_not_image')
+  }
+
+  if (!mess) {
+    return c
+  } else {
+    return (
+      <div style={{ width: width + 'px', overflow: 'hidden' }}>
+        <div
+          style={{
+            fontSize: 12 * Math.sqrt(width / 100) + 'px',
+            color: '#888',
+            textAlign: 'right',
+            marginRight: '.3em',
+            height: '0px',
+            position: 'relative',
+            top: '.1em',
+          }}
+        >
+          {mess}
+        </div>
+        {c}
+      </div>
+    )
+  }
+}
+
+type LineProps = {
+  gesture: string
+  width: number
+  height: number
+  lineWidth: number
+  trailColor: { r: number; g: number; b: number; a: number }
+}
+
+const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const c = canvasRef.current
+    if (!c) return
+    const ctx = c.getContext('2d')
+    if (!ctx) return
+    ctx.strokeStyle =
+      'rgba(' +
+      trailColor.r +
+      ',' +
+      trailColor.g +
+      ',' +
+      trailColor.b +
+      ',' +
+      trailColor.a +
+      ')'
+    ctx.lineWidth = lineWidth || 3
+    ctx.lineCap = 'butt'
+    let step: number = 10
+    let tight: number = 2
+    let sep: number = 3
+
+    let prev: { x: number; y: number } = { x: 0, y: 0 }
+    let curr: { x: number; y: number } = { x: 0, y: 0 }
+    const max: { x: number; y: number } = { x: 0, y: 0 }
+    const min: { x: number; y: number } = { x: 0, y: 0 }
+
+    const tip = (dir: string): void => {
+      prev = curr
+      ctx.lineTo(prev.x, prev.y)
+      if (dir === 'U') {
+        curr = { x: prev.x, y: prev.y - step * 0.75 }
+      } else if (dir === 'D') {
+        curr = { x: prev.x, y: prev.y + step * 0.75 }
+      } else if (dir === 'L') {
+        curr = { x: prev.x - step * 0.75, y: prev.y }
+      } else if (dir === 'R') {
+        curr = { x: prev.x + step * 0.75, y: prev.y }
+      } else if (dir === '1') {
+        curr = { x: prev.x - step * 0.5, y: prev.y + step * 0.5 }
+      } else if (dir === '3') {
+        curr = { x: prev.x + step * 0.5, y: prev.y + step * 0.5 }
+      } else if (dir === '7') {
+        curr = { x: prev.x - step * 0.5, y: prev.y - step * 0.5 }
+      } else if (dir === '9') {
+        curr = { x: prev.x + step * 0.5, y: prev.y - step * 0.5 }
+      }
+      ctx.lineTo(curr.x, curr.y)
+      minmax()
+    }
+    const curve = (dir: string): void => {
+      prev = curr
+      ctx.lineTo(prev.x, prev.y)
+      if (dir === 'UD') {
+        curr = { x: prev.x, y: prev.y - step }
+        minmax()
+        ctx.lineTo(prev.x, prev.y - step)
+        ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false)
+        ctx.lineTo(prev.x + tight * 2, prev.y)
+      } else if (dir === 'UL') {
+        ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true)
+      } else if (dir === 'UR') {
+        ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false)
+      } else if (dir === 'DU') {
+        curr = { x: prev.x, y: prev.y + step }
+        minmax()
+        ctx.lineTo(prev.x, prev.y + step)
+        ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true)
+        ctx.lineTo(prev.x + tight * 2, prev.y)
+      } else if (dir === 'DL') {
+        ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false)
+      } else if (dir === 'DR') {
+        ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true)
+      } else if (dir === 'LU') {
+        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false)
+      } else if (dir === 'LD') {
+        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true)
+      } else if (dir === 'LR') {
+        curr = { x: prev.x - step, y: prev.y }
+        minmax()
+        ctx.lineTo(prev.x - step, prev.y)
+        ctx.arc(
+          prev.x - step,
+          prev.y + tight,
+          tight,
+          -Math.PI / 2,
+          Math.PI / 2,
+          true,
+        )
+        ctx.lineTo(prev.x, prev.y + tight * 2)
+      } else if (dir === 'RU') {
+        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true)
+      } else if (dir === 'RD') {
+        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, 0, false)
+      } else if (dir === 'RL') {
+        curr = { x: prev.x + step, y: prev.y }
+        minmax()
+        ctx.lineTo(prev.x + step, prev.y)
+        ctx.arc(
+          prev.x + step,
+          prev.y + tight,
+          tight,
+          -Math.PI / 2,
+          Math.PI / 2,
+          false,
+        )
+        ctx.lineTo(prev.x, prev.y + tight * 2)
+      } else {
+        tip(dir[0])
+        tip(dir[1])
+      }
+      if (dir === 'UD') {
+        curr = { x: prev.x + tight * 2, y: prev.y + sep }
+      } else if (dir === 'UL') {
+        curr = { x: prev.x - step, y: prev.y - step }
+      } else if (dir === 'UR') {
+        curr = { x: prev.x + step + sep, y: prev.y - step }
+      } else if (dir === 'DU') {
+        curr = { x: prev.x + tight * 2, y: prev.y }
+      } else if (dir === 'DL') {
+        curr = { x: prev.x - step, y: prev.y + step }
+      } else if (dir === 'DR') {
+        curr = { x: prev.x + step + sep, y: prev.y + step }
+      } else if (dir === 'LU') {
+        curr = { x: prev.x - step, y: prev.y - step }
+      } else if (dir === 'LD') {
+        curr = { x: prev.x - step, y: prev.y + step + sep }
+      } else if (dir === 'LR') {
+        curr = { x: prev.x + sep, y: prev.y + tight * 2 }
+      } else if (dir === 'RU') {
+        curr = { x: prev.x + step, y: prev.y - step }
+      } else if (dir === 'RD') {
+        curr = { x: prev.x + step, y: prev.y + step + sep }
+      } else if (dir === 'RL') {
+        curr = { x: prev.x, y: prev.y + tight * 2 }
+      }
+      minmax()
+    }
+    const minmax = (): void => {
+      if (curr.x > max.x) max.x = curr.x
+      if (curr.y > max.y) max.y = curr.y
+      if (curr.x < min.x) min.x = curr.x
+      if (curr.y < min.y) min.y = curr.y
+    }
+
+    ctx.beginPath()
+    tip(gesture[0])
+    for (let i: number = 0; i < gesture.length - 1; i++) {
+      curve(gesture[i] + gesture[i + 1])
+    }
+    tip(gesture[gesture.length - 1])
+    ctx.stroke()
+
+    const center: { x: number; y: number } = {
+      x: (max.x + min.x) / 2,
+      y: (max.y + min.y) / 2,
+    }
+    const wr: number = (max.x - min.x + step) / width
+    const hr: number = (max.y - min.y + step) / height
+    const ratio: number = hr > wr ? hr : wr
+    step /= ratio
+    sep /= ratio
+    tight /= ratio
+    if (tight > 6) tight = 6
+    curr = { x: 0, y: 0 }
+
+    ctx.clearRect(0, 0, c.width, c.height)
+    ctx.save()
+    ctx.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio)
+    ctx.beginPath()
+    tip(gesture[0])
+    for (let i: number = 0; i < gesture.length - 1; i++) {
+      curve(gesture[i] + gesture[i + 1])
+    }
+    tip(gesture[gesture.length - 1])
+    ctx.stroke()
+    ctx.fillStyle =
+      'rgba(' +
+      trailColor.r +
+      ',' +
+      trailColor.g +
+      ',' +
+      trailColor.b +
+      ',' +
+      trailColor.a +
+      ')'
+    ctx.beginPath()
+    if (gesture[gesture.length - 1] === 'U') {
+      ctx.moveTo(curr.x - 5, curr.y + 2)
+      ctx.lineTo(curr.x + 5, curr.y + 2)
+      ctx.lineTo(curr.x, curr.y - 3)
+    } else if (gesture[gesture.length - 1] === 'D') {
+      ctx.moveTo(curr.x - 5, curr.y - 2)
+      ctx.lineTo(curr.x + 5, curr.y - 2)
+      ctx.lineTo(curr.x, curr.y + 3)
+    } else if (gesture[gesture.length - 1] === 'L') {
+      ctx.moveTo(curr.x + 2, curr.y - 5)
+      ctx.lineTo(curr.x + 2, curr.y + 5)
+      ctx.lineTo(curr.x - 3, curr.y)
+    } else if (gesture[gesture.length - 1] === 'R') {
+      ctx.moveTo(curr.x - 2, curr.y - 5)
+      ctx.lineTo(curr.x - 2, curr.y + 5)
+      ctx.lineTo(curr.x + 3, curr.y)
+    } else if (gesture[gesture.length - 1] === '1') {
+      ctx.moveTo(curr.x - 2, curr.y - 6)
+      ctx.lineTo(curr.x + 6, curr.y + 2)
+      ctx.lineTo(curr.x - 2, curr.y + 2)
+    } else if (gesture[gesture.length - 1] === '3') {
+      ctx.moveTo(curr.x + 2, curr.y - 6)
+      ctx.lineTo(curr.x - 6, curr.y + 2)
+      ctx.lineTo(curr.x + 2, curr.y + 2)
+    } else if (gesture[gesture.length - 1] === '7') {
+      ctx.moveTo(curr.x - 2, curr.y + 6)
+      ctx.lineTo(curr.x + 6, curr.y - 2)
+      ctx.lineTo(curr.x - 2, curr.y - 2)
+    } else if (gesture[gesture.length - 1] === '9') {
+      ctx.moveTo(curr.x + 2, curr.y + 6)
+      ctx.lineTo(curr.x - 6, curr.y - 2)
+      ctx.lineTo(curr.x + 2, curr.y - 2)
+    }
+    ctx.closePath()
+    ctx.fill()
+    ctx.restore()
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      width={width}
+      height={height}
+      style={{ minHeight: '2em', overflow: 'hidden' }}
+    />
+  )
+}
+
+type RockerProps = {
+  gesture: string
+  width: number
+}
+
+const Rocker = ({ gesture, width }: RockerProps) => {
+  const first: number = gesture[1] === 'L' ? 0 : gesture[1] === 'M' ? 1 : 2
+  const second: number = gesture[2] === 'L' ? 0 : gesture[2] === 'M' ? 1 : 2
+
+  return (
+    <div
+      style={{
+        width: width - 2 + 'px',
+        padding: '5px 1px',
+        minHeight: '2em',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          color: '#111',
+          textAlign: 'center',
+          fontWeight: 'bold',
+        }}
+      >
+        {chrome.i18n.getMessage('gesture_' + gesture)}
+      </div>
+      <div
+        style={{
+          fontSize: 12 * Math.sqrt(width / 100) + 'px',
+          color: '#666',
+          textAlign: 'center',
+        }}
+      >
+        {chrome.i18n.getMessage('gesture_rocker_descrip', [
+          chrome.i18n.getMessage('options_mousebutton_' + first),
+          chrome.i18n.getMessage('options_mousebutton_' + second),
+        ])}
+      </div>
+    </div>
+  )
+}
+
+type WheelProps = {
+  gesture: string
+  width: number
+}
+
+const Wheel = ({ gesture, width }: WheelProps) => {
+  return (
+    <div
+      style={{
+        width: width - 2 + 'px',
+        padding: '5px 1px',
+        minHeight: '2em',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          color: '#111',
+          textAlign: 'center',
+          fontWeight: 'bold',
+        }}
+      >
+        {chrome.i18n.getMessage('gesture_' + gesture)}
+      </div>
+      <div
+        style={{
+          fontSize: 12 * Math.sqrt(width / 100) + 'px',
+          color: '#666',
+          textAlign: 'center',
+        }}
+      >
+        {chrome.i18n.getMessage('gesture_' + gesture + '_descrip')}
+      </div>
+    </div>
+  )
+}
+
+const codeCharMap: { [key: string]: string } = {
+  Space: 'Space',
+  ArrowLeft: '←',
+  ArrowUp: '↑',
+  ArrowRight: '→',
+  ArrowDown: '↓',
+  Digit0: '0',
+  Digit1: '1',
+  Digit2: '2',
+  Digit3: '3',
+  Digit4: '4',
+  Digit5: '5',
+  Digit6: '6',
+  Digit7: '7',
+  Digit8: '8',
+  Digit9: '9',
+  KeyA: 'A',
+  KeyB: 'B',
+  KeyC: 'C',
+  KeyD: 'D',
+  KeyE: 'E',
+  KeyF: 'F',
+  KeyG: 'G',
+  KeyH: 'H',
+  KeyI: 'I',
+  KeyJ: 'J',
+  KeyK: 'K',
+  KeyL: 'L',
+  KeyM: 'M',
+  KeyN: 'N',
+  KeyO: 'O',
+  KeyP: 'P',
+  KeyQ: 'Q',
+  KeyR: 'R',
+  KeyS: 'S',
+  KeyT: 'T',
+  KeyU: 'U',
+  KeyV: 'V',
+  KeyW: 'W',
+  KeyX: 'X',
+  KeyY: 'Y',
+  KeyZ: 'Z',
+}
+
+const codeButton = (gesture: string): string => {
+  const parts: string[] = gesture.split(':')
+  const key: string = parts[1]
+  const code: string = parts[2]
+  if (codeCharMap[code]) {
+    return codeCharMap[code]
+  }
+  return key
+}
+
+type KeyProps = {
+  gesture: string
+  width: number
+}
+
+const Key = ({ gesture, width }: KeyProps) => {
+  return (
+    <div
+      style={{
+        width: width - 2 + 'px',
+        padding: '5px 1px',
+        minHeight: '2em',
+        overflow: 'hidden',
+      }}
+    >
+      <div
+        style={{
+          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          color: '#666',
+          textAlign: 'center',
+          fontWeight: 'bold',
+        }}
+      >
+        {(gesture[1] === '1' ? 'Ctrl + ' : '') +
+          (gesture[2] === '1' ? 'Alt + ' : '') +
+          (gesture[3] === '1' ? 'Shift + ' : '') +
+          (gesture[4] === '1' ? 'Meta + ' : '') +
+          codeButton(gesture)}
+      </div>
+    </div>
+  )
+}

@@ -269,13 +269,15 @@ const contexts = {
 }
 
 var actions = {
-  'new-tab': (id, call) => {
-    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
-      var prop = {
-        url: settings.newTabUrl != 'homepage' ? settings.newTabUrl : undefined,
+  'new-tab': (id, call): void => {
+    chrome.tabs.get(contents[id].detail.tabId, (tab: chrome.tabs.Tab): void => {
+      const prop = {
+        url: settings.newTabUrl !== 'homepage' ? settings.newTabUrl : undefined,
         windowId: tab.windowId,
       }
-      if (settings.newTabRight) prop.index = tab.index + 1
+      if (settings.newTabRight) {
+        prop.index = tab.index + 1
+      }
       chrome.tabs.create(prop, call)
     })
   },
@@ -312,23 +314,28 @@ var actions = {
   },
   'close-tab': (id, call) => {
     chrome.tabs.get(contents[id].detail.tabId, (tab) => {
-      if (tab.pinned) call()
-      else if (settings.closeLastBlock) {
+      if (tab.pinned) {
+        call()
+      } else if (settings.closeLastBlock) {
         chrome.windows.getAll({ populate: true }, (wins) => {
-          if (wins.length == 1 && wins[0].tabs.length == 1)
+          if (wins.length == 1 && wins[0].tabs.length == 1) {
             chrome.tabs.update(
               contents[id].detail.tabId,
               {
                 url:
-                  settings.newTabUrl != 'homepage'
+                  settings.newTabUrl !== 'homepage'
                     ? settings.newTabUrl
                     : undefined,
               },
               call,
             )
-          else chrome.tabs.remove(contents[id].detail.tabId, call)
+          } else {
+            chrome.tabs.remove(contents[id].detail.tabId, call)
+          }
         })
-      } else chrome.tabs.remove(contents[id].detail.tabId, call)
+      } else {
+        chrome.tabs.remove(contents[id].detail.tabId, call)
+      }
     })
   },
   'close-other-tabs': (id, call) => {
@@ -515,7 +522,7 @@ var actions = {
   'new-window': (id, call) => {
     chrome.windows.create(
       {
-        url: settings.newTabUrl != 'homepage' ? settings.newTabUrl : undefined,
+        url: settings.newTabUrl !== 'homepage' ? settings.newTabUrl : undefined,
       },
       call,
     )
@@ -534,21 +541,27 @@ var actions = {
     })
   },
   'split-tabs': (id, call) => {
-    chrome.tabs.get(contents[id].detail.tabId, (tab) => {
-      chrome.windows.get(tab.windowId, (win) => {
-        chrome.tabs.getAllInWindow(win.id, (tabs) => {
-          chrome.windows.create({ incognito: win.incognito }, (newwin) => {
-            for (i = tab.index; i < tabs.length; i++) {
-              chrome.tabs.move(tabs[i].id, {
-                windowId: newwin.id,
-                index: i - tab.index,
-              })
-            }
-            chrome.tabs.getAllInWindow(newwin.id, (newtabs) => {
-              chrome.tabs.remove(newtabs[newtabs.length - 1].id)
-              chrome.tabs.update(newtabs[0].id, { selected: true }, call)
-            })
-          })
+    chrome.tabs.get(contents[id].detail.tabId, (tab: chrome.tabs.Tab): void => {
+      chrome.windows.get(tab.windowId, (win): void => {
+        chrome.tabs.getAllInWindow(win.id, (tabs): void => {
+          chrome.windows.create(
+            { incognito: win.incognito },
+            (newwin: chrome.windows.Window) => {
+              for (i = tab.index; i < tabs.length; i++) {
+                chrome.tabs.move(tabs[i].id, {
+                  windowId: newwin.id,
+                  index: i - tab.index,
+                })
+              }
+              chrome.tabs.getAllInWindow(
+                newwin.id,
+                (newtabs: chrome.tabs.Tab): void => {
+                  chrome.tabs.remove(newtabs[newtabs.length - 1].id)
+                  chrome.tabs.update(newtabs[0].id, { selected: true }, call)
+                },
+              )
+            },
+          )
         })
       })
     })
@@ -1424,7 +1437,7 @@ var contentMessage = (id, mess) => {
 
 // Connect Tabs ///////////////////////////////////////////
 ///////////////////////////////////////////////////////////
-var initConnectTab = (port) => {
+var initConnectTab = (port: chrome.runtime.Port) => {
   if (!port.sender || !port.sender.tab || !port.detail.id) return
   var tab = port.sender.tab
   var id = port.detail.id

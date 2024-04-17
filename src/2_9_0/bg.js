@@ -3,173 +3,201 @@ for (a in console) e[a] = console[a]
 if ('update_url' in chrome.runtime.getManifest()) {
   for (a in console) console[a] = () => {}
 }
-var s = {},
-  r = {},
-  c = (e, t) => {
-    var n = Date.now()
-    for (key in e) {
-      ;(s[key] = e[key]),
-        void 0 === e[key] && chrome.storage.local.remove(key),
-        key.match(/\+ts$/) || (s[key + '+ts'] = e[key + '+ts'] = n)
-    }
-    chrome.storage.local.set(e, t)
-  },
-  l = { initcount: 2 }
-chrome.storage.local.get(null, (e) => {
-  chrome.runtime.lastError
-    ? (l.failed ||
-        alert(
-          "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
-        ),
-      (l.failed = true),
-      console.log('chrome.storage failure'),
-      (s = JSON.parse(localStorage.local)))
-    : ((s = e), (localStorage.local = JSON.stringify(e))),
-    --l.initcount == 0 && l.init()
-}),
-  chrome.storage.sync.get(null, (e) => {
-    chrome.runtime.lastError
-      ? (l.failed ||
-          alert(
-            "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
-          ),
-        (l.failed = true),
-        console.log('chrome.storage failure'),
-        (r = JSON.parse(localStorage.sync)))
-      : ((r = e), (localStorage.sync = JSON.stringify(e))),
-      --l.initcount == 0 && l.init()
-  }),
-  (l.changed = (e, t) => {
-    if (t == 'local') {
-      var n = {}
-      for (key in (console.log('localchanged', e), e)) {
-        ;(s[key] = e[key].newValue),
-          r.sync && r.sync[key] && (r[key] = n[key] = e[key].newValue),
-          console.log('syncsync', key, r.sync && r.sync[key], n)
-      }
-      console.log('updatesync', Object.keys(n).length, n),
-        Object.keys(n).length && chrome.storage.sync.set(n),
-        l.localChanged(e)
-    } else if (t == 'sync') {
-      if (e.firstinstalled) {
-        if (!e.firstinstalled.newValue) return void chrome.storage.sync.set(r)
-        r.firstinstalled &&
-          e.firstinstalled.newValue > e.firstinstalled.oldValue &&
-          ((e.firstinstalled.newValue = e.firstinstalled.oldValue),
-          chrome.storage.sync.set({
-            firstinstalled: e.firstinstalled.oldValue,
-          }))
-      }
-      var o = {}
-      for (key in (console.log('syncchanged', e), e)) {
-        ;(r[key] = e[key].newValue),
-          r.sync && r.sync[key] && (s[key] = o[key] = e[key].newValue),
-          console.log('synclocal', key, r.sync && r.sync[key], o)
-      }
-      console.log('updatelocal', Object.keys(o).length, o),
-        Object.keys(o).length && chrome.storage.local.set(o),
-        l.syncChanged(e)
-    }
-  }),
-  chrome.storage.onChanged.addListener(l.changed),
-  (l.init = () => {
-    for (key in (r.firstinstalled ||
-      ((r.firstinstalled = Date.now()), (r.sync = { firstinstalled: true })),
-    JSON.parse(defaults['Smooth Gestures'].settings))) {
-      r.sync[key] = true
-    }
-    if (
-      ((r.sync.gestures = true), (r.sync.customactions = true), !s.installed)
-    ) {
-      ;(s.installed = Date.now()),
-        (s.id =
-          Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
-          Math.floor(Math.random() * Math.pow(2, 30)).toString(32)),
-        (s.log = { action: {} }),
-        (s.gestures = JSON.parse(defaults['Smooth Gestures'].gestures))
-      var e = JSON.parse(defaults['Smooth Gestures'].settings)
-      for (key in e) s[key] = e[key]
-      ;(s.customactions = {
-        custom000000: {
-          title: 'Navigate to Google (example)',
-          descrip: 'Go to Google',
-          code: 'location.href = "http://www.google.com/"',
-          env: 'page',
-          share: false,
-          context: '',
-        },
-      }),
-        (s.externalactions = {}),
-        setTimeout(() => {
-          chrome.tabs.create({ url: 'options.html' })
-        }, 1e3)
-    }
-    for (key in (r.firstinstalled > s.installed &&
-      (r.firstinstalled = s.installed),
-    r.sync)) {
-      r.sync[key] &&
-      void 0 !== r[key] &&
-      (r[key + '+ts'] || 0) >= (s[key + '+ts'] || 0)
-        ? ((s[key] = r[key]), (s[key + '+ts'] = r[key + '+ts'] || Date.now()))
-        : r.sync[key] &&
-          void 0 !== s[key] &&
-          (s[key + '+ts'] || 0) >= (r[key + '+ts'] || 0) &&
-          ((r[key] = s[key]), (r[key + '+ts'] = s[key + '+ts'] || Date.now()))
-    }
-    if (
-      ((s.version = chrome.runtime.getManifest().version),
-      (s.started = Date.now()),
-      (s.session =
-        Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
-        Math.floor(Math.random() * Math.pow(2, 30)).toString(32)),
-      (o = s.license),
-      s.forceInstallRightclick)
-    ) {
-      var t = screen.availHeight / 2 - 320 / 1.5,
-        n = screen.availWidth / 2 - 375
-      window.open(
-        'rightclick.html',
-        'rightclick',
-        'width=750,height=320,top=' + t + ',left=' + n,
+var settings = {}
+var r = {}
+var c = (e, t) => {
+  var n = Date.now()
+  for (key in e) {
+    ;(settings[key] = e[key]),
+      void 0 === e[key] && chrome.storage.local.remove(key),
+      key.match(/\+ts$/) || (settings[key + '+ts'] = e[key + '+ts'] = n)
+  }
+  chrome.storage.local.set(e, t)
+}
+var l = { initcount: 2 }
+
+chrome.storage.local.get(null, (e): void => {
+  if (chrome.runtime.lastError) {
+    if (!l.failed) {
+      alert(
+        "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
       )
     }
-    chrome.storage.sync.set(r, () => {
-      chrome.storage.local.set(s, F)
+    l.failed = true
+    console.log('chrome.storage failure')
+    settings = JSON.parse(localStorage.local)
+  } else {
+    settings = e
+    localStorage.local = JSON.stringify(e)
+  }
+  if (--l.initcount === 0) {
+    l.init()
+  }
+})
+
+chrome.storage.sync.get(null, (e): void => {
+  if (chrome.runtime.lastError) {
+    l.failed ||
+      alert(
+        "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
+      )
+    l.failed = true
+    console.log('chrome.storage failure')
+    r = JSON.parse(localStorage.sync)
+  } else {
+    r = e
+    localStorage.sync = JSON.stringify(e)
+  }
+  if (--l.initcount === 0) {
+    l.init()
+  }
+})
+
+l.changed = (e, t) => {
+  if (t === 'local') {
+    var n = {}
+    for (key in (console.log('localchanged', e), e)) {
+      ;(settings[key] = e[key].newValue),
+        r.sync && r.sync[key] && (r[key] = n[key] = e[key].newValue),
+        console.log('syncsync', key, r.sync && r.sync[key], n)
+    }
+    console.log('updatesync', Object.keys(n).length, n),
+      Object.keys(n).length && chrome.storage.sync.set(n),
+      l.localChanged(e)
+  } else if (t == 'sync') {
+    if (e.firstinstalled) {
+      if (!e.firstinstalled.newValue) return void chrome.storage.sync.set(r)
+      r.firstinstalled &&
+        e.firstinstalled.newValue > e.firstinstalled.oldValue &&
+        ((e.firstinstalled.newValue = e.firstinstalled.oldValue),
+        chrome.storage.sync.set({
+          firstinstalled: e.firstinstalled.oldValue,
+        }))
+    }
+    var o = {}
+    for (key in (console.log('syncchanged', e), e)) {
+      ;(r[key] = e[key].newValue),
+        r.sync && r.sync[key] && (settings[key] = o[key] = e[key].newValue),
+        console.log('synclocal', key, r.sync && r.sync[key], o)
+    }
+    console.log('updatelocal', Object.keys(o).length, o),
+      Object.keys(o).length && chrome.storage.local.set(o),
+      l.syncChanged(e)
+  }
+}
+
+chrome.storage.onChanged.addListener(l.changed)
+l.init = () => {
+  for (key in (r.firstinstalled ||
+    ((r.firstinstalled = Date.now()), (r.sync = { firstinstalled: true })),
+  JSON.parse(defaults['Smooth Gestures'].settings))) {
+    r.sync[key] = true
+  }
+  if (
+    ((r.sync.gestures = true),
+    (r.sync.customactions = true),
+    !settings.installed)
+  ) {
+    ;(settings.installed = Date.now()),
+      (settings.id =
+        Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
+        Math.floor(Math.random() * Math.pow(2, 30)).toString(32)),
+      (settings.log = { action: {} }),
+      (settings.gestures = JSON.parse(defaults['Smooth Gestures'].gestures))
+    var e = JSON.parse(defaults['Smooth Gestures'].settings)
+    for (key in e) settings[key] = e[key]
+    ;(settings.customactions = {
+      custom000000: {
+        title: 'Navigate to Google (example)',
+        descrip: 'Go to Google',
+        code: 'location.href = "http://www.google.com/"',
+        env: 'page',
+        share: false,
+        context: '',
+      },
+    }),
+      (settings.externalactions = {}),
+      setTimeout(() => {
+        chrome.tabs.create({ url: 'options.html' })
+      }, 1e3)
+  }
+  for (key in (r.firstinstalled > settings.installed &&
+    (r.firstinstalled = settings.installed),
+  r.sync)) {
+    r.sync[key] &&
+    void 0 !== r[key] &&
+    (r[key + '+ts'] || 0) >= (settings[key + '+ts'] || 0)
+      ? ((settings[key] = r[key]),
+        (settings[key + '+ts'] = r[key + '+ts'] || Date.now()))
+      : r.sync[key] &&
+        void 0 !== settings[key] &&
+        (settings[key + '+ts'] || 0) >= (r[key + '+ts'] || 0) &&
+        ((r[key] = settings[key]),
+        (r[key + '+ts'] = settings[key + '+ts'] || Date.now()))
+  }
+  if (
+    ((settings.version = chrome.runtime.getManifest().version),
+    (settings.started = Date.now()),
+    (settings.session =
+      Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
+      Math.floor(Math.random() * Math.pow(2, 30)).toString(32)),
+    (o = settings.license),
+    settings.forceInstallRightclick)
+  ) {
+    var t = screen.availHeight / 2 - 320 / 1.5,
+      n = screen.availWidth / 2 - 375
+    window.open(
+      'rightclick.html',
+      'rightclick',
+      'width=750,height=320,top=' + t + ',left=' + n,
+    )
+  }
+  chrome.storage.sync.set(r, () => {
+    chrome.storage.local.set(settings, F)
+  })
+}
+
+l.localChanged = (e) => {
+  if (e.gestures) {
+    updateValidGestures()
+  }
+  if (
+    e.license_expires &&
+    e.license_expires.oldValue < Date.now() &&
+    !e.license_expires.newValue
+  ) {
+    c({ license_showexpired: true })
+  }
+  if (settings.license !== o) {
+    c({ license: o })
+  } else if (e.license && void 0 !== e.license.oldValue) {
+    c(
+      {
+        license_showactivated: !!o,
+        license_showdeactivated: !o && !settings.license_showexpired,
+      },
+      () => {},
+    )
+  }
+  if (
+    e.version &&
+    settings.version === '2.8.1' &&
+    e.version.oldValue &&
+    e.version.oldValue !== '2.8.1'
+  ) {
+    c({ showNoteUpdated: true }, () => {
+      chrome.tabs.create({
+        url: chrome.runtime.getURL('/options.html#changelog'),
+      })
     })
-  }),
-  (l.localChanged = (e) => {
-    e.gestures && updateValidGestures(),
-      e.license_expires &&
-        e.license_expires.oldValue < Date.now() &&
-        !e.license_expires.newValue &&
-        c({ license_showexpired: true }),
-      s.license != o
-        ? c({ license: o })
-        : e.license &&
-          void 0 !== e.license.oldValue &&
-          c(
-            {
-              license_showactivated: !!o,
-              license_showdeactivated: !o && !s.license_showexpired,
-            },
-            () => {},
-          ),
-      e.version &&
-        s.version == '2.8.1' &&
-        e.version.oldValue &&
-        e.version.oldValue != '2.8.1' &&
-        c({ showNoteUpdated: true }, () => {
-          chrome.tabs.create({
-            url: chrome.runtime.getURL('/options.html#changelog'),
-          })
-        })
-  }),
-  (l.syncChanged = () => {})
-navigator.platform.indexOf('Win')
-var d = navigator.platform.indexOf('Mac') != -1
-var u = navigator.platform.indexOf('Linux') != -1
+  }
+}
+
+l.syncChanged = () => {}
+var d = navigator.userAgent.indexOf('Mac') !== -1
+var u = navigator.userAgent.indexOf('Linux') !== -1
 var m = null
-var h = {}
+var contents = {}
 var f = { active: null, prevActive: null, closed: [], tab: {} }
 var b = {}
 var w = null
@@ -300,29 +328,39 @@ const contexts = {
 }
 
 const actions = {
-    'new-tab': (id, call) => {
-      chrome.tabs.get(h[id].detail.tabId, (e) => {
-        var t = { openerTabId: e.id, windowId: e.windowId }
-        s.newTabUrl != 'homepage' && (t.url = s.newTabUrl),
-          s.newTabRight && (t.index = e.index + 1),
-          chrome.tabs.create(t, call)
-      })
+    'new-tab': (id, call): void => {
+      chrome.tabs.get(
+        contents[id].detail.tabId,
+        (tab: chrome.tabs.Tab): void => {
+          const createProperties: chrome.tabs.CreateProperties = {
+            openerTabId: tab.id,
+            windowId: tab.windowId,
+          }
+          if (settings.newTabUrl !== 'homepage') {
+            createProperties.url = settings.newTabUrl
+          }
+          if (settings.newTabRight) {
+            createProperties.index = tab.index + 1
+          }
+          chrome.tabs.create(createProperties, call)
+        },
+      )
     },
     'new-tab-link': (id, call, a) => {
-      chrome.tabs.get(h[id].detail.tabId, (e) => {
+      chrome.tabs.get(contents[id].detail.tabId, (tab: chrome.tabs.Tab) => {
         for (var t = 0; t < a.links.length; t++) {
           var n = {
-            openerTabId: e.id,
-            windowId: e.windowId,
+            openerTabId: tab.id,
+            windowId: tab.windowId,
             url: a.links[t].src,
           }
-          s.newTabLinkRight && (n.index = e.index + 1 + t),
-            chrome.tabs.create(n, t == a.links.length - 1 ? call : null)
+          settings.newTabLinkRight && (n.index = tab.index + 1 + t)
+          chrome.tabs.create(n, t == a.links.length - 1 ? call : null)
         }
       })
     },
     'new-tab-back': (e, o, i) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         for (var t = 0; t < i.links.length; t++) {
           var n = {
             openerTabId: e.id,
@@ -330,39 +368,52 @@ const actions = {
             url: i.links[t].src,
             active: false,
           }
-          s.newTabLinkRight && (n.index = e.index + 1 + t),
+          settings.newTabLinkRight && (n.index = e.index + 1 + t),
             chrome.tabs.create(n, t == i.links.length - 1 ? o : null)
         }
       })
     },
     'navigate-tab': (e, t) => {
       chrome.tabs.update(
-        h[e].detail.tabId,
-        { url: s.newTabUrl != 'homepage' ? s.newTabUrl : void 0 },
+        contents[e].detail.tabId,
+        { url: settings.newTabUrl != 'homepage' ? settings.newTabUrl : void 0 },
         t,
       )
     },
-    'close-tab': (t, n) => {
-      chrome.tabs.get(h[t].detail.tabId, (e) => {
-        e.pinned
-          ? n()
-          : s.closeLastBlock
-            ? chrome.windows.getAll({ populate: true }, (e) => {
-                e.length == 1 && e[0].tabs.length == 1
-                  ? chrome.tabs.update(
-                      h[t].detail.tabId,
-                      {
-                        url: s.newTabUrl != 'homepage' ? s.newTabUrl : void 0,
-                      },
-                      n,
-                    )
-                  : chrome.tabs.remove(h[t].detail.tabId, n)
-              })
-            : chrome.tabs.remove(h[t].detail.tabId, n)
-      })
+    'close-tab': (id, callback): void => {
+      chrome.tabs.get(
+        contents[id].detail.tabId,
+        (tab: chrome.tabs.Tab): void => {
+          if (tab.pinned) {
+            callback()
+          } else if (settings.closeLastBlock) {
+            chrome.windows.getAll(
+              { populate: true },
+              (windows: chrome.windows.Window[]): void => {
+                if (windows.length === 1 && windows[0].tabs.length === 1) {
+                  chrome.tabs.update(
+                    contents[id].detail.tabId,
+                    {
+                      url:
+                        settings.newTabUrl !== 'homepage'
+                          ? settings.newTabUrl
+                          : void 0,
+                    },
+                    callback,
+                  )
+                } else {
+                  chrome.tabs.remove(contents[id].detail.tabId, callback)
+                }
+              },
+            )
+          } else {
+            chrome.tabs.remove(contents[id].detail.tabId, callback)
+          }
+        },
+      )
     },
     'close-other-tabs': (e, n) => {
-      chrome.tabs.get(h[e].detail.tabId, (t) => {
+      chrome.tabs.get(contents[e].detail.tabId, (t) => {
         chrome.tabs.query({ windowId: t.windowId }, (e) => {
           for (i = 0; i < e.length; i++) {
             e[i].id == t.id || e[i].pinned || chrome.tabs.remove(e[i].id)
@@ -372,7 +423,7 @@ const actions = {
       })
     },
     'close-left-tabs': (e, n) => {
-      chrome.tabs.get(h[e].detail.tabId, (t) => {
+      chrome.tabs.get(contents[e].detail.tabId, (t) => {
         chrome.tabs.query({ windowId: t.windowId }, (e) => {
           for (i = 0; i < e.length; i++) {
             e[i].index < t.index && !t.pinned && chrome.tabs.remove(e[i].id)
@@ -382,7 +433,7 @@ const actions = {
       })
     },
     'close-right-tabs': (e, n) => {
-      chrome.tabs.get(h[e].detail.tabId, (t) => {
+      chrome.tabs.get(contents[e].detail.tabId, (t) => {
         chrome.tabs.query({ windowId: t.windowId }, (e) => {
           for (i = 0; i < e.length; i++) {
             e[i].index > t.index && !t.pinned && chrome.tabs.remove(e[i].id)
@@ -405,28 +456,46 @@ const actions = {
         )
       }
     },
-    'reload-tab': (e, t) => {
-      chrome.tabs.reload(h[e].detail.tabId, { bypassCache: false }, t)
+    'reload-tab': (id, callback): void => {
+      chrome.tabs.reload(
+        contents[id].detail.tabId,
+        { bypassCache: false },
+        callback,
+      )
     },
-    'reload-tab-full': (e, t) => {
-      chrome.tabs.reload(h[e].detail.tabId, { bypassCache: true }, t)
+    'reload-tab-full': (id, callback): void => {
+      chrome.tabs.reload(
+        contents[id].detail.tabId,
+        { bypassCache: true },
+        callback,
+      )
     },
-    'reload-all-tabs': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
-        chrome.tabs.query({ windowId: e.windowId }, (e) => {
-          for (i = 0; i < e.length; i++) chrome.tabs.reload(e[i].id)
-          t()
-        })
-      })
+    'reload-all-tabs': (id, callback): void => {
+      chrome.tabs.get(
+        contents[id].detail.tabId,
+        (tab: chrome.tabs.Tab): void => {
+          chrome.tabs.query(
+            { windowId: tab.windowId },
+            (tabs: chrome.tabs.Tab[]): void => {
+              for (let i = 0; i < tabs.length; i++) {
+                chrome.tabs.reload(tabs[i].id)
+              }
+              callback()
+            },
+          )
+        },
+      )
     },
     stop: (e, t) => {
-      h[e].postMessage({ action: { id: 'stop' } }, t)
+      contents[e].postMessage({ action: { id: 'stop' } }, t)
     },
     'view-source': (t, n) => {
-      chrome.tabs.get(h[t].detail.tabId, (e) => {
+      chrome.tabs.get(contents[t].detail.tabId, (e) => {
         chrome.tabs.create(
           {
-            url: 'view-source:' + (h[t].detail.url ? h[t].detail.url : e.url),
+            url:
+              'view-source:' +
+              (contents[t].detail.url ? contents[t].detail.url : e.url),
             windowId: e.windowId,
             index: e.index + 1,
           },
@@ -435,7 +504,7 @@ const actions = {
       })
     },
     'prev-tab': (e, o) => {
-      chrome.tabs.get(h[e].detail.tabId, (n) => {
+      chrome.tabs.get(contents[e].detail.tabId, (n) => {
         chrome.tabs.query({ windowId: n.windowId }, (e) => {
           var t = null
           for (i = e.length - 1; i >= 0; i--) {
@@ -448,7 +517,7 @@ const actions = {
       })
     },
     'next-tab': (e, o) => {
-      chrome.tabs.get(h[e].detail.tabId, (n) => {
+      chrome.tabs.get(contents[e].detail.tabId, (n) => {
         chrome.tabs.query({ windowId: n.windowId }, (e) => {
           var t = null
           for (i = 1; i <= e.length; i++) {
@@ -460,16 +529,18 @@ const actions = {
         })
       })
     },
-    'page-back': (e, t) => {
-      h[e].postMessage({ action: { id: 'page-back' } }, t)
+    'page-back': (e, callback) => {
+      contents[e].postMessage({ action: { id: 'page-back' } }, callback)
     },
-    'page-forward': (e, t) => {
-      h[e].postMessage({ action: { id: 'page-forward' } }, t)
+    'page-forward': (e, callback) => {
+      contents[e].postMessage({ action: { id: 'page-forward' } }, callback)
     },
-    'new-window': (e, t) => {
+    'new-window'(e, callback): void {
       chrome.windows.create(
-        { url: s.newTabUrl != 'homepage' ? s.newTabUrl : void 0 },
-        t,
+        {
+          url: settings.newTabUrl !== 'homepage' ? settings.newTabUrl : void 0,
+        },
+        callback,
       )
     },
     'new-window-link': (e, t, n) => {
@@ -480,30 +551,36 @@ const actions = {
         )
       }
     },
-    'close-window': (e, t) => {
-      chrome.windows.getCurrent((e) => {
-        chrome.windows.remove(e.id, t)
+    'close-window': (e, callback): void => {
+      chrome.windows.getCurrent((window: chrome.windows.Window): void => {
+        chrome.windows.remove(window.id, callback)
       })
     },
-    'split-tabs': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (n) => {
-        chrome.tabs.query({ windowId: n.windowId }, (t) => {
-          chrome.windows.create(
-            { tabId: n.id, focused: true, incognito: n.incognito },
-            (e) => {
-              for (i = n.index + 1; i < t.length; i++) {
-                chrome.tabs.move(t[i].id, {
-                  windowId: e.id,
-                  index: i - n.index,
-                })
-              }
+    'split-tabs': (id, callback: () => void): void => {
+      chrome.tabs.get(
+        contents[id].detail.tabId,
+        (tab: chrome.tabs.Tab): void => {
+          chrome.tabs.query(
+            { windowId: tab.windowId },
+            (tabs: chrome.tabs.Tab[]): void => {
+              chrome.windows.create(
+                { tabId: tab.id, focused: true, incognito: tab.incognito },
+                (window?: chrome.windows.Window): void => {
+                  for (let i: number = tab.index + 1; i < tabs.length; i++) {
+                    chrome.tabs.move(tabs[i].id, {
+                      windowId: window.id,
+                      index: i - tab.index,
+                    })
+                  }
+                },
+              )
             },
           )
-        })
-      })
+        },
+      )
     },
     'merge-tabs': (e, r) => {
-      chrome.tabs.get(h[e].detail.tabId, (a) => {
+      chrome.tabs.get(contents[e].detail.tabId, (a) => {
         chrome.tabs.query({ windowId: a.windowId }, (e) => {
           var t = []
           for (var n in b) b[n].focused > 0 && t.push([n, b[n]])
@@ -525,7 +602,7 @@ const actions = {
       })
     },
     options: (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         chrome.tabs.create(
           {
             url: chrome.runtime.getURL('options.html'),
@@ -536,36 +613,36 @@ const actions = {
       })
     },
     'page-back-close': (e, t) => {
-      h[e].postMessage(
+      contents[e].postMessage(
         {
           action: {
             id: 'page-back-close',
-            has_history: f.tab[h[e].detail.tabId].history.length > 1,
+            has_history: f.tab[contents[e].detail.tabId].history.length > 1,
           },
         },
         t,
       )
     },
     'goto-top': (e, t, n) => {
-      h[e].postMessage(
+      contents[e].postMessage(
         { action: { id: 'goto-top', startPoint: n.startPoint } },
         t,
       )
     },
     'goto-bottom': (e, t, n) => {
-      h[e].postMessage(
+      contents[e].postMessage(
         { action: { id: 'goto-bottom', startPoint: n.startPoint } },
         t,
       )
     },
     'page-up': (e, t, n) => {
-      h[e].postMessage(
+      contents[e].postMessage(
         { action: { id: 'page-up', startPoint: n.startPoint } },
         t,
       )
     },
     'page-down': (e, t, n) => {
-      h[e].postMessage(
+      contents[e].postMessage(
         { action: { id: 'page-down', startPoint: n.startPoint } },
         t,
       )
@@ -625,7 +702,7 @@ const actions = {
       )
     },
     'fullscreen-window': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         chrome.windows.get(e.windowId, (e) => {
           b[e.id] || (b[e.id] = {}),
             chrome.windows.update(
@@ -643,7 +720,7 @@ const actions = {
       })
     },
     'minimize-window': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         chrome.windows.get(e.windowId, (e) => {
           b[e.id] || (b[e.id] = {}),
             chrome.windows.update(
@@ -661,7 +738,7 @@ const actions = {
       })
     },
     'maximize-window': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         chrome.windows.get(e.windowId, (e) => {
           b[e.id] || (b[e.id] = {}),
             chrome.windows.update(
@@ -674,7 +751,7 @@ const actions = {
       })
     },
     'open-screenshot': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         chrome.tabs.update(e.id, { active: true }, () => {
           setTimeout(() => {
             chrome.tabs.captureVisibleTab(
@@ -689,7 +766,7 @@ const actions = {
       })
     },
     'save-screenshot': (e, o) => {
-      chrome.tabs.get(h[e].detail.tabId, (n) => {
+      chrome.tabs.get(contents[e].detail.tabId, (n) => {
         chrome.tabs.update(n.id, { active: true }, () => {
           setTimeout(() => {
             chrome.tabs.captureVisibleTab(
@@ -705,14 +782,14 @@ const actions = {
       })
     },
     'open-screenshot-full': (e, t) => {
-      chrome.tabs.get(h[e].detail.tabId, (e) => {
+      chrome.tabs.get(contents[e].detail.tabId, (e) => {
         U(e, (e) => {
           chrome.tabs.create({ url: URL.createObjectURL(e) }), t()
         })
       })
     },
     'save-screenshot-full': (e, o) => {
-      chrome.tabs.get(h[e].detail.tabId, (n) => {
+      chrome.tabs.get(contents[e].detail.tabId, (n) => {
         U(n, (e) => {
           var t = n.url.match(/\/\/([^\/]+)\//)[1]
           D(e, 'screenshot' + (t ? '-' + t : '') + '.png'), o()
@@ -845,7 +922,7 @@ const actions = {
       n.dispatchEvent(o)
   }
 actions['clone-tab'] = (e, t, n) => {
-  chrome.tabs.duplicate(h[e].detail.tabId, t)
+  chrome.tabs.duplicate(contents[e].detail.tabId, t)
 }
 actions['zoom-in'] = (e, t) => {
   m
@@ -854,7 +931,7 @@ actions['zoom-in'] = (e, t) => {
         timestamp: Date.now(),
       }),
       t())
-    : h[e].postMessage({ action: { id: 'zoom-in-hack' } }, t)
+    : contents[e].postMessage({ action: { id: 'zoom-in-hack' } }, t)
 }
 actions['zoom-out'] = (e, t) => {
   m
@@ -863,7 +940,7 @@ actions['zoom-out'] = (e, t) => {
         timestamp: Date.now(),
       }),
       t())
-    : h[e].postMessage({ action: { id: 'zoom-out-hack' } }, t)
+    : contents[e].postMessage({ action: { id: 'zoom-out-hack' } }, t)
 }
 actions['zoom-zero'] = (e, t) => {
   m
@@ -872,29 +949,38 @@ actions['zoom-zero'] = (e, t) => {
         timestamp: Date.now(),
       }),
       t())
-    : h[e].postMessage({ action: { id: 'zoom-zero-hack' } }, t)
+    : contents[e].postMessage({ action: { id: 'zoom-zero-hack' } }, t)
 }
 actions['zoom-img-in'] = (e, t, n) => {
-  h[e].postMessage({ action: { id: 'zoom-img-in', images: n.images } }, t)
+  contents[e].postMessage(
+    { action: { id: 'zoom-img-in', images: n.images } },
+    t,
+  )
 }
 actions['zoom-img-out'] = (e, t, n) => {
-  h[e].postMessage({ action: { id: 'zoom-img-out', images: n.images } }, t)
+  contents[e].postMessage(
+    { action: { id: 'zoom-img-out', images: n.images } },
+    t,
+  )
 }
 actions['zoom-img-zero'] = (e, t, n) => {
-  h[e].postMessage({ action: { id: 'zoom-img-zero', images: n.images } }, t)
+  contents[e].postMessage(
+    { action: { id: 'zoom-img-zero', images: n.images } },
+    t,
+  )
 }
 actions['tab-to-left'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.move(e.id, { index: e.index > 0 ? e.index - 1 : 0 })
   })
 }
 actions['tab-to-right'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.move(e.id, { index: e.index + 1 })
   })
 }
 actions['parent-dir'] = (e, o) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     var t = e.url.split('#')[0].split('?')[0].split('/')
     t[t.length - 1] == '' && (t = t.slice(0, t.length - 1))
     var n = null
@@ -907,27 +993,27 @@ actions['parent-dir'] = (e, o) => {
   })
 }
 actions['open-history'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.create({ url: 'chrome://history/', windowId: e.windowId }, t)
   })
 }
 actions['open-downloads'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.create({ url: 'chrome://downloads/', windowId: e.windowId }, t)
   })
 }
 actions['open-extensions'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.create({ url: 'chrome://extensions/', windowId: e.windowId }, t)
   })
 }
 actions['open-bookmarks'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.create({ url: 'chrome://bookmarks/', windowId: e.windowId }, t)
   })
 }
 actions['open-image'] = (e, n, o) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     for (var t = 0; t < o.images.length; t++) {
       chrome.tabs.create(
         {
@@ -941,7 +1027,7 @@ actions['open-image'] = (e, n, o) => {
   })
 }
 actions['save-image'] = (e, o, i) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     for (var t = 0; t < i.images.length; t++) {
       var n = i.images[t].src.match(/([^\/?]{1,255})\/?(\?.*)?$/)
       T(i.images[t].src, n[1])
@@ -950,7 +1036,7 @@ actions['save-image'] = (e, o, i) => {
   })
 }
 actions['hide-image'] = (e, t, n) => {
-  h[e].postMessage({ action: { id: 'hide-image', images: n.images } }, t)
+  contents[e].postMessage({ action: { id: 'hide-image', images: n.images } }, t)
 }
 actions['show-cookies'] = (e, t) => {
   O(
@@ -960,7 +1046,7 @@ actions['show-cookies'] = (e, t) => {
   )
 }
 actions['search-sel'] = (e, t, n) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.create(
       {
         url: 'http://www.google.com/search?q=' + n.selection,
@@ -973,20 +1059,20 @@ actions['search-sel'] = (e, t, n) => {
   })
 }
 actions.print = (e, t) => {
-  h[e].postMessage({ action: { id: 'print', images: a.images } }, t)
+  contents[e].postMessage({ action: { id: 'print', images: a.images } }, t)
 }
 actions['toggle-pin'] = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.update(e.id, { pinned: !e.pinned }, t)
   })
 }
 actions.pin = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.update(e.id, { pinned: true }, t)
   })
 }
 actions.unpin = (e, t) => {
-  chrome.tabs.get(h[e].detail.tabId, (e) => {
+  chrome.tabs.get(contents[e].detail.tabId, (e) => {
     chrome.tabs.update(e.id, { pinned: false }, t)
   })
 }
@@ -1032,7 +1118,7 @@ actions['find-next'] = (e, t, n) => {
 }
 actions['toggle-bookmark'] = (e, n) => {
   M(['bookmarks'], () => {
-    chrome.tabs.get(h[e].detail.tabId, (t) => {
+    chrome.tabs.get(contents[e].detail.tabId, (t) => {
       chrome.bookmarks.search(t.url, (e) => {
         e.length <= 0
           ? chrome.bookmarks.create(
@@ -1046,14 +1132,14 @@ actions['toggle-bookmark'] = (e, n) => {
 }
 actions.bookmark = (e, t) => {
   M(['bookmarks'], () => {
-    chrome.tabs.get(h[e].detail.tabId, (e) => {
+    chrome.tabs.get(contents[e].detail.tabId, (e) => {
       chrome.bookmarks.create({ parentId: '2', title: e.title, url: e.url }, t)
     })
   })
 }
 actions.unbookmark = (e, t) => {
   M(['bookmarks'], () => {
-    chrome.tabs.get(h[e].detail.tabId, (e) => {
+    chrome.tabs.get(contents[e].detail.tabId, (e) => {
       chrome.bookmarks.search(e.url, (e) => {
         e.length <= 0 ? t() : chrome.bookmarks.remove(e[0].id, t)
       })
@@ -1083,86 +1169,94 @@ chrome.runtime.onMessage.addListener((e, t, n) => {
         n(JSON.stringify({ states: e }))
       })
     : (e.log && console.log(e.log), n(null))
-}),
-  chrome.runtime.onConnect.addListener((e) => {
-    if (e.sender && e.sender.tab) {
-      if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
-      ;(e.detail.tabId = e.sender.tab.id), t(e)
+})
+
+chrome.runtime.onConnect.addListener((e) => {
+  if (e.sender && e.sender.tab) {
+    if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
+    ;(e.detail.tabId = e.sender.tab.id), initConnectTab(e)
+  }
+})
+
+chrome.runtime.onMessageExternal.addListener((e, t, n) => {
+  if (e.getgestures) {
+    if (!w) {
+      return (
+        $.get(chrome.runtime.getURL('js/gestures.js'), null, (e) => {
+          ;(w = "window.SGextId='" + chrome.runtime.id + "';\n" + e),
+            n({ gestures: w })
+        }),
+        true
+      )
     }
-  }),
-  chrome.runtime.onMessageExternal.addListener((e, t, n) => {
-    if (e.getgestures) {
-      if (!w) {
-        return (
-          $.get(chrome.runtime.getURL('js/gestures.js'), null, (e) => {
-            ;(w = "window.SGextId='" + chrome.runtime.id + "';\n" + e),
-              n({ gestures: w })
-          }),
-          true
-        )
-      }
-      n({ gestures: w })
-    } else if (e.storage) {
-      var o = [
-          'gestures',
-          'validGestures',
-          'contextOnLink',
-          'holdButton',
-          'trailBlock',
-          'trailColor',
-          'trailWidth',
-          'trailLegacy',
-          'selectToLink',
-        ],
-        a = {}
-      for (i in o) a[o[i]] = s[o[i]]
-      n(a)
-    } else if (e.externalactions) {
-      var r = e.externalactions
-      if (r.name && r.actions) {
-        if (r.actions.length > 0) {
-          for (
-            s.externalactions[t.id] = r, i = 0;
-            i < s.externalactions[t.id].actions.length;
-            i++
-          ) {
-            contexts[t.id + '-' + s.externalactions[t.id].actions[i].id] =
-              s.externalactions[t.id].actions[i].context
-          }
-        } else delete s.externalactions[t.id]
-        c({ externalactions: s.externalactions }), n(true)
-      } else n(false)
-    } else n(null)
-  }),
-  chrome.runtime.onConnectExternal.addListener((e) => {
-    if ((console.log(e.sender.tab, e.name), e.sender.tab)) {
-      if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
-      ;(e.detail.tabId = e.sender.tab.id), (e.detail.external = true), t(e)
-    }
-  })
-var t = (e) => {
+    n({ gestures: w })
+  } else if (e.storage) {
+    var o = [
+        'gestures',
+        'validGestures',
+        'contextOnLink',
+        'holdButton',
+        'trailBlock',
+        'trailColor',
+        'trailWidth',
+        'trailLegacy',
+        'selectToLink',
+      ],
+      a = {}
+    for (i in o) a[o[i]] = settings[o[i]]
+    n(a)
+  } else if (e.externalactions) {
+    var r = e.externalactions
+    if (r.name && r.actions) {
+      if (r.actions.length > 0) {
+        for (
+          settings.externalactions[t.id] = r, i = 0;
+          i < settings.externalactions[t.id].actions.length;
+          i++
+        ) {
+          contexts[t.id + '-' + settings.externalactions[t.id].actions[i].id] =
+            settings.externalactions[t.id].actions[i].context
+        }
+      } else delete settings.externalactions[t.id]
+      c({ externalactions: settings.externalactions }), n(true)
+    } else n(false)
+  } else n(null)
+})
+
+chrome.runtime.onConnectExternal.addListener((e) => {
+  if ((console.log(e.sender.tab, e.name), e.sender.tab)) {
+    if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return
+    ;(e.detail.tabId = e.sender.tab.id),
+      (e.detail.external = true),
+      initConnectTab(e)
+  }
+})
+
+var initConnectTab = (e: chrome.runtime.Port) => {
     if (e.sender && e.sender.tab && e.detail.id) {
       var t = e.sender.tab,
         n = e.detail.id
-      ;(h[n] = e),
-        h[n].onMessage.addListener(
+      ;(contents[n] = e),
+        contents[n].onMessage.addListener(
           function (t, n) {
             if (
               (console.log('content_message', JSON.stringify(n)),
               n.selection &&
               n.selection.length > 0 &&
-              s.gestures['s' + n.gesture]
+              settings.gestures['s' + n.gesture]
                 ? (n.gesture = 's' + n.gesture)
-                : n.links && n.links.length > 0 && s.gestures['l' + n.gesture]
+                : n.links &&
+                    n.links.length > 0 &&
+                    settings.gestures['l' + n.gesture]
                   ? (n.gesture = 'l' + n.gesture)
                   : n.images &&
                     n.images.length > 0 &&
-                    s.gestures['i' + n.gesture] &&
+                    settings.gestures['i' + n.gesture] &&
                     (n.gesture = 'i' + n.gesture),
-              n.gesture && s.gestures[n.gesture])
+              n.gesture && settings.gestures[n.gesture])
             ) {
               if (v) return void J()
-              var e = s.gestures[n.gesture]
+              var e = settings.gestures[n.gesture]
               console.log('gesture', n.gesture, e),
                 p && clearTimeout(p.timeout),
                 (p = null),
@@ -1188,9 +1282,9 @@ var t = (e) => {
                       { active: true, lastFocusedWindow: true },
                       (e) => {
                         if (p && e.length) {
-                          for (t in ((p.tabId = e[0].id), h)) {
-                            e[0].id == h[t].detail.tabId &&
-                              h[t].postMessage({ chain: p })
+                          for (t in ((p.tabId = e[0].id), contents)) {
+                            e[0].id == contents[t].detail.tabId &&
+                              contents[t].postMessage({ chain: p })
                           }
                         }
                       },
@@ -1199,24 +1293,25 @@ var t = (e) => {
                 : () => {}
               try {
                 if (actions[e]) actions[e].call(null, t, o, n)
-                else if (s.externalactions[e.substr(0, 32)]) {
+                else if (settings.externalactions[e.substr(0, 32)]) {
                   chrome.runtime.sendMessage(e.substr(0, 32), {
                     doaction: e.substr(33),
                   })
-                } else if (s.customactions[e]) {
-                  var i = s.customactions[e]
+                } else if (settings.customactions[e]) {
+                  var i = settings.customactions[e]
                   i.env == 'page' && O(t, i.code, o)
                 }
               } catch (e) {}
-              s.log.action[e] || (s.log.action[e] = {}),
-                s.log.action[e][n.gesture] ||
-                  (s.log.action[e][n.gesture] = { count: 0 }),
-                (s.log.action[e][n.gesture].count += 1),
-                s.log.line || (s.log.line = { distance: 0, segments: 0 }),
+              settings.log.action[e] || (settings.log.action[e] = {}),
+                settings.log.action[e][n.gesture] ||
+                  (settings.log.action[e][n.gesture] = { count: 0 }),
+                (settings.log.action[e][n.gesture].count += 1),
+                settings.log.line ||
+                  (settings.log.line = { distance: 0, segments: 0 }),
                 n.line &&
-                  ((s.log.line.distance += n.line.distance),
-                  (s.log.line.segments += n.line.segments)),
-                c({ log: s.log })
+                  ((settings.log.line.distance += n.line.distance),
+                  (settings.log.line.segments += n.line.segments)),
+                c({ log: settings.log })
             }
             if (
               (n.syncButton &&
@@ -1227,15 +1322,15 @@ var t = (e) => {
                   chrome.tabs.query(
                     { active: true, lastFocusedWindow: true },
                     (e) => {
-                      for (t in h) {
-                        e[0].id == h[t].detail.tabId &&
-                          h[t].postMessage({ syncButton: n.syncButton })
+                      for (t in contents) {
+                        e[0].id == contents[t].detail.tabId &&
+                          contents[t].postMessage({ syncButton: n.syncButton })
                       }
                     },
                   )
                 }, 20)),
               n.closetab &&
-                chrome.tabs.get(h[t].detail.tabId, (e) => {
+                chrome.tabs.get(contents[t].detail.tabId, (e) => {
                   chrome.tabs.remove(e.id)
                 }),
               n.nativeport && n.nativeport.rightclick)
@@ -1255,7 +1350,7 @@ var t = (e) => {
                   },
                   timestamp: Date.now(),
                 })
-              } else if (!s.blockDoubleclickAlert && (d || u)) {
+              } else if (!settings.blockDoubleclickAlert && (d || u)) {
                 var a = screen.availHeight / 2 - 320 / 1.5,
                   r = screen.availWidth / 2 - 375
                 window.open(
@@ -1267,8 +1362,8 @@ var t = (e) => {
             }
           }.bind(null, n),
         ),
-        h[n].onDisconnect.addListener(() => {
-          delete h[n]
+        contents[n].onDisconnect.addListener(() => {
+          delete contents[n]
         })
       var o = { enable: true }
       p &&
@@ -1276,16 +1371,20 @@ var t = (e) => {
         (t.active ? (o.chain = p) : (clearTimeout(p.timeout), (p = null)))
       var i = t.url.substr(t.url.indexOf('//') + 2)
       i = i.substr(0, i.indexOf('/')).toLowerCase()
-      for (var a = 0; s.blacklist && a < s.blacklist.length; a++) {
-        new RegExp('^(.+\\.)?' + s.blacklist[a].replace('.', '\\.') + '$').test(
-          i,
-        ) && (o.enable = false)
+      for (
+        var a = 0;
+        settings.blacklist && a < settings.blacklist.length;
+        a++
+      ) {
+        new RegExp(
+          '^(.+\\.)?' + settings.blacklist[a].replace('.', '\\.') + '$',
+        ).test(i) && (o.enable = false)
       }
-      h[n].postMessage(o), _(t.id)
+      contents[n].postMessage(o), _(t.id)
     }
   },
   O = (e, t, n, o) => {
-    h[e] &&
+    contents[e] &&
       (typeof n == 'function' && ((o = n), (n = void 0)),
       void 0 === n && (n = []),
       (typeof n == 'object' && n.constructor === Array) || (n = [n]),
@@ -1309,7 +1408,7 @@ var t = (e) => {
         t +
         '}})()'),
       chrome.tabs.executeScript(
-        h[e].sender.tab.id,
+        contents[e].sender.tab.id,
         { code: t, allFrames: true, matchAboutBlank: true },
         (e) => {
           for (var t = 0; t < e.length; t++) {
@@ -1321,24 +1420,26 @@ var t = (e) => {
   },
   n = (e) => {
     if (f.active != e) {
-      for (id in h) {
-        f.active == h[id].detail.tabId &&
-          h[id].postMessage({ windowBlurred: true })
+      for (id in contents) {
+        f.active == contents[id].detail.tabId &&
+          contents[id].postMessage({ windowBlurred: true })
       }
       ;(f.prevActive = f.active), (f.active = e)
     }
   }
 chrome.tabs.onActivated.addListener((e) => {
   n(e.tabId)
-}),
-  chrome.windows.onFocusChanged.addListener((e) => {
-    e != chrome.windows.WINDOW_ID_NONE &&
-      (b[e] || (b[e] = {}),
-      (b[e].focused = Date.now()),
-      chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
-        e.length && n(e[0].id)
-      }))
-  })
+})
+
+chrome.windows.onFocusChanged.addListener((e) => {
+  e != chrome.windows.WINDOW_ID_NONE &&
+    (b[e] || (b[e] = {}),
+    (b[e].focused = Date.now()),
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
+      e.length && n(e[0].id)
+    }))
+})
+
 var z = (d, u) => {
   chrome.tabs.get(d, (e) => {
     if (!chrome.runtime.lastError) {
@@ -1390,22 +1491,23 @@ var z = (d, u) => {
     }
   })
 }
-chrome.tabs.onUpdated.addListener(z),
-  chrome.tabs.onMoved.addListener(z),
-  chrome.tabs.onAttached.addListener(z),
-  chrome.tabs.onRemoved.addListener((e) => {
-    for (f.tab[e] && f.closed.push(f.tab[e]); f.closed.length > 50; ) {
-      f.closed.shift()
-    }
-    delete f.tab[e]
-  }),
-  chrome.windows.onRemoved.addListener((e) => {
-    delete b[e]
-  })
+
+chrome.tabs.onUpdated.addListener(z)
+chrome.tabs.onMoved.addListener(z)
+chrome.tabs.onAttached.addListener(z)
+chrome.tabs.onRemoved.addListener((e) => {
+  for (f.tab[e] && f.closed.push(f.tab[e]); f.closed.length > 50; ) {
+    f.closed.shift()
+  }
+  delete f.tab[e]
+})
+chrome.windows.onRemoved.addListener((e) => {
+  delete b[e]
+})
 
 const updateValidGestures = (): void => {
   const validGestures = {}
-  for (let g in s.gestures) {
+  for (let g in settings.gestures) {
     if (g[0] === 'l' || g[0] === 'i' || g[0] === 's') {
       g = g.substring(1)
     }
@@ -1434,20 +1536,20 @@ const updateValidGestures = (): void => {
 
 var C = (e) => {
     var t = null
-    for (id in h) {
-      if (e == h[id].detail.tabId) {
-        if (!h[id].detail.frame) return h[id]
-        t = h[id]
+    for (id in contents) {
+      if (e == contents[id].detail.tabId) {
+        if (!contents[id].detail.frame) return contents[id]
+        t = contents[id]
       }
     }
     return t
   },
   N = (r) => {
     var s = {}
-    for (id in h) {
-      var e = h[id].detail.tabId
+    for (id in contents) {
+      var e = contents[id].detail.tabId
       s[e] || (s[e] = { root: false, frames: 0 }),
-        h[id].detail.frame ? (s[e].frames += 1) : (s[e].root = true)
+        contents[id].detail.frame ? (s[e].frames += 1) : (s[e].root = true)
     }
     chrome.windows.getAll({ populate: true }, (e) => {
       var t = {}
@@ -1543,8 +1645,8 @@ var V = (t) => {
           url: 'https://api.s13.us/gestures/ping',
           type: 'post',
           data: JSON.stringify({
-            clid: s.id,
-            time: s.firstinstalled,
+            clid: settings.id,
+            time: settings.firstinstalled,
             htok: r.token
               ? sjcl.codec.hex.fromBits(sjcl.hash.sha1.hash(r.token))
               : void 0,
@@ -1674,11 +1776,12 @@ var W = () => {
     })
   },
   F = () => {
-    for (id in s.customactions) contexts[id] = s.customactions[id].context
-    for (id in s.externalactions) {
-      for (i = 0; i < s.externalactions[id].actions.length; i++) {
-        contexts[id + '-' + s.externalactions[id].actions[i].id] =
-          s.externalactions[id].actions[i].context
+    for (id in settings.customactions)
+      contexts[id] = settings.customactions[id].context
+    for (id in settings.externalactions) {
+      for (i = 0; i < settings.externalactions[id].actions.length; i++) {
+        contexts[id + '-' + settings.externalactions[id].actions[i].id] =
+          settings.externalactions[id].actions[i].context
       }
     }
     for (id in (((e, t) => {
@@ -1689,14 +1792,14 @@ var W = () => {
         }
       }
       return e.length > t.length
-    })(chrome.runtime.getManifest().version, s.version) &&
+    })(chrome.runtime.getManifest().version, settings.version) &&
       c({
         version: chrome.runtime.getManifest().version,
         updated: Date.now(),
       }),
-    s.externalactions)) {
-      delete s.externalactions[id],
-        c({ externalactions: s.externalactions }),
+    settings.externalactions)) {
+      delete settings.externalactions[id],
+        c({ externalactions: settings.externalactions }),
         chrome.runtime.sendMessage(id, { getexternalactions: true })
     }
     setTimeout(W, 0),

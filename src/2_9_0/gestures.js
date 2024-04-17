@@ -244,61 +244,6 @@ const SmoothGestures = () => {
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent): void => {
-    if (event.keyCode == 27) {
-      endGesture(), (keyEscape = true)
-      var t = (e) => {
-        ;(keyEscape = false), window.removeEventListener('keyup', t, true)
-      }
-      window.addEventListener('keyup', t, true)
-    }
-    var n =
-      (event.ctrlKey ? '1' : '0') +
-      (event.altKey ? '1' : '0') +
-      (event.shiftKey ? '1' : '0') +
-      (event.metaKey ? '1' : '0')
-    if (
-      event.keyCode === 16 ||
-      event.keyCode === 17 ||
-      event.keyCode === 18 ||
-      event.keyCode === 0 ||
-      event.keyCode === 91 ||
-      event.keyCode === 92 ||
-      event.keyCode === 93
-    ) {
-      var o: number | null =
-        event.keyCode === 16
-          ? 2
-          : event.keyCode === 17
-            ? 0
-            : event.keyCode === 18
-              ? 1
-              : null
-      if (o != null) {
-        n = n.substr(0, o) + '1' + n.substr(o + 1)
-        t = (e) => {
-          ;(keyMod = keyMod.substr(0, o) + '0' + keyMod.substr(o + 1)),
-            window.removeEventListener('keyup', t, true)
-        }
-        window.addEventListener('keyup', t, true)
-      }
-      keyMod = n
-    } else
-      (g.callback ||
-        ((n != '0000' ||
-          focus == null ||
-          (focus.nodeName != 'INPUT' && focus.nodeName != 'TEXTAREA')) &&
-          settings.validGestures.k &&
-          settings.validGestures.k[n] &&
-          settings.validGestures.k[n].indexOf(
-            event.keyIdentifier + ':' + event.keyCode,
-          ) >= 0)) &&
-        (startGesture(null, null, false, false, false),
-        sendGesture('k' + n + ':' + event.keyIdentifier + ':' + event.keyCode),
-        event.preventDefault(),
-        event.stopPropagation())
-  }
-
   const moveGesture = (event, diagonal): void => {
     if (!gesture.startPoint) {
       gesture.startPoint = { x: event.clientX, y: event.clientY }
@@ -367,9 +312,9 @@ const SmoothGestures = () => {
     }
   }
 
-  const C = (e, t): string => {
-    const diffx: number = t.x - e.x
-    const diffy: number = t.y - e.y
+  const C = (e, next): string => {
+    const diffx: number = next.x - e.x
+    const diffy: number = next.y - e.y
     if (Math.abs(diffx) > 2 * Math.abs(diffy)) {
       if (diffx > 0) {
         return 'R'
@@ -397,7 +342,7 @@ const SmoothGestures = () => {
     }
   }
 
-  const refreshLineAsync = (): void => {
+  const refreshLineAsync: (() => void) | { timeout: number } = (): void => {
     if (!refreshLineAsync.timeout) {
       const e: number = Date.now() - refreshLine.lasttime
       const t: number = Math.min(500, 4 * refreshLine.runtime)
