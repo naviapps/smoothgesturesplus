@@ -1,0 +1,46 @@
+{
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Close Window"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Maximise Window (hack)"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Minimise Window (hack)"
+  },
+  "descrip_maximize_x": {
+    "description": "Action description for clone_tab",
+    "message": "This is a messy hack to simulate maximising a window"
+  },
+  "descrip_minimize_x": {
+    "description": "Action description for clone_tab",
+    "message": "This is a _very_ messy hack to simulate minimising a window"
+  },
+  "long_description": {
+    "description": "short extension description",
+    "message": "This Mouse Gestures extension allows you to move the mouse while holding the right mouse button to trigger actions, such as page navigation or tab management. Supports click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), and keyboard shortcuts!\n\n• Powerful customisation of gestures (and custom actions!)\n• supports diagonal gestures, syncing/import/export of settings\n• Does not work on this extension website, or other built-in chrome pages due to security restrictions for extensions. But it does work on almost all http:// and https:// pages."
+  },
+  "setting_sendstats_descrip": {
+    "description": "setting description",
+    "message": "Send an anonymous gesture usage report to inform the programme of the most commonly used gestures, thereby influencing the default gestures of future releases."
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Synchronise"
+  },
+  "setting_sync_descrip": {
+    "description": "setting description",
+    "message": "Synchronise settings and gestures with other computers through bookmarks. To use this feature you must also enable bookmark synchronisation."
+  },
+  "setting_trail_color": {
+    "description": "setting title",
+    "message": "Colour of Trailing Line"
+  },
+  "setting_trail_color_descrip": {
+    "description": "setting description",
+    "message": "Adjust the colour and transparency of the line drawn when you make a gesture."
+  }
+}

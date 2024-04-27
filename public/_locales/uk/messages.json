@@ -1,0 +1,192 @@
+{
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "не на зображенні"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "не на посиланні"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "не на посиланнях чи зображеннях"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "не з виділеним"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "на зображенні"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "на посилання"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "з виділеним"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Жести миші! Швидко і легко переміщуйтесь по веб-сторінках за допомогою миші або клавіатури."
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "Розширення жестів миші дозволяє переміщати мишу, утримуючи праву кнопку, для навігації по сторінці або управління вкладками. Підтримує такі жести, як click-and-drag, click-and-scroll, click-and-click та клавішні скорочення!\n\n• Гнучке налаштування жестів (та визначених користувачем дій!)\n• Підтримка діагональних жестів, синхронізації / імпорту / експорту налаштувань\n• Не працює на цій сторінці розширення та інших вбудованих chrome-сторінок через обмеження безпеки для розширень. Але працює майже на всіх http:// і https:// сторінках."
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Плавні жести"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Виконайте один з таких жестів"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Жест миші: Утримуйте $BUTTON$ кнопку миші, намалюйте жест, переміщаючи мишу, потім відпустіть кнопку",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_3": {
+    "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Жест прокрутки: Утримуйте $BUTTON$ кнопку миші та прокручуйте колесо миші",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_4": {
+    "description": "[bullet point] instructions for making a gesture (rocker)",
+    "message": "Жест \"Рокер\": натисни і затримай одну кнопку миші, а потім натисни іншу."
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Цей жест вже закріплено за $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Задайте жест для $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Додати цей жест"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Переписати цей жест"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Спробуйте знову"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "Жести"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Більше"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Налаштування"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Дивитись статус"
+  },
+  "options_externalactions": {
+    "description": "link to external actions",
+    "message": "Зовнішні дії"
+  },
+  "options_moreactions": {
+    "description": "Link to access more actions. These actions don't currently have a gesture assigned",
+    "message": "Більше доступних дій"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "ліва"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "середня"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "права"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Приховати іконку"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Не можете запам'ятати всі жести, які Ви налаштували? Роздрукуйте шпаргалку!"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Друк"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "Вам подобаються Плавні Жести? Будь-ласка, $LINK$!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Ви знаєте Англійську мову? Допоможіть $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "перекладіть Плавні Жести на Вашу мову"
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "Плавні Жести було оновлено до $VERSION$",
+    "placeholders": {
+      "version": {
+        "content": "$2",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Налаштування!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "Ласкаво просимо у \"Плавні Жести\""
+  }
+}

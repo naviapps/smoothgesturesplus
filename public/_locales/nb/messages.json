@@ -1,0 +1,390 @@
+{
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Kopier tab"
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "Kopier tab (hack)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "Lukk faner til venstre"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Lukk alle andre faner"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "Lukk faner til høyre"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Lukk tab"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Lukk vindu"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "Kopier til utklippstavle"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Gå til bunn"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Gå til topp"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Skjul bilde"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Maksimer vindu (hack)"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "Slå sammen tabs"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Minimer vundu (hack)"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "Gå til ny fane-side"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Ny tab"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "Ny fane (åpne lenke i bakgrunnen)"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "Ny fane (åpne lenke)"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Nytt vindu"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "Nytt vindu (Åpne lenke)"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Neste tab"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "Neste vindu (hack)"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "Åpne bokmerkebehandler"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Åpne nedlastinger"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "Åpne utvidelser"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Åpne logg"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Åpne bilde"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Åpne instillinger-siden"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "Historie-tilbake"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "Historie-tilbake eller lukk"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "Historie-fremover"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "Neste side"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "Forrige side"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "Forrige fane"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "Forrige vindu (hack)"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Skriv ut side"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Søk på Google"
+  },
+  "action_split_tabs": {
+    "description": "Action title for split_tabs",
+    "message": "Splitt faner"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "Åpne statusside"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "Stopp lasting"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "Flytt fane venstre"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "Flytt fane høyre"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "Oversett markering"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Fjern bokmerke"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "Angre lukking av fane"
+  },
+  "action_undo_close_hack": {
+    "description": "Action title for undo_close_hack",
+    "message": "Angre lukking av fane (hack)"
+  },
+  "action_view_source": {
+    "description": "Action title for view_source",
+    "message": "Vi sidekilde"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Forstørr bilde"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Forminsk bilde"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "Tilbakestill forstørring"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "Egendefinerte handlinger"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "Andre handlinger"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "Sidenavigasjon"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Andre innstillinger"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "Tabbehandling"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "Tilbehør"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "Ikke over bilde"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "Ikke over link"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "ikke på linker eller bilder"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "ikke med markert tekst"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "på bilde"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "på link"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "med markert tekst"
+  },
+  "descrip_bookmark": {
+    "description": "Action description",
+    "message": "Legg til bokmerke for åpen side."
+  },
+  "descrip_clone_tab": {
+    "description": "Action description for clone_tab",
+    "message": "Åpne en duplikat av den åpne siden. Duplikaten vil ikke ha historien til den opprinnelige fanen."
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "Lukk alle faner til venstre for nåværende fane."
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "Lukk alle faner i nåværende vindu, unntatt den valgte fanen."
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "Lukk alle faner til høyre for den nåværende fanen."
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Lukk den valgte fanen"
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "Lukk alle faner i det nåværende vinduet"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "Kopier valgt tekst til utklippstavlen"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Mouse Gestures! Naviger fort og enkelt på nettet ved hjelp av mus eller tastatur."
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Utfør én av følgende bevegelser:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Musbevegelser: Hold nede $BUTTON$ museknapp og tegn en bevegelse ved å flytte på musa, slipp så knappen",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Legg til denne bevegelsen"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Overskriv bevegelse"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Prøv igjen"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Mer"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Innstillinger"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "venstre"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "midtre"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "høyre"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Skjul icon"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Skriv ut"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "Liker du Smooth Gestures? Gi oss $LINK$!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "en 5-stjerners vurdering"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Kan du Engelsk? Hjelp oss å $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "oversette Smooth Gestures til ditt språk."
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "Smooth Gestures har blitt oppdatert til $VERSION$",
+    "placeholders": {
+      "version": {
+        "content": "$2",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Alternativer!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "Velkommen til Smooth Gestures!"
+  }
+}

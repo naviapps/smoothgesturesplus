@@ -1,0 +1,68 @@
+{
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Tee üks järgmistest liigutustest"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Lisa liigutus"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Proovi uuesti"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Rohkem"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Seaded"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Vaata olekut"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "vasak"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "keskmine"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "parem"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "peida ikoon"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Prindi"
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "Jäta 5 täheline hinnand"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Oskad inglise keelt ? Abi $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "Tõlgi Smooth Gestures enda keelde"
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Valikud"
+  }
+}

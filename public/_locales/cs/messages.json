@@ -1,0 +1,950 @@
+{
+  "action_bookmark": {
+    "description": "Action title",
+    "message": "Přidat záložku této stránky"
+  },
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Rozdvojit kartu"
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "Rozdvojit kartu (hack)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "Zavřít karty vlevo"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Zavřít všechny ostatní karty"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "Zavřít karty vpravo"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Zavřít kartu"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Zavřít okno"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "Kopírovat text do schránky"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Přejít na konec"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Přejít na začátek"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Skrýt obrázek"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Maximalizovat okno (hack)"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "* Sloučit karty *"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Minimalizovat okno (hack)"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "Přejít na stránku Nová karta"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Nová karta"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "Nová karta (otevřít odkaz na pozadí)"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "Nová karta (otevřít odkaz)"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Nové okno"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "Nové okno (otevřít odkaz)"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Další karta"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "Další okno (hack)"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "Otevřít Správce záložek"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Otevřít Stahování"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "Otevřít Doplňky"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Otevřít Historii"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Otevřít obrázek"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Otevřít stránku Možnosti"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "Zpět v historii"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "Zpět v historii nebo zavřít"
+  },
+  "action_page_down": {
+    "description": "Action title for page_down",
+    "message": "O stránku dolů"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "Vpřed v historii"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "Další stránka"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "Předchozí stránka"
+  },
+  "action_page_up": {
+    "description": "Action title for page_up",
+    "message": "O stránku nahoru"
+  },
+  "action_parent_dir": {
+    "description": "Action title",
+    "message": "Nadřazený adresář"
+  },
+  "action_pin": {
+    "description": "Action title",
+    "message": "Připnout kartu"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "Předchozí karta"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "Předchozí okno (hack)"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Vytisknout stránku"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "Načíst znovu všechny karty"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "Načíst kartu znovu"
+  },
+  "action_reload_tab_full": {
+    "description": "Action title for reload_tab_full",
+    "message": "Načíst kartu znovu (ne z mezipaměti)"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Hledat na Googlu"
+  },
+  "action_show_cookies": {
+    "description": "Action title",
+    "message": "Zobrazit seznam cookies"
+  },
+  "action_split_tabs": {
+    "description": "Action title for split_tabs",
+    "message": "* Rozdělit karty *"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "Otevřít stránku Stav"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "Přerušit načítání"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "Přesunout kartu doleva"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "Přesunout kartu doprava"
+  },
+  "action_toggle_bookmark": {
+    "description": "Action title",
+    "message": "Označit jako záložku"
+  },
+  "action_toggle_pin": {
+    "description": "Action title",
+    "message": "Připnout kartu"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "Přeložit výběr"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Odstranit záložku"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "Otevřít naposledy zavřenou kartu"
+  },
+  "action_undo_close_hack": {
+    "description": "Action title for undo_close_hack",
+    "message": "Znovu otevřít kartu (hack)"
+  },
+  "action_unpin": {
+    "description": "Action title",
+    "message": "Odepnout kartu"
+  },
+  "action_view_source": {
+    "description": "Action title for view_source",
+    "message": "Zobrazit zdrojový kód stránky"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Přiblížit obrázek"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Oddálit obrázek"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "Zobrazit obrázek v původní velikosti"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "Přiblížit"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "Oddálit"
+  },
+  "action_zoom_zero": {
+    "description": "Action title",
+    "message": "Zobrazit v původní velikosti"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "Vlastní akce"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "Jiné akce"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "Navigace na stránkách"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Další nastavení"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "Správa karet"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "Nástroje"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "mimo obrázek"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "mimo odkaz"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "mimo odkazy a obrázky"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "neplatí při vybraném objektu"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "přes obrázek"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "přes odkaz"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "při vybraném objektu"
+  },
+  "descrip_bookmark": {
+    "description": "Action description",
+    "message": "Přidat stránku do záložek."
+  },
+  "descrip_clone_tab": {
+    "description": "Action description for clone_tab",
+    "message": "Rozdvojit kartu. Kopie nebude mít historii původní karty."
+  },
+  "descrip_clone_tab_hack": {
+    "description": "Action description for clone_tab",
+    "message": "Rozdvojit kartu. Načíst její historii pomocí nedokonalého triku"
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "Zavřít všechny karty nalevo od vybrané"
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "Zavřít v okně všechny karty kromě vybrané"
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "Zavřít všechny karty napravo od vybrané"
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Zavřít vybranou kartu"
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "Zavřít všechny karty v okně"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "Zkopírovat označený text do schránky"
+  },
+  "descrip_goto_bottom": {
+    "description": "Action description for goto_bottom",
+    "message": "Posunout dolů po stránce"
+  },
+  "descrip_goto_top": {
+    "description": "Action description for goto_top",
+    "message": "Posunout nahoru po stránce"
+  },
+  "descrip_hide_image": {
+    "description": "Action description",
+    "message": "Odstranit ze stránky obrázek, na němž je myš"
+  },
+  "descrip_maximize_x": {
+    "description": "Action description for clone_tab",
+    "message": "Toto je ošklivý hack k napodobení maximalizace okna"
+  },
+  "descrip_merge_tabs": {
+    "description": "Action description for merge_tabs",
+    "message": "Sloučit všechny karty okna s oknem naposledy vybraným"
+  },
+  "descrip_minimize_x": {
+    "description": "Action description for clone_tab",
+    "message": "Toto je _velmi_ ošklivý hack k napodobení minimalizace okna"
+  },
+  "descrip_navigate_tab": {
+    "description": "Action description for new_tab",
+    "message": "Jít na stránku Nová karta (adresu můžete nastavit níže)"
+  },
+  "descrip_new_tab": {
+    "description": "Action description for new_tab",
+    "message": "Otevřít v okně novou kartu (adresu můžete nastavit níže)"
+  },
+  "descrip_new_tab_back": {
+    "description": "Action description for new_tab_back",
+    "message": "Začněte s gestem na odkazu, a otevře se v nové kartě, na niž se hned nepřepne („nová karta na pozadí“)"
+  },
+  "descrip_new_tab_link": {
+    "description": "Action description for new_tab_link",
+    "message": "Začněte s gestem na odkazu, a otevře se v nové kartě"
+  },
+  "descrip_new_window": {
+    "description": "Action description for new_window",
+    "message": "Otevřít nové okno s výchozí kartou"
+  },
+  "descrip_new_window_link": {
+    "description": "Action description",
+    "message": "Začněte s gestem na odkazu, a otevře se v novém okně"
+  },
+  "descrip_next_tab": {
+    "description": "Action description for next_tab",
+    "message": "Přepnout na kartu vpravo"
+  },
+  "descrip_next_window": {
+    "description": "Action description for clone_tab",
+    "message": "Přepnout na okno, jež bylo vybráno před nejdelší dobou"
+  },
+  "descrip_open_bookmarks": {
+    "description": "Action description",
+    "message": "Otevřít v nové kartě Správce záložek"
+  },
+  "descrip_open_downloads": {
+    "description": "Action description",
+    "message": "Otevřít v nové kartě Stahování"
+  },
+  "descrip_open_extensions": {
+    "description": "Action description",
+    "message": "Otevřít v nové kartě Rozšíření"
+  },
+  "descrip_open_history": {
+    "description": "Action description",
+    "message": "Otevřít v nové kartě Historii"
+  },
+  "descrip_open_image": {
+    "description": "Action description",
+    "message": "Otevřít v nové kartě obrázek, na němž je myš"
+  },
+  "descrip_options": {
+    "description": "Action description for options",
+    "message": "Otevřít tuto stránku nastavení"
+  },
+  "descrip_page_back": {
+    "description": "Action description for page_back",
+    "message": "Jít o jeden krok zpět v historii karty"
+  },
+  "descrip_page_back_close": {
+    "description": "Action description for page_back_close",
+    "message": "Jít o jeden krok zpět v historii karty; nezbývá-li žádná historie, zavřít kartu"
+  },
+  "descrip_page_down": {
+    "description": "Action description for page_down",
+    "message": "Posunout stránku dolů o 80 %"
+  },
+  "descrip_page_forward": {
+    "description": "Action description for page_forward",
+    "message": "Jít v kartě jednu stránku vpřed"
+  },
+  "descrip_page_next": {
+    "description": "Action description for page_next",
+    "message": "Zkusit jít na další stránku, podle odkazu s textem „next“ („další“)"
+  },
+  "descrip_page_prev": {
+    "description": "Action description for page_prev",
+    "message": "Zkusit jít na předchozí stránku, podle odkazu s textem „previous“ („předchozí“)"
+  },
+  "descrip_page_up": {
+    "description": "Action description for page_up",
+    "message": "Posunout stránku nahoru o 80 %"
+  },
+  "descrip_parent_dir": {
+    "description": "Action description",
+    "message": "Přejít k nadřazenému adresáři stránky. V případě kořenového adresáře odstranit nižší domény."
+  },
+  "descrip_pin": {
+    "description": "Action description",
+    "message": "Připnout kartu"
+  },
+  "descrip_prev_tab": {
+    "description": "Action description for prev_tab",
+    "message": "Přepnout na kartu vlevo"
+  },
+  "descrip_prev_window": {
+    "description": "Action description for clone_tab",
+    "message": "Přepnout na minulé vybrané okno"
+  },
+  "descrip_print": {
+    "description": "Action description",
+    "message": "Vytisknout stránku"
+  },
+  "descrip_reload_all_tabs": {
+    "description": "Action description",
+    "message": "Načíst znovu všechny karty v okně"
+  },
+  "descrip_reload_tab": {
+    "description": "Action description for reload_tab",
+    "message": "Načíst znovu obsah karty"
+  },
+  "descrip_reload_tab_full": {
+    "description": "Action description for reload_tab_full",
+    "message": "Plně znovu načíst kartu (vynechat cache)"
+  },
+  "descrip_search_sel": {
+    "description": "Action description",
+    "message": "Hledat označený text Googlem"
+  },
+  "descrip_show_cookies": {
+    "description": "Action description",
+    "message": "Ukázat seznam všech cookies ze stránky"
+  },
+  "descrip_split_tabs": {
+    "description": "Action description for split_tabs",
+    "message": "Otevřít všechny karty vpravo od aktivní do nového okna."
+  },
+  "descrip_status": {
+    "description": "Action description for status",
+    "message": "Otevřít stránku se stavem rozšíření Smooth Gestures"
+  },
+  "descrip_stop": {
+    "description": "Action description for stop",
+    "message": "Zastavit načítání v kartě (u některých, jako např. stránek s obrázkem, nemusí fungovat)"
+  },
+  "descrip_tab_to_left": {
+    "description": "Action description",
+    "message": "Posunout aktivní kartu vlevo"
+  },
+  "descrip_tab_to_right": {
+    "description": "Action description",
+    "message": "Posunout aktivní kartu vpravo"
+  },
+  "descrip_toggle_bookmark": {
+    "description": "Action description",
+    "message": "Odstranit existující záložku nebo ji vytvořit."
+  },
+  "descrip_toggle_pin": {
+    "description": "Action description",
+    "message": "Změnit upíchnutí karty"
+  },
+  "descrip_translate": {
+    "description": "Action description",
+    "message": "Přeložit označený text do výchozího jazyka (pravděpodobně čeština)"
+  },
+  "descrip_unbookmark": {
+    "description": "Action description",
+    "message": "Odstranit záložku na tuto stránku (pokud existuje)."
+  },
+  "descrip_undo_close": {
+    "description": "Action description for undo_close",
+    "message": "Otevřít posledně zavřenou kartu. Jedná se pouze o načtení adresy stránky, Ctrl+Shift+T je stále nadřazené, jelikož spravuje historii."
+  },
+  "descrip_undo_close_hack": {
+    "description": "Action description for undo_close",
+    "message": "Otevřít posledně zavřenou kartu. Načte historii použitím nedokonalého postupu"
+  },
+  "descrip_unpin": {
+    "description": "Action description",
+    "message": "Odpíchnout aktivní kartu"
+  },
+  "descrip_view_source": {
+    "description": "Action description for view_source",
+    "message": "Zobrazit zdrojový kód aktivní stránky"
+  },
+  "descrip_zoom_img_in": {
+    "description": "Action description",
+    "message": "Přiblížit obrázek, nad nímž je kurzor myši"
+  },
+  "descrip_zoom_img_out": {
+    "description": "Action description",
+    "message": "Oddálit obrázek, nad nímž je kurzor myši"
+  },
+  "descrip_zoom_img_zero": {
+    "description": "Action description",
+    "message": "Nastavit původní proporce obrázku před jeho přiblížením"
+  },
+  "descrip_zoom_in": {
+    "description": "Action description",
+    "message": "Přiblížit celou stránku"
+  },
+  "descrip_zoom_out": {
+    "description": "Action description",
+    "message": "Oddálit celou stránku"
+  },
+  "descrip_zoom_zero": {
+    "description": "Action description",
+    "message": "Vrátit zpět přiblížení nebo oddálení"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Gesta myší! Pohybujte se rychle a jednoduše po webových stránkách s použitím myši a klávesnice."
+  },
+  "doubleclick_alert": {
+    "description": "Pop up an alert box the first time a user right-clicks to let them know that they may need to double-click the right mouse button to get to the context menu",
+    "message": "Double-klikněte pravým tlačítkem myši se dostanete do kontextového menu. \n\nTento účinek Linux a Mac verze Chrome. (Nutné pro gesta do práce)"
+  },
+  "gesture_rocker_descrip": {
+    "description": "rocker right gesture description",
+    "message": "Podržte $BUTTON1$ tlačítko, stiskněte $BUTTON2$",
+    "placeholders": {
+      "button1": {
+        "content": "$1",
+        "example": "right"
+      },
+      "button2": {
+        "content": "$2",
+        "example": "right"
+      }
+    }
+  },
+  "gesture_wD": {
+    "description": "wheel down gesture title",
+    "message": "Posunout dolů"
+  },
+  "gesture_wU": {
+    "description": "wheel up gesture title",
+    "message": "Posunout nahoru"
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "Toto rozšíření pro gesta myší umožňuje pohybem myši při držení stisknutého pravého tlačítka myši spouštět různé akce, například navigaci na stránkách \nnebo na správu záložek. Podporuje gesta typů kliknout-a-táhnout (gesto myši), kliknout-a-rolovat (rolovací gesta), kliknout-a-kliknout (překlikávací gesta) a klávesové zkratky.\n\n• Bohaté možnosti přizpůsobení gest (a vlastní akce!)\n• Podporuje diagonální gesta, synchronizaci, import a export nastavení \n• Z bezpečnostních důvodů nefunguje na stránkách rozšíření ani jiných speciálních Chrome stránkách. Zato funguje na téměř všech http:// a https:// stránkách."
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Rozšíření Smooth Gestures"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Vyzkoušejte si jedno z následujících gest:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Gesto myší: Podržte stisknuté $BUTTON$ tlačítko myši a pohybem myši nakreslete gesto. Potom tlačítko uvolněte.",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_3": {
+    "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Posunovací gesto: Podržte tlačítko $BUTTON$ tlačítko myši a otočte  kolečkem myši.",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_4": {
+    "description": "[bullet point] instructions for making a gesture (rocker)",
+    "message": "Rocker Gesto: Podržte tlačítko myši, pak klikněte na jiné tlačítko."
+  },
+  "options_addgesture_instruct_5": {
+    "description": "[bullet point] instructions for doing a keyboard shortcut",
+    "message": "Klávesové zkratky: Podržte stisknuté jakékoliv modifikační klávesy (nebo žádnou), poté stiskněte jinou klávesu."
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Toto gesto se již používá pro akci $ACTION$.",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Nastavit gesto pro akci $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addcustomaction": {
+    "description": "Label for a button to start setting up a new custom action",
+    "message": "Přidat vlastní akci"
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Přidat gesto"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Přepsat gesto"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Přidat gesto"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Zkusit znovu"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "Akce gesta"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Další"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Nastavení"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Zobrazit stav"
+  },
+  "options_externalactions": {
+    "description": "link to external actions",
+    "message": "Externí akce"
+  },
+  "options_moreactions": {
+    "description": "Link to access more actions. These actions don't currently have a gesture assigned",
+    "message": "Další dostupné akce"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "levé"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "střední"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "pravé"
+  },
+  "options_note_doubleclick": {
+    "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
+    "message": "Možná budete muset dvojklikem pravým tlačítkem myši otevřete kontextové menu. To ovlivní Linux a Mac verze Chrome"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Skrýt ikonu"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Nemůžete si zapamatovat všechna gesta, které jste nastavili? Vytiskněte si tahák."
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Tisk"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "Líbí se vám Smooth Gestures? Prosím $LINK$!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "ohodnoťte je 5 hvězdičkami"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Umíte anglicky? Pomozte $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "přeložit Smooth Gestures do vašeho jazyka"
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "Doplněk Smooth Gestures byl aktualizován na verzi $VERSION$.",
+    "placeholders": {
+      "version": {
+        "content": "$2",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Možnosti!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "Vítají vás gesta Smooth Gestures."
+  },
+  "options_welcome_1": {
+    "description": "First just-installed bullet point",
+    "message": "Nainstalovali jste Smooth Gestures. Na tuto stránku Možnosti se vrátíte podržením pravého tlačítka myši a tažením do tvaru písmene \"O\" (zkuste: doprava-dolů-doleva-nahoru-doprava)."
+  },
+  "options_welcome_2": {
+    "description": "Second just-installed bullet point",
+    "message": "Chcete-li nastavit nová gesta nebo akce, klikněte na příslušné tlačítko \"+\" níže."
+  },
+  "options_welcome_3": {
+    "description": "Third just-installed bullet point",
+    "message": "Konfiguraci různých možností provedete kliknutím na tlačítko \"Nastavení\" vpravo nebo po odrolování dolů do spodní části stránky."
+  },
+  "popup_button_hidepageaction": {
+    "description": "a button to hide the pageaction",
+    "message": "Skrýt ikonu tohoto URL"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "Možnosti"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "Načíst znovu"
+  },
+  "popup_status_blocked_1": {
+    "description": "text explaining a blocked tab",
+    "message": "Na této stránce aplikace Chrome z bezpečnostních důvodů doplňky zablokovala. "
+  },
+  "popup_status_blocked_file2": {
+    "description": "text explaining how to make a file:// tab work",
+    "message": "Chcete-li, aby gesta Smooth Gestures fungovala i s protokoly file:// a ftp://, přejděte na sem: $LINK$. Pak v části Smooth Gestures zaškrtněte možnost  \"Allow access to file URLs\".",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Extensions"
+      }
+    }
+  },
+  "popup_status_blocked_file2_link": {
+    "description": "text naming the link that goes to chrome://extensions/",
+    "message": "Doplňky"
+  },
+  "popup_status_blocked_newtab2": {
+    "description": "text explaining how to make a newtab page work",
+    "message": "Chcete-li přidat gesta i na stránku Nová karta, vyzkoušejte doplněk $LINK$.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Smooth Gestures New Tab Add-on"
+      }
+    }
+  },
+  "popup_status_blocked_newtab2_link": {
+    "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
+    "message": "Ultimate New Tab"
+  },
+  "popup_status_broken": {
+    "description": "text explaining a broken tab",
+    "message": "Na této stránce momentálně gest nefungují."
+  },
+  "popup_status_broken_short": {
+    "description": "short text saying that gestures are broken on this page.",
+    "message": "Gesta nefungují"
+  },
+  "popup_status_unable_short": {
+    "description": "short text saying that gestures are blocked by this page.",
+    "message": "Gesta blokována"
+  },
+  "popup_status_working": {
+    "description": "text explaining a working tab",
+    "message": "Na této stránce gesta fungují."
+  },
+  "popup_status_working_short": {
+    "description": "short text saying that gestures are working on this page.",
+    "message": "Gesta fungují"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Uložit nastavení"
+  },
+  "setting_button_import": {
+    "description": "button to load a settings file",
+    "message": "Nahrát soubor s nastavením"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "Levé tlačítko"
+  },
+  "setting_button_middle": {
+    "description": "choose middle mouse button",
+    "message": "Prostřední tlačítko"
+  },
+  "setting_button_off": {
+    "description": "setting label",
+    "message": "Vypnuto"
+  },
+  "setting_button_on": {
+    "description": "setting label",
+    "message": "Zapnuto"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "obnovit"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "Pravé tlačítko"
+  },
+  "setting_button_update": {
+    "description": "button label",
+    "message": "Aktualizovat"
+  },
+  "setting_closelastblock": {
+    "description": "setting title",
+    "message": "Nezavírejte poslední záložku"
+  },
+  "setting_disabled": {
+    "description": "choose no mouse button (gestures are disabled)",
+    "message": "neaktivní"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "skrýt"
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Synchronizace"
+  },
+  "status_button_reloadall": {
+    "description": "button to reload all broken pages",
+    "message": "Znovu načíst nepracující stránky"
+  },
+  "status_button_reloadone": {
+    "description": "button to reload single broken page",
+    "message": "Znovu načíst stránku"
+  },
+  "status_legend_blocked": {
+    "description": "status of a page",
+    "message": "Blokované systémové stránky"
+  },
+  "status_legend_broken": {
+    "description": "status of a page",
+    "message": "Nefunguje"
+  },
+  "status_legend_loading": {
+    "description": "status of a page",
+    "message": "Načítá se"
+  },
+  "status_legend_working": {
+    "description": "status of a page",
+    "message": "Funguje"
+  },
+  "status_link_options": {
+    "description": "Link to go to the options page",
+    "message": "Nastavit možnosti rozšíření Smooth Gestures"
+  },
+  "status_title": {
+    "description": "The title of the status page, at top and tab name",
+    "message": "Stav"
+  },
+  "status_window_other": {
+    "description": "title for a group of tab statuses",
+    "message": "Jiné okna"
+  },
+  "status_window_this": {
+    "description": "title for a group of tab statuses",
+    "message": "Toto okno"
+  }
+}

@@ -1,0 +1,688 @@
+{
+  "action_bookmark": {
+    "description": "Action title",
+    "message": "Kedvencek"
+  },
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Lap duplikálása"
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "Másodpéldány (hack)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "Balra lévő lapok bezárása"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Minden más lap bezárása"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "Jobbra lévő lapok bezárása"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Lap bezárása"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Ablak bezárása"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "Szöveg másolása vágólapra"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Ugrás az aljára"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Ugrás az elejére"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Kép elrejtése"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Ablak maximalizálása (hack)"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "* Lapok egyesítése"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Ablak minimalizálás (hack)"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "Ugrás az \"Új lap\" oldalra"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Új lap"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "Link megnyitása háttérben egy új lapon"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "Link megnyitása új lapon"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Új ablak"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "Link megnyitása új ablakban"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Következő lap"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "Következő ablak"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "Könyvjelzőkezelő megnyitása"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Letöltések megnyitása"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "Kiterjesztések megnyitása"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Előzmények megnyitása"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Kép megnyitása"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Beállítások megnyitása"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "Vissza"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "Vissza vagy Bezárás"
+  },
+  "action_page_down": {
+    "description": "Action title for page_down",
+    "message": "Görgetés le"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "Előre"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "Következő oldal"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "Előző oldal"
+  },
+  "action_page_up": {
+    "description": "Action title for page_up",
+    "message": "Görgetés fel"
+  },
+  "action_parent_dir": {
+    "description": "Action title",
+    "message": "Gyökérkönyvtár"
+  },
+  "action_pin": {
+    "description": "Action title",
+    "message": "Lap rögzítése"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "Előző lap"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "Előző ablak (hack)"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Nyomtatás"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "Minden lap újratöltése"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "Lap újratöltése"
+  },
+  "action_reload_tab_full": {
+    "description": "Action title for reload_tab_full",
+    "message": "Lap újratöltése (gyorsítótár nélkül"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Google keresés"
+  },
+  "action_show_cookies": {
+    "description": "Action title",
+    "message": "Sütik listája"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "Státus oldal megnyitása"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "Letöltés megállítása"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "Lap mozgatása balra"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "Lap mozgatása jobbra"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "Fordítás kiválasztása"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Könyvjelző eltávolítása"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "Lap bezárásának visszavonása"
+  },
+  "action_undo_close_hack": {
+    "description": "Action title for undo_close_hack",
+    "message": "Lapbezárás visszavonása (hack)"
+  },
+  "action_unpin": {
+    "description": "Action title",
+    "message": "Lap rögzítésének feloldása"
+  },
+  "action_view_source": {
+    "description": "Action title for view_source",
+    "message": "Forrás megtekintése"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Kép nagyítása"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Kép kicsinyítése"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "Nagyítás visszaállítása a képen"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "Lap nagyítása"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "Lap kicsinyítése"
+  },
+  "action_zoom_zero": {
+    "description": "Action title",
+    "message": "Nagyítás visszaállítása az oldalon"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "Egyéni műveletek"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "Egyéb műveletek"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "Böngészés"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Egyéb beállítások"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "Lapok"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "Eszközök"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "nem képről indítva"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "nem linkről indítva"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "nem képről vagy linkről indítva"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "kijelölés nélkül"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "képről indítva"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "linkről indítva"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "kijelölés után"
+  },
+  "descrip_bookmark": {
+    "description": "Action description",
+    "message": "Jelenlegi oldal könyvjelzőkhöz adása"
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "Jelenlegi lapból balra levő összes lap bezárása"
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "Összes lap bezárása a jelenlegi ablakban, kivétel a jelenlegi lap"
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "Jelenlegi laptól jobbra levő összes lap bezárása"
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Kiválasztott lapok bezárása"
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "Összes lap bezárása a jelenlegi ablakban"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "Kijelölt szöveg másolása a vágólapra"
+  },
+  "descrip_goto_bottom": {
+    "description": "Action description for goto_bottom",
+    "message": "Görgetés a lap aljára"
+  },
+  "descrip_goto_top": {
+    "description": "Action description for goto_top",
+    "message": "Görgetés a lap tetejére"
+  },
+  "descrip_next_tab": {
+    "description": "Action description for next_tab",
+    "message": "Jelenlegi laptól jobbra levő lap kiválasztása"
+  },
+  "descrip_open_bookmarks": {
+    "description": "Action description",
+    "message": "Könyvjelzőkezelő megnyitása új lapon"
+  },
+  "descrip_open_downloads": {
+    "description": "Action description",
+    "message": "Letöltések megnyitása új lapon"
+  },
+  "descrip_open_extensions": {
+    "description": "Action description",
+    "message": "Bővítmények megnyitása új lapon"
+  },
+  "descrip_open_history": {
+    "description": "Action description",
+    "message": "Előzmények megnyitása új lapon"
+  },
+  "descrip_open_image": {
+    "description": "Action description",
+    "message": "Az egérmutató alatti kép megnyitása új lapon"
+  },
+  "descrip_options": {
+    "description": "Action description for options",
+    "message": "Jelenlegi beállítások lap megnyitása"
+  },
+  "descrip_page_down": {
+    "description": "Action description for page_down",
+    "message": "Lap görgetése le 80%-kal"
+  },
+  "descrip_page_next": {
+    "description": "Action description for page_next",
+    "message": "Próbálja meg betölteni a következő lapot egy olyan link segítségével, ami a 'next' szöveget tartalmazza"
+  },
+  "descrip_page_prev": {
+    "description": "Action description for page_prev",
+    "message": "Próbálja meg betölteni az előző lapot egy olyan link segítségével, ami a 'previous' szöveget tartalmazza"
+  },
+  "descrip_page_up": {
+    "description": "Action description for page_up",
+    "message": "Lap görgetése fel 80%-kal"
+  },
+  "descrip_pin": {
+    "description": "Action description",
+    "message": "Jelenlegi lap rögzítése"
+  },
+  "descrip_print": {
+    "description": "Action description",
+    "message": "Jelenlegi lap nyomtatása"
+  },
+  "descrip_reload_all_tabs": {
+    "description": "Action description",
+    "message": "Összes lap újratöltése a jelenlegi ablakban"
+  },
+  "descrip_reload_tab": {
+    "description": "Action description for reload_tab",
+    "message": "Jelenlegi lap tartalmának újratöltése"
+  },
+  "descrip_reload_tab_full": {
+    "description": "Action description for reload_tab_full",
+    "message": "Jelenlegi lap tartalmának újratöltése (gyorsítótár kihagyása)"
+  },
+  "descrip_search_sel": {
+    "description": "Action description",
+    "message": "Kijelölt szöveg keresése Google-lel"
+  },
+  "descrip_show_cookies": {
+    "description": "Action description",
+    "message": "Jelenlegi lap által tárolt sütik listájának megjelenítése"
+  },
+  "descrip_status": {
+    "description": "Action description for status",
+    "message": "Smoothg Gestures állapotlap megnyitása"
+  },
+  "descrip_stop": {
+    "description": "Action description for stop",
+    "message": "Jelenlegi lap betöltésének leállítása. (Néhány oldalon nem működhet, mint pl.: képek)"
+  },
+  "descrip_tab_to_left": {
+    "description": "Action description",
+    "message": "Jelenlegi lap mozgatása eggyel balra"
+  },
+  "descrip_tab_to_right": {
+    "description": "Action description",
+    "message": "Jelenlegi lap mozgatása eggyel jobbra"
+  },
+  "descrip_translate": {
+    "description": "Action description",
+    "message": "Kijelölt szöveg fordítása a böngésző alapértelmezett nyelvére"
+  },
+  "descrip_unpin": {
+    "description": "Action description",
+    "message": "Jelenlegi lap rögzítésének feloldása"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Egérmozdulatok. Böngéssz gyorsan és egyszerűen egérmozdulatokkal vagy a billentyűzettel."
+  },
+  "gesture_wD": {
+    "description": "wheel down gesture title",
+    "message": "Görgetés le"
+  },
+  "gesture_wU": {
+    "description": "wheel up gesture title",
+    "message": "Görgetés fel"
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "Ez az egérmozdulatokat támogató bővítmény lehetővé teszi, hogy a jobb egérgomb nyomva tartása közben, az egér mozgatásával indítsunk műveleteket, úgy, mint az oldalon történő navigálás, vagy a fülkezelés. Ismeri a kattints-és-húzd (egérmozdulat), kattints-és-görgess (görgőmozdulat), kattints-és-kattints (hintázó mozdulat) utasításokat és a billentyű-kombinációkat!\n\n• A mozulatok erőteljesen testreszabhatóak (és a műveletek!)\n• Támogatja a függőleges mozdulatokat, a beállítások szinkronizálását/importját/exportját\n• Nem működik ezen a bővítmény oldalon, vagy egyéb beépített chrome oldalon a bővítményekre érvényes biztonsági korlátozásoknak köszönhetően, DE majd minden http:// és https:// oldalon igen."
+  },
+  "options_addgesture_instruct_5": {
+    "description": "[bullet point] instructions for doing a keyboard shortcut",
+    "message": "Gyorsbillentyűzet:"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Próbálja újra"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Több"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Beállítások"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Állapot megtekintése"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "bal"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "középső"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "jobb"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Ikon elrejtése"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Nyomtatás"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Beszél angolul? $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "fordítsd le a Smooth Gestures-t a saját nyelvedre"
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Beállítások"
+  },
+  "popup_button_hidepageaction": {
+    "description": "a button to hide the pageaction",
+    "message": "URL ikon eltüntetése"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "Beállítások"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "Újratöltés"
+  },
+  "popup_status_blocked_1": {
+    "description": "text explaining a blocked tab",
+    "message": "A Chrome biztonsági okokból letiltotta a bővítményeket ezen az oldalon."
+  },
+  "popup_status_blocked_file2": {
+    "description": "text explaining how to make a file:// tab work",
+    "message": "Hogy a Smooth Gestures működjön a file:// és az ftp:// protokollok használata esetén, kattintson a $LINK$, majd jelölje be a ,,Fájl URL-ekhez való hozzáférés engedélyezése\" jelölőnégyzetet!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Extensions"
+      }
+    }
+  },
+  "popup_status_blocked_file2_link": {
+    "description": "text naming the link that goes to chrome://extensions/",
+    "message": "Bővítményekre"
+  },
+  "popup_status_blocked_newtab2": {
+    "description": "text explaining how to make a newtab page work",
+    "message": "Próbáld ki az $LINK$-et az egérmozdulatok használatához az ,,Új lap\" oldalon ",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Smooth Gestures New Tab Add-on"
+      }
+    }
+  },
+  "popup_status_broken": {
+    "description": "text explaining a broken tab",
+    "message": "Az egérmozdulatok jelenleg nem működnek ezen az oldalon."
+  },
+  "popup_status_broken_short": {
+    "description": "short text saying that gestures are broken on this page.",
+    "message": "Egérmozdulatok hibásan működnek"
+  },
+  "popup_status_unable_short": {
+    "description": "short text saying that gestures are blocked by this page.",
+    "message": "Egérmozdulatok blokkolva"
+  },
+  "popup_status_working": {
+    "description": "text explaining a working tab",
+    "message": "Az egérmozdulatok nem működnek ezen az oldalon."
+  },
+  "popup_status_working_short": {
+    "description": "short text saying that gestures are working on this page.",
+    "message": "Egérmozdulatok rendben"
+  },
+  "setting_blacklist": {
+    "description": "setting title",
+    "message": "Feketelista"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Beállítások mentése"
+  },
+  "setting_button_import": {
+    "description": "button to load a settings file",
+    "message": "Beállítások betöltése"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "Bal egérgomb"
+  },
+  "setting_button_middle": {
+    "description": "choose middle mouse button",
+    "message": "Középső egérgomb"
+  },
+  "setting_button_off": {
+    "description": "setting label",
+    "message": "Ki"
+  },
+  "setting_button_on": {
+    "description": "setting label",
+    "message": "Be"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "Visszaállítás"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "Jobb egérgomb"
+  },
+  "setting_button_update": {
+    "description": "button label",
+    "message": "Frissítés"
+  },
+  "setting_closelastblock": {
+    "description": "setting title",
+    "message": "Ne zárja be az utolsó lapot"
+  },
+  "setting_disabled": {
+    "description": "choose no mouse button (gestures are disabled)",
+    "message": "Letiltva"
+  },
+  "setting_group_context": {
+    "description": "title of a group of settings",
+    "message": "Környezeti menü beállításai"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "elrejt"
+  },
+  "setting_group_newtab": {
+    "description": "title of a group of settings",
+    "message": "Új lap beállításai"
+  },
+  "setting_group_show": {
+    "description": "button to show a group of settings",
+    "message": "mutat"
+  },
+  "setting_hidepageaction": {
+    "description": "setting title",
+    "message": "Mindig mutassa az ikont"
+  },
+  "setting_reset": {
+    "description": "setting title",
+    "message": "Alapértelmezett értékek visszaállítása"
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Szinkronizálás"
+  },
+  "setting_warning_reset": {
+    "description": "warn that setting will be lost during a reset",
+    "message": "A visszaállítással elveszíti az összes személyre szabott beállítását. Biztos hogy folytatni akarja?"
+  },
+  "status_button_reloadall": {
+    "description": "button to reload all broken pages",
+    "message": "Az összes nem működő lap újratöltése"
+  },
+  "status_button_reloadone": {
+    "description": "button to reload single broken page",
+    "message": "Újratöltés"
+  },
+  "status_legend_blocked": {
+    "description": "status of a page",
+    "message": "Blokkolt rendszeroldalak"
+  },
+  "status_legend_broken": {
+    "description": "status of a page",
+    "message": "Nem működik"
+  },
+  "status_legend_loading": {
+    "description": "status of a page",
+    "message": "Betöltés"
+  },
+  "status_legend_working": {
+    "description": "status of a page",
+    "message": "Dolgozom"
+  },
+  "status_link_options": {
+    "description": "Link to go to the options page",
+    "message": "Konfiguráld a Smooth Gestures-t: Beállítások!"
+  },
+  "status_title": {
+    "description": "The title of the status page, at top and tab name",
+    "message": "Állapot"
+  },
+  "status_window_other": {
+    "description": "title for a group of tab statuses",
+    "message": "Másik ablak"
+  },
+  "status_window_this": {
+    "description": "title for a group of tab statuses",
+    "message": "Ez az ablak"
+  }
+}

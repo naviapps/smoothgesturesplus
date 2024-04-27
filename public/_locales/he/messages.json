@@ -1,0 +1,920 @@
+{
+  "action_bookmark": {
+    "description": "Action title",
+    "message": "הוסף לסימניות"
+  },
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "שכפל כרטיסיה "
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "שכפל כרטיסיה (פריצה)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "סגור את כל הלשוניות משמאל"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "סגור את כל הלשוניות האחרות"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "סגור את כל הלשוניות מימין"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "סגור כרטיסיה "
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "סגור חלון"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "העתק טקסט"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": " גלול לתחתית העמוד"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "גלול לראש העמוד"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "הסתר תמונה"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "הגדל חלון"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "* שלב כרטיסיה *"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "מזער חלון"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "פתח דף 'כרטיסיות חדשות'"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "כרטיסיה חדשה"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "כרטיסיה חדשה (פתח קישור ברקע)"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "כרטיסיה חדשה (פתח קישור)"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "חלון חדש"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "חלון חדש (פתח קישור)"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "כרטיסיה הבאה"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "חלון הבא"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "פתח את מנהל הסימניות"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "פתח את 'הורדות'"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "פתח את 'הרחבות'"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "פתח את 'היסטוריה'"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "פתח תמונה"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "פתח את 'הגדרות'"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "הקודם בהיסטוריה"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "הקודם או סגור"
+  },
+  "action_page_down": {
+    "description": "Action title for page_down",
+    "message": "עמוד למטה"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "הבא בהיסטוריה"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "הבא"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "הקודם"
+  },
+  "action_page_up": {
+    "description": "Action title for page_up",
+    "message": "עמוד למעלה"
+  },
+  "action_parent_dir": {
+    "description": "Action title",
+    "message": "מדריך להורים"
+  },
+  "action_pin": {
+    "description": "Action title",
+    "message": "כרטיסיית pin"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "הכרטיסייה הקודמת"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "החלון הקודם"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "הדפס"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "טען שוב את כל הכרטיסיות"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "טען כרטיסיה מחדש"
+  },
+  "action_reload_tab_full": {
+    "description": "Action title for reload_tab_full",
+    "message": "טען שוב (ללא מטמון)"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Googleחפש ב"
+  },
+  "action_show_cookies": {
+    "description": "Action title",
+    "message": "רשימת קוקיס"
+  },
+  "action_split_tabs": {
+    "description": "Action title for split_tabs",
+    "message": "* פצל כרטיסיות *"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "פתח עמוד מצב"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "הפסק את טעינת הדף"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "הזז כרטיסיה שמאלה"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "הזז כרטיסיה ימינה"
+  },
+  "action_toggle_bookmark": {
+    "description": "Action title",
+    "message": "קבע כסימנייה"
+  },
+  "action_toggle_pin": {
+    "description": "Action title",
+    "message": "הצמד כרטיסיה (Pin)"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "תרגם טקסט מסומן"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "מחק סימניה"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "בטל סגירת כרטיסיה "
+  },
+  "action_undo_close_hack": {
+    "description": "Action title for undo_close_hack",
+    "message": "בטל סגירת כרטיסיה "
+  },
+  "action_unpin": {
+    "description": "Action title",
+    "message": "בטל הצמדה של כרטיסיה"
+  },
+  "action_view_source": {
+    "description": "Action title for view_source",
+    "message": "צפה במקור הדף"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "הגדל תמונה"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "הקטן תמונה"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "גודל מקורי של תמונה"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "הגדל עמוד"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "הקטן עמוד"
+  },
+  "action_zoom_zero": {
+    "description": "Action title",
+    "message": "גודל מקורי של עמוד"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "פעולות מותאמות אישית"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "פעולות אחרות"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "נווט בעמוד"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "הגדרות אחרות"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "ניהול לשוניות"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "ללא קטגוריה"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "לא ניתן להפעיל מחווה זו על תמונה"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "לא ניתן להפעיל מחווה זו על קישור"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "לא ניתן להפעיל מחווה זו על תמונות או קישורים"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "לא ניתן להפעיל מחווה זו עם בחירה"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "על תמונה"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "על קישור"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "סמן משהו"
+  },
+  "descrip_bookmark": {
+    "description": "Action description",
+    "message": "הוסף סימנייה לעמוד זה."
+  },
+  "descrip_clone_tab": {
+    "description": "Action description for clone_tab",
+    "message": "פתח כרטיסיה זהה לדף זה. בכרטיסיה החדשה לא תיהיה ההיסטוריה של הדף המקורי."
+  },
+  "descrip_clone_tab_hack": {
+    "description": "Action description for clone_tab",
+    "message": "פתח כרטיסיה זהה לדף זה. עם היסטוריה של הדף המקורי"
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "סגור את הכרטיסיות משמאל"
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "סגור כרטיסיות אחרות"
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "סגור כרטיסיות מימין"
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "סגור כרטיסיה"
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "סגור את כל הלשוניות בחלון הנוכחי"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "העתק טקסט מסומן"
+  },
+  "descrip_goto_bottom": {
+    "description": "Action description for goto_bottom",
+    "message": "גלול לתחתית העמוד"
+  },
+  "descrip_goto_top": {
+    "description": "Action description for goto_top",
+    "message": "גלול לראש העמוד"
+  },
+  "descrip_hide_image": {
+    "description": "Action description",
+    "message": "הסר את התמונה שהעכבר עליה"
+  },
+  "descrip_maximize_x": {
+    "description": "Action description for clone_tab",
+    "message": "הגדל חלון"
+  },
+  "descrip_merge_tabs": {
+    "description": "Action description for merge_tabs",
+    "message": "מזג את הכרטיסיות של חלון זה עם הכרטיסיות של החלון הקודם"
+  },
+  "descrip_minimize_x": {
+    "description": "Action description for clone_tab",
+    "message": "מזער חלון"
+  },
+  "descrip_navigate_tab": {
+    "description": "Action description for new_tab",
+    "message": "נווט ל'כרטיסיות חדשות'"
+  },
+  "descrip_new_tab": {
+    "description": "Action description for new_tab",
+    "message": "כרטיסיה חדשה"
+  },
+  "descrip_new_tab_back": {
+    "description": "Action description for new_tab_back",
+    "message": "בצע מחווה על קישור כדי לפתוח אותו בכרטיסיה חדשה, אבל אל תראה את הכרטיסיה החדשה עדיין"
+  },
+  "descrip_new_tab_link": {
+    "description": "Action description for new_tab_link",
+    "message": "בצע מחווה על קישור כדי לפתוח אותו בכרטיסיה חדשה"
+  },
+  "descrip_new_window": {
+    "description": "Action description for new_window",
+    "message": "פתח חלון חדש"
+  },
+  "descrip_new_window_link": {
+    "description": "Action description",
+    "message": "בצע מחווה על קישור כדי לפתוח אותו בחלון חדש"
+  },
+  "descrip_next_tab": {
+    "description": "Action description for next_tab",
+    "message": "בחר את הכרטיסייה הימנית לכרטיסיה זו"
+  },
+  "descrip_next_window": {
+    "description": "Action description for clone_tab",
+    "message": "בחר את החלון שהסתכלת עליו הכי מוקדם"
+  },
+  "descrip_open_bookmarks": {
+    "description": "Action description",
+    "message": "פתח את מנהל הסימניות בכרטיסיה חדשה"
+  },
+  "descrip_open_downloads": {
+    "description": "Action description",
+    "message": "פתח את 'הורדות' בכרטיסיה חדשה"
+  },
+  "descrip_open_extensions": {
+    "description": "Action description",
+    "message": "פתח את 'הרחבות' בכרטיסיה חדשה"
+  },
+  "descrip_open_history": {
+    "description": "Action description",
+    "message": "פתח את 'היסטוריה' בכרטיסיה חדשה"
+  },
+  "descrip_open_image": {
+    "description": "Action description",
+    "message": "פתח את התמונה שהעכבר עליה בכרטיסיה חדשה"
+  },
+  "descrip_options": {
+    "description": "Action description for options",
+    "message": "פתח את 'אפשרויות'"
+  },
+  "descrip_page_back": {
+    "description": "Action description for page_back",
+    "message": "הקודם"
+  },
+  "descrip_page_back_close": {
+    "description": "Action description for page_back_close",
+    "message": "הקודם, אם אין אז סגור את הכרטיסיה"
+  },
+  "descrip_page_down": {
+    "description": "Action description for page_down",
+    "message": "גלול למטה 80%"
+  },
+  "descrip_page_forward": {
+    "description": "Action description for page_forward",
+    "message": "הבא"
+  },
+  "descrip_page_next": {
+    "description": "Action description for page_next",
+    "message": "נסה לעבור לעמוד הבא ע\"י שימוש הקישור: 'next'"
+  },
+  "descrip_page_prev": {
+    "description": "Action description for page_prev",
+    "message": "נסה לעבור לעמוד הקודם ע\"י שימוש הקישור: 'previous'"
+  },
+  "descrip_page_up": {
+    "description": "Action description for page_up",
+    "message": "גלול למעלה 80%"
+  },
+  "descrip_pin": {
+    "description": "Action description",
+    "message": "כרטיסיית pin"
+  },
+  "descrip_prev_tab": {
+    "description": "Action description for prev_tab",
+    "message": "בחר את הכרטיסיה השמאלית לכרטיסיה זו"
+  },
+  "descrip_prev_window": {
+    "description": "Action description for clone_tab",
+    "message": "עבור אל החלון הקודם שהיית בו"
+  },
+  "descrip_print": {
+    "description": "Action description",
+    "message": "הדפס"
+  },
+  "descrip_reload_all_tabs": {
+    "description": "Action description",
+    "message": "טען שוב את כל הכרטיסיות בחלון זה"
+  },
+  "descrip_reload_tab": {
+    "description": "Action description for reload_tab",
+    "message": "טען שוב את התוכן של כרטיסיה זו"
+  },
+  "descrip_reload_tab_full": {
+    "description": "Action description for reload_tab_full",
+    "message": "טען שוב את התוכן של כרטיסיה זו (ללא מטמון)"
+  },
+  "descrip_search_sel": {
+    "description": "Action description",
+    "message": "חפש בגוגל טקסט מסומן"
+  },
+  "descrip_show_cookies": {
+    "description": "Action description",
+    "message": "הראה רשימה של כל הקוקים של עמוד זה"
+  },
+  "descrip_split_tabs": {
+    "description": "Action description for split_tabs",
+    "message": "פצל את כל הכרטיסיות מימין לכרטיסיה זו (כולל זו) לחלון חדש"
+  },
+  "descrip_status": {
+    "description": "Action description for status",
+    "message": "פתח את עמוד המצב של מחוות רכות"
+  },
+  "descrip_stop": {
+    "description": "Action description for stop",
+    "message": "הפסק את טעינת הדף (יכול להיות שלא יעבוד בחלק מהדפים, כמו דפי תמונות)"
+  },
+  "descrip_tab_to_left": {
+    "description": "Action description",
+    "message": "הזז כרטיסיה זו שמאלה"
+  },
+  "descrip_tab_to_right": {
+    "description": "Action description",
+    "message": "הזז כרטיסיה זו ימינה"
+  },
+  "descrip_toggle_bookmark": {
+    "description": "Action description",
+    "message": "מוחק את הסימנייה לדף זה אם הוגדרה. מוסיף סימנייה אם אין."
+  },
+  "descrip_translate": {
+    "description": "Action description",
+    "message": "תרגם טקסט מסומן לשפת ברירת המחדל של כרום"
+  },
+  "descrip_unbookmark": {
+    "description": "Action description",
+    "message": "מוחק את הסימנייה של דף זה, אם הוגדרה"
+  },
+  "descrip_undo_close": {
+    "description": "Action description for undo_close",
+    "message": "פותח את הכרטיסייה האחרונה שנסגרה. זה טוען רק את הכתובת של הדף -- CTRL-SHIFT-T עדיף, כי זה מוסיף גם את ההיסטוריה של הדף"
+  },
+  "descrip_undo_close_hack": {
+    "description": "Action description for undo_close",
+    "message": "פותח את הכרטיסייה האחרונה שנסגרה, כולל ההיסטוריה"
+  },
+  "descrip_unpin": {
+    "description": "Action description",
+    "message": "בטל הצמדה של כרטיסייה"
+  },
+  "descrip_view_source": {
+    "description": "Action description for view_source",
+    "message": "צפה במקור הדף"
+  },
+  "descrip_zoom_img_in": {
+    "description": "Action description",
+    "message": "הגדל את התמונה שהעכבר נמצע עלייה"
+  },
+  "descrip_zoom_img_out": {
+    "description": "Action description",
+    "message": "הקטן את התמונה שהעכבר נמצע עלייה"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "מחוות עכבר! במהירות ובקלות ניתן לגלוש ולעבור בין דפים ע\"י העכבר או המקלדת."
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "הרחבת מחוות העכבר הזו, מאפשרת לך ל\"צייר\" עם העכבר צורות, כל עוד הכפתור הימני לחוץ. כל צורה שתבחר יכולה להיות כפתור מסויים בדפדפן או כעזר לגלישה חלקה יותר. ניתן גם להגדיר מחוות עבור הגלגלת, מחוות ע\"י דאבל קליק ומחוות קיצורי דרך על המקלדת."
+  },
+  "name": {
+    "description": "Extension name",
+    "message": "מחוות רכות"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "עשה אחת מהמחוות הבאות:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "מחוות עכבר: תחזיק את הלחצן ה$BUTTON$ ותצייר את מחווה ע\"י הזזת העבר, ואז עזיבת העכבר",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_3": {
+    "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "מחוות גלילה: לחץ על ה$BUTTON$ בעכבר וגלול",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_5": {
+    "description": "[bullet point] instructions for doing a keyboard shortcut",
+    "message": "קיצור מקלדת: תחזיק כפתור מוגדר, ואז תלחץ על כפתור אחר"
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "המחווה הזו כפר תפוסה כ$ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "הגדר מחווה בשביל פעולת $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addcustomaction": {
+    "description": "Label for a button to start setting up a new custom action",
+    "message": "הכנס פעולה מותאמת אישית"
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "הכנס מחווה זו"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "החלף מחווה"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "הוסף מחווה"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "נסה שוב"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "פעולת מחווה"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "עוד"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "הגדרות"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "סטטוס"
+  },
+  "options_externalactions": {
+    "description": "link to external actions",
+    "message": "פעולה חיצונית"
+  },
+  "options_moreactions": {
+    "description": "Link to access more actions. These actions don't currently have a gesture assigned",
+    "message": "עוד פעולות אפשריות"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "שמאל"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "אמצע"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "ימין"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "הסתר אייקון"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "קשה לך לזכור את כל המחוות שהגדרת? הדפס דף עזר!"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "הדפס"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "אוהב את מחוות רכות? בבקשה $LINK$!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "השאר דירוג של 5 כוכבים"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "יודע אנגלית? $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "בבקשה תרגם את מחוות רכות לשפה שלך"
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "מחוות רכות עודכן לגרסה $VERSION$",
+    "placeholders": {
+      "version": {
+        "content": "$1",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "הגדרות!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "ברוכים הבאים למחוות רכות!"
+  },
+  "options_welcome_1": {
+    "description": "First just-installed bullet point",
+    "message": "אתה יכול להגיע לעמוד הגדרות זה ע\"י החזקת הלחצן הימני וציור 'O'\n( נסה: ימינה-למטה-שמאלה-למעלה-ימינה)."
+  },
+  "options_welcome_2": {
+    "description": "Second just-installed bullet point",
+    "message": " כדי לראות מחוות חדשות לחץ על כפתור ה '+' למטה."
+  },
+  "options_welcome_3": {
+    "description": "Third just-installed bullet point",
+    "message": "שנה את ההגדרות ע\"י לחיצה על 'הגדרות' בימין או גלול לתחתית העמוד."
+  },
+  "popup_button_hidepageaction": {
+    "description": "a button to hide the pageaction",
+    "message": "הסתר את האייקון של הURL"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "הגדרות"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "טען מחדש"
+  },
+  "popup_status_blocked_1": {
+    "description": "text explaining a blocked tab",
+    "message": "כרום חוסם הרחבות בדף זה לצורך הבטחה"
+  },
+  "popup_status_blocked_file2": {
+    "description": "text explaining how to make a file:// tab work",
+    "message": "To get Smooth Gestures to work on file:// and ftp:// protocols, go to $LINK$ and mark \"Allow access to file URLs\" under the Smooth Gestures entry.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Extensions"
+      }
+    }
+  },
+  "popup_status_blocked_file2_link": {
+    "description": "text naming the link that goes to chrome://extensions/",
+    "message": "הרחבות"
+  },
+  "popup_status_blocked_newtab2": {
+    "description": "text explaining how to make a newtab page work",
+    "message": "נסה $LINK$ כדי לאפשר מחוות ב ב'כרטיסיות חדשות'",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Smooth Gestures New Tab Add-on"
+      }
+    }
+  },
+  "popup_status_blocked_newtab2_link": {
+    "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
+    "message": "הטאב האולטימטיבי החדש"
+  },
+  "popup_status_broken": {
+    "description": "text explaining a broken tab",
+    "message": "המחוות לא עובדות בדף זה עכשיו."
+  },
+  "popup_status_broken_short": {
+    "description": "short text saying that gestures are broken on this page.",
+    "message": "המחוות שבורות"
+  },
+  "popup_status_unable_short": {
+    "description": "short text saying that gestures are blocked by this page.",
+    "message": "המחוות נחסמו"
+  },
+  "popup_status_working": {
+    "description": "text explaining a working tab",
+    "message": "המחוות עובדות בדף הזה"
+  },
+  "popup_status_working_short": {
+    "description": "short text saying that gestures are working on this page.",
+    "message": "המחוות עובדות"
+  },
+  "setting_blacklist": {
+    "description": "setting title",
+    "message": "רשימה שחורה"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "שמור הגדרות"
+  },
+  "setting_button_import": {
+    "description": "button to load a settings file",
+    "message": "טעינת קובץ הגדרות"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "לחצן שמאלי"
+  },
+  "setting_button_middle": {
+    "description": "choose middle mouse button",
+    "message": "לחצן אמצעי"
+  },
+  "setting_button_off": {
+    "description": "setting label",
+    "message": "כבוי"
+  },
+  "setting_button_on": {
+    "description": "setting label",
+    "message": "הפעלה"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "הפעלה מחדש"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "לחצן ימני"
+  },
+  "setting_button_update": {
+    "description": "button label",
+    "message": "עדכון"
+  },
+  "setting_closelastblock": {
+    "description": "setting title",
+    "message": "אל תסגור את הכרטיסיה האחרונה"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "החבא"
+  },
+  "setting_group_newtab": {
+    "description": "title of a group of settings",
+    "message": "הגדרות טאב חדש"
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "סנכרן"
+  },
+  "setting_sync_descrip": {
+    "description": "setting description",
+    "message": "סנכרן הגדרות ומחוות עם מחשבים אחרים דרך סימניות. כדי להשתמש באפשרות הזו אתה חייב לאפשר סינכרון סימניות."
+  },
+  "setting_trail_color": {
+    "description": "setting title",
+    "message": "צבע הקו המשתרך"
+  },
+  "setting_trail_draw": {
+    "description": "setting title",
+    "message": "צייר קו משתרך"
+  },
+  "setting_trail_draw_descrip": {
+    "description": "setting description",
+    "message": "צייר קו משתרך במסך כשמחוות מתבצעות"
+  },
+  "setting_trail_width": {
+    "description": "setting title",
+    "message": "רוחב הקו המשתרך"
+  },
+  "setting_warning_reset": {
+    "description": "warn that setting will be lost during a reset",
+    "message": "אתה בטוח שאתה רוצה לרסט? אתה תאבד את כל ההגדרות המותאמות אישית."
+  },
+  "status_button_reloadall": {
+    "description": "button to reload all broken pages",
+    "message": "טען מחדש  את כל הדפים שלא עובדים"
+  },
+  "status_button_reloadone": {
+    "description": "button to reload single broken page",
+    "message": "טען מחדש"
+  },
+  "status_legend_blocked": {
+    "description": "status of a page",
+    "message": "חסום דפי מערכת"
+  },
+  "status_legend_broken": {
+    "description": "status of a page",
+    "message": "לא עובד"
+  },
+  "status_legend_loading": {
+    "description": "status of a page",
+    "message": "טוען"
+  },
+  "status_legend_working": {
+    "description": "status of a page",
+    "message": "עובד"
+  },
+  "status_link_options": {
+    "description": "Link to go to the options page",
+    "message": "הגדר מחווה רכה: הגדרות!"
+  },
+  "status_title": {
+    "description": "The title of the status page, at top and tab name",
+    "message": "סטטוס"
+  },
+  "status_window_other": {
+    "description": "title for a group of tab statuses",
+    "message": "חלון אחר"
+  },
+  "status_window_this": {
+    "description": "title for a group of tab statuses",
+    "message": "חלון זה"
+  }
+}

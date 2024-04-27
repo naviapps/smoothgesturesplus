@@ -1,0 +1,540 @@
+{
+  "action_bookmark": {
+    "description": "Action title",
+    "message": "Bokmärk sida"
+  },
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Duplicera flik"
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "Duplicera flik (hack)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "Stäng vänstra flikarna"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Stäng alla övriga flikar"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "Stäng högra flikarna"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Stäng flik"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Stäng fönster"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "Kopiera text till urklipp"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Gå till botten"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Gå till toppen"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Dölj bild"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Maximera fönster (hack)"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "* Slå ihop flikar *"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Minimera fönster (hack)"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "Gå till ny fliksidan"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Ny flik"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "Ny flik (öppna länk i bakgrunden)"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "Ny flik (öppna länk)"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Nytt fönster"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "Nytt fönster (öppna länk)"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Nästa flik"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "Nästa fönster (hack)"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "Öppna bokmärkeshanteraren"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Öppna nedladdningar"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "Öppna tillägg"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Öppna historik"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Öppna bild"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Öppna inställningssidan"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "Bakåt"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "Bakåt eller stäng"
+  },
+  "action_page_down": {
+    "description": "Action title for page_down",
+    "message": "Sida ner"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "Framåt"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "Nästa sida"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "Föregående sida"
+  },
+  "action_page_up": {
+    "description": "Action title for page_up",
+    "message": "Sida upp"
+  },
+  "action_parent_dir": {
+    "description": "Action title",
+    "message": "Överordnad mapp"
+  },
+  "action_pin": {
+    "description": "Action title",
+    "message": "Fäst flik"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "Föregående flik"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "Föregående fönster (hack)"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Skriv ut sida"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "Ladda om alla flikar"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "Ladda om fliken"
+  },
+  "action_reload_tab_full": {
+    "description": "Action title for reload_tab_full",
+    "message": "Ladda om fliken (utan cache)"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Sök på Google"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "Öppna statussida"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "Sluta ladda"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "Flytta flik till vänster"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "Flytta flik till höger"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Ta bort bokmärke"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "Ångra stängd flik"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Zooma in på bild"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Zomma ut på bild"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "Återställ zoomen på bilden till 0"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "Zooma in på hela sidan"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "Zooma ut på hela sidan"
+  },
+  "action_zoom_zero": {
+    "description": "Action title",
+    "message": "Återställ zoomen för hela sidan till 0"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "Egna åtgärder"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "Andra åtgärder"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "Sidnavigering"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Andra inställningar"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "Flikhantering"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "Tillbehör"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "Fungerar inte på bild"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "Fungerar inte på länk"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "Fungerar varken på länkar eller bilder"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "Fungerar inte med markeringar"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "Fungerar bara på bilder"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "Fungerar bara på en länk"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "Fungerar bara med en markering"
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "Stäng alla fliker till vänster om den aktuella fliken"
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "Stäng alla flikar i aktuellt fönster, utom den aktuella fliken"
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "Stäng alla flikar väl höger om aktuella fliken"
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Stäng den aktuella fliken"
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "Stäng alla flikar i det aktuella fönstret"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "Kopiera vald text"
+  },
+  "descrip_goto_bottom": {
+    "description": "Action description for goto_bottom",
+    "message": "Scrolla ner till sidans botten"
+  },
+  "descrip_goto_top": {
+    "description": "Action description for goto_top",
+    "message": "Scrolla upp till sidans topp"
+  },
+  "descrip_hide_image": {
+    "description": "Action description",
+    "message": "F"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Mus-svepningar! Navigera på webben snabbt och enkelt genom att använda mus och tangentbord. "
+  },
+  "gesture_wD": {
+    "description": "wheel down gesture title",
+    "message": "Skrolla ner"
+  },
+  "gesture_wU": {
+    "description": "wheel up gesture title",
+    "message": "Skrolla upp"
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Mjuka svepningar"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Gör en av följande gester"
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Den här gesten används redan av $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Lägg till denna gest"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Skriv över gest"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Lägg till gest"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Försök igen"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "Geståtgärder"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Mer"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Inställningar"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Visa status"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "vänster"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "mitten"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "höger"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Göm ikon"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Har du problem att komma ihåg alla gester du har sparat? Skriv ut denna sida som ett fuskpapper!"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Skriv ut"
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "lämna en 5-stjärnigt betyg"
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "översätt Mjuka Svepningar till ditt språk"
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Alternativ!"
+  },
+  "options_welcome_1": {
+    "description": "First just-installed line",
+    "message": "Du har installerat Smoot Gestures! Du kan komma till den här alternativsidan genom att hålla ned höger musknapp och rita ett \"O\" (höger-ned-vänster-uppåt-höger)"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "Ladda om"
+  },
+  "popup_link_status": {
+    "description": "link to the status page",
+    "message": "Visa alla flikars status"
+  },
+  "setting_blacklist": {
+    "description": "setting title",
+    "message": "Svartlista"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Spara inställningar"
+  },
+  "setting_button_import": {
+    "description": "button to load a settings file",
+    "message": "Ladda inställningsfil"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "Vänster knapp"
+  },
+  "setting_button_middle": {
+    "description": "choose middle mouse button",
+    "message": "Mittenknapp"
+  },
+  "setting_button_off": {
+    "description": "setting label",
+    "message": "Av"
+  },
+  "setting_button_on": {
+    "description": "setting label",
+    "message": "På"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "Återställ"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "Höger knapp"
+  },
+  "setting_button_update": {
+    "description": "button label",
+    "message": "Uppdatera"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "dölj"
+  },
+  "setting_group_show": {
+    "description": "button to show a group of settings",
+    "message": "visa"
+  },
+  "setting_hold_button": {
+    "description": "setting title",
+    "message": "Musknapp för att starta gester"
+  },
+  "setting_import": {
+    "description": "setting title",
+    "message": "Säkerhetskopiera inställningar"
+  },
+  "setting_newtab_url": {
+    "description": "setting title",
+    "message": "Ny flikURL"
+  },
+  "setting_reset": {
+    "description": "setting title",
+    "message": "Återställ till standardvärden"
+  },
+  "setting_sendstats": {
+    "description": "setting title",
+    "message": "Skicka in användande"
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Synkronisera"
+  },
+  "status_button_reloadall": {
+    "description": "button to reload all broken pages",
+    "message": "Ladda om alla icke fungerande sidor"
+  },
+  "status_button_reloadone": {
+    "description": "button to reload single broken page",
+    "message": "Ladda om sida"
+  },
+  "status_legend_blocked": {
+    "description": "status of a page",
+    "message": "Blockerade systemsidor"
+  },
+  "status_legend_broken": {
+    "description": "status of a page",
+    "message": "Fungerar inte"
+  },
+  "status_legend_loading": {
+    "description": "status of a page",
+    "message": "Laddar"
+  },
+  "status_legend_working": {
+    "description": "status of a page",
+    "message": "Fungerar"
+  },
+  "status_link_options": {
+    "description": "Link to go to the options page",
+    "message": "Ange Smooth Gestures: Inställningar!"
+  },
+  "status_title": {
+    "description": "The title of the status page, at top and tab name",
+    "message": "Status"
+  },
+  "status_window_other": {
+    "description": "title for a group of tab statuses",
+    "message": "Annat fönster"
+  },
+  "status_window_this": {
+    "description": "title for a group of tab statuses",
+    "message": "Detta fönster"
+  }
+}

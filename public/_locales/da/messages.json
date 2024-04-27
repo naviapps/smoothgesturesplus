@@ -1,0 +1,48 @@
+{
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "ikke på billede"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "ikke på link"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "ikke på link eller billede"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "ikke for markering"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "på billede"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "på link"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "for markering"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Mouse Gestures! Naviger hurtigt og nemt gennem hjemmesider med brug af mus eller tastatur."
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Lav én af de følgende bevægelser:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Mouse Gesture: Hold $BUTTON$ musseknap nede og lav en bevægelse med musen og giv slip på knappen ",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  }
+}

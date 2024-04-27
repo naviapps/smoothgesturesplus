@@ -1,0 +1,152 @@
+{
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Zavrieť list"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Ukryť obrázok"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Nové okno"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Nový list"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Prehladávaj Google"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "Prelož výber"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Odstrániť záložku"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Iné nastavenia"
+  },
+  "descrip_search_sel": {
+    "description": "Action description",
+    "message": "Prehladávaj Google pre vybraný text"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Gestúry myšou! Rýchla a jednoduchá navigácia po internetových stráknach za použitia myši a klávesnice."
+  },
+  "gesture_wD": {
+    "description": "wheel down gesture title",
+    "message": "Skroluj dole"
+  },
+  "gesture_wU": {
+    "description": "wheel up gesture title",
+    "message": "Skroluj hore"
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Gestúry myšou"
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "$$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Pridať toto gesto"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Prepísať gesto"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Pridať gesto"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Skús znovu"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Viac"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Nastavenia"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Zobraziť status"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "$$"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Tlačiť"
+  },
+  "popup_button_hidepageaction": {
+    "description": "a button to hide the pageaction",
+    "message": "Skryť URL ikonu"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "Nastavenia"
+  },
+  "popup_status_blocked_file2_link": {
+    "description": "text naming the link that goes to chrome://extensions/",
+    "message": "Rozšírenia"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Ulož nastavenia"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "Ľavé tlačidlo"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "Resetovať"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "Pravé tlačidlo"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "Ukryť"
+  },
+  "setting_group_show": {
+    "description": "button to show a group of settings",
+    "message": "Zobraz"
+  },
+  "setting_hidepageaction": {
+    "description": "setting title",
+    "message": "Vždy zobraz ikonu"
+  },
+  "setting_import": {
+    "description": "setting title",
+    "message": "Zálohuj nastavenia"
+  },
+  "setting_reset": {
+    "description": "setting title",
+    "message": "Resetovať na pôvodné nastavenia"
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Synchronizovať"
+  }
+}

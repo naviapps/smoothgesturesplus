@@ -1,120 +1,27 @@
-import React, { useEffect, useRef } from 'react'
-
-export type GestureProps = {
-  gesture: string
-  width: number
-  height: number
-  lineWidth: number
-  trailColor: { r: number; g: number; b: number; a: number }
-  gestures: { [gesture: string]: string }
-}
-
-export const Gesture = ({
-  gesture,
-  width,
-  height,
-  lineWidth,
-  trailColor,
-  gestures,
-}: GestureProps) => {
-  let context: string = ''
-  if (gesture[0] === 's') {
-    context = 's'
-    gesture = gesture.substring(1)
-  } else if (gesture[0] === 'l') {
-    context = 'l'
-    gesture = gesture.substring(1)
-  } else if (gesture[0] === 'i') {
-    context = 'i'
-    gesture = gesture.substring(1)
-  }
-
-  let c: React.JSX.Element
-  if (gesture[0] === 'r') {
-    c = <Rocker gesture={gesture} width={width} />
-  } else if (gesture[0] === 'w') {
-    c = <Wheel gesture={gesture} width={width} />
-  } else if (gesture[0] === 'k') {
-    c = <Key gesture={gesture} width={width} />
-  } else {
-    c = (
-      <Line
-        gesture={gesture}
-        width={width}
-        height={height}
-        lineWidth={lineWidth}
-        trailColor={trailColor}
-      />
-    )
-  }
-
-  let mess: string | undefined
-  if (context === 's') {
-    mess = '* ' + chrome.i18n.getMessage('context_with_selection')
-  } else if (context === 'l') {
-    mess = '* ' + chrome.i18n.getMessage('context_on_link')
-  } else if (context === 'i') {
-    mess = '* ' + chrome.i18n.getMessage('context_on_image')
-  } else if (gestures['s' + gesture]) {
-    mess = '* ' + chrome.i18n.getMessage('context_not_selection')
-  } else if (gestures['l' + gesture] && gestures['i' + gesture]) {
-    mess = '* ' + chrome.i18n.getMessage('context_not_links_images')
-  } else if (gestures['l' + gesture]) {
-    mess = '* ' + chrome.i18n.getMessage('context_not_link')
-  } else if (gestures['i' + gesture]) {
-    mess = '* ' + chrome.i18n.getMessage('context_not_image')
-  }
-
-  if (!mess) {
-    return c
-  } else {
-    return (
-      <div style={{ width: width + 'px', overflow: 'hidden' }}>
-        <div
-          style={{
-            fontSize: 12 * Math.sqrt(width / 100) + 'px',
-            color: '#888',
-            textAlign: 'right',
-            marginRight: '.3em',
-            height: '0px',
-            position: 'relative',
-            top: '.1em',
-          }}
-        >
-          {mess}
-        </div>
-        {c}
-      </div>
-    )
-  }
-}
+import React, { JSX, useEffect, useRef } from 'react'
+import { SettingsStore, useSettingStore } from '../../stores/settings'
 
 type LineProps = {
   gesture: string
   width: number
   height: number
   lineWidth: number
-  trailColor: { r: number; g: number; b: number; a: number }
+  style?: React.CSSProperties
 }
 
-const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+function Line({ gesture, width, height, lineWidth, style }: LineProps): JSX.Element {
+  const trailColor: SettingsStore['trailColor'] = useSettingStore(
+    (state: SettingsStore) => state.trailColor,
+  )
+
+  const canvasRef: React.RefObject<HTMLCanvasElement> = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
-    const c = canvasRef.current
+    const c: HTMLCanvasElement | null = canvasRef.current
     if (!c) return
-    const ctx = c.getContext('2d')
+    const ctx: CanvasRenderingContext2D | null = c.getContext('2d')
     if (!ctx) return
-    ctx.strokeStyle =
-      'rgba(' +
-      trailColor.r +
-      ',' +
-      trailColor.g +
-      ',' +
-      trailColor.b +
-      ',' +
-      trailColor.a +
-      ')'
+    ctx.strokeStyle = `rgba(${trailColor.r},${trailColor.g},${trailColor.b},${trailColor.a})`
     ctx.lineWidth = lineWidth || 3
     ctx.lineCap = 'butt'
     let step: number = 10
@@ -126,6 +33,12 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
     const max: { x: number; y: number } = { x: 0, y: 0 }
     const min: { x: number; y: number } = { x: 0, y: 0 }
 
+    const minmax = (): void => {
+      if (curr.x > max.x) max.x = curr.x
+      if (curr.y > max.y) max.y = curr.y
+      if (curr.x < min.x) min.x = curr.x
+      if (curr.y < min.y) min.y = curr.y
+    }
     const tip = (dir: string): void => {
       prev = curr
       ctx.lineTo(prev.x, prev.y)
@@ -180,14 +93,7 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
         curr = { x: prev.x - step, y: prev.y }
         minmax()
         ctx.lineTo(prev.x - step, prev.y)
-        ctx.arc(
-          prev.x - step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          true,
-        )
+        ctx.arc(prev.x - step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, true)
         ctx.lineTo(prev.x, prev.y + tight * 2)
       } else if (dir === 'RU') {
         ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true)
@@ -197,14 +103,7 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
         curr = { x: prev.x + step, y: prev.y }
         minmax()
         ctx.lineTo(prev.x + step, prev.y)
-        ctx.arc(
-          prev.x + step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          false,
-        )
+        ctx.arc(prev.x + step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, false)
         ctx.lineTo(prev.x, prev.y + tight * 2)
       } else {
         tip(dir[0])
@@ -237,16 +136,10 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
       }
       minmax()
     }
-    const minmax = (): void => {
-      if (curr.x > max.x) max.x = curr.x
-      if (curr.y > max.y) max.y = curr.y
-      if (curr.x < min.x) min.x = curr.x
-      if (curr.y < min.y) min.y = curr.y
-    }
 
     ctx.beginPath()
     tip(gesture[0])
-    for (let i: number = 0; i < gesture.length - 1; i++) {
+    for (let i: number = 0; i < gesture.length - 1; i += 1) {
       curve(gesture[i] + gesture[i + 1])
     }
     tip(gesture[gesture.length - 1])
@@ -270,21 +163,12 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
     ctx.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio)
     ctx.beginPath()
     tip(gesture[0])
-    for (let i: number = 0; i < gesture.length - 1; i++) {
+    for (let i: number = 0; i < gesture.length - 1; i += 1) {
       curve(gesture[i] + gesture[i + 1])
     }
     tip(gesture[gesture.length - 1])
     ctx.stroke()
-    ctx.fillStyle =
-      'rgba(' +
-      trailColor.r +
-      ',' +
-      trailColor.g +
-      ',' +
-      trailColor.b +
-      ',' +
-      trailColor.a +
-      ')'
+    ctx.fillStyle = `rgba(${trailColor.r},${trailColor.g},${trailColor.b},${trailColor.a})`
     ctx.beginPath()
     if (gesture[gesture.length - 1] === 'U') {
       ctx.moveTo(curr.x - 5, curr.y + 2)
@@ -322,56 +206,63 @@ const Line = ({ gesture, width, height, lineWidth, trailColor }: LineProps) => {
     ctx.closePath()
     ctx.fill()
     ctx.restore()
-  }, [])
+  }, [gesture, width, height, lineWidth, trailColor])
 
-  return (
-    <canvas
-      ref={canvasRef}
-      width={width}
-      height={height}
-      style={{ minHeight: '2em', overflow: 'hidden' }}
-    />
-  )
+  return <canvas ref={canvasRef} width={width} height={height} style={style} />
 }
 
 type RockerProps = {
   gesture: string
   width: number
+  style?: React.CSSProperties
 }
 
-const Rocker = ({ gesture, width }: RockerProps) => {
-  const first: number = gesture[1] === 'L' ? 0 : gesture[1] === 'M' ? 1 : 2
-  const second: number = gesture[2] === 'L' ? 0 : gesture[2] === 'M' ? 1 : 2
+function Rocker({ gesture, width, style }: RockerProps): JSX.Element {
+  let first: number
+  if (gesture[1] === 'L') {
+    first = 0
+  } else if (gesture[1] === 'M') {
+    first = 1
+  } else {
+    first = 2
+  }
+  let second: number
+  if (gesture[2] === 'L') {
+    second = 0
+  } else if (gesture[2] === 'M') {
+    second = 1
+  } else {
+    second = 2
+  }
 
   return (
     <div
       style={{
-        width: width - 2 + 'px',
+        width: `${width - 2}px`,
         padding: '5px 1px',
-        minHeight: '2em',
-        overflow: 'hidden',
+        ...style,
       }}
     >
       <div
         style={{
-          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          fontSize: `${14 * Math.sqrt(width / 100)}px`,
           color: '#111',
           textAlign: 'center',
           fontWeight: 'bold',
         }}
       >
-        {chrome.i18n.getMessage('gesture_' + gesture)}
+        {chrome.i18n.getMessage(`gesture_${gesture}`)}
       </div>
       <div
         style={{
-          fontSize: 12 * Math.sqrt(width / 100) + 'px',
+          fontSize: `${12 * Math.sqrt(width / 100)}px`,
           color: '#666',
           textAlign: 'center',
         }}
       >
         {chrome.i18n.getMessage('gesture_rocker_descrip', [
-          chrome.i18n.getMessage('options_mousebutton_' + first),
-          chrome.i18n.getMessage('options_mousebutton_' + second),
+          chrome.i18n.getMessage(`options_mousebutton_${first}`),
+          chrome.i18n.getMessage(`options_mousebutton_${second}`),
         ])}
       </div>
     </div>
@@ -381,36 +272,36 @@ const Rocker = ({ gesture, width }: RockerProps) => {
 type WheelProps = {
   gesture: string
   width: number
+  style?: React.CSSProperties
 }
 
-const Wheel = ({ gesture, width }: WheelProps) => {
+function Wheel({ gesture, width, style }: WheelProps): JSX.Element {
   return (
     <div
       style={{
-        width: width - 2 + 'px',
+        width: `${width - 2}px`,
         padding: '5px 1px',
-        minHeight: '2em',
-        overflow: 'hidden',
+        ...style,
       }}
     >
       <div
         style={{
-          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          fontSize: `${14 * Math.sqrt(width / 100)}px`,
           color: '#111',
           textAlign: 'center',
           fontWeight: 'bold',
         }}
       >
-        {chrome.i18n.getMessage('gesture_' + gesture)}
+        {chrome.i18n.getMessage(`gesture_${gesture}`)}
       </div>
       <div
         style={{
-          fontSize: 12 * Math.sqrt(width / 100) + 'px',
+          fontSize: `${12 * Math.sqrt(width / 100)}px`,
           color: '#666',
           textAlign: 'center',
         }}
       >
-        {chrome.i18n.getMessage('gesture_' + gesture + '_descrip')}
+        {chrome.i18n.getMessage(`gesture_${gesture}_descrip`)}
       </div>
     </div>
   )
@@ -473,21 +364,21 @@ const codeButton = (gesture: string): string => {
 type KeyProps = {
   gesture: string
   width: number
+  style?: React.CSSProperties
 }
 
-const Key = ({ gesture, width }: KeyProps) => {
+function Key({ gesture, width, style }: KeyProps): JSX.Element {
   return (
     <div
       style={{
-        width: width - 2 + 'px',
+        width: `${width - 2}px`,
         padding: '5px 1px',
-        minHeight: '2em',
-        overflow: 'hidden',
+        ...style,
       }}
     >
       <div
         style={{
-          fontSize: 14 * Math.sqrt(width / 100) + 'px',
+          fontSize: `${14 * Math.sqrt(width / 100)}px`,
           color: '#666',
           textAlign: 'center',
           fontWeight: 'bold',
@@ -499,6 +390,96 @@ const Key = ({ gesture, width }: KeyProps) => {
           (gesture[4] === '1' ? 'Meta + ' : '') +
           codeButton(gesture)}
       </div>
+    </div>
+  )
+}
+
+export type GestureProps = {
+  gesture: string
+  width: number
+  height: number
+  lineWidth: number
+}
+
+export function Gesture({ gesture, width, height, lineWidth }: GestureProps): JSX.Element {
+  const gestures: SettingsStore['gestures'] = useSettingStore(
+    (state: SettingsStore) => state.gestures,
+  )
+
+  let newGesture: string
+  let context: string = ''
+  if (gesture[0] === 's') {
+    context = 's'
+    newGesture = gesture.substring(1)
+  } else if (gesture[0] === 'l') {
+    context = 'l'
+    newGesture = gesture.substring(1)
+  } else if (gesture[0] === 'i') {
+    context = 'i'
+    newGesture = gesture.substring(1)
+  } else {
+    newGesture = gesture
+  }
+
+  let c: React.JSX.Element
+  const style: React.CSSProperties = {
+    minHeight: '2em',
+    overflow: 'hidden',
+  }
+  if (gesture[0] === 'r') {
+    c = <Rocker gesture={newGesture} width={width} style={style} />
+  } else if (gesture[0] === 'w') {
+    c = <Wheel gesture={newGesture} width={width} style={style} />
+  } else if (gesture[0] === 'k') {
+    c = <Key gesture={newGesture} width={width} style={style} />
+  } else {
+    c = (
+      <Line
+        gesture={newGesture}
+        width={width}
+        height={height}
+        lineWidth={lineWidth}
+        style={style}
+      />
+    )
+  }
+
+  let mess: string | undefined
+  if (context === 's') {
+    mess = `* ${chrome.i18n.getMessage('context_with_selection')}`
+  } else if (context === 'l') {
+    mess = `* ${chrome.i18n.getMessage('context_on_link')}`
+  } else if (context === 'i') {
+    mess = `* ${chrome.i18n.getMessage('context_on_image')}`
+  } else if (gestures[`s${gesture}`]) {
+    mess = `* ${chrome.i18n.getMessage('context_not_selection')}`
+  } else if (gestures[`l${gesture}`] && gestures[`i${gesture}`]) {
+    mess = `* ${chrome.i18n.getMessage('context_not_links_images')}`
+  } else if (gestures[`l${gesture}`]) {
+    mess = `* ${chrome.i18n.getMessage('context_not_link')}`
+  } else if (gestures[`i${gesture}`]) {
+    mess = `* ${chrome.i18n.getMessage('context_not_image')}`
+  }
+
+  if (!mess) {
+    return c
+  }
+  return (
+    <div style={{ width: `${width}px`, overflow: 'hidden' }}>
+      <div
+        style={{
+          fontSize: `${12 * Math.sqrt(width / 100)}px`,
+          color: '#888',
+          textAlign: 'right',
+          marginRight: '.3em',
+          height: '0px',
+          position: 'relative',
+          top: '.1em',
+        }}
+      >
+        {mess}
+      </div>
+      {c}
     </div>
   )
 }

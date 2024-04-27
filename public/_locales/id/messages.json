@@ -1,0 +1,48 @@
+{
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Sembunyikan gambar"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "gerakan mouse ! dengan cepat dan mudah mengatur halaman web dengan mouse dan keyboard"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "kanan"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "sembunyikan icon"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Bermasalah mengingat semua gerakan-gerakan mouse yang telah anda setel? Cetak halaman ini"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Cetak"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Anda tahu Bahasa Inggris? Silahkan tekan",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "Terjemahkan Gerakan-Gerakan Mulus ke dalam bahasa anda"
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Pilihan!"
+  },
+  "options_welcome_2": {
+    "description": "Second just-installed bullet point",
+    "message": "Untuk menyetel gerakan-geraka baru atau aksi, klik pada tombol '+' di bawah"
+  }
+}

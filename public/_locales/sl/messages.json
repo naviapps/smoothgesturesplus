@@ -1,0 +1,324 @@
+{
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Podvoji zavihek"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Zapri vse druge zavihke"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Zapri zavihek"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Zapri okno"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Pojdi na dno"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Pojdi na vrh"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Skrij sliko"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Nov zavihek"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Novo okno"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Odpri prenesene datoteke"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Odpri zgodovino"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Odpri sliko"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Odpri stran možnosti"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Natisni stran"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "Osveži vse zavihke"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "Osveži zavihek"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Povečaj sliko"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Pomanjšaj sliko"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "Povečaj stran"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "Pomanjšaj stran"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Druge nastavitve"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "Ni na sliki"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "Ni na tej povezavi"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "Ni na povezavah ali slikah"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "Ni v izbranem"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "Na sliki"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "Samo na povezavi"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "Samo na izbranem"
+  },
+  "descrip_clone_tab": {
+    "description": "Action description for clone_tab",
+    "message": "Podvoji trenutni zavihek. Podvojen zavihek ne bo imel zgodovine od prvotnega zavihka."
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Zapri trenutni zavihek"
+  },
+  "descrip_print": {
+    "description": "Action description",
+    "message": "Natisni trenutno stran"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Mouse Gestures! Hitra in preprosta navigacija po spletnih straneh s pomočjo miške ali tipkovnice."
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "Razširitev Mouse Gestures vam omogoča izvrševanje akcij kot so premikanje po straneh ali zavihkih s pomočjo premikanja miške, medtem ko pritiskate na desni miškin gumb. Podpira klikni-povelci (poteza z miško), klikni-pomakni (poteza s pomikanjem), klikni-klikni in bližnjice na tipkovnici!\n\n• Zmogljivo prilagajanje potez (tudi nastavitev akcij po želji!)\n• Podpira diagonalne poteze, sinhronizacijo/uvažanje/izvažanje nastavitev\n• Ne deluje na tej in ostalih Chromovih vgrajenih straneh zaradi zavarovanja omejevanja razširitev. Deluje na skoraj vseh http:// in https:// straneh."
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Gladke poteze"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Naredite eno izmed naslednjih potez:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Poteza z miško: Pritisnite $BUTTON$ miškin gumb in narišite potezo s premikanjem miške, nato spustite.",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_3": {
+    "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Poteza s pomikanjem: Pritisnite $BUTTON$ miškin gumb in pomaknite kolešček na miški.",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_4": {
+    "description": "[bullet point] instructions for making a gesture (rocker)",
+    "message": "Poteza: Pritisnite katerikoli miškin gumb, nato kliknite drugega."
+  },
+  "options_addgesture_instruct_5": {
+    "description": "[bullet point] instructions for doing a keyboard shortcut",
+    "message": "Bližnjica na tipkovnici: Pritisnite katerokoli tipko za spreminjanje (ali nobeno), nato pritisnite drugo tipko."
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Ta poteza je že uporablja $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Nastavi potezo za $ACTION$  akcijo.",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addcustomaction": {
+    "description": "Label for a button to start setting up a new custom action",
+    "message": "Dodaj svojo akcijo"
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Dodaj to potezo"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Zamenjaj potezo"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Dodaj potezo"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Poskusi znova"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "Akcije potez"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Več"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Nastavitve"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Stanje"
+  },
+  "options_externalactions": {
+    "description": "link to external actions",
+    "message": "Zunanje akcije"
+  },
+  "options_moreactions": {
+    "description": "Link to access more actions. These actions don't currently have a gesture assigned",
+    "message": "Več možnih akcij"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "levi"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "srednji"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "desni"
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Skrij ikono"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Si težko zapomnite poteze, ki ste jih naredili? Natisnite si plonklistek!"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Natisni"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "So vam Smooth Gestures všeč? Prosimo $LINK$!",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "Oceni z 5 zvezdicami"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Ali znate angleško? Pomagajte $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "prevedi Smooth Gestures v svoj jezik"
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "Smooth Gestures je bil posodovljen na $VERSION$",
+    "placeholders": {
+      "version": {
+        "content": "$2",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Možnosti!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "Dobrodošli na Smooth Gestures!"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "Možnosti"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "Osveži"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Shrani nastavitve"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "skrij"
+  },
+  "setting_group_show": {
+    "description": "button to show a group of settings",
+    "message": "pokaži"
+  }
+}

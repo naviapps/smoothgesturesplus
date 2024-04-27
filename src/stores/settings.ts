@@ -1,52 +1,16 @@
 import { create } from 'zustand'
 
-// TODO
-export type SettingsLineValue = 'U' | 'D' | 'L' | 'R' | '1' | '3' | '7' | '9'
-export type SmoothGesturesLineObject = {
-  [dir in SmoothGesturesLineValue]: SmoothGesturesLineObject
-}
-export type SmoothGesturesRockerValue = 'L' | 'M' | 'R'
-export type SmoothGesturesWheelValue = 'U' | 'D'
-
-export interface SettingsValidGestures {
-  k: {
-    [mod: string]: string[]
-  }
-  r: {
-    [first in SmoothGesturesRockerValue]?: {
-      [second in SmoothGesturesRockerValue]: boolean
-    }
-  }
-  w: {
-    [dir in SmoothGesturesWheelValue]?: boolean
-  }
-  U?: SmoothGesturesLineObject
-  D?: SmoothGesturesLineObject
-  L?: SmoothGesturesLineObject
-  R?: SmoothGesturesLineObject
-  '1'?: SmoothGesturesLineObject
-  '3'?: SmoothGesturesLineObject
-  '7'?: SmoothGesturesLineObject
-  '9'?: SmoothGesturesLineObject
+export type RValidGestures = {
+  [first: string]: string[]
 }
 
-export interface Settings {
-  //
-  gestures: { [gesture: string]: string }
-  validGestures: SettingsValidGestures
-  closeLastBlock: boolean
+export type KValidGestures = {
+  [mod: string]: string[]
 }
 
-export const defaults: Settings = {
-  //
-  validGestures: {
-    k: {},
-    r: {},
-    w: {},
-  },
+export interface ValidGestures {
+  [key: string]: ValidGestures | boolean
 }
-
-//
 
 export type SettingsStore = {
   holdButton: number
@@ -59,11 +23,19 @@ export type SettingsStore = {
   trailBlock: boolean
   blacklist: string[]
   selectToLink: boolean
-  //
   gestures: { [gesture: string]: string }
+  //
+  rValidGestures: RValidGestures
+  wValidGestures: string[]
+  kValidGestures: KValidGestures
+  validGestures: ValidGestures
+  //
+  updateValidGestures: () => void
+  setTrailBlock: (trailBlock: boolean) => void
+  closeLastBlock?: boolean
 }
 
-export const useSettingStore = create<SettingsStore>(() => ({
+export const useSettingStore = create<SettingsStore>()((set, get) => ({
   holdButton: 2,
   contextOnLink: false,
   newTabUrl: 'chrome://newtab/',
@@ -74,6 +46,73 @@ export const useSettingStore = create<SettingsStore>(() => ({
   trailBlock: false,
   blacklist: [],
   selectToLink: true,
+  rValidGestures: {},
+  wValidGestures: [],
+  kValidGestures: {
+    '0000': ['a:KeyA'],
+  },
+  validGestures: {
+    U: {
+      L: {
+        '': true,
+      },
+      R: {
+        D: {
+          '': true,
+        },
+      },
+      D: {
+        U: {
+          '': true,
+        },
+        R: {
+          '': true,
+        },
+        L: {
+          '': true,
+        },
+      },
+    },
+    D: {
+      R: {
+        '': true,
+      },
+      U: {
+        '': true,
+      },
+      L: {
+        '': true,
+      },
+    },
+    L: {
+      U: {
+        '': true,
+      },
+      D: {
+        R: {
+          '': true,
+        },
+      },
+    },
+    R: {
+      U: {
+        L: {
+          D: {
+            '': true,
+          },
+        },
+      },
+      D: {
+        L: {
+          U: {
+            R: {
+              '': true,
+            },
+          },
+        },
+      },
+    },
+  },
   //
   gestures: {
     U: 'new-tab',
@@ -101,5 +140,46 @@ export const useSettingStore = create<SettingsStore>(() => ({
     DL: 'minimize-window',
     RU: 'maximize-window',
     RDLUR: 'options',
+  },
+  //
+  setTrailBlock: (trailBlock: boolean) => set({ trailBlock }),
+  updateValidGestures: (): void => {
+    console.log('updateValidGestures')
+    const rValidGestures: RValidGestures = {}
+    const wValidGestures: string[] = []
+    const kValidGestures: KValidGestures = {}
+    const validGestures: ValidGestures = {}
+    Object.keys(get().gestures).forEach((g: string) => {
+      if (g[0] === 'l' || g[0] === 'i' || g[0] === 's') {
+        g = g.substring(1)
+      }
+      if (g[0] === 'r') {
+        const first: string = g[1]
+        if (!rValidGestures[first]) {
+          rValidGestures[first] = []
+        }
+        const second: string = g[2]
+        rValidGestures[first].push(second)
+      } else if (g[0] === 'w') {
+        const dir: string = g[1]
+        wValidGestures.push(dir)
+      } else if (g[0] === 'k') {
+        const mod: string = g.substring(1, 5)
+        if (!kValidGestures[mod]) {
+          kValidGestures[mod] = []
+        }
+        kValidGestures[mod].push(g.substring(6))
+      } else {
+        let cur: ValidGestures = validGestures
+        for (let i: number = 0; i < g.length; i += 1) {
+          if (!cur[g[i]]) {
+            cur[g[i]] = {}
+          }
+          cur = cur[g[i]] as ValidGestures
+        }
+        cur[''] = true
+      }
+    })
+    set({ rValidGestures, wValidGestures, kValidGestures, validGestures })
   },
 }))

@@ -1,0 +1,14 @@
+{
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Ταχεία Κλήση"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Χειρονομίες ποντικιού! Πλοηγηθείτε εύκολα και γρήγορα σε ιστοσελίδες με το ποντίκι ή το πληκτρολόγιο."
+  },
+  "setting_group_newtab": {
+    "description": "title of a group of settings",
+    "message": "Ταχεία Κλήση"
+  }
+}

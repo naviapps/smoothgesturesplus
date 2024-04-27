@@ -1,0 +1,1076 @@
+{
+  "action_bookmark": {
+    "description": "Action title",
+    "message": "Aggiungi la pagina ai preferiti"
+  },
+  "action_clone_tab": {
+    "description": "Action title for clone_tab",
+    "message": "Duplica scheda"
+  },
+  "action_clone_tab_hack": {
+    "description": "Action title for clone_tab",
+    "message": "Duplica la scheda (hack)"
+  },
+  "action_close_left_tabs": {
+    "description": "Action title",
+    "message": "Chiudi schede a sinistra"
+  },
+  "action_close_other_tabs": {
+    "description": "Action title",
+    "message": "Chiudi le altre schede"
+  },
+  "action_close_right_tabs": {
+    "description": "Action title",
+    "message": "Chiudi schede a destra"
+  },
+  "action_close_tab": {
+    "description": "Action title for close_tab",
+    "message": "Chiudi scheda"
+  },
+  "action_close_window": {
+    "description": "Action title for close_window",
+    "message": "Chiudi la finestra"
+  },
+  "action_copy": {
+    "description": "Action title",
+    "message": "Copia il testo negli appunti"
+  },
+  "action_goto_bottom": {
+    "description": "Action title for goto_bottom",
+    "message": "Vai al fondo pagina"
+  },
+  "action_goto_top": {
+    "description": "Action title for goto_top",
+    "message": "Vai all'inizio pagina"
+  },
+  "action_hide_image": {
+    "description": "Action title",
+    "message": "Nascondi Immagini"
+  },
+  "action_maximize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Massimizza la Finestra"
+  },
+  "action_merge_tabs": {
+    "description": "Action title for merge_tabs",
+    "message": "Unisci le Schede"
+  },
+  "action_minimize_x": {
+    "description": "Action title for clone_tab",
+    "message": "Minimizza la Finestra"
+  },
+  "action_navigate_tab": {
+    "description": "Action title for new_tab",
+    "message": "Vai alla pagina Nuova scheda"
+  },
+  "action_new_tab": {
+    "description": "Action title for new_tab",
+    "message": "Nuova scheda"
+  },
+  "action_new_tab_back": {
+    "description": "Action title for new_tab_back",
+    "message": "Apri nuova scheda in secondo piano"
+  },
+  "action_new_tab_link": {
+    "description": "Action title for new_tab_link",
+    "message": "Apri link in nuova scheda"
+  },
+  "action_new_window": {
+    "description": "Action title for new_window",
+    "message": "Nuova finestra"
+  },
+  "action_new_window_link": {
+    "description": "Action title",
+    "message": "Nuova finestra (Apri Link)"
+  },
+  "action_next_tab": {
+    "description": "Action title for next_tab",
+    "message": "Prossima scheda"
+  },
+  "action_next_window": {
+    "description": "Action title for clone_tab",
+    "message": "Finestra successiva"
+  },
+  "action_open_bookmarks": {
+    "description": "Action title",
+    "message": "Apri gestione Preferiti"
+  },
+  "action_open_downloads": {
+    "description": "Action title",
+    "message": "Apri Download"
+  },
+  "action_open_extensions": {
+    "description": "Action title",
+    "message": "Apri Estensioni"
+  },
+  "action_open_history": {
+    "description": "Action title",
+    "message": "Apri Cronologia"
+  },
+  "action_open_image": {
+    "description": "Action title",
+    "message": "Apri immagine"
+  },
+  "action_options": {
+    "description": "Action title for options",
+    "message": "Apri le Opzioni"
+  },
+  "action_page_back": {
+    "description": "Action title for page_back",
+    "message": "Indietro"
+  },
+  "action_page_back_close": {
+    "description": "Action title for page_back_close",
+    "message": "Indietro o Chiudi"
+  },
+  "action_page_down": {
+    "description": "Action title for page_down",
+    "message": "Pagina giù"
+  },
+  "action_page_forward": {
+    "description": "Action title for page_forward",
+    "message": "Avanti"
+  },
+  "action_page_next": {
+    "description": "Action title for page_next",
+    "message": "Prossima Pagina"
+  },
+  "action_page_prev": {
+    "description": "Action title for page_prev",
+    "message": "Pagina Precedente"
+  },
+  "action_page_up": {
+    "description": "Action title for page_up",
+    "message": "Pagina Su"
+  },
+  "action_parent_dir": {
+    "description": "Action title",
+    "message": "Directory superiore"
+  },
+  "action_pin": {
+    "description": "Action title",
+    "message": "Blocca scheda"
+  },
+  "action_prev_tab": {
+    "description": "Action title for prev_tab",
+    "message": "Scheda Precedente"
+  },
+  "action_prev_window": {
+    "description": "Action title for clone_tab",
+    "message": "Finestra precedente"
+  },
+  "action_print": {
+    "description": "Action title",
+    "message": "Stampa pagina"
+  },
+  "action_reload_all_tabs": {
+    "description": "Action title",
+    "message": "Ricarica tutte le schede"
+  },
+  "action_reload_tab": {
+    "description": "Action title for reload_tab",
+    "message": "Ricarica scheda"
+  },
+  "action_reload_tab_full": {
+    "description": "Action title for reload_tab_full",
+    "message": "Ricarica scheda (non dalla cache)"
+  },
+  "action_search_sel": {
+    "description": "Action title",
+    "message": "Cerca con Google"
+  },
+  "action_show_cookies": {
+    "description": "Action title",
+    "message": "Elenca cookies"
+  },
+  "action_split_tabs": {
+    "description": "Action title for split_tabs",
+    "message": "Dividi schede"
+  },
+  "action_status": {
+    "description": "Action title for status",
+    "message": "Apri pagina di status"
+  },
+  "action_stop": {
+    "description": "Action title for stop",
+    "message": "Ferma caricamento"
+  },
+  "action_tab_to_left": {
+    "description": "Action title",
+    "message": "Sposta la scheda a sinistra"
+  },
+  "action_tab_to_right": {
+    "description": "Action title",
+    "message": "Sposta la scheda a destra"
+  },
+  "action_toggle_bookmark": {
+    "description": "Action title",
+    "message": "Alterna preferito"
+  },
+  "action_toggle_pin": {
+    "description": "Action title",
+    "message": "Blocca/Sblocca Scheda"
+  },
+  "action_translate": {
+    "description": "Action title",
+    "message": "Traduci selezione"
+  },
+  "action_unbookmark": {
+    "description": "Action title",
+    "message": "Rimuovi la pagina dai preferiti"
+  },
+  "action_undo_close": {
+    "description": "Action title for undo_close",
+    "message": "Riapri scheda chiusa"
+  },
+  "action_undo_close_hack": {
+    "description": "Action title for undo_close_hack",
+    "message": "Annulla la chiusura della scheda"
+  },
+  "action_unpin": {
+    "description": "Action title",
+    "message": "Sblocca scheda"
+  },
+  "action_view_source": {
+    "description": "Action title for view_source",
+    "message": "Vedi sorgente della pagina"
+  },
+  "action_zoom_img_in": {
+    "description": "Action title",
+    "message": "Ingrandisci l'immagine"
+  },
+  "action_zoom_img_out": {
+    "description": "Action title",
+    "message": "Rimpicciolisci l'immagine"
+  },
+  "action_zoom_img_zero": {
+    "description": "Action title",
+    "message": "Ripristina dimensione immagine"
+  },
+  "action_zoom_in": {
+    "description": "Action title",
+    "message": "Ingrandisci la pagina"
+  },
+  "action_zoom_out": {
+    "description": "Action title",
+    "message": "Rimpiccolisci la pagina"
+  },
+  "action_zoom_zero": {
+    "description": "Action title",
+    "message": "Ripristina zoom pagina"
+  },
+  "cat_custom": {
+    "description": "Name of category for all custom actions",
+    "message": "Azioni Personali"
+  },
+  "cat_other": {
+    "description": "Name of category for actions that don't have a category",
+    "message": "Altre Azioni"
+  },
+  "cat_page_navigation": {
+    "description": "Name of category encompassing basic page navigation actions",
+    "message": "Navigazione della pagina"
+  },
+  "cat_settings": {
+    "description": "Title of the settings group",
+    "message": "Altre Configurazioni"
+  },
+  "cat_tab_management": {
+    "description": "Name of category encompassing tab manipulation actions",
+    "message": "Gestione Tab"
+  },
+  "cat_utilities": {
+    "description": "Name of category for general utility actions",
+    "message": "Utilità"
+  },
+  "context_not_image": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on an image",
+    "message": "non sull'immagine"
+  },
+  "context_not_link": {
+    "description": "A short label for a gesture indicating that the gesture is not valid on a link",
+    "message": "non sul link"
+  },
+  "context_not_links_images": {
+    "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
+    "message": "non sull'immagine o sul link"
+  },
+  "context_not_selection": {
+    "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
+    "message": "senza selezione"
+  },
+  "context_on_image": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
+    "message": "sull'immagine"
+  },
+  "context_on_link": {
+    "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
+    "message": "sul link"
+  },
+  "context_with_selection": {
+    "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
+    "message": "selezionato"
+  },
+  "descrip_bookmark": {
+    "description": "Action description",
+    "message": "Aggiungi la pagina corrente ai preferiti."
+  },
+  "descrip_clone_tab": {
+    "description": "Action description for clone_tab",
+    "message": "Apri un duplicato della scheda della pagina corrente. La scheda duplicata non sarà nella cronologia della scheda originale."
+  },
+  "descrip_clone_tab_hack": {
+    "description": "Action description for clone_tab",
+    "message": "Apri una scheda duplicata della pagina corrente. Carica la cronologia con una soluzione imperfetta"
+  },
+  "descrip_close_left_tabs": {
+    "description": "Action description",
+    "message": "Chiudi tutte le schede a sinistra della scheda corrente"
+  },
+  "descrip_close_other_tabs": {
+    "description": "Action description",
+    "message": "Chiudi tutte le schede nella finestra corrente eccetto la scheda selezionata"
+  },
+  "descrip_close_right_tabs": {
+    "description": "Action description",
+    "message": "Chiudi tutte le schede a destra della scheda corrente"
+  },
+  "descrip_close_tab": {
+    "description": "Action description for close_tab",
+    "message": "Chiudi la scheda selezionata "
+  },
+  "descrip_close_window": {
+    "description": "Action description for close_window",
+    "message": "Chiudi tutte le schede della finestra selezionata"
+  },
+  "descrip_copy": {
+    "description": "Action description",
+    "message": "Copia il testo selezionato negli appunti"
+  },
+  "descrip_goto_bottom": {
+    "description": "Action description for goto_bottom",
+    "message": "Scorri la pagina verso il basso"
+  },
+  "descrip_goto_top": {
+    "description": "Action description for goto_top",
+    "message": "Scorri la pagina verso l'alto"
+  },
+  "descrip_hide_image": {
+    "description": "Action description",
+    "message": "Rimuovi dalla pagina l'immagine sotto il cursore del mouse"
+  },
+  "descrip_merge_tabs": {
+    "description": "Action description for merge_tabs",
+    "message": "Unisci tutte le schede della finestra corrente con quelli dell'ultima finestra attiva"
+  },
+  "descrip_navigate_tab": {
+    "description": "Action description for new_tab",
+    "message": "Passare alla pagina della Nuova scheda (l'URL può essere impostato sotto)"
+  },
+  "descrip_new_tab": {
+    "description": "Action description for new_tab",
+    "message": "Apri una nuova scheda nella finestra corrente (l'URL può essere impostato sotto)"
+  },
+  "descrip_new_tab_back": {
+    "description": "Action description for new_tab_back",
+    "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda, ma non visualizzare la nuova scheda"
+  },
+  "descrip_new_tab_link": {
+    "description": "Action description for new_tab_link",
+    "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda"
+  },
+  "descrip_new_window": {
+    "description": "Action description for new_window",
+    "message": "Aprire una nuova finestra con la scheda di default"
+  },
+  "descrip_new_window_link": {
+    "description": "Action description",
+    "message": "Avviare un gesto su un link per aprire quel link in una nuova finestra"
+  },
+  "descrip_next_tab": {
+    "description": "Action description for next_tab",
+    "message": "Selezionare la scheda a destra della scheda corrente"
+  },
+  "descrip_next_window": {
+    "description": "Action description for clone_tab",
+    "message": "Seleziona la finestra attivata da tempo"
+  },
+  "descrip_open_bookmarks": {
+    "description": "Action description",
+    "message": "Apri il gestore dei segnalibri in una nuova scheda"
+  },
+  "descrip_open_downloads": {
+    "description": "Action description",
+    "message": "Apri la pagina dei download in una nuova scheda"
+  },
+  "descrip_open_extensions": {
+    "description": "Action description",
+    "message": "Apri la pagina delle estensioni in una nuova scheda"
+  },
+  "descrip_open_history": {
+    "description": "Action description",
+    "message": "Aprire la Cronologia in una nuova scheda"
+  },
+  "descrip_open_image": {
+    "description": "Action description",
+    "message": "Apri l'immagine sotto il cursore del mouse in una nuova scheda"
+  },
+  "descrip_options": {
+    "description": "Action description for options",
+    "message": "Apri la pagina delle Opzioni"
+  },
+  "descrip_page_back": {
+    "description": "Action description for page_back",
+    "message": "Vai indietro di una pagina della Cronologia per la scheda corrente"
+  },
+  "descrip_page_back_close": {
+    "description": "Action description for page_back_close",
+    "message": "Vai indietro di una pagina della Cronologia per la scheda corrente o se chiudi la scheda se non resta nessuna Cronologia"
+  },
+  "descrip_page_down": {
+    "description": "Action description for page_down",
+    "message": "Scorri verso il basso l'80% della pagina"
+  },
+  "descrip_page_forward": {
+    "description": "Action description for page_forward",
+    "message": "Vai avanti di una pagina nella scheda corrente"
+  },
+  "descrip_page_next": {
+    "description": "Action description for page_next",
+    "message": "Vai alla pagina successiva seguendo il link 'prossimo'"
+  },
+  "descrip_page_prev": {
+    "description": "Action description for page_prev",
+    "message": "Vai alla pagina precedente seguendo il link 'precedente'"
+  },
+  "descrip_page_up": {
+    "description": "Action description for page_up",
+    "message": "Scorri verso l'alto l'80% della pagina"
+  },
+  "descrip_parent_dir": {
+    "description": "Action description",
+    "message": "Passa alla directory principale della pagina corrente. Se sei già nella directory principale, provare a rimuovere sottodomini"
+  },
+  "descrip_pin": {
+    "description": "Action description",
+    "message": "Blocca la scheda corrente"
+  },
+  "descrip_prev_tab": {
+    "description": "Action description for prev_tab",
+    "message": "Seleziona la scheda a sinistra della scheda corrente"
+  },
+  "descrip_prev_window": {
+    "description": "Action description for clone_tab",
+    "message": "Seleziona la finestra attiva subito prima della finestra corrente"
+  },
+  "descrip_print": {
+    "description": "Action description",
+    "message": "Stampa la pagina corrente"
+  },
+  "descrip_reload_all_tabs": {
+    "description": "Action description",
+    "message": "Aggiorna tutte le schede nella finestra corrente"
+  },
+  "descrip_reload_tab": {
+    "description": "Action description for reload_tab",
+    "message": "Aggiorna il contenuto della scheda corrente"
+  },
+  "descrip_reload_tab_full": {
+    "description": "Action description for reload_tab_full",
+    "message": "Aggiorna completamente il contenuto della scheda corrente (salta la cache)"
+  },
+  "descrip_search_sel": {
+    "description": "Action description",
+    "message": "Cerca il testo selezionato su Google "
+  },
+  "descrip_show_cookies": {
+    "description": "Action description",
+    "message": "Mostra la lista di tutti i cookies per la pagina corrente"
+  },
+  "descrip_split_tabs": {
+    "description": "Action description for split_tabs",
+    "message": "Separa tutte le schede a destra della scheda corrente (inclusa) in una nuova finestra"
+  },
+  "descrip_status": {
+    "description": "Action description for status",
+    "message": "Apri la pagina di stato delle estensioni di Smooth Gestures"
+  },
+  "descrip_stop": {
+    "description": "Action description for stop",
+    "message": "Interrompi il caricamento della scheda corrente. (potrebbe non funzionare su alcune pagine, come le pagine di immagini)"
+  },
+  "descrip_tab_to_left": {
+    "description": "Action description",
+    "message": "Sposta la scheda corrente a sinistra"
+  },
+  "descrip_tab_to_right": {
+    "description": "Action description",
+    "message": "Sposta la scheda corrente a destra"
+  },
+  "descrip_toggle_bookmark": {
+    "description": "Action description",
+    "message": "Rimuovi un segnalibro se già impostato. Altrimenti aggiungi un segnalibro alla pagina corrente."
+  },
+  "descrip_toggle_pin": {
+    "description": "Action description",
+    "message": "Alterna il blocco della scheda"
+  },
+  "descrip_translate": {
+    "description": "Action description",
+    "message": "Traduci il testo selezionato nella lingua di default di Chrome"
+  },
+  "descrip_unbookmark": {
+    "description": "Action description",
+    "message": "Rimuovi, se esiste, un segnalibro alla pagina corrente."
+  },
+  "descrip_undo_close": {
+    "description": "Action description for undo_close",
+    "message": "Apri l'ultima scheda chiusa. Questo carica solo l'URL della pagina - CTRL-SHIFT-T è ancora superiore, perché mantiene la cronologia"
+  },
+  "descrip_undo_close_hack": {
+    "description": "Action description for undo_close",
+    "message": "Apri l'ultima scheda chiusa. Carica la cronologia attraverso l'uso di una soluzione imperfetta"
+  },
+  "descrip_unpin": {
+    "description": "Action description",
+    "message": "Sblocca la scheda corrente"
+  },
+  "descrip_view_source": {
+    "description": "Action description for view_source",
+    "message": "Visualizza il codice sorgente della pagina corrente"
+  },
+  "descrip_zoom_img_in": {
+    "description": "Action description",
+    "message": "Ingrandisci l'immagine sotto il cursore del mouse"
+  },
+  "descrip_zoom_img_out": {
+    "description": "Action description",
+    "message": "Rimpicciolisci l'immagine sotto il cursore del mouse"
+  },
+  "descrip_zoom_img_zero": {
+    "description": "Action description",
+    "message": "Imposta l'immagine alla sua dimensione originale"
+  },
+  "descrip_zoom_in": {
+    "description": "Action description",
+    "message": "Ingrandisci il contenuto della pagina"
+  },
+  "descrip_zoom_out": {
+    "description": "Action description",
+    "message": "Rimpicciolisci il contenuto della pagina"
+  },
+  "descrip_zoom_zero": {
+    "description": "Action description",
+    "message": "Annulla le precedenti azioni di ingrandimento sulla pagina"
+  },
+  "description": {
+    "description": "short extension description",
+    "message": "Mouse Gestures! Naviga nelle pagine web in maniera semplice e veloce usando il mouse o la tastiera."
+  },
+  "doubleclick_alert": {
+    "description": "Pop up an alert box the first time a user right-clicks to let them know that they may need to double-click the right mouse button to get to the context menu",
+    "message": "Fai doppio click con il tasto destro del mouse per ottenere il menu contestuale\n\nVale solo per le versioni Linux e Mac di Chrome. (necessario per il corretto funzionamento delle gestures)"
+  },
+  "gesture_rLR": {
+    "description": "rocker right gesture title",
+    "message": "Rocker destra"
+  },
+  "gesture_rRL": {
+    "description": "rocker left gesture title",
+    "message": "Rocker sinistra"
+  },
+  "gesture_rocker_descrip": {
+    "description": "rocker right gesture description",
+    "message": "Tieni premuto il tasto $BUTTON1$, clicca $BUTTON2$",
+    "placeholders": {
+      "button1": {
+        "content": "$1",
+        "example": "right"
+      },
+      "button2": {
+        "content": "$2",
+        "example": "right"
+      }
+    }
+  },
+  "gesture_wD": {
+    "description": "wheel down gesture title",
+    "message": "Scorri in basso"
+  },
+  "gesture_wD_descrip": {
+    "description": "wheel down gesture description",
+    "message": "Tieni premuto il tasto azione, scorri in basso"
+  },
+  "gesture_wU": {
+    "description": "wheel up gesture title",
+    "message": "Scorri in alto"
+  },
+  "gesture_wU_descrip": {
+    "description": "wheel up gesture description",
+    "message": "Tieni premuto il tasto azione, scorri in alto"
+  },
+  "long_description": {
+    "description": "complete extension description",
+    "message": "Con l'estensione Mouse Gestures, muovendo il mouse e contemporaneamente premendo il tasto destro, puoi eseguire azioni, come la gestione delle tab o le azioni di navigazione. L'estensione supporta click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), e scorciatoie da tastiera!\n\n• Incredibile personalizzazione delle gestures (ed azioni personalizzate!)\n• Supporta gestures diagonali, sincronizzazione/importazione/esportazione delle impostazioni\n• Non è disponibile su questo sito, o in altra pagine di servizio di Chrome a causa di restrizioni di sicurezza per le estensioni, ma funziona su quasi la totalità delle pagine http:// e https://"
+  },
+  "name": {
+    "description": "\"Smooth Gestures\" in your language",
+    "message": "Gesti facili"
+  },
+  "options_addgesture_instruct_1": {
+    "description": "instructions for making a gesture (just before bullet point list)",
+    "message": "Esegui una delle seguenti gestures:"
+  },
+  "options_addgesture_instruct_2": {
+    "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Mouse Gesture: tieni premuto il tasto $BUTTON$ del mouse e disegna una gesture muovendo il mouse, poi rilascia",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_3": {
+    "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Scroll Gesture: tieni premuto il tasto $BUTTON$ del mouse e muovi la rotellina",
+    "placeholders": {
+      "button": {
+        "content": "$1",
+        "example": "right"
+      }
+    }
+  },
+  "options_addgesture_instruct_4": {
+    "description": "[bullet point] instructions for making a gesture (rocker)",
+    "message": "Rocker Gesture: tieni premuto un tasto qualunque del mouse, poi premine un altro"
+  },
+  "options_addgesture_instruct_5": {
+    "description": "[bullet point] instructions for doing a keyboard shortcut",
+    "message": "Scorciatoia da tastiera: premi un tasto speciale (o nessuno), poi premi un altro tasto"
+  },
+  "options_addgesture_overwrite": {
+    "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Questa Gesture è già assegnata a $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_addgesture_title": {
+    "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
+    "message": "Assegna una Gesture all'azione $ACTION$",
+    "placeholders": {
+      "action": {
+        "content": "$1",
+        "example": "History Back"
+      }
+    }
+  },
+  "options_button_addcustomaction": {
+    "description": "Label for a button to start setting up a new custom action",
+    "message": "Aggiungi Azioni Personali"
+  },
+  "options_button_addgesture": {
+    "description": "button to add the new gesture to the action",
+    "message": "Aggiungi questa Gesture"
+  },
+  "options_button_overwrite": {
+    "description": "button to overwrite the gesture made to the new action",
+    "message": "Sovrascrivi la Gesture"
+  },
+  "options_button_startaddgesture": {
+    "description": "Label for a button to start setting up a new gesture",
+    "message": "Aggiungi Gesture"
+  },
+  "options_button_tryagain": {
+    "description": "button to reject the gesture made and try to make a new one",
+    "message": "Prova ancora"
+  },
+  "options_contents_actions": {
+    "description": "category type for all actions links",
+    "message": "Gesture di azioni"
+  },
+  "options_contents_more": {
+    "description": "category type for all external links",
+    "message": "Altre Gesture"
+  },
+  "options_contents_settings": {
+    "description": "category type for all settings links",
+    "message": "Impostazioni"
+  },
+  "options_contents_status": {
+    "description": "link to open the status page",
+    "message": "Visualizza lo stato"
+  },
+  "options_externalactions": {
+    "description": "link to external actions",
+    "message": "Azioni Esterne"
+  },
+  "options_moreactions": {
+    "description": "Link to access more actions. These actions don't currently have a gesture assigned",
+    "message": "Altre Azioni Disponibili"
+  },
+  "options_mousebutton_0": {
+    "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
+    "message": "Tasto sinistro"
+  },
+  "options_mousebutton_1": {
+    "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
+    "message": "Tasto centrale"
+  },
+  "options_mousebutton_2": {
+    "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
+    "message": "Tasto destro"
+  },
+  "options_note_doubleclick": {
+    "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
+    "message": "Nelle versioni di Chrome per Linux e Mac, potresti dover fare un doppio click con il tasto destro del mouse per aprire il menù contestuale."
+  },
+  "options_note_hidepageaction_button": {
+    "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
+    "message": "Nascondi Icone"
+  },
+  "options_note_print": {
+    "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
+    "message": "Hai problemi a ricordare tutte le Gesture che hai configurato? Stampa uno schema riassuntivo!"
+  },
+  "options_note_print_button": {
+    "description": "Label on the button to print the page",
+    "message": "Stampa"
+  },
+  "options_note_remindrate": {
+    "description": "Notify the user that they can rate this extension to help promote it",
+    "message": "Ti piace Smooth Gestures? Per favore $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+      }
+    }
+  },
+  "options_note_remindrate_link": {
+    "description": "Text for the link leading to the extension's page",
+    "message": "Lascia una valutazione di 5 stelle"
+  },
+  "options_note_translate": {
+    "description": "Solicit translation requests",
+    "message": "Conosci l'inglese? Contribuisci $LINK$",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+      }
+    }
+  },
+  "options_note_translate_link": {
+    "description": "Link for soliciting translation requests",
+    "message": "traduci Smooth Gestures nella tua lingua"
+  },
+  "options_note_updated": {
+    "description": "Notify that the extension has been updated",
+    "message": "Smooth Gestures è stato aggiornato alla versione $VERSION$",
+    "placeholders": {
+      "version": {
+        "content": "$2",
+        "example": "0.13.1"
+      }
+    }
+  },
+  "options_title": {
+    "description": "The title of the options page, at top and tab name",
+    "message": "Opzioni!"
+  },
+  "options_welcome_0": {
+    "description": "First just-installed line",
+    "message": "Benvenuto in Smooth Gestures!"
+  },
+  "options_welcome_1": {
+    "description": "First just-installed line",
+    "message": "Hai installato Smooth Gestures! Puoi aprire questa pagina delle Opzioni tenendo premuto il tasto destro del mouse e disegnando una \"O\" (prova: destra-giù-sinistra-su-destra)."
+  },
+  "options_welcome_2": {
+    "description": "Second just-installed bullet point",
+    "message": "Per impostare nuove gesture o azioni clicca sul bottone \"+\" qui sotto."
+  },
+  "options_welcome_3": {
+    "description": "Third just-installed line",
+    "message": "Imposta le differenti opzioni cliccando \"Impostazioni\" sulla destra o scorrendo in basso fino al fondo della pagina."
+  },
+  "popup_button_hidepageaction": {
+    "description": "a button to hide the pageaction",
+    "message": "Nascondi questa icona URL"
+  },
+  "popup_button_options": {
+    "description": "a button to go to the options page",
+    "message": "Opzioni"
+  },
+  "popup_button_reload": {
+    "description": "a button to reload the current page",
+    "message": "Ricarica"
+  },
+  "popup_link_status": {
+    "description": "link to the status page",
+    "message": "Vedi lo Status di tutti i Tabs"
+  },
+  "popup_status_blocked_1": {
+    "description": "text explaining a blocked tab",
+    "message": "Chrome blocca le estensioni su questa pagina per motivi di sicurezza."
+  },
+  "popup_status_blocked_2": {
+    "description": "text explaining a blocked tab",
+    "message": "Smooth Gestures non può funzionare su questa pagina a causa di questa policy."
+  },
+  "popup_status_blocked_file2": {
+    "description": "text explaining how to make a file:// tab work",
+    "message": "Per far funzionare Smooth Gestures sui protocolli file:// e ftp://, vai in chrome://extensions/ e seleziona \"permetti l'accesso ai file URLs\" tra le opzioni di Smooth Gestures. "
+  },
+  "popup_status_blocked_file2_link": {
+    "description": "text naming the link that goes to chrome://extensions/",
+    "message": "Estensioni"
+  },
+  "popup_status_blocked_newtab": {
+    "description": "text explaining how to make a newtab page work",
+    "message": "Prova il $LINK$ per abilitare i gesti sulla nuova scheda.",
+    "placeholders": {
+      "link": {
+        "content": "$1",
+        "example": "Smooth Gestures New Tab Add-on"
+      }
+    }
+  },
+  "popup_status_broken": {
+    "description": "text explaining a broken tab",
+    "message": "Gestures non sta funzionando su questa pagina in questo momento."
+  },
+  "popup_status_question": {
+    "description": "text explaining a questionable tab",
+    "message": "Gesture potrebbe non funzionare su questa pagina adesso."
+  },
+  "popup_status_unable_short": {
+    "description": "short text saying that gestures are blocked by this page.",
+    "message": "Gesture bloccata"
+  },
+  "popup_status_working": {
+    "description": "text explaining a working tab",
+    "message": "Le gesture sono abilitate in questa pagina"
+  },
+  "popup_status_working_short": {
+    "description": "short text saying that gestures are working on this page.",
+    "message": "Gesture funzionanti"
+  },
+  "setting_blacklist": {
+    "description": "setting title",
+    "message": "Lista nera"
+  },
+  "setting_blacklist_descrip": {
+    "description": "setting description",
+    "message": "Disabilita le azioni sui domini inclusi nella lista nera. Separa i domini con le virgole. (Esempio: \"mail.google.com, www.example.com\")"
+  },
+  "setting_button_export": {
+    "description": "button to save settings as a backup file",
+    "message": "Salva impostazioni"
+  },
+  "setting_button_import": {
+    "description": "button to load a settings file",
+    "message": "Carica file impostazioni"
+  },
+  "setting_button_left": {
+    "description": "choose left mouse button",
+    "message": "Tasto sinistro"
+  },
+  "setting_button_middle": {
+    "description": "choose middle mouse button",
+    "message": "Tasto centrale"
+  },
+  "setting_button_off": {
+    "description": "setting label",
+    "message": "Off"
+  },
+  "setting_button_on": {
+    "description": "setting label",
+    "message": "On"
+  },
+  "setting_button_reset": {
+    "description": "button label",
+    "message": "Ripristina"
+  },
+  "setting_button_right": {
+    "description": "choose right mouse button",
+    "message": "Tasto destro"
+  },
+  "setting_button_update": {
+    "description": "button label",
+    "message": "Aggiorna"
+  },
+  "setting_closelastblock": {
+    "description": "setting title",
+    "message": "Non chiudere l'ultima scheda."
+  },
+  "setting_closelastblock_descrip": {
+    "description": "setting description",
+    "message": "Non chiudere l'ultimo tab con il gesto di chiusura tab. Invece, crea un nuovo tab."
+  },
+  "setting_disabled": {
+    "description": "choose no mouse button (gestures are disabled)",
+    "message": "Disabilitato"
+  },
+  "setting_force_context": {
+    "description": "setting title",
+    "message": "Forza il Menu contestuale sui links"
+  },
+  "setting_force_context2": {
+    "description": "setting title",
+    "message": "Forza il Menu contestuale"
+  },
+  "setting_force_context2_descrip": {
+    "description": "setting description",
+    "message": "Mostra sempre il Menu contestuale cliccando col tasto destro. Utile se si attivano i gesti con il tasto centrale del mouse."
+  },
+  "setting_force_context_descrip": {
+    "description": "setting description",
+    "message": "Blocca le gestures che partono dei link. Su sistemi con conflitti del menu contestuale, ciò consente di ottenere il menu contestuali facendo click con il tasto destro del mouse solo una volta invece di due. Tuttavia, così facendo si disabilita l'opzione Nuova scheda dal link"
+  },
+  "setting_group_assorted": {
+    "description": "title of a group of settings",
+    "message": "Altre impostazioni"
+  },
+  "setting_group_context": {
+    "description": "title of a group of settings",
+    "message": "Impostazioni Menu contestuale"
+  },
+  "setting_group_hide": {
+    "description": "button to hide a group of settings",
+    "message": "nascondi"
+  },
+  "setting_group_newtab": {
+    "description": "title of a group of settings",
+    "message": "Impostazioni nuova scheda"
+  },
+  "setting_group_show": {
+    "description": "button to show a group of settings",
+    "message": "mostra"
+  },
+  "setting_group_trail": {
+    "description": "title of a group of settings",
+    "message": "Impostazioni tracciato"
+  },
+  "setting_hidepageaction": {
+    "description": "setting title",
+    "message": "Mostra l'icona."
+  },
+  "setting_hidepageaction_descrip": {
+    "description": "setting description",
+    "message": "L'icona sulla barra degli indirizzi permette di accedere velocemente alla pagina delle opzioni di Smooth Gesture. In alternativa vi puoi accedere tramite Chiave Inglese > Strumenti > Estensioni > Smooth Gesture > Opzioni"
+  },
+  "setting_hold_button": {
+    "description": "setting title",
+    "message": "Bottone del mouse per iniziare una gesture"
+  },
+  "setting_hold_button_descrip": {
+    "description": "setting description",
+    "message": "Permetti di iniziare una gesture premendo il tasto centrale o sinistro del mouse, invece che quello destro."
+  },
+  "setting_import": {
+    "description": "setting title",
+    "message": "Backup Impostazioni"
+  },
+  "setting_import_descrip": {
+    "description": "setting description",
+    "message": "Salva le impostazioni correnti (incluse le gesture, azioni personali e opzioni). Carica il file per ripristinare le impostazioni perdute o spostarle su un altro computer."
+  },
+  "setting_newtab_linkright": {
+    "description": "setting title",
+    "message": "Nuove schede da link si aprono accanto alla scheda corrente"
+  },
+  "setting_newtab_linkright_descrip": {
+    "description": "setting description",
+    "message": "Simile al comportamento di default di Chromium quando si aprono link in una nuova scheda."
+  },
+  "setting_newtab_url": {
+    "description": "setting title",
+    "message": "URL della nuova scheda."
+  },
+  "setting_newtab_url_descrip": {
+    "description": "setting description",
+    "message": "Impostare l'URL dell'azione per la nuova scheda."
+  },
+  "setting_reset": {
+    "description": "setting title",
+    "message": "Ripristina i valori."
+  },
+  "setting_reset_descrip": {
+    "description": "setting description",
+    "message": "Ripristina tutte le gesture e le impostazioni di default"
+  },
+  "setting_sendstats_descrip": {
+    "description": "setting description",
+    "message": "Invia un rapporto anonimo dei principali gesti utilizzati, influenzando i gesti di default di versioni future."
+  },
+  "setting_sync": {
+    "description": "setting title",
+    "message": "Sincronizza"
+  },
+  "setting_sync_descrip": {
+    "description": "setting description",
+    "message": "Sincronizza le impostazione e le gesture con altri computer tramite i segnalibri. Devi prima abilitare la sincronizzazione dei segnalibri."
+  },
+  "setting_trail_color_descrip": {
+    "description": "setting description",
+    "message": "Modifica il colore e la trasparenza della linea disegnata quando si effettua un gesto."
+  },
+  "setting_trail_width": {
+    "description": "setting title",
+    "message": "Grandezza della linea."
+  },
+  "setting_trail_width_descrip": {
+    "description": "setting description",
+    "message": "Modifica lo spessore della linea che viene visualizzata quando fai un gesto."
+  },
+  "setting_warning_reset": {
+    "description": "warn that setting will be lost during a reset",
+    "message": "Sei sicuro di voler resettare? Perderai tutti i tuoi settaggi personalizzati."
+  },
+  "status_button_reloadall": {
+    "description": "button to reload all broken pages",
+    "message": "Ricarica tutte le pagine non funzionanti"
+  },
+  "status_button_reloadone": {
+    "description": "button to reload single broken page",
+    "message": "Ricarica la pagina"
+  },
+  "status_legend_blocked": {
+    "description": "status of a page",
+    "message": "Pagine bloccate dal sistema"
+  },
+  "status_legend_broken": {
+    "description": "status of a page",
+    "message": "Non funzionante"
+  },
+  "status_legend_loading": {
+    "description": "status of a page",
+    "message": "In caricamento"
+  },
+  "status_legend_working": {
+    "description": "status of a page",
+    "message": "Funzionante"
+  },
+  "status_link_options": {
+    "description": "Link to go to the options page",
+    "message": "Imposta Smooth Gestures: Opzioni!"
+  },
+  "status_title": {
+    "description": "The title of the status page, at top and tab name",
+    "message": "Stato"
+  },
+  "status_window_other": {
+    "description": "title for a group of tab statuses",
+    "message": "Altra finestra"
+  },
+  "status_window_this": {
+    "description": "title for a group of tab statuses",
+    "message": "Questa finestra"
+  }
+}

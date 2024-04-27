@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "Smooth Gestures Plus",
+  "description": "__MSG_description__",
+  "default_locale": "en",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "bookmarks",
+    "tabs"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "src/background.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/*"
+      ],
+      "js": [
+        "src/content.tsx"
+      ],
+      "all_frames": true
+    }
+  ],
+  "version": "2.9.0"
+}
