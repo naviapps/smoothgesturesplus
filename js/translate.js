@@ -83,10 +83,8 @@ chrome.i18n.getAcceptLanguages(function (e) {
     );
   var t = $('<optgroup>').attr('label', 'Detected Languages'),
     a = $('<optgroup>').attr('label', 'Other Languages');
-  for (i = 0; i < accept.length; i++)
-    t.append($('<option>').val(accept[i]).text(langs[accept[i]]));
-  for (l in langs)
-    -1 == accept.indexOf(l) && a.append($('<option>').val(l).text(langs[l]));
+  for (i = 0; i < accept.length; i++) t.append($('<option>').val(accept[i]).text(langs[accept[i]]));
+  for (l in langs) -1 == accept.indexOf(l) && a.append($('<option>').val(l).text(langs[l]));
   $('body').append(
     $('<div>')
       .attr('id', 'languages')
@@ -160,13 +158,9 @@ chrome.i18n.getAcceptLanguages(function (e) {
             }),
         ),
     ),
-    $.get(
-      chrome.runtime.getURL('_locales/en/messages.json'),
-      null,
-      function (e) {
-        (src = JSON.parse(e)), loadpage();
-      },
-    );
+    $.get(chrome.runtime.getURL('_locales/en/messages.json'), null, function (e) {
+      (src = JSON.parse(e)), loadpage();
+    });
 });
 var src = null;
 var res = null;
@@ -174,19 +168,11 @@ var language = 'zh';
 var words = null;
 var tree = null;
 (document.title = 'Smooth Gestures: Translate'),
-  $('body').append(
-    $(
-      '<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>',
-    ),
-  );
+  $('body').append($('<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>'));
 var loadpage = function () {
-  $.get(
-    chrome.runtime.getURL('_locales/' + language + '/messages.json'),
-    null,
-    function (e) {
-      (res = e && '' != e ? JSON.parse(e) : {}), formpage();
-    },
-  );
+  $.get(chrome.runtime.getURL('_locales/' + language + '/messages.json'), null, function (e) {
+    (res = e && '' != e ? JSON.parse(e) : {}), formpage();
+  });
 };
 var formpage = function () {
   var e = JSON.parse(JSON.stringify(res));
@@ -195,10 +181,7 @@ var formpage = function () {
       words.push({
         id: id,
         src: src[id],
-        res:
-          e[id] && e[id].update && e[id].update > src[id].update
-            ? e[id]
-            : void 0,
+        res: e[id] && e[id].update && e[id].update > src[id].update ? e[id] : void 0,
       }),
       delete e[id];
   for (id in e) words.push({ id: id, src: void 0, res: e[id] });
@@ -212,17 +195,11 @@ var formpage = function () {
     i < words.length;
     i++
   )
-    words[i].res
-      ? words[i].src
-        ? tree.complete.push(words[i])
-        : tree.old.push(words[i])
-      : tree.empty.push(words[i]);
+    words[i].res ? (words[i].src ? tree.complete.push(words[i]) : tree.old.push(words[i])) : tree.empty.push(words[i]);
   for (s in tree) {
     var t = {};
     for (i = 0; i < tree[s].length; i++) {
-      var a = tree[s][i].src
-        ? tree[s][i].src.category
-        : tree[s][i].res.category;
+      var a = tree[s][i].src ? tree[s][i].src.category : tree[s][i].res.category;
       t[a] || (t[a] = []), t[a].push(tree[s][i]);
     }
     tree[s] = t;
@@ -233,22 +210,15 @@ var buildpage = function () {
   var e = {};
   for (c in tree.empty)
     for (
-      e[c] = $('<div>')
-        .attr('class', 'translatetable')
-        .append($('<div>').attr('class', 'tabletitle').text(c)),
-        i = 0;
+      e[c] = $('<div>').attr('class', 'translatetable').append($('<div>').attr('class', 'tabletitle').text(c)), i = 0;
       i < tree.empty[c].length;
       i++
     )
       e[c].append(buildword(tree.empty[c][i]));
   for (c in tree.complete) {
     var t = $('<div>');
-    for (i = 0; i < tree.complete[c].length; i++)
-      t.append(buildword(tree.complete[c][i]));
-    e[c] ||
-      (e[c] = $('<div>')
-        .attr('class', 'translatetable')
-        .append($('<div>').attr('class', 'tabletitle').text(c))),
+    for (i = 0; i < tree.complete[c].length; i++) t.append(buildword(tree.complete[c][i]));
+    e[c] || (e[c] = $('<div>').attr('class', 'translatetable').append($('<div>').attr('class', 'tabletitle').text(c))),
       e[c].append(completedwords(t));
   }
   $('#translateroot').remove();
@@ -281,11 +251,7 @@ var completedwords = function (e) {
                       },
                       200,
                     ))
-                  : ($(this).text('hide'),
-                    $('#' + t + 'group').animate(
-                      { height: 'show', opacity: 1 },
-                      200,
-                    )),
+                  : ($(this).text('hide'), $('#' + t + 'group').animate({ height: 'show', opacity: 1 }, 200)),
                 false
               );
             }),
@@ -308,11 +274,7 @@ var buildword = function (e) {
             .text(e.src.description + ' ')
             .append($('<span>').text('[ ' + e.id + ' ]')),
         )
-        .append(
-          $('<div>')
-            .attr('class', 'message')
-            .html(e.src.message.replace(/\n/g, '<br>\n')),
-        )
+        .append($('<div>').attr('class', 'message').html(e.src.message.replace(/\n/g, '<br>\n')))
         .append(
           $('<textarea>')
             .attr('id', 'edit-' + e.id)

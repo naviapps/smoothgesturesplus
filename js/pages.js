@@ -3,15 +3,9 @@
     n = { elem: null, offset: 0 },
     c = function () {
       $('#sidebar').css({ display: 'none' }),
-        (n.elem = document.elementFromPoint(
-          0.6 * window.innerWidth,
-          0 * window.innerHeight,
-        )),
+        (n.elem = document.elementFromPoint(0.6 * window.innerWidth, 0 * window.innerHeight)),
         (n.offset =
-          Math.max(
-            document.documentElement.scrollTop,
-            document.body.scrollTop,
-          ) +
+          Math.max(document.documentElement.scrollTop, document.body.scrollTop) +
           0 * window.innerHeight -
           $(n.elem).offset().top),
         $('#sidebar').css({ display: '' });
@@ -19,14 +13,10 @@
     o = function () {
       if (n.elem) {
         var o =
-          Math.max(
-            document.documentElement.scrollTop,
-            document.body.scrollTop,
-          ) +
+          Math.max(document.documentElement.scrollTop, document.body.scrollTop) +
           0 * window.innerHeight -
           $(n.elem).offset().top;
-        (document.body.scrollTop += n.offset - o),
-          (document.documentElement.scrollTop += n.offset - o);
+        (document.body.scrollTop += n.offset - o), (document.documentElement.scrollTop += n.offset - o);
       }
     },
     e = function () {
@@ -37,24 +27,13 @@
           if ('none' != e.css('display')) {
             var t = e.attr('page'),
               i = Math.round(
-                Math.max(
-                  document.documentElement.scrollTop,
-                  document.body.scrollTop,
-                ) +
+                Math.max(document.documentElement.scrollTop, document.body.scrollTop) +
                   window.innerHeight -
                   e.position().top -
                   e.height(),
               ),
-              a = Math.round(
-                Math.max(
-                  document.documentElement.scrollTop,
-                  document.body.scrollTop,
-                ) - e.position().top,
-              );
-            if (
-              i <= window.innerHeight / 2 + 25 &&
-              a > -window.innerHeight / 2 - 25
-            ) {
+              a = Math.round(Math.max(document.documentElement.scrollTop, document.body.scrollTop) - e.position().top);
+            if (i <= window.innerHeight / 2 + 25 && a > -window.innerHeight / 2 - 25) {
               s(t);
               break;
             }
@@ -76,15 +55,11 @@
     return 0 == n ? e : t * Math.pow(2, 10 * (n / i - 1)) + e;
   };
   var a = function (o, n) {
-    o =
-      o ||
-      location.hash.replace(/^#(.+)$/, '$1') ||
-      document.querySelector('.page').page;
+    o = o || location.hash.replace(/^#(.+)$/, '$1') || document.querySelector('.page').page;
     var e = $('[page=' + o + ']');
     1 == e.length &&
       (o != t && s(o),
-      e.position().top !=
-        Math.max(document.documentElement.scrollTop, document.body.scrollTop) &&
+      e.position().top != Math.max(document.documentElement.scrollTop, document.body.scrollTop) &&
         $('html, body')
           .stop()
           .animate({ scrollTop: e.position().top }, n || 0, 'easeInExp'));

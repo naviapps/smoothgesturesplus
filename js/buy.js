@@ -1,16 +1,16 @@
 !(function () {
-  'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {});
+  'update_url' in chrome.runtime.getManifest() && (console.log = console.error = function () {});
   var e = {};
   chrome.storage.local.get(null, function (s) {
-    (e = s), a();
+    e = s;
+    a();
   });
   chrome.storage.onChanged.addListener(function (s, a) {
     if ('local' == a) for (key in s) e[key] = s[key].newValue;
-  }),
-    chrome.runtime.getBackgroundPage(function (s) {
-      s.ping();
-    });
+  });
+  chrome.runtime.getBackgroundPage(function (s) {
+    s.ping();
+  });
   var a = function () {
     $(function () {
       var s = 336 - Math.ceil((Date.now() - e.firstinstalled) / 1e3 / 60 / 60);
@@ -40,11 +40,7 @@
                     $('<span>')
                       .css({
                         'background-color':
-                          s < 0
-                            ? 'rgba(255,0,0,.2)'
-                            : s < 120
-                              ? 'rgba(255,255,0,.2)'
-                              : 'rgba(0,255,0,.2)',
+                          s < 0 ? 'rgba(255,0,0,.2)' : s < 120 ? 'rgba(255,255,0,.2)' : 'rgba(0,255,0,.2)',
                         'font-weight': 'bold',
                       })
                       .text(
@@ -52,11 +48,7 @@
                           (s < 0
                             ? 'has expired'
                             : 'will expire in ' +
-                              (24 <= s
-                                ? Math.round(s / 24) + ' days'
-                                : 0 < s
-                                  ? s + ' hours'
-                                  : 'less than an hour')),
+                              (24 <= s ? Math.round(s / 24) + ' days' : 0 < s ? s + ' hours' : 'less than an hour')),
                       ),
                   ),
                 )
@@ -74,12 +66,7 @@
                   .click(function () {
                     chrome.tabs.create(
                       {
-                        url:
-                          'https://smoothgesturesplus.com/id/?clid=' +
-                          e.id +
-                          '&fi=' +
-                          e.firstinstalled +
-                          '&n=/pay/',
+                        url: 'https://smoothgesturesplus.com/id/?clid=' + e.id + '&fi=' + e.firstinstalled + '&n=/pay/',
                       },
                       function () {
                         window.close();
@@ -96,31 +83,31 @@
             ),
         )
         .append(
-          $('<div class=section>')
-            .append($('<div class=descrip>').text('FAQ'))
+          $('<div class="section">')
+            .append($('<div class="descrip">').text('FAQ'))
             .append(
-              $('<ul class=subdescrip>')
+              $('<ul class="subdescrip">')
                 .append(
                   $('<li>')
                     .append(
-                      '<div class=faqtitle>Can I use <span class=sgtitle>Smooth Gestures <span class=sgplus>plus</span></span> on more than one computer?</div>',
+                      '<div class="faqtitle">Can I use <span class="sgtitle">Smooth Gestures <span class="sgplus">plus</span></span> on more than one computer?</div>',
                     )
                     .append(
-                      '<div class=faqdescrip>Yes! This <span class=sgtitle>Smooth Gestures <span class=sgplus>plus</span></span> upgrade will work on any computer which has Chrome syncing to the same Google account.</div>',
+                      '<div class="faqdescrip">Yes! This <span class="sgtitle">Smooth Gestures <span class="sgplus">plus</span></span> upgrade will work on any computer which has Chrome syncing to the same Google account.</div>',
                     ),
                 )
                 .append(
                   $('<li>')
-                    .append('<div class=faqtitle>What about privacy?</div>')
+                    .append('<div class="faqtitle">What about privacy?</div>')
                     .append(
-                      '<div class=faqdescrip><span class=sgtitle>Smooth Gestures <span class=sgplus>plus</span></span> is focused on keeping extension permissions to a minimum and only requesting additional permissions as needed.</div>',
+                      '<div class="faqdescrip"><span class="sgtitle">Smooth Gestures <span class="sgplus">plus</span></span> is focused on keeping extension permissions to a minimum and only requesting additional permissions as needed.</div>',
                     ),
                 )
                 .append(
                   $('<li>')
-                    .append('<div class=faqtitle>How can I contact you?</div>')
+                    .append('<div class="faqtitle">How can I contact you?</div>')
                     .append(
-                      "<div class=faqdescrip>Please contact me at <a href='mailto:scott@smoothgesturesplus.com'>scott@smoothgesturesplus.com</a>. Send me more questions!</div>",
+                      '<div class="faqdescrip">Please contact me at <a href="mailto:scott@smoothgesturesplus.com">scott@smoothgesturesplus.com</a>. Send me more questions!</div>',
                     ),
                 ),
             ),

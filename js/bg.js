@@ -44,8 +44,7 @@
     !(function () {
       var e = {};
       for (a in console) e[a] = console[a];
-      if ('update_url' in chrome.runtime.getManifest())
-        for (a in console) console[a] = function () {};
+      if ('update_url' in chrome.runtime.getManifest()) for (a in console) console[a] = function () {};
       var s = {},
         r = {},
         c = function (e, t) {
@@ -93,8 +92,7 @@
               l.localChanged(e);
           } else if ('sync' == t) {
             if (e.firstinstalled) {
-              if (!e.firstinstalled.newValue)
-                return void chrome.storage.sync.set(r);
+              if (!e.firstinstalled.newValue) return void chrome.storage.sync.set(r);
               r.firstinstalled &&
                 e.firstinstalled.newValue > e.firstinstalled.oldValue &&
                 ((e.firstinstalled.newValue = e.firstinstalled.oldValue),
@@ -114,16 +112,10 @@
         }),
         chrome.storage.onChanged.addListener(l.changed),
         (l.init = function () {
-          for (key in (r.firstinstalled ||
-            ((r.firstinstalled = Date.now()),
-            (r.sync = { firstinstalled: true })),
+          for (key in (r.firstinstalled || ((r.firstinstalled = Date.now()), (r.sync = { firstinstalled: true })),
           JSON.parse(k['Smooth Gestures'].settings)))
             r.sync[key] = true;
-          if (
-            ((r.sync.gestures = true),
-            (r.sync.customactions = true),
-            !s.installed)
-          ) {
+          if (((r.sync.gestures = true), (r.sync.customactions = true), !s.installed)) {
             (s.installed = Date.now()),
               (s.id =
                 Math.floor(Math.random() * Math.pow(2, 30)).toString(32) +
@@ -147,19 +139,13 @@
                 chrome.tabs.create({ url: 'options.html' });
               }, 1e3);
           }
-          for (key in (r.firstinstalled > s.installed &&
-            (r.firstinstalled = s.installed),
-          r.sync))
-            r.sync[key] &&
-            void 0 !== r[key] &&
-            (r[key + '+ts'] || 0) >= (s[key + '+ts'] || 0)
-              ? ((s[key] = r[key]),
-                (s[key + '+ts'] = r[key + '+ts'] || Date.now()))
+          for (key in (r.firstinstalled > s.installed && (r.firstinstalled = s.installed), r.sync))
+            r.sync[key] && void 0 !== r[key] && (r[key + '+ts'] || 0) >= (s[key + '+ts'] || 0)
+              ? ((s[key] = r[key]), (s[key + '+ts'] = r[key + '+ts'] || Date.now()))
               : r.sync[key] &&
                 void 0 !== s[key] &&
                 (s[key + '+ts'] || 0) >= (r[key + '+ts'] || 0) &&
-                ((r[key] = s[key]),
-                (r[key + '+ts'] = s[key + '+ts'] || Date.now()));
+                ((r[key] = s[key]), (r[key + '+ts'] = s[key + '+ts'] || Date.now()));
           if (
             ((s.version = chrome.runtime.getManifest().version),
             (s.started = Date.now()),
@@ -171,11 +157,7 @@
           ) {
             var t = screen.availHeight / 2 - 320 / 1.5,
               n = screen.availWidth / 2 - 375;
-            window.open(
-              'rightclick.html',
-              'rightclick',
-              'width=750,height=320,top=' + t + ',left=' + n,
-            );
+            window.open('rightclick.html', 'rightclick', 'width=750,height=320,top=' + t + ',left=' + n);
           }
           chrome.storage.sync.set(r, function () {
             chrome.storage.local.set(s, F);
@@ -372,11 +354,7 @@
           });
         },
         'navigate-tab': function (e, t) {
-          chrome.tabs.update(
-            h[e].detail.tabId,
-            { url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 },
-            t,
-          );
+          chrome.tabs.update(h[e].detail.tabId, { url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 }, t);
         },
         'close-tab': function (t, n) {
           chrome.tabs.get(h[t].detail.tabId, function (e) {
@@ -388,8 +366,7 @@
                       ? chrome.tabs.update(
                           h[t].detail.tabId,
                           {
-                            url:
-                              'homepage' != s.newTabUrl ? s.newTabUrl : void 0,
+                            url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0,
                           },
                           n,
                         )
@@ -401,8 +378,7 @@
         'close-other-tabs': function (e, n) {
           chrome.tabs.get(h[e].detail.tabId, function (t) {
             chrome.tabs.query({ windowId: t.windowId }, function (e) {
-              for (i = 0; i < e.length; i++)
-                e[i].id == t.id || e[i].pinned || chrome.tabs.remove(e[i].id);
+              for (i = 0; i < e.length; i++) e[i].id == t.id || e[i].pinned || chrome.tabs.remove(e[i].id);
               n();
             });
           });
@@ -410,10 +386,7 @@
         'close-left-tabs': function (e, n) {
           chrome.tabs.get(h[e].detail.tabId, function (t) {
             chrome.tabs.query({ windowId: t.windowId }, function (e) {
-              for (i = 0; i < e.length; i++)
-                e[i].index < t.index &&
-                  !t.pinned &&
-                  chrome.tabs.remove(e[i].id);
+              for (i = 0; i < e.length; i++) e[i].index < t.index && !t.pinned && chrome.tabs.remove(e[i].id);
               n();
             });
           });
@@ -421,10 +394,7 @@
         'close-right-tabs': function (e, n) {
           chrome.tabs.get(h[e].detail.tabId, function (t) {
             chrome.tabs.query({ windowId: t.windowId }, function (e) {
-              for (i = 0; i < e.length; i++)
-                e[i].index > t.index &&
-                  !t.pinned &&
-                  chrome.tabs.remove(e[i].id);
+              for (i = 0; i < e.length; i++) e[i].index > t.index && !t.pinned && chrome.tabs.remove(e[i].id);
               n();
             });
           });
@@ -464,8 +434,7 @@
           chrome.tabs.get(h[t].detail.tabId, function (e) {
             chrome.tabs.create(
               {
-                url:
-                  'view-source:' + (h[t].detail.url ? h[t].detail.url : e.url),
+                url: 'view-source:' + (h[t].detail.url ? h[t].detail.url : e.url),
                 windowId: e.windowId,
                 index: e.index + 1,
               },
@@ -502,17 +471,11 @@
           h[e].postMessage({ action: { id: 'page-forward' } }, t);
         },
         'new-window': function (e, t) {
-          chrome.windows.create(
-            { url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 },
-            t,
-          );
+          chrome.windows.create({ url: 'homepage' != s.newTabUrl ? s.newTabUrl : void 0 }, t);
         },
         'new-window-link': function (e, t, n) {
           for (var o = 0; o < n.links.length; o++)
-            chrome.windows.create(
-              { url: n.links[o].src },
-              o == n.links.length - 1 ? t : null,
-            );
+            chrome.windows.create({ url: n.links[o].src }, o == n.links.length - 1 ? t : null);
         },
         'close-window': function (e, t) {
           chrome.windows.getCurrent(function (e) {
@@ -522,16 +485,13 @@
         'split-tabs': function (e, t) {
           chrome.tabs.get(h[e].detail.tabId, function (n) {
             chrome.tabs.query({ windowId: n.windowId }, function (t) {
-              chrome.windows.create(
-                { tabId: n.id, focused: true, incognito: n.incognito },
-                function (e) {
-                  for (i = n.index + 1; i < t.length; i++)
-                    chrome.tabs.move(t[i].id, {
-                      windowId: e.id,
-                      index: i - n.index,
-                    });
-                },
-              );
+              chrome.windows.create({ tabId: n.id, focused: true, incognito: n.incognito }, function (e) {
+                for (i = n.index + 1; i < t.length; i++)
+                  chrome.tabs.move(t[i].id, {
+                    windowId: e.id,
+                    index: i - n.index,
+                  });
+              });
             });
           });
         },
@@ -542,16 +502,11 @@
               for (var n in b) 0 < b[n].focused && t.push([n, b[n]]);
               if (!(t.length < 2)) {
                 t.sort(function (e, t) {
-                  return e.focused > t.focused
-                    ? 1
-                    : e.focused < t.focused
-                      ? -1
-                      : 0;
+                  return e.focused > t.focused ? 1 : e.focused < t.focused ? -1 : 0;
                 });
                 var o = parseInt(t[t.length - 2][0]);
                 if (o) {
-                  for (i = 0; i < e.length; i++)
-                    chrome.tabs.move(e[i].id, { windowId: o, index: 1e6 });
+                  for (i = 0; i < e.length; i++) chrome.tabs.move(e[i].id, { windowId: o, index: 1e6 });
                   chrome.tabs.update(a.id, { active: true }, function () {
                     chrome.windows.update(o, { focused: true }, r);
                   });
@@ -583,47 +538,31 @@
           );
         },
         'goto-top': function (e, t, n) {
-          h[e].postMessage(
-            { action: { id: 'goto-top', startPoint: n.startPoint } },
-            t,
-          );
+          h[e].postMessage({ action: { id: 'goto-top', startPoint: n.startPoint } }, t);
         },
         'goto-bottom': function (e, t, n) {
-          h[e].postMessage(
-            { action: { id: 'goto-bottom', startPoint: n.startPoint } },
-            t,
-          );
+          h[e].postMessage({ action: { id: 'goto-bottom', startPoint: n.startPoint } }, t);
         },
         'page-up': function (e, t, n) {
-          h[e].postMessage(
-            { action: { id: 'page-up', startPoint: n.startPoint } },
-            t,
-          );
+          h[e].postMessage({ action: { id: 'page-up', startPoint: n.startPoint } }, t);
         },
         'page-down': function (e, t, n) {
-          h[e].postMessage(
-            { action: { id: 'page-down', startPoint: n.startPoint } },
-            t,
-          );
+          h[e].postMessage({ action: { id: 'page-down', startPoint: n.startPoint } }, t);
         },
         'page-next': function (e, t) {
           O(
             e,
             function () {
               var e = null;
-              if ((e = document.querySelector('link[rel=next][href]')))
-                location.href = e.href;
-              else if ((e = document.querySelector('a[rel=next][href]')))
-                location.href = e.href;
+              if ((e = document.querySelector('link[rel=next][href]'))) location.href = e.href;
+              else if ((e = document.querySelector('a[rel=next][href]'))) location.href = e.href;
               else {
                 e = document.querySelectorAll('a[href]');
                 for (var t = 0; t < e.length; t++)
-                  if (e[t].innerText.match(/(next|下一页|下页)/i))
-                    return void (location.href = e[t].href);
+                  if (e[t].innerText.match(/(next|下一页|下页)/i)) return void (location.href = e[t].href);
                 e = document.querySelectorAll('a[href]');
                 for (t = 0; t < e.length; t++)
-                  if (e[t].innerText.match(/(>|›)/i))
-                    return void (location.href = e[t].href);
+                  if (e[t].innerText.match(/(>|›)/i)) return void (location.href = e[t].href);
               }
             },
             t,
@@ -634,19 +573,15 @@
             e,
             function () {
               var e = null;
-              if ((e = document.querySelector('link[rel=prev][href]')))
-                location.href = e.href;
-              else if ((e = document.querySelector('a[rel=prev][href]')))
-                location.href = e.href;
+              if ((e = document.querySelector('link[rel=prev][href]'))) location.href = e.href;
+              else if ((e = document.querySelector('a[rel=prev][href]'))) location.href = e.href;
               else {
                 e = document.querySelectorAll('a[href]');
                 for (var t = 0; t < e.length; t++)
-                  if (e[t].innerText.match(/(prev|上一页|上页)/i))
-                    return void (location.href = e[t].href);
+                  if (e[t].innerText.match(/(prev|上一页|上页)/i)) return void (location.href = e[t].href);
                 e = document.querySelectorAll('a[href]');
                 for (t = 0; t < e.length; t++)
-                  if (e[t].innerText.match(/(<|‹)/i))
-                    return void (location.href = e[t].href);
+                  if (e[t].innerText.match(/(<|‹)/i)) return void (location.href = e[t].href);
               }
             },
             t,
@@ -659,10 +594,7 @@
                 chrome.windows.update(
                   e.id,
                   {
-                    state:
-                      'fullscreen' != e.state
-                        ? 'fullscreen'
-                        : b[e.id].prevstate || 'normal',
+                    state: 'fullscreen' != e.state ? 'fullscreen' : b[e.id].prevstate || 'normal',
                   },
                   t,
                 ),
@@ -677,10 +609,7 @@
                 chrome.windows.update(
                   e.id,
                   {
-                    state:
-                      'minimized' != e.state
-                        ? 'minimized'
-                        : b[e.id].prevstate || 'normal',
+                    state: 'minimized' != e.state ? 'minimized' : b[e.id].prevstate || 'normal',
                   },
                   t,
                 ),
@@ -692,11 +621,7 @@
           chrome.tabs.get(h[e].detail.tabId, function (e) {
             chrome.windows.get(e.windowId, function (e) {
               b[e.id] || (b[e.id] = {}),
-                chrome.windows.update(
-                  e.id,
-                  { state: 'maximized' != e.state ? 'maximized' : 'normal' },
-                  t,
-                ),
+                chrome.windows.update(e.id, { state: 'maximized' != e.state ? 'maximized' : 'normal' }, t),
                 (b[e.id].prevstate = e.state);
             });
           });
@@ -705,13 +630,9 @@
           chrome.tabs.get(h[e].detail.tabId, function (e) {
             chrome.tabs.update(e.id, { active: true }, function () {
               setTimeout(function () {
-                chrome.tabs.captureVisibleTab(
-                  e.windowId,
-                  { format: 'png' },
-                  function (e) {
-                    chrome.tabs.create({ url: e }, t);
-                  },
-                );
+                chrome.tabs.captureVisibleTab(e.windowId, { format: 'png' }, function (e) {
+                  chrome.tabs.create({ url: e }, t);
+                });
               }, 100);
             });
           });
@@ -720,14 +641,10 @@
           chrome.tabs.get(h[e].detail.tabId, function (n) {
             chrome.tabs.update(n.id, { active: true }, function () {
               setTimeout(function () {
-                chrome.tabs.captureVisibleTab(
-                  n.windowId,
-                  { format: 'png' },
-                  function (e) {
-                    var t = n.url.match(/\/\/([^\/]+)\//)[1];
-                    T(e, 'screenshot' + (t ? '-' + t : '') + '.png'), o();
-                  },
-                );
+                chrome.tabs.captureVisibleTab(n.windowId, { format: 'png' }, function (e) {
+                  var t = n.url.match(/\/\/([^\/]+)\//)[1];
+                  T(e, 'screenshot' + (t ? '-' + t : '') + '.png'), o();
+                });
               }, 100);
             });
           });
@@ -758,8 +675,7 @@
             function (e) {
               var t = e[0],
                 n = document.createElement('canvas');
-              (n.height = Math.min(t.height, 32768)),
-                (n.width = Math.min(t.width, 32768));
+              (n.height = Math.min(t.height, 32768)), (n.width = Math.min(t.width, 32768));
               var o = document.createElement('img'),
                 i = n.getContext('2d'),
                 a = 0,
@@ -769,21 +685,13 @@
                     c.id,
                     {
                       code:
-                        'document.body.scrollTop=' +
-                        a * t.screenh +
-                        ';document.body.scrollLeft=' +
-                        r * t.screenw +
-                        ';',
+                        'document.body.scrollTop=' + a * t.screenh + ';document.body.scrollLeft=' + r * t.screenw + ';',
                     },
                     function () {
                       setTimeout(function () {
-                        chrome.tabs.captureVisibleTab(
-                          c.windowId,
-                          { format: 'png' },
-                          function (e) {
-                            o.src = e;
-                          },
-                        );
+                        chrome.tabs.captureVisibleTab(c.windowId, { format: 'png' }, function (e) {
+                          o.src = e;
+                        });
                       }, 80);
                     },
                   );
@@ -833,12 +741,7 @@
         return (
           ';base64' == n[2] &&
             (o = (function (e) {
-              for (
-                var t = atob(e), n = new Array(t.length), o = 0;
-                o < t.length;
-                o++
-              )
-                n[o] = t.charCodeAt(o);
+              for (var t = atob(e), n = new Array(t.length), o = 0; o < t.length; o++) n[o] = t.charCodeAt(o);
               return new Uint8Array(n);
             })(o)),
           new Blob([o], { type: n[1] })
@@ -852,23 +755,7 @@
         var n = document.createElement('a');
         (n.href = e), (n.download = t || 'download');
         var o = document.createEvent('MouseEvents');
-        o.initMouseEvent(
-          'click',
-          true,
-          false,
-          window,
-          0,
-          0,
-          0,
-          0,
-          0,
-          false,
-          false,
-          false,
-          false,
-          0,
-          null,
-        ),
+        o.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null),
           n.dispatchEvent(o);
       };
       L['clone-tab'] = function (e, t, n) {
@@ -902,22 +789,13 @@
           : h[e].postMessage({ action: { id: 'zoom-zero-hack' } }, t);
       };
       L['zoom-img-in'] = function (e, t, n) {
-        h[e].postMessage(
-          { action: { id: 'zoom-img-in', images: n.images } },
-          t,
-        );
+        h[e].postMessage({ action: { id: 'zoom-img-in', images: n.images } }, t);
       };
       L['zoom-img-out'] = function (e, t, n) {
-        h[e].postMessage(
-          { action: { id: 'zoom-img-out', images: n.images } },
-          t,
-        );
+        h[e].postMessage({ action: { id: 'zoom-img-out', images: n.images } }, t);
       };
       L['zoom-img-zero'] = function (e, t, n) {
-        h[e].postMessage(
-          { action: { id: 'zoom-img-zero', images: n.images } },
-          t,
-        );
+        h[e].postMessage({ action: { id: 'zoom-img-zero', images: n.images } }, t);
       };
       L['tab-to-left'] = function (e, t) {
         chrome.tabs.get(h[e].detail.tabId, function (e) {
@@ -934,44 +812,29 @@
           var t = e.url.split('#')[0].split('?')[0].split('/');
           '' == t[t.length - 1] && (t = t.slice(0, t.length - 1));
           var n = null;
-          (n =
-            3 < t.length
-              ? t.slice(0, t.length - 1).join('/') + '/'
-              : t.join('/') + '/')
+          (n = 3 < t.length ? t.slice(0, t.length - 1).join('/') + '/' : t.join('/') + '/')
             ? chrome.tabs.update(e.id, { url: n }, o)
             : o();
         });
       };
       L['open-history'] = function (e, t) {
         chrome.tabs.get(h[e].detail.tabId, function (e) {
-          chrome.tabs.create(
-            { url: 'chrome://history/', windowId: e.windowId },
-            t,
-          );
+          chrome.tabs.create({ url: 'chrome://history/', windowId: e.windowId }, t);
         });
       };
       L['open-downloads'] = function (e, t) {
         chrome.tabs.get(h[e].detail.tabId, function (e) {
-          chrome.tabs.create(
-            { url: 'chrome://downloads/', windowId: e.windowId },
-            t,
-          );
+          chrome.tabs.create({ url: 'chrome://downloads/', windowId: e.windowId }, t);
         });
       };
       L['open-extensions'] = function (e, t) {
         chrome.tabs.get(h[e].detail.tabId, function (e) {
-          chrome.tabs.create(
-            { url: 'chrome://extensions/', windowId: e.windowId },
-            t,
-          );
+          chrome.tabs.create({ url: 'chrome://extensions/', windowId: e.windowId }, t);
         });
       };
       L['open-bookmarks'] = function (e, t) {
         chrome.tabs.get(h[e].detail.tabId, function (e) {
-          chrome.tabs.create(
-            { url: 'chrome://bookmarks/', windowId: e.windowId },
-            t,
-          );
+          chrome.tabs.create({ url: 'chrome://bookmarks/', windowId: e.windowId }, t);
         });
       };
       L['open-image'] = function (e, n, o) {
@@ -1059,21 +922,13 @@
       };
       L['find-prev'] = function (e, t, n) {
         if (!n.selection) return t();
-        O(
-          e,
-          "window.find('" +
-            n.selection.replace(/[\\"']/g, '\\$&') +
-            "', false, true, true, false, true, true);",
-          t,
-        );
+        O(e, "window.find('" + n.selection.replace(/[\\"']/g, '\\$&') + "', false, true, true, false, true, true);", t);
       };
       L['find-next'] = function (e, t, n) {
         if (!n.selection) return t();
         O(
           e,
-          "window.find('" +
-            n.selection.replace(/[\\"']/g, '\\$&') +
-            "', false, false, true, false, true, true);",
+          "window.find('" + n.selection.replace(/[\\"']/g, '\\$&') + "', false, false, true, false, true, true);",
           t,
         );
       };
@@ -1098,10 +953,7 @@
       L.bookmark = function (e, t) {
         M(['bookmarks'], function () {
           chrome.tabs.get(h[e].detail.tabId, function (e) {
-            chrome.bookmarks.create(
-              { parentId: '2', title: e.title, url: e.url },
-              t,
-            );
+            chrome.bookmarks.create({ parentId: '2', title: e.title, url: e.url }, t);
           });
         });
       };
@@ -1122,11 +974,7 @@
               R = i;
               var t = screen.height / 2 - 200 / 1.5,
                 n = screen.width / 2 - 250;
-              window.open(
-                'permissions.html#' + o.join(','),
-                'sggrant',
-                'width=500,height=200,top=' + t + ',left=' + n,
-              );
+              window.open('permissions.html#' + o.join(','), 'sggrant', 'width=500,height=200,top=' + t + ',left=' + n);
             }
           });
         };
@@ -1147,14 +995,9 @@
           if (e.getgestures) {
             if (!w)
               return (
-                $.get(
-                  chrome.runtime.getURL('js/gestures.js'),
-                  null,
-                  function (e) {
-                    (w = "window.SGextId='" + chrome.runtime.id + "';\n" + e),
-                      n({ gestures: w });
-                  },
-                ),
+                $.get(chrome.runtime.getURL('js/gestures.js'), null, function (e) {
+                  (w = "window.SGextId='" + chrome.runtime.id + "';\n" + e), n({ gestures: w });
+                }),
                 true
               );
             n({ gestures: w });
@@ -1177,13 +1020,8 @@
             var r = e.externalactions;
             if (r.name && r.actions) {
               if (0 < r.actions.length)
-                for (
-                  s.externalactions[t.id] = r, i = 0;
-                  i < s.externalactions[t.id].actions.length;
-                  i++
-                )
-                  I[t.id + '-' + s.externalactions[t.id].actions[i].id] =
-                    s.externalactions[t.id].actions[i].context;
+                for (s.externalactions[t.id] = r, i = 0; i < s.externalactions[t.id].actions.length; i++)
+                  I[t.id + '-' + s.externalactions[t.id].actions[i].id] = s.externalactions[t.id].actions[i].context;
               else delete s.externalactions[t.id];
               c({ externalactions: s.externalactions }), n(true);
             } else n(false);
@@ -1192,9 +1030,7 @@
         chrome.runtime.onConnectExternal.addListener(function (e) {
           if ((console.log(e.sender.tab, e.name), e.sender.tab)) {
             if (((e.detail = JSON.parse(e.name)), !e.detail.id)) return;
-            (e.detail.tabId = e.sender.tab.id),
-              (e.detail.external = true),
-              t(e);
+            (e.detail.tabId = e.sender.tab.id), (e.detail.external = true), t(e);
           }
         });
       var t = function (e) {
@@ -1206,13 +1042,9 @@
                 function (t, n) {
                   if (
                     (console.log('content_message', JSON.stringify(n)),
-                    n.selection &&
-                    0 < n.selection.length &&
-                    s.gestures['s' + n.gesture]
+                    n.selection && 0 < n.selection.length && s.gestures['s' + n.gesture]
                       ? (n.gesture = 's' + n.gesture)
-                      : n.links &&
-                          0 < n.links.length &&
-                          s.gestures['l' + n.gesture]
+                      : n.links && 0 < n.links.length && s.gestures['l' + n.gesture]
                         ? (n.gesture = 'l' + n.gesture)
                         : n.images &&
                           0 < n.images.length &&
@@ -1243,15 +1075,11 @@
                       p && n.startPoint && (p.startPoint = n.startPoint);
                     var o = p
                       ? function () {
-                          chrome.tabs.query(
-                            { active: true, lastFocusedWindow: true },
-                            function (e) {
-                              if (p && e.length)
-                                for (t in ((p.tabId = e[0].id), h))
-                                  e[0].id == h[t].detail.tabId &&
-                                    h[t].postMessage({ chain: p });
-                            },
-                          );
+                          chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (e) {
+                            if (p && e.length)
+                              for (t in ((p.tabId = e[0].id), h))
+                                e[0].id == h[t].detail.tabId && h[t].postMessage({ chain: p });
+                          });
                         }
                       : function () {};
                     try {
@@ -1266,33 +1094,23 @@
                       }
                     } catch (e) {}
                     s.log.action[e] || (s.log.action[e] = {}),
-                      s.log.action[e][n.gesture] ||
-                        (s.log.action[e][n.gesture] = { count: 0 }),
+                      s.log.action[e][n.gesture] || (s.log.action[e][n.gesture] = { count: 0 }),
                       (s.log.action[e][n.gesture].count += 1),
                       s.log.line ||
                         (s.log.line = {
                           distance: 0,
                           segments: 0,
                         }),
-                      n.line &&
-                        ((s.log.line.distance += n.line.distance),
-                        (s.log.line.segments += n.line.segments)),
+                      n.line && ((s.log.line.distance += n.line.distance), (s.log.line.segments += n.line.segments)),
                       c({ log: s.log });
                   }
                   if (
                     (n.syncButton &&
-                      (p &&
-                        (p.buttonDown || (p.buttonDown = {}),
-                        (p.buttonDown[n.syncButton.id] = n.syncButton.down)),
+                      (p && (p.buttonDown || (p.buttonDown = {}), (p.buttonDown[n.syncButton.id] = n.syncButton.down)),
                       setTimeout(function () {
-                        chrome.tabs.query(
-                          { active: true, lastFocusedWindow: true },
-                          function (e) {
-                            for (t in h)
-                              e[0].id == h[t].detail.tabId &&
-                                h[t].postMessage({ syncButton: n.syncButton });
-                          },
-                        );
+                        chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (e) {
+                          for (t in h) e[0].id == h[t].detail.tabId && h[t].postMessage({ syncButton: n.syncButton });
+                        });
                       }, 20)),
                     n.closetab &&
                       chrome.tabs.get(h[t].detail.tabId, function (e) {
@@ -1300,10 +1118,7 @@
                       }),
                     n.nativeport && n.nativeport.rightclick)
                   ) {
-                    if (
-                      'number' != typeof n.nativeport.rightclick.x ||
-                      'number' != typeof n.nativeport.rightclick.y
-                    )
+                    if ('number' != typeof n.nativeport.rightclick.x || 'number' != typeof n.nativeport.rightclick.y)
                       return;
                     if (m)
                       m.postMessage({
@@ -1317,11 +1132,7 @@
                     else if (!s.blockDoubleclickAlert && (d || u)) {
                       var a = screen.availHeight / 2 - 320 / 1.5,
                         r = screen.availWidth / 2 - 375;
-                      window.open(
-                        'rightclick.html',
-                        'rightclick',
-                        'width=750,height=320,top=' + a + ',left=' + r,
-                      );
+                      window.open('rightclick.html', 'rightclick', 'width=750,height=320,top=' + a + ',left=' + r);
                     }
                   }
                 }.bind(null, n),
@@ -1330,17 +1141,11 @@
                 delete h[n];
               });
             var o = { enable: true };
-            p &&
-              p.tabId == t.id &&
-              (t.active
-                ? (o.chain = p)
-                : (clearTimeout(p.timeout), (p = null)));
+            p && p.tabId == t.id && (t.active ? (o.chain = p) : (clearTimeout(p.timeout), (p = null)));
             var i = t.url.substr(t.url.indexOf('//') + 2);
             i = i.substr(0, i.indexOf('/')).toLowerCase();
             for (var a = 0; s.blacklist && a < s.blacklist.length; a++)
-              new RegExp(
-                '^(.+\\.)?' + s.blacklist[a].replace('.', '\\.') + '$',
-              ).test(i) && (o.enable = false);
+              new RegExp('^(.+\\.)?' + s.blacklist[a].replace('.', '\\.') + '$').test(i) && (o.enable = false);
             h[n].postMessage(o), _(t.id);
           }
         },
@@ -1362,12 +1167,7 @@
                   })
                   .join(',') +
                 ')'),
-            (t =
-              '(function(){if(window.SG && window.SG.isId("' +
-              e +
-              '")){return ' +
-              t +
-              '}})()'),
+            (t = '(function(){if(window.SG && window.SG.isId("' + e + '")){return ' + t + '}})()'),
             chrome.tabs.executeScript(
               h[e].sender.tab.id,
               {
@@ -1376,17 +1176,14 @@
                 matchAboutBlank: true,
               },
               function (e) {
-                for (var t = 0; t < e.length; t++)
-                  if (null !== e[t]) return void o(e[t]);
+                for (var t = 0; t < e.length; t++) if (null !== e[t]) return void o(e[t]);
                 o && o();
               },
             ));
         },
         n = function (e) {
           if (f.active != e) {
-            for (id in h)
-              f.active == h[id].detail.tabId &&
-                h[id].postMessage({ windowBlurred: true });
+            for (id in h) f.active == h[id].detail.tabId && h[id].postMessage({ windowBlurred: true });
             (f.prevActive = f.active), (f.active = e);
           }
         };
@@ -1422,11 +1219,9 @@
                 a = JSON.parse(unescape(o[2])),
                 r = 1 * n[1].substr(6);
               e.url = '';
-              for (var s = 0; s < a[r].length; s++)
-                e.url += String.fromCharCode(a[r].charCodeAt(s) - 10);
+              for (var s = 0; s < a[r].length; s++) e.url += String.fromCharCode(a[r].charCodeAt(s) - 10);
               e.title = '';
-              for (s = 0; s < i[r].length; s++)
-                e.title += String.fromCharCode(i[r].charCodeAt(s) - 10);
+              for (s = 0; s < i[r].length; s++) e.title += String.fromCharCode(i[r].charCodeAt(s) - 10);
             }
             f.tab[d] || (f.tab[d] = { history: [], titles: [] });
             var c = f.tab[d];
@@ -1460,8 +1255,7 @@
         chrome.tabs.onMoved.addListener(z),
         chrome.tabs.onAttached.addListener(z),
         chrome.tabs.onRemoved.addListener(function (e) {
-          for (f.tab[e] && f.closed.push(f.tab[e]); 50 < f.closed.length; )
-            f.closed.shift();
+          for (f.tab[e] && f.closed.push(f.tab[e]); 50 < f.closed.length; ) f.closed.shift();
           delete f.tab[e];
         }),
         chrome.windows.onRemoved.addListener(function (e) {
@@ -1470,17 +1264,13 @@
       var A = function () {
         var e = {};
         for (g in s.gestures)
-          if (
-            (('l' != g[0] && 'i' != g[0] && 's' != g[0]) || (g = g.substr(1)),
-            'k' == g[0])
-          ) {
+          if ((('l' != g[0] && 'i' != g[0] && 's' != g[0]) || (g = g.substr(1)), 'k' == g[0])) {
             e.k || (e.k = {});
             var t = g.substr(1, 4);
             e.k[t] || (e.k[t] = []), e.k[t].push(g.substr(6));
           } else {
             var n = e;
-            for (i = 0; i < g.length; i++)
-              n[g[i]] || (n[g[i]] = {}), (n = n[g[i]]);
+            for (i = 0; i < g.length; i++) n[g[i]] || (n[g[i]] = {}), (n = n[g[i]]);
             n[''] = true;
           }
         c({ validGestures: e });
@@ -1498,8 +1288,7 @@
         var s = {};
         for (id in h) {
           var e = h[id].detail.tabId;
-          s[e] || (s[e] = { root: false, frames: 0 }),
-            h[id].detail.frame ? (s[e].frames += 1) : (s[e].root = true);
+          s[e] || (s[e] = { root: false, frames: 0 }), h[id].detail.frame ? (s[e].frames += 1) : (s[e].root = true);
         }
         chrome.windows.getAll({ populate: true }, function (e) {
           var t = {};
@@ -1600,9 +1389,7 @@
               data: JSON.stringify({
                 clid: s.id,
                 time: s.firstinstalled,
-                htok: r.token
-                  ? sjcl.codec.hex.fromBits(sjcl.hash.sha1.hash(r.token))
-                  : void 0,
+                htok: r.token ? sjcl.codec.hex.fromBits(sjcl.hash.sha1.hash(r.token)) : void 0,
                 version: chrome.runtime.getManifest().version,
                 lang: navigator.language,
                 nat: !!m,
@@ -1621,9 +1408,7 @@
                     chrome.storage.sync.set({ invalidtoken: r.invalidtoken }),
                     delete r.token,
                     chrome.storage.sync.remove('token')),
-                  e.settoken &&
-                    ((r.token = e.settoken),
-                    chrome.storage.sync.set({ token: r.token })),
+                  e.settoken && ((r.token = e.settoken), chrome.storage.sync.set({ token: r.token })),
                   (o =
                     -1 !=
                     [
@@ -1654,48 +1439,38 @@
       var B = null,
         P = function (o) {
           m ||
-            chrome.permissions.contains(
-              { permissions: ['nativeMessaging'] },
-              function (e) {
-                if ((console.log('connectNative', e), e)) {
-                  B = true;
-                  try {
-                    (m = chrome.runtime.connectNative(
-                      'com.smoothgesturesplus.extras',
-                    )).onMessage.addListener(function (e) {
+            chrome.permissions.contains({ permissions: ['nativeMessaging'] }, function (e) {
+              if ((console.log('connectNative', e), e)) {
+                B = true;
+                try {
+                  (m = chrome.runtime.connectNative('com.smoothgesturesplus.extras')).onMessage.addListener(
+                    function (e) {
                       console.log('nativemessage', e),
-                        m &&
-                          (n && (clearTimeout(n), (n = null), t()),
-                          e.version && (m.version = e.version));
-                    }),
-                      m.onDisconnect.addListener(function () {
-                        m &&
-                          ((m = null),
-                          console.log('nativedisconnect: retryTimeout: ', o),
-                          clearTimeout(n),
-                          (n = null),
-                          0 < o && o < 6e4 && setTimeout(P, o, 1.01 * o));
-                      });
-                    var t = function () {
-                        for (
-                          var e = chrome.extension.getViews(), t = 0;
-                          t < e.length;
-                          t++
-                        )
-                          '/rightclick.html' == e[t].location.pathname &&
-                            e[t].close();
-                      },
-                      n = setTimeout(t, 1e3);
-                  } catch (e) {
-                    console.error('connectNative', B, e),
-                      B &&
-                        setTimeout(function () {
-                          chrome.runtime.reload();
-                        }, 1e3);
-                  }
-                } else B = false;
-              },
-            );
+                        m && (n && (clearTimeout(n), (n = null), t()), e.version && (m.version = e.version));
+                    },
+                  ),
+                    m.onDisconnect.addListener(function () {
+                      m &&
+                        ((m = null),
+                        console.log('nativedisconnect: retryTimeout: ', o),
+                        clearTimeout(n),
+                        (n = null),
+                        0 < o && o < 6e4 && setTimeout(P, o, 1.01 * o));
+                    });
+                  var t = function () {
+                      for (var e = chrome.extension.getViews(), t = 0; t < e.length; t++)
+                        '/rightclick.html' == e[t].location.pathname && e[t].close();
+                    },
+                    n = setTimeout(t, 1e3);
+                } catch (e) {
+                  console.error('connectNative', B, e),
+                    B &&
+                      setTimeout(function () {
+                        chrome.runtime.reload();
+                      }, 1e3);
+                }
+              } else B = false;
+            });
         };
       P(1e3);
       var W = function () {
@@ -1709,9 +1484,7 @@
                   history: [e.url],
                   titles: [e.title],
                 }),
-                  e.url.match(
-                    /(^chrome(|-devtools|-extension):\/\/)|(:\/\/chrome.google.com\/)|(^view-source:)/,
-                  ) ||
+                  e.url.match(/(^chrome(|-devtools|-extension):\/\/)|(:\/\/chrome.google.com\/)|(^view-source:)/) ||
                     (chrome.tabs.executeScript(e.id, {
                       allFrames: true,
                       matchAboutBlank: true,
@@ -1737,13 +1510,11 @@
         for (id in s.customactions) I[id] = s.customactions[id].context;
         for (id in s.externalactions)
           for (i = 0; i < s.externalactions[id].actions.length; i++)
-            I[id + '-' + s.externalactions[id].actions[i].id] =
-              s.externalactions[id].actions[i].context;
+            I[id + '-' + s.externalactions[id].actions[i].id] = s.externalactions[id].actions[i].context;
         for (id in ((function (e, t) {
           (e = e.split('.')), (t = t.split('.'));
           for (var n = 0; n < e.length && n < t.length; n++)
-            if (parseInt(e[n]) != parseInt(t[n]))
-              return parseInt(e[n]) > parseInt(t[n]);
+            if (parseInt(e[n]) != parseInt(t[n])) return parseInt(e[n]) > parseInt(t[n]);
           return e.length > t.length;
         })(chrome.runtime.getManifest().version, s.version) &&
           c({
@@ -1755,12 +1526,9 @@
             c({ externalactions: s.externalactions }),
             chrome.runtime.sendMessage(id, { getexternalactions: true });
         setTimeout(W, 0),
-          chrome.tabs.query(
-            { active: true, lastFocusedWindow: true },
-            function (e) {
-              e.length && (f.active = e[0].id);
-            },
-          ),
+          chrome.tabs.query({ active: true, lastFocusedWindow: true }, function (e) {
+            e.length && (f.active = e[0].id);
+          }),
           V();
       };
       chrome.runtime.onUpdateAvailable.addListener(function (e) {
@@ -1875,12 +1643,7 @@
           m && (m.disconnect(), (m = null));
         }),
         (window.isNative = function () {
-          return (
-            !!m &&
-            (m.version
-              ? { loaded: true, version: m.version }
-              : { loaded: false })
-          );
+          return !!m && (m.version ? { loaded: true, version: m.version } : { loaded: false });
         });
     })();
   },

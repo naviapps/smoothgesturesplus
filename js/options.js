@@ -1,6 +1,5 @@
 !(function () {
-  'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {});
+  'update_url' in chrome.runtime.getManifest() && (console.log = console.error = function () {});
   var l = {},
     i = function (e) {
       for (key in e) l[key] = e[key];
@@ -31,20 +30,13 @@
   $(function () {
     for (
       var e, t = $('body').html(), n = 0;
-      (e = t.match(
-        /__MSG_([a-zA-Z0-9_\-@]+)(\{\{([^|}]+(\|\|[^|}]+)*)\}\})?__/,
-      ));
+      (e = t.match(/__MSG_([a-zA-Z0-9_\-@]+)(\{\{([^|}]+(\|\|[^|}]+)*)\}\})?__/));
 
     ) {
       console.log(e);
       var s = [e[1], e[3] ? e[3].split('||') : void 0];
       if (
-        ((t = t.replace(
-          new RegExp(
-            '__MSG_' + e[1] + '(\\{\\{([^|}]+(\\|\\|[^|}]+)*)\\}\\})?__',
-          ),
-          c.apply(null, s),
-        )),
+        ((t = t.replace(new RegExp('__MSG_' + e[1] + '(\\{\\{([^|}]+(\\|\\|[^|}]+)*)\\}\\})?__'), c.apply(null, s))),
         500 < ++n)
       )
         break;
@@ -53,18 +45,14 @@
   });
   var n = function () {
     v(),
-      $('#newtab_url.setting select, #newtab_url.setting .button').on(
-        'change click',
-        function () {
-          var e = $('#newtab_url.setting select').val();
-          'custom' == e &&
-            (e = $('#newtab_url.setting input[type=text]').val()),
-            !e.match(/:/) && e.match(/\./) && (e = 'http://' + e),
-            e.match(/:/) || 'homepage' == e || (e = 'http://www.google.com/'),
-            i({ newTabUrl: e }),
-            v();
-        },
-      ),
+      $('#newtab_url.setting select, #newtab_url.setting .button').on('change click', function () {
+        var e = $('#newtab_url.setting select').val();
+        'custom' == e && (e = $('#newtab_url.setting input[type=text]').val()),
+          !e.match(/:/) && e.match(/\./) && (e = 'http://' + e),
+          e.match(/:/) || 'homepage' == e || (e = 'http://www.google.com/'),
+          i({ newTabUrl: e }),
+          v();
+      }),
       $('#newtab_right.setting select').on('change', function () {
         i({ newTabRight: 1 == $(this).val() });
       }),
@@ -113,11 +101,7 @@
         i({ selectToLink: 1 == $(this).val() });
       }),
       $('#blacklist.setting .button').on('click', function () {
-        for (
-          var e = $('#blacklist.setting textarea').val().split(/[\n,]/), t = 0;
-          t < e.length;
-          t++
-        )
+        for (var e = $('#blacklist.setting textarea').val().split(/[\n,]/), t = 0; t < e.length; t++)
           e[t] = e[t].trim();
         i({ blacklist: e }), v();
       }),
@@ -130,9 +114,7 @@
       $('#reset.setting .button').on('click', function () {
         confirm(c('setting_warning_reset')) &&
           chrome.runtime.getBackgroundPage(function (e) {
-            i({ gestures: JSON.parse(e.defaults['Smooth Gestures'].gestures) }),
-              h(),
-              v();
+            i({ gestures: JSON.parse(e.defaults['Smooth Gestures'].gestures) }), h(), v();
           });
       });
     var a = [
@@ -159,23 +141,7 @@
         s = document.createElement('a');
       (s.href = n), (s.download = 'Smooth Gestures Plus Settings.txt');
       var o = document.createEvent('MouseEvents');
-      o.initMouseEvent(
-        'click',
-        true,
-        false,
-        window,
-        0,
-        0,
-        0,
-        0,
-        0,
-        false,
-        false,
-        false,
-        false,
-        0,
-        null,
-      ),
+      o.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null),
         s.dispatchEvent(o),
         URL.revokeObjectURL(n);
     }),
@@ -194,18 +160,11 @@
                 try {
                   (e = e.substring(e.indexOf('{'), e.lastIndexOf('}') + 1)),
                     (t = e),
-                    ((n = document.createElement('div')).innerHTML = t.replace(
-                      /</g,
-                      '[leftangle]',
-                    )),
-                    (e = n.childNodes[0].nodeValue.replace(
-                      /\[leftangle\]/g,
-                      '<',
-                    ));
+                    ((n = document.createElement('div')).innerHTML = t.replace(/</g, '[leftangle]')),
+                    (e = n.childNodes[0].nodeValue.replace(/\[leftangle\]/g, '<'));
                   var s = JSON.parse(e);
                   if ('Smooth Gestures Settings' != s.title) return false;
-                  for (var o in (s.gestures && (l.gestures = s.gestures),
-                  s.settings))
+                  for (var o in (s.gestures && (l.gestures = s.gestures), s.settings))
                     -1 != a.indexOf(o) && (l[o] = s.settings[o]);
                   return i(l), alert('Import Successful'), true;
                 } catch (e) {}
@@ -213,8 +172,7 @@
               })(t) || alert('Import Failed');
             }
             if (n) {
-              for (label in n.sgplus)
-                -1 != a.indexOf(label) && (l[label] = n.sgplus[label]);
+              for (label in n.sgplus) -1 != a.indexOf(label) && (l[label] = n.sgplus[label]);
               i(l), alert('Import Successful');
             }
             h(), v();
@@ -252,26 +210,18 @@
           l.showNoteUpdated
             ? ($('#note_updated p:first-child').html(
                 c('options_note_updated', [
-                  '<span class=sgtitle>' +
-                    c('name') +
-                    '<span class=sgplus> plus</span></span>',
+                  '<span class=sgtitle>' + c('name') + '<span class=sgplus> plus</span></span>',
                   chrome.runtime.getManifest().version,
                 ]),
               ),
               i({ showNoteUpdated: false }))
             : $('#note_updated').css({ display: 'none' });
-          var e =
-            336 - Math.ceil((Date.now() - l.firstinstalled) / 1e3 / 60 / 60);
+          var e = 336 - Math.ceil((Date.now() - l.firstinstalled) / 1e3 / 60 / 60);
           l.license && $('#trialperiod').css({ display: 'none' }),
             $('#expirein').append(
               $('<span>')
                 .css({
-                  'background-color':
-                    e < 0
-                      ? 'rgba(255,0,0,.2)'
-                      : e < 120
-                        ? 'rgba(255,255,0,.2)'
-                        : 'rgba(0,255,0,.2)',
+                  'background-color': e < 0 ? 'rgba(255,0,0,.2)' : e < 120 ? 'rgba(255,255,0,.2)' : 'rgba(0,255,0,.2)',
                   'font-weight': 'bold',
                 })
                 .text(
@@ -279,24 +229,17 @@
                     (e < 0
                       ? 'has expired'
                       : 'will expire in ' +
-                        (24 <= e
-                          ? Math.round(e / 24) + ' days'
-                          : 0 < e
-                            ? e + ' hours'
-                            : 'less than an hour')),
+                        (24 <= e ? Math.round(e / 24) + ' days' : 0 < e ? e + ' hours' : 'less than an hour')),
                 ),
             ),
-            (l.hideNoteRemindRate ||
-              -1 == ['full', '1yrmul'].indexOf(l.license)) &&
+            (l.hideNoteRemindRate || -1 == ['full', '1yrmul'].indexOf(l.license)) &&
               $('.note_remindrate').css({ display: 'none' }),
             $('.note_remindrate .close').click(function () {
-              $('.note_remindrate').css({ display: 'none' }),
-                i({ hideNoteRemindRate: true });
+              $('.note_remindrate').css({ display: 'none' }), i({ hideNoteRemindRate: true });
             }),
             l.hideNotePrint && $('#note_print').css({ display: 'none' }),
             $('#note_print .close').click(function () {
-              $('#note_print').css({ display: 'none' }),
-                i({ hideNotePrint: true });
+              $('#note_print').css({ display: 'none' }), i({ hideNotePrint: true });
             }),
             $('#note_print .button').click(function () {
               window.print();
@@ -306,9 +249,7 @@
                 .attr('class', 'footer')
                 .html(
                   'You have gestured approximately ' +
-                    (254e-6 * (l.log.line ? l.log.line.distance : 0)).toFixed(
-                      2,
-                    ) +
+                    (254e-6 * (l.log.line ? l.log.line.distance : 0)).toFixed(2) +
                     ' meters.',
                 ),
             );
@@ -316,13 +257,7 @@
         (function () {
           for (
             var e = $('.pagesection[pagesection=actions]'),
-              t = [
-                'page_navigation',
-                'tab_management',
-                'utilities',
-                'other',
-                'custom',
-              ],
+              t = ['page_navigation', 'tab_management', 'utilities', 'other', 'custom'],
               n = 0;
             n < t.length;
             n++
@@ -357,50 +292,32 @@
             t = -1 != navigator.platform.indexOf('CrOS');
           navigator.platform.indexOf('Linux');
           (e || t) &&
-            ($('.navbutton[nav=extras]').css({ display: 'none' }),
-            $('.page[page=extras]').css({ display: 'none' })),
+            ($('.navbutton[nav=extras]').css({ display: 'none' }), $('.page[page=extras]').css({ display: 'none' })),
             $('#extras.setting select').on('change', function () {
               i({ blockDoubleclickAlert: 0 == $(this).val() });
             }),
             $('#installplugin,#updateplugin').click(function () {
               i({ blockDoubleclickAlert: false }),
-                chrome.permissions.request(
-                  { permissions: ['nativeMessaging'] },
-                  function (e) {
-                    if (e) {
-                      chrome.runtime.getBackgroundPage(function (e) {
-                        e.connectNative(1e3);
-                      });
-                      var t = document.createElement('a');
-                      n
-                        ? (t.setAttribute(
-                            'href',
-                            '/nat/SmoothGesturesPlusExtras-0.7.dmg',
-                          ),
-                          t.setAttribute(
-                            'download',
-                            'SmoothGesturesPlusExtras-0.7.dmg',
-                          ))
-                        : (t.setAttribute(
-                            'href',
-                            '/nat/smoothgesturesplus-extras-0.6.tar.gz',
-                          ),
-                          t.setAttribute(
-                            'download',
-                            'smoothgesturesplus-extras-0.6.tar.gz',
-                          )),
-                        t.click();
-                    }
-                  },
-                );
+                chrome.permissions.request({ permissions: ['nativeMessaging'] }, function (e) {
+                  if (e) {
+                    chrome.runtime.getBackgroundPage(function (e) {
+                      e.connectNative(1e3);
+                    });
+                    var t = document.createElement('a');
+                    n
+                      ? (t.setAttribute('href', '/nat/SmoothGesturesPlusExtras-0.7.dmg'),
+                        t.setAttribute('download', 'SmoothGesturesPlusExtras-0.7.dmg'))
+                      : (t.setAttribute('href', '/nat/smoothgesturesplus-extras-0.6.tar.gz'),
+                        t.setAttribute('download', 'smoothgesturesplus-extras-0.6.tar.gz')),
+                      t.click();
+                  }
+                });
             });
         })(),
         b(),
         $('#currentversion').html(
           c('options_note_updated', [
-            '<span class=sgtitle>' +
-              c('name') +
-              '<span class=sgplus> plus</span></span>',
+            '<span class=sgtitle>' + c('name') + '<span class=sgplus> plus</span></span>',
             chrome.runtime.getManifest().version,
           ]),
         ),
@@ -426,16 +343,11 @@
         context: '',
       },
       t = 'custom' + Math.floor(Math.random() * Math.pow(2, 30)).toString(32);
-    (l.customactions[t] = e),
-      i({ customactions: l.customactions }),
-      m(),
-      setTimeout(u.bind(null, t), 500);
+    (l.customactions[t] = e), i({ customactions: l.customactions }), m(), setTimeout(u.bind(null, t), 500);
   };
   var r = function (t) {
     if (confirm('Delete this custom action?')) {
-      for (var e in (delete l.customactions[t],
-      i({ customactions: l.customactions }),
-      l.gestures))
+      for (var e in (delete l.customactions[t], i({ customactions: l.customactions }), l.gestures))
         l.gestures[e] == t && p(e);
       chrome.runtime.getBackgroundPage(function (e) {
         delete e.contexts[t];
@@ -470,25 +382,12 @@
             $("<div class='button gray customcancel' tabindex=0>")
               .text('cancel')
               .on('click', function () {
-                $('#customedit').remove(),
-                  $('.page[page=custom] .action').css({ display: '' });
+                $('#customedit').remove(), $('.page[page=custom] .action').css({ display: '' });
               }),
           )
-          .append(
-            $('<input type=text class=customtitle placeholder=Title>').val(
-              t.title,
-            ),
-          )
-          .append(
-            $(
-              '<input type=text class=customdescrip placeholder=Description>',
-            ).val(t.descrip),
-          )
-          .append(
-            $("<textarea class=customcode placeholder='Javascript Code'>").text(
-              t.code,
-            ),
-          ),
+          .append($('<input type=text class=customtitle placeholder=Title>').val(t.title))
+          .append($('<input type=text class=customdescrip placeholder=Description>').val(t.descrip))
+          .append($("<textarea class=customcode placeholder='Javascript Code'>").text(t.code)),
       );
   };
   var d = {
@@ -510,9 +409,7 @@
         chrome.runtime.getBackgroundPage(function (e) {
           for (var t in e.categories)
             if (e.categories[t].actions) {
-              $('#chooseaction').append(
-                $('<option>').text(c(t)).prop('disabled', true),
-              );
+              $('#chooseaction').append($('<option>').text(c(t)).prop('disabled', true));
               for (var n = 0; n < e.categories[t].actions.length; n++)
                 $('#chooseaction').append(
                   $('<option>')
@@ -520,9 +417,7 @@
                     .val(e.categories[t].actions[n]),
                 );
             } else if (e.categories[t].customActions)
-              for (var s in ($('#chooseaction').append(
-                $('<option>').text('Custom Actions').prop('disabled', true),
-              ),
+              for (var s in ($('#chooseaction').append($('<option>').text('Custom Actions').prop('disabled', true)),
               l.customactions))
                 $('#chooseaction').append(
                   $('<option>')
@@ -550,9 +445,7 @@
     },
     gesturecallback: function (s) {
       chrome.runtime.getBackgroundPage(function (e) {
-        e.contexts[d.action] && (s = e.contexts[d.action] + s),
-          (window.SG.callback = null),
-          (d.gesture = s);
+        e.contexts[d.action] && (s = e.contexts[d.action] + s), (window.SG.callback = null), (d.gesture = s);
         var t = null;
         l.gestures[s]
           ? ((t = c('options_button_overwrite')),
@@ -562,30 +455,19 @@
                 c(
                   'options_addgesture_overwrite',
                   c('action_' + l.gestures[s]) ||
-                    (l.customactions[l.gestures[s]]
-                      ? l.customactions[l.gestures[s]].title
-                      : ''),
+                    (l.customactions[l.gestures[s]] ? l.customactions[l.gestures[s]].title : ''),
                 ),
               ))
-          : ((t = c('options_button_addgesture')),
-            $('#gestureoverwrite').css({ display: 'none' }));
-        t = l.gestures[s]
-          ? c('options_button_overwrite')
-          : c('options_button_addgesture');
+          : ((t = c('options_button_addgesture')), $('#gestureoverwrite').css({ display: 'none' }));
+        t = l.gestures[s] ? c('options_button_overwrite') : c('options_button_addgesture');
         d.action
-          ? ($('#doaddgesture').css({ display: 'block' }).text(t),
-            $('#chooseaction').css({ display: 'none' }))
+          ? ($('#doaddgesture').css({ display: 'block' }).text(t), $('#chooseaction').css({ display: 'none' }))
           : ($('#doaddgesture').css({ display: 'none' }),
             $('#chooseaction').css({ display: 'block' }),
-            $('#chooseaction option:nth-child(1)')
-              .prop('disabled', true)
-              .text(t)),
+            $('#chooseaction option:nth-child(1)').prop('disabled', true).text(t)),
           $('#canvasdescrip').css({ display: 'none' }),
           $('#nowwhat').css({ display: 'block' });
-        var n = Math.min(
-          (0.8 * window.innerWidth) / 2,
-          (0.8 * window.innerHeight) / 2,
-        );
+        var n = Math.min((0.8 * window.innerWidth) / 2, (0.8 * window.innerHeight) / 2);
         $('#gesturedisplay')
           .empty()
           .append(drawGesture(s, n, n));
@@ -602,23 +484,13 @@
         window.addEventListener('mousewheel', d.blockevent, false),
         document.addEventListener('keydown', d.blockevent, true),
         $('#canvastitle').text(
-          c(
-            'options_addgesture_title',
-            c('action_' + e) ||
-              (l.customactions[e] ? l.customactions[e].title : ''),
-          ),
+          c('options_addgesture_title', c('action_' + e) || (l.customactions[e] ? l.customactions[e].title : '')),
         ),
         $('#canvasdescrip li:nth-child(1)').text(
-          c(
-            'options_addgesture_instruct_2',
-            c('options_mousebutton_' + l.holdButton),
-          ),
+          c('options_addgesture_instruct_2', c('options_mousebutton_' + l.holdButton)),
         ),
         $('#canvasdescrip li:nth-child(2)').text(
-          c(
-            'options_addgesture_instruct_3',
-            c('options_mousebutton_' + l.holdButton),
-          ),
+          c('options_addgesture_instruct_3', c('options_mousebutton_' + l.holdButton)),
         ),
         $('#drawingcanvas').css({ display: 'block' }),
         $('#canvasdescrip').css({ display: 'table' }),
@@ -627,9 +499,7 @@
     },
   };
   var p = function (e) {
-    $(
-      '.gesture[gesture=' + e.replace(/\:/g, '\\:').replace(/\+/g, '\\+') + ']',
-    ).remove(),
+    $('.gesture[gesture=' + e.replace(/\:/g, '\\:').replace(/\+/g, '\\+') + ']').remove(),
       delete l.gestures[e],
       i({ gestures: l.gestures }),
       h();
@@ -739,23 +609,13 @@
               .attr('sectionindex', s)
               .append('<div class=gestures>')
               .append(
-                $(
-                  "<div class='button gray addactiongesture' tabindex=0>+</div>",
-                ).on('click', d.open.bind(null, o)),
+                $("<div class='button gray addactiongesture' tabindex=0>+</div>").on('click', d.open.bind(null, o)),
               )
               .append(
                 a
                   ? $('<img class=context>').attr(
                       'src',
-                      '/img/icon-' +
-                        ('l' == a
-                          ? 'link'
-                          : 'i' == a
-                            ? 'image'
-                            : 's' == a
-                              ? 'selection'
-                              : '') +
-                        '.png',
+                      '/img/icon-' + ('l' == a ? 'link' : 'i' == a ? 'image' : 's' == a ? 'selection' : '') + '.png',
                     )
                   : null,
               )
@@ -775,35 +635,15 @@
           $('<div class=action>')
             .attr('action', o)
             .attr('sectionindex', t)
-            .append(
-              $(
-                "<div class='button gray delcustomaction' tabindex=0>&times;</div>",
-              ).on('click', r.bind(null, o)),
-            )
-            .append(
-              $(
-                "<div class='button gray editcustomaction' tabindex=0>edit</div>",
-              ).on('click', u.bind(null, o)),
-            )
+            .append($("<div class='button gray delcustomaction' tabindex=0>&times;</div>").on('click', r.bind(null, o)))
+            .append($("<div class='button gray editcustomaction' tabindex=0>edit</div>").on('click', u.bind(null, o)))
             .append('<div class=gestures>')
-            .append(
-              $(
-                "<div class='button gray addactiongesture' tabindex=0>+</div>",
-              ).on('click', d.open.bind(null, o)),
-            )
+            .append($("<div class='button gray addactiongesture' tabindex=0>+</div>").on('click', d.open.bind(null, o)))
             .append(
               a
                 ? $('<img class=context>').attr(
                     'src',
-                    '/img/icon-' +
-                      ('l' == a
-                        ? 'link'
-                        : 'i' == a
-                          ? 'image'
-                          : 's' == a
-                            ? 'selection'
-                            : '') +
-                      '.png',
+                    '/img/icon-' + ('l' == a ? 'link' : 'i' == a ? 'image' : 's' == a ? 'selection' : '') + '.png',
                   )
                 : null,
             )
@@ -825,11 +665,7 @@
       ($('.gestures', n).append(
         $('<div class=gesture>')
           .attr('gesture', e)
-          .append(
-            $(
-              "<div class='button gray removegesture' tabindex=0>&times;</div>",
-            ).on('click', p.bind(null, e)),
-          )
+          .append($("<div class='button gray removegesture' tabindex=0>&times;</div>").on('click', p.bind(null, e)))
           .append(drawGesture(e, 100, 100)),
       ),
       n.parent().hasClass('disabled'))
@@ -853,12 +689,8 @@
       $('#newtab_url.setting select').val() != l.newTabUrl
         ? ($('#newtab_url.setting select').val('custom'),
           $('#newtab_url.setting input[type=text]').val(l.newTabUrl),
-          $(
-            '#newtab_url.setting input[type=text], #newtab_url.setting .button',
-          ).css({ display: '' }))
-        : $(
-            '#newtab_url.setting input[type=text], #newtab_url.setting .button',
-          ).css({ display: 'none' }),
+          $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({ display: '' }))
+        : $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({ display: 'none' }),
       $('#newtab_right.setting select').val(l.newTabRight ? 1 : 0),
       $('#newtab_linkright.setting select').val(l.newTabLinkRight ? 1 : 0),
       $('#trail_draw.setting select').val(l.trailBlock ? 0 : 1),
@@ -944,12 +776,10 @@
   };
   var b = function () {
     $('#keybutton').on('click', function () {
-      $('#keybutton').css({ display: 'none' }),
-        $('#key').css({ display: 'table' });
+      $('#keybutton').css({ display: 'none' }), $('#key').css({ display: 'table' });
     }),
       $('#setkey .start').on('click', function () {
-        $('#setkey input, #setkey .submit').css({ display: 'block' }),
-          $('#setkey .start').css({ display: 'none' });
+        $('#setkey input, #setkey .submit').css({ display: 'block' }), $('#setkey .start').css({ display: 'none' });
       }),
       $('#setkey .submit').on('click', function () {
         var e = $('#setkey input').val().toLowerCase().trim();
@@ -982,86 +812,43 @@
           $('#note_licensestatus').addClass('green').removeClass('yellow'),
           $('#noplus').css({ display: 'none' }))
         : '1yrmul' == l.license
-          ? ($('#note_licensestatus .title').html(
-              'You have the 1 year license',
-            ),
+          ? ($('#note_licensestatus .title').html('You have the 1 year license'),
             $('#note_licensestatus').addClass('green').removeClass('yellow'))
           : '6mnmul' == l.license
-            ? ($('#note_licensestatus .title').html(
-                'You have the 6 month license',
-              ),
+            ? ($('#note_licensestatus .title').html('You have the 6 month license'),
               $('#note_licensestatus').addClass('green').removeClass('yellow'))
             : '1mnmul' == l.license
-              ? ($('#note_licensestatus .title').html(
-                  'You have the 1 month license',
-                ),
-                $('#note_licensestatus')
-                  .addClass('green')
-                  .removeClass('yellow'))
+              ? ($('#note_licensestatus .title').html('You have the 1 month license'),
+                $('#note_licensestatus').addClass('green').removeClass('yellow'))
               : '2wkmul' == l.license
-                ? ($('#note_licensestatus .title').html(
-                    'You have the 2 week license',
-                  ),
-                  $('#note_licensestatus')
-                    .addClass('green')
-                    .removeClass('yellow'))
+                ? ($('#note_licensestatus .title').html('You have the 2 week license'),
+                  $('#note_licensestatus').addClass('green').removeClass('yellow'))
                 : '1wkmul' == l.license
-                  ? ($('#note_licensestatus .title').html(
-                      'You have the 1 week license',
-                    ),
-                    $('#note_licensestatus')
-                      .addClass('green')
-                      .removeClass('yellow'))
+                  ? ($('#note_licensestatus .title').html('You have the 1 week license'),
+                    $('#note_licensestatus').addClass('green').removeClass('yellow'))
                   : '1yr1cl' == l.license
-                    ? ($('#note_licensestatus .title').html(
-                        'You have the 1 year / 1 install license',
-                      ),
-                      $('#note_licensestatus')
-                        .addClass('green')
-                        .removeClass('yellow'))
+                    ? ($('#note_licensestatus .title').html('You have the 1 year / 1 install license'),
+                      $('#note_licensestatus').addClass('green').removeClass('yellow'))
                     : '1mn1cl' == l.license
-                      ? ($('#note_licensestatus .title').html(
-                          'You have the 1 month / 1 install license',
-                        ),
-                        $('#note_licensestatus')
-                          .addClass('green')
-                          .removeClass('yellow'))
+                      ? ($('#note_licensestatus .title').html('You have the 1 month / 1 install license'),
+                        $('#note_licensestatus').addClass('green').removeClass('yellow'))
                       : '1wk1cl' == l.license
-                        ? ($('#note_licensestatus .title').html(
-                            'You have the 1 week / 1 install license',
-                          ),
-                          $('#note_licensestatus')
-                            .addClass('green')
-                            .removeClass('yellow'))
+                        ? ($('#note_licensestatus .title').html('You have the 1 week / 1 install license'),
+                          $('#note_licensestatus').addClass('green').removeClass('yellow'))
                         : 'free' == l.license
-                          ? ($('#note_licensestatus .title').html(
-                              'You have the free license',
-                            ),
-                            $('#note_licensestatus')
-                              .addClass('green')
-                              .removeClass('yellow'))
+                          ? ($('#note_licensestatus .title').html('You have the free license'),
+                            $('#note_licensestatus').addClass('green').removeClass('yellow'))
                           : l.license
-                            ? ($('#note_licensestatus .title').html(
-                                'You have an unknown license',
-                              ),
-                              $('#note_licensestatus')
-                                .addClass('yellow')
-                                .removeClass('green'),
+                            ? ($('#note_licensestatus .title').html('You have an unknown license'),
+                              $('#note_licensestatus').addClass('yellow').removeClass('green'),
                               $('#nolicense').css({ display: 'block' }))
-                            : ($('#note_licensestatus .title').html(
-                                'You do not have an active license',
-                              ),
-                              $('#note_licensestatus')
-                                .addClass('yellow')
-                                .removeClass('green')),
+                            : ($('#note_licensestatus .title').html('You do not have an active license'),
+                              $('#note_licensestatus').addClass('yellow').removeClass('green')),
       l.license_expires)
     ) {
       var e = (l.license_expires - Date.now()) / 1e3 / 60 / 60;
       $('#note_licensestatus .descrip').html(
-        'This license expires in ' +
-          (24 < e
-            ? Math.round(e / 24) + ' days'
-            : Math.round(2 * e) / 2 + ' hours'),
+        'This license expires in ' + (24 < e ? Math.round(e / 24) + ' days' : Math.round(2 * e) / 2 + ' hours'),
       );
     } else
       $('#note_licensestatus .descrip').html(
@@ -1072,15 +859,9 @@
       $('#key').css({ display: '' }),
       chrome.storage.sync.get(null, function (e) {
         $('#key')
-          .html(
-            'Save this key: <span class=key>' +
-              (e.token || 'no license key') +
-              '</span>',
-          )
+          .html('Save this key: <span class=key>' + (e.token || 'no license key') + '</span>')
           .css({ display: 'none' });
-        !l.license && e.token
-          ? e.token
-          : e.invalidtoken != e.token && e.invalidtoken;
+        !l.license && e.token ? e.token : e.invalidtoken != e.token && e.invalidtoken;
       }),
       $('#clid').text('id: ' + l.id + 'z' + l.firstinstalled.toString(32));
   };

@@ -49,10 +49,7 @@
       mess = '* ' + chrome.i18n.getMessage('context_on_image');
     } else if (settings.gestures['s' + gesture]) {
       mess = '* ' + chrome.i18n.getMessage('context_not_selection');
-    } else if (
-      settings.gestures['l' + gesture] &&
-      settings.gestures['i' + gesture]
-    ) {
+    } else if (settings.gestures['l' + gesture] && settings.gestures['i' + gesture]) {
       mess = '* ' + chrome.i18n.getMessage('context_not_links_images');
     } else if (settings.gestures['l' + gesture]) {
       mess = '* ' + chrome.i18n.getMessage('context_not_link');
@@ -164,14 +161,7 @@
         curr = { x: prev.x - step, y: prev.y };
         minmax();
         ctx.lineTo(prev.x - step, prev.y);
-        ctx.arc(
-          prev.x - step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          true,
-        );
+        ctx.arc(prev.x - step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, true);
         ctx.lineTo(prev.x, prev.y + 2 * tight);
       } else if (dir === 'RU') {
         ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true);
@@ -181,14 +171,7 @@
         curr = { x: prev.x + step, y: prev.y };
         minmax();
         ctx.lineTo(prev.x + step, prev.y);
-        ctx.arc(
-          prev.x + step,
-          prev.y + tight,
-          tight,
-          -Math.PI / 2,
-          Math.PI / 2,
-          false,
-        );
+        ctx.arc(prev.x + step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, false);
         ctx.lineTo(prev.x, prev.y + 2 * tight);
       } else {
         tip(dir[0]);

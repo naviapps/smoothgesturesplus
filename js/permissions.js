@@ -1,6 +1,5 @@
 !(function () {
-  'update_url' in chrome.runtime.getManifest() &&
-    (console.log = console.error = function () {});
+  'update_url' in chrome.runtime.getManifest() && (console.log = console.error = function () {});
   var o = {};
   chrome.storage.local.get(null, function (n) {
     (o = n), e();
