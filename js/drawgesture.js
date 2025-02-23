@@ -1,124 +1,303 @@
 !function () {
-    'update_url' in chrome.runtime.getManifest() && (console.log = console.error = function () {
-    });
-    var f = {};
+    if ('update_url' in chrome.runtime.getManifest()) {
+        console.log = function () {}
+        console.error = function () {}
+    }
+    var settings = {};
     chrome.storage.local.get(null, function (t) {
-        f = t
+        settings = t
     });
     chrome.storage.onChanged.addListener(function (t, e) {
-        if ('local' == e) for (key in t) f[key] = t[key].newValue
-    }), window.drawGesture = function (t, e, x, o) {
-        var n, c = '';
-        's' == t[0] ? (c = 's', t = t.substr(1)) : 'l' == t[0] ? (c = 'l', t = t.substr(1)) : 'i' == t[0] && (c = 'i', t = t.substr(1)), n = 'r' == t[0] ? a(t, e) : 'w' == t[0] ? s(t, e) : 'k' == t[0] ? y(t, e) : r(t, e, x, o), $(n).css({
-            'min-height': '2em',
-            overflow: 'hidden'
-        });
-        var i = null;
-        return 's' == c ? i = '* ' + chrome.i18n.getMessage('context_with_selection') : 'l' == c ? i = '* ' + chrome.i18n.getMessage('context_on_link') : 'i' == c ? i = '* ' + chrome.i18n.getMessage('context_on_image') : f.gestures['s' + t] ? i = '* ' + chrome.i18n.getMessage('context_not_selection') : f.gestures['l' + t] && f.gestures['i' + t] ? i = '* ' + chrome.i18n.getMessage('context_not_links_images') : f.gestures['l' + t] ? i = '* ' + chrome.i18n.getMessage('context_not_link') : f.gestures['i' + t] && (i = '* ' + chrome.i18n.getMessage('context_not_image')), i ? $('<div>').css({
-            width: e + 'px',
-            overflow: 'hidden'
-        }).append($('<div>').css({
-            'font-size': 12 * Math.sqrt(e / 100) + 'px',
-            color: '#888',
-            'text-align': 'right',
-            'margin-right': '.3em',
-            height: '0px',
-            position: 'relative',
-            top: '.1em'
-        }).text(i)).append(n) : n
+        if (e === 'local') {
+            for (let key in t) {
+                settings[key] = t[key].newValue
+            }
+        }
+    })
+
+    window.drawGesture = function (gesture, width, height, lineWidth) {
+        var context = '';
+        if (gesture[0] === 's') {
+            context = 's'
+            gesture = gesture.substr(1)
+        } else if (gesture[0] === 'l') {
+            context = 'l'
+            gesture = gesture.substr(1)
+        } else if (gesture[0] === 'i') {
+            context = 'i'
+            gesture = gesture.substr(1)
+        }
+
+        let c
+        if (gesture[0] === 'r') {
+            c = drawRocker(gesture, width)
+        } else if (gesture[0] === 'w') {
+            c = drawWheel(gesture, width)
+        } else if (gesture[0] === 'k') {
+            c = drawKey(gesture, width)
+        } else {
+            c = drawLine(gesture, width, height, lineWidth)
+        }
+        $(c).css({'min-height': '2em', overflow: 'hidden'});
+
+        let mess = null;
+        if (context === 's') {
+            mess = '* ' + chrome.i18n.getMessage('context_with_selection')
+        } else if (context === 'l') {
+            mess = '* ' + chrome.i18n.getMessage('context_on_link')
+        } else if (context === 'i') {
+            mess = '* ' + chrome.i18n.getMessage('context_on_image')
+        } else if (settings.gestures['s' + gesture]) {
+            mess = '* ' + chrome.i18n.getMessage('context_not_selection')
+        } else if (settings.gestures['l' + gesture] && settings.gestures['i' + gesture]) {
+            mess = '* ' + chrome.i18n.getMessage('context_not_links_images')
+        } else if (settings.gestures['l' + gesture]) {
+            mess = '* ' + chrome.i18n.getMessage('context_not_link')
+        } else if (settings.gestures['i' + gesture]) {
+            mess = '* ' + chrome.i18n.getMessage('context_not_image')
+        }
+
+        if (!mess) {
+            return c
+        } else {
+            $('<div>').css({
+                width: width + 'px',
+                overflow: 'hidden'
+            }).append($('<div>').css({
+                'font-size': 12 * Math.sqrt(width / 100) + 'px',
+                color: '#888',
+                'text-align': 'right',
+                'margin-right': '.3em',
+                height: '0px',
+                position: 'relative',
+                top: '.1em'
+            }).text(mess)).append(c)
+        }
     };
-    var r = function (t, e, x, o) {
-        var n = document.createElement('canvas');
-        n.width = e, n.height = x, ctx = n.getContext('2d'), ctx.strokeStyle = 'rgba(' + f.trailColor.r + ',' + f.trailColor.g + ',' + f.trailColor.b + ',' + f.trailColor.a + ')', ctx.lineWidth = o || 3, ctx.lineCap = 'butt';
-        var c = 10, r = 2, a = 3, s = {x: 0, y: 0}, y = {x: 0, y: 0}, l = {x: 0, y: 0}, g = {x: 0, y: 0},
-            h = function (t) {
-                s = y, ctx.lineTo(s.x, s.y), 'U' == t ? y = {x: s.x, y: s.y - .75 * c} : 'D' == t ? y = {
-                    x: s.x,
-                    y: s.y + .75 * c
-                } : 'L' == t ? y = {x: s.x - .75 * c, y: s.y} : 'R' == t ? y = {
-                    x: s.x + .75 * c,
-                    y: s.y
-                } : '1' == t ? y = {x: s.x - .5 * c, y: s.y + .5 * c} : '3' == t ? y = {
-                    x: s.x + .5 * c,
-                    y: s.y + .5 * c
-                } : '7' == t ? y = {x: s.x - .5 * c, y: s.y - .5 * c} : '9' == t && (y = {
-                    x: s.x + .5 * c,
-                    y: s.y - .5 * c
-                }), ctx.lineTo(y.x, y.y), p()
-            }, u = function (t) {
-                s = y, ctx.lineTo(s.x, s.y), 'UD' == t ? (y = {
-                    x: s.x,
-                    y: s.y - c
-                }, p(), ctx.lineTo(s.x, s.y - c), ctx.arc(s.x + r, s.y - c, r, Math.PI, 0, !1), ctx.lineTo(s.x + 2 * r, s.y)) : 'UL' == t ? ctx.arc(s.x - c, s.y, c, 0, -Math.PI / 2, !0) : 'UR' == t ? ctx.arc(s.x + c, s.y, c, Math.PI, -Math.PI / 2, !1) : 'DU' == t ? (y = {
-                    x: s.x,
-                    y: s.y + c
-                }, p(), ctx.lineTo(s.x, s.y + c), ctx.arc(s.x + r, s.y + c, r, Math.PI, 0, !0), ctx.lineTo(s.x + 2 * r, s.y)) : 'DL' == t ? ctx.arc(s.x - c, s.y, c, 0, Math.PI / 2, !1) : 'DR' == t ? ctx.arc(s.x + c, s.y, c, Math.PI, Math.PI / 2, !0) : 'LU' == t ? ctx.arc(s.x, s.y - c, c, Math.PI / 2, Math.PI, !1) : 'LD' == t ? ctx.arc(s.x, s.y + c, c, -Math.PI / 2, Math.PI, !0) : 'LR' == t ? (y = {
-                    x: s.x - c,
-                    y: s.y
-                }, p(), ctx.lineTo(s.x - c, s.y), ctx.arc(s.x - c, s.y + r, r, -Math.PI / 2, Math.PI / 2, !0), ctx.lineTo(s.x, s.y + 2 * r)) : 'RU' == t ? ctx.arc(s.x, s.y - c, c, Math.PI / 2, 0, !0) : 'RD' == t ? ctx.arc(s.x, s.y + c, c, -Math.PI / 2, 0, !1) : 'RL' == t ? (y = {
-                    x: s.x + c,
-                    y: s.y
-                }, p(), ctx.lineTo(s.x + c, s.y), ctx.arc(s.x + c, s.y + r, r, -Math.PI / 2, Math.PI / 2, !1), ctx.lineTo(s.x, s.y + 2 * r)) : (h(t[0]), h(t[1])), 'UD' == t ? y = {
-                    x: s.x + 2 * r,
-                    y: s.y + a
-                } : 'UL' == t ? y = {x: s.x - c, y: s.y - c} : 'UR' == t ? y = {
-                    x: s.x + c + a,
-                    y: s.y - c
-                } : 'DU' == t ? y = {x: s.x + 2 * r, y: s.y} : 'DL' == t ? y = {
-                    x: s.x - c,
-                    y: s.y + c
-                } : 'DR' == t ? y = {x: s.x + c + a, y: s.y + c} : 'LU' == t ? y = {
-                    x: s.x - c,
-                    y: s.y - c
-                } : 'LD' == t ? y = {x: s.x - c, y: s.y + c + a} : 'LR' == t ? y = {
-                    x: s.x + a,
-                    y: s.y + 2 * r
-                } : 'RU' == t ? y = {x: s.x + c, y: s.y - c} : 'RD' == t ? y = {
-                    x: s.x + c,
-                    y: s.y + c + a
-                } : 'RL' == t && (y = {x: s.x, y: s.y + 2 * r}), p()
-            }, p = function () {
-                y.x > l.x && (l.x = y.x), y.y > l.y && (l.y = y.y), y.x < g.x && (g.x = y.x), y.y < g.y && (g.y = y.y)
-            };
-        for (ctx.beginPath(), h(t[0]), i = 0; i < t.length - 1; i++) u(t[i] + t[i + 1]);
-        h(t[t.length - 1]), ctx.stroke();
-        var d = (l.x + g.x) / 2, M = (l.y + g.y) / 2, m = (l.x - g.x + c) / e, P = (l.y - g.y + c) / x,
-            T = m < P ? P : m;
-        for (c /= T, a /= T, 6 < (r /= T) && (r = 6), y = {
-            x: 0,
-            y: 0
-        }, ctx.clearRect(0, 0, n.width, n.height), ctx.save(), ctx.translate(e / 2 - d / T, x / 2 - M / T), ctx.beginPath(), h(t[0]), i = 0; i < t.length - 1; i++) u(t[i] + t[i + 1]);
-        return h(t[t.length - 1]), ctx.stroke(), ctx.fillStyle = 'rgba(' + f.trailColor.r + ',' + f.trailColor.g + ',' + f.trailColor.b + ',' + f.trailColor.a + ')', ctx.beginPath(), 'U' == t[t.length - 1] ? (ctx.moveTo(y.x - 5, y.y + 2), ctx.lineTo(y.x + 5, y.y + 2), ctx.lineTo(y.x, y.y - 3)) : 'D' == t[t.length - 1] ? (ctx.moveTo(y.x - 5, y.y - 2), ctx.lineTo(y.x + 5, y.y - 2), ctx.lineTo(y.x, y.y + 3)) : 'L' == t[t.length - 1] ? (ctx.moveTo(y.x + 2, y.y - 5), ctx.lineTo(y.x + 2, y.y + 5), ctx.lineTo(y.x - 3, y.y)) : 'R' == t[t.length - 1] ? (ctx.moveTo(y.x - 2, y.y - 5), ctx.lineTo(y.x - 2, y.y + 5), ctx.lineTo(y.x + 3, y.y)) : '1' == t[t.length - 1] ? (ctx.moveTo(y.x - 2, y.y - 6), ctx.lineTo(y.x + 6, y.y + 2), ctx.lineTo(y.x - 2, y.y + 2)) : '3' == t[t.length - 1] ? (ctx.moveTo(y.x + 2, y.y - 6), ctx.lineTo(y.x - 6, y.y + 2), ctx.lineTo(y.x + 2, y.y + 2)) : '7' == t[t.length - 1] ? (ctx.moveTo(y.x - 2, y.y + 6), ctx.lineTo(y.x + 6, y.y - 2), ctx.lineTo(y.x - 2, y.y - 2)) : '9' == t[t.length - 1] && (ctx.moveTo(y.x + 2, y.y + 6), ctx.lineTo(y.x - 6, y.y - 2), ctx.lineTo(y.x + 2, y.y - 2)), ctx.closePath(), ctx.fill(), ctx.restore(), n
-    }, a = function (t, e) {
-        var x = 'L' == t[1] ? 0 : 'M' == t[1] ? 1 : 2, o = 'L' == t[2] ? 0 : 'M' == t[2] ? 1 : 2;
+    var drawLine = function (gesture, width, height, lineWidth) {
+        var c = document.createElement('canvas');
+        c.width = width
+        c.height = height
+        ctx = c.getContext('2d')
+        ctx.strokeStyle = 'rgba(' + settings.trailColor.r + ',' + settings.trailColor.g + ',' + settings.trailColor.b + ',' + settings.trailColor.a + ')'
+        ctx.lineWidth = lineWidth || 3
+        ctx.lineCap = 'butt';
+        var step = 10
+        var tight = 2
+        var sep = 3
+
+        var prev = {x: 0, y: 0}
+        var curr = {x: 0, y: 0}
+        var max = {x: 0, y: 0}
+        var min = {x: 0, y: 0}
+
+        var tip = function (dir) {
+            prev = curr
+            ctx.lineTo(prev.x, prev.y)
+            if (dir === 'U') {
+                curr = {x: prev.x, y: prev.y - step * .75}
+            } else if (dir === 'D') {
+                curr = {x: prev.x, y: prev.y + step * .75}
+            } else if (dir === 'L') {
+                curr = {x: prev.x - step * .75, y: prev.y}
+            } else if (dir === 'R') {
+                curr = {x: prev.x + step * .75, y: prev.y}
+            } else if (dir === '1') {
+                curr = {x: prev.x - step * .5, y: prev.y + step * .5}
+            } else if (dir === '3') {
+                curr = {x: prev.x + step * .5, y: prev.y + step * .5}
+            } else if (dir === '7') {
+                curr = {x: prev.x - step * .5, y: prev.y - step * .5}
+            } else if (dir === '9') {
+                curr = {x: prev.x + step * .5, y: prev.y - step * .5}
+            }
+            ctx.lineTo(curr.x, curr.y)
+            minmax()
+        }
+        var curve = function (dir) {
+            prev = curr
+            ctx.lineTo(prev.x, prev.y)
+            if (dir === 'UD') {
+                curr = {x: prev.x, y: prev.y - step}
+                minmax()
+                ctx.lineTo(prev.x, prev.y - step)
+                ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false)
+                ctx.lineTo(prev.x + 2 * tight, prev.y)
+            } else if (dir === 'UL') {
+                ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true)
+            } else if (dir === 'UR') {
+                ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false)
+            } else if (dir === 'DU') {
+                curr = {x: prev.x, y: prev.y + step}
+                minmax()
+                ctx.lineTo(prev.x, prev.y + step)
+                ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true)
+                ctx.lineTo(prev.x + 2 * tight, prev.y)
+            } else if (dir === 'DL') {
+                ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false)
+            } else if (dir === 'DR') {
+                ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true)
+            } else if (dir === 'LU') {
+                ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false)
+            } else if (dir === 'LD') {
+                ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true);
+            } else if (dir === 'LR') {
+                curr = {x: prev.x - step, y: prev.y}
+                minmax()
+                ctx.lineTo(prev.x - step, prev.y)
+                ctx.arc(prev.x - step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, true)
+                ctx.lineTo(prev.x, prev.y + 2 * tight)
+            } else if (dir === 'RU') {
+                ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true)
+            } else if (dir === 'RD') {
+                ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, 0, false)
+            } else if (dir === 'RL') {
+                curr = {x: prev.x + step, y: prev.y}
+                minmax()
+                ctx.lineTo(prev.x + step, prev.y)
+                ctx.arc(prev.x + step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, false)
+                ctx.lineTo(prev.x, prev.y + 2 * tight)
+            } else {
+                tip(dir[0])
+                tip(dir[1])
+            }
+            if (dir === 'UD') {
+                curr = {x: prev.x + 2 * tight, y: prev.y + sep}
+            } else if (dir === 'UL') {
+                curr = {x: prev.x - step, y: prev.y - step}
+            } else if (dir === 'UR') {
+                curr = {x: prev.x + step + sep, y: prev.y - step}
+            } else if (dir === 'DU') {
+                curr = {x: prev.x + 2 * tight, y: prev.y}
+            } else if (dir === 'DL') {
+                curr = {x: prev.x - step, y: prev.y + step}
+            } else if (dir === 'DR') {
+                curr = {x: prev.x + step + sep, y: prev.y + step}
+            } else if (dir === 'LU') {
+                curr = {x: prev.x - step, y: prev.y - step}
+            } else if (dir === 'LD') {
+                curr = {x: prev.x - step, y: prev.y + step + sep}
+            } else if (dir === 'LR') {
+                curr = {x: prev.x + sep, y: prev.y + 2 * tight}
+            } else if (dir === 'RU') {
+                curr = {x: prev.x + step, y: prev.y - step}
+            } else if (dir === 'RD') {
+                curr = {x: prev.x + step, y: prev.y + step + sep}
+            } else if (dir === 'RL') {
+                curr = {x: prev.x, y: prev.y + 2 * tight}
+            }
+            minmax()
+        }
+        var minmax = function () {
+            if (curr.x > max.x) max.x = curr.x
+            if (curr.y > max.y) max.y = curr.y
+            if (curr.x < min.x) min.x = curr.x
+            if (curr.y < min.y) min.y = curr.y
+        };
+
+        ctx.beginPath()
+        tip(gesture[0])
+        for (let i = 0; i < gesture.length - 1; i++) {
+            curve(gesture[i] + gesture[i + 1]);
+        }
+        tip(gesture[gesture.length - 1])
+        ctx.stroke();
+
+        var d = (max.x + min.x) / 2
+        var M = (max.y + min.y) / 2
+        var wr = (max.x - min.x + step) / width
+        var hr = (max.y - min.y + step) / height
+        var ratio = wr < hr ? hr : wr;
+        step /= ratio
+        sep /= ratio
+        tight /= ratio
+        if (tight > 6) tight = 6
+        curr = {x: 0, y: 0}
+
+        ctx.clearRect(0, 0, c.width, c.height)
+        ctx.save()
+        ctx.translate(width / 2 - d / ratio, height / 2 - M / ratio)
+        ctx.beginPath()
+        tip(gesture[0])
+        for (let i = 0; i < gesture.length - 1; i++) {
+            curve(gesture[i] + gesture[i + 1]);
+        }
+        tip(gesture[gesture.length - 1])
+        ctx.stroke()
+        ctx.fillStyle = 'rgba(' + settings.trailColor.r + ',' + settings.trailColor.g + ',' + settings.trailColor.b + ',' + settings.trailColor.a + ')'
+        ctx.beginPath()
+        if (gesture[gesture.length - 1] === 'U') {
+            ctx.moveTo(curr.x - 5, curr.y + 2)
+            ctx.lineTo(curr.x + 5, curr.y + 2)
+            ctx.lineTo(curr.x, curr.y - 3)
+        } else if (gesture[gesture.length - 1] === 'D') {
+            ctx.moveTo(curr.x - 5, curr.y - 2)
+            ctx.lineTo(curr.x + 5, curr.y - 2)
+            ctx.lineTo(curr.x, curr.y + 3)
+        } else if (gesture[gesture.length - 1] === 'L') {
+            ctx.moveTo(curr.x + 2, curr.y - 5)
+            ctx.lineTo(curr.x + 2, curr.y + 5)
+            ctx.lineTo(curr.x - 3, curr.y)
+        } else if (gesture[gesture.length - 1] === 'R') {
+            ctx.moveTo(curr.x - 2, curr.y - 5)
+            ctx.lineTo(curr.x - 2, curr.y + 5)
+            ctx.lineTo(curr.x + 3, curr.y)
+        } else if (gesture[gesture.length - 1] === '1') {
+            ctx.moveTo(curr.x - 2, curr.y - 6)
+            ctx.lineTo(curr.x + 6, curr.y + 2)
+            ctx.lineTo(curr.x - 2, curr.y + 2)
+        } else if (gesture[gesture.length - 1] === '3') {
+            ctx.moveTo(curr.x + 2, curr.y - 6)
+            ctx.lineTo(curr.x - 6, curr.y + 2)
+            ctx.lineTo(curr.x + 2, curr.y + 2)
+        } else if (gesture[gesture.length - 1] === '7') {
+            ctx.moveTo(curr.x - 2, curr.y + 6)
+            ctx.lineTo(curr.x + 6, curr.y - 2)
+            ctx.lineTo(curr.x - 2, curr.y - 2)
+        } else if (gesture[gesture.length - 1] === '9') {
+            ctx.moveTo(curr.x + 2, curr.y + 6)
+            ctx.lineTo(curr.x - 6, curr.y - 2)
+            ctx.lineTo(curr.x + 2, curr.y - 2)
+        }
+        ctx.closePath()
+        ctx.fill()
+        ctx.restore()
+
+        return c
+    }
+    var drawRocker = function (gesture, width) {
+        var first = gesture[1] === 'L' ? 0 : gesture[1] === 'M' ? 1 : 2
+        var second = gesture[2] === 'L' ? 0 : gesture[2] === 'M' ? 1 : 2;
         return $('<div>').css({
-            width: e - 2 + 'px',
+            width: width - 2 + 'px',
             padding: '5px 1px'
-        }).append($('<div>').text(chrome.i18n.getMessage('gesture_' + t)).css({
-            'font-size': 14 * Math.sqrt(e / 100) + 'px',
+        }).append($('<div>').text(chrome.i18n.getMessage('gesture_' + gesture)).css({
+            'font-size': 14 * Math.sqrt(width / 100) + 'px',
             color: '#111',
             'text-align': 'center',
             'font-weight': 'bold'
-        })).append($('<div>').text(chrome.i18n.getMessage('gesture_rocker_descrip', [chrome.i18n.getMessage('options_mousebutton_' + x), chrome.i18n.getMessage('options_mousebutton_' + o)])).css({
-            'font-size': 12 * Math.sqrt(e / 100) + 'px',
+        })).append($('<div>').text(chrome.i18n.getMessage('gesture_rocker_descrip', [chrome.i18n.getMessage('options_mousebutton_' + first), chrome.i18n.getMessage('options_mousebutton_' + second)])).css({
+            'font-size': 12 * Math.sqrt(width / 100) + 'px',
             color: '#666',
             'text-align': 'center'
         }))
-    }, s = function (t, e) {
+    }
+    var drawWheel = function (gesture, width) {
         return $('<div>').css({
-            width: e - 2 + 'px',
+            width: width - 2 + 'px',
             padding: '5px 1px'
-        }).append($('<div>').text(chrome.i18n.getMessage('gesture_' + t)).css({
-            'font-size': 14 * Math.sqrt(e / 100) + 'px',
+        }).append($('<div>').text(chrome.i18n.getMessage('gesture_' + gesture)).css({
+            'font-size': 14 * Math.sqrt(width / 100) + 'px',
             color: '#111',
             'text-align': 'center',
             'font-weight': 'bold'
-        })).append($('<div>').text(chrome.i18n.getMessage('gesture_' + t + '_descrip')).css({
-            'font-size': 12 * Math.sqrt(e / 100) + 'px',
+        })).append($('<div>').text(chrome.i18n.getMessage('gesture_' + gesture + '_descrip')).css({
+            'font-size': 12 * Math.sqrt(width / 100) + 'px',
             color: '#666',
             'text-align': 'center'
         }))
-    }, n = {
+    }
+    var codeCharMap = {
         8: 'Backspace',
         9: 'Tab',
         13: 'Enter',
@@ -164,18 +343,23 @@
         220: '\\',
         221: ']',
         222: "'"
-    }, y = function (t, e) {
+    }
+    var codeButton = function (code) {
+        code = code.split(':')
+        var id = code[1]
+        var key = code[2];
+        if (!id || id == '') return 'empty';
+        if (id.substr(0, 2) != 'U+') return id;
+        var ch = codeCharMap[key];
+        if (ch) return ch
+        return JSON.parse('"\\u' + id.substr(2) + '"')
+    }
+    var drawKey = function (gesture, width) {
         return $('<div>').css({
-            width: e - 2 + 'px',
+            width: width - 2 + 'px',
             padding: '5px 1px'
-        }).append($('<div>').text(('1' == t[1] ? 'Ctrl + ' : '') + ('1' == t[2] ? 'Alt + ' : '') + ('1' == t[3] ? 'Shift + ' : '') + ('1' == t[4] ? 'Meta + ' : '') + function (t) {
-            var e = (t = t.split(':'))[1], x = t[2];
-            if (!e || '' == e) return 'empty';
-            if ('U+' != e.substr(0, 2)) return e;
-            var o = n[x];
-            return o || JSON.parse('"\\u' + e.substr(2) + '"')
-        }(t)).css({
-            'font-size': 14 * Math.sqrt(e / 100) + 'px',
+        }).append($('<div>').text((gesture[1] === '1' ? 'Ctrl + ' : '') + (gesture[2] === '1' ? 'Alt + ' : '') + (gesture[3] === '1' ? 'Shift + ' : '') + (gesture[4] === '1' ? 'Meta + ' : '') + codeButton(gesture)).css({
+            'font-size': 14 * Math.sqrt(width / 100) + 'px',
             color: '#666',
             'text-align': 'center',
             'font-weight': 'bold'

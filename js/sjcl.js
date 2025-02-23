@@ -49,7 +49,7 @@ function n(t, r) {
     }, getPartial: function (t) {
         return Math.round(t / 1099511627776) || 32
     }, equal: function (t, r) {
-        if (sjcl.bitArray.bitLength(t) !== sjcl.bitArray.bitLength(r)) return !1;
+        if (sjcl.bitArray.bitLength(t) !== sjcl.bitArray.bitLength(r)) return false;
         var i, n = 0;
         for (i = 0; i < t.length; i++) n |= t[i] ^ r[i];
         return 0 === n

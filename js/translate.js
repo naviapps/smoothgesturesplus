@@ -49,7 +49,8 @@ var langs = {
     vi: 'Vietnamese',
     zh: 'Chinese',
     zh_TW: 'Chinese: Traditional'
-}, accept = [];
+}
+var accept = [];
 chrome.i18n.getAcceptLanguages(function (e) {
     for (-1 != e.indexOf(window.navigator.language.replace('-', '_')) && e.splice(e.indexOf(window.navigator.language.replace('-', '_')), 1), e.unshift(window.navigator.language.replace('-', '_')), i = 0; i < e.length; i++) langs[e[i]] || (e.splice(i, 1), i--);
     language = (accept = e)[0], $('body').append($('<div>').attr('id', 'instruct').append($('<p>').text('Choose the language to translate to from the dropdown box. Type translations for some or all phrases, then click Submit.')).append($('<p>').text('The gray words are a description of the phrase. The bold phrases are the English to be translated. Type the translation in the textbox.')).append($('<p>').text('It is not neccessary to fill out all of the empty boxes, only the ones that need to be translated. You can edit any already existing translations to make changes.')));
@@ -90,13 +91,18 @@ chrome.i18n.getAcceptLanguages(function (e) {
         src = JSON.parse(e), loadpage()
     })
 });
-var src = null, res = null, language = 'zh', words = null, tree = null;
+var src = null
+var res = null
+var language = 'zh'
+var words = null
+var tree = null;
 document.title = 'Smooth Gestures: Translate', $('body').append($('<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>'));
 var loadpage = function () {
     $.get(chrome.runtime.getURL('_locales/' + language + '/messages.json'), null, function (e) {
         res = e && '' != e ? JSON.parse(e) : {}, formpage()
     })
-}, formpage = function () {
+}
+var formpage = function () {
     var e = JSON.parse(JSON.stringify(res));
     for (id in words = [], src) '_' != id && words.push({
         id: id,
@@ -118,7 +124,8 @@ var loadpage = function () {
         tree[s] = t
     }
     buildpage()
-}, buildpage = function () {
+}
+var buildpage = function () {
     var e = {};
     for (c in tree.empty) for (e[c] = $('<div>').attr('class', 'translatetable').append($('<div>').attr('class', 'tabletitle').text(c)), i = 0; i < tree.empty[c].length; i++) e[c].append(buildword(tree.empty[c][i]));
     for (c in tree.complete) {
@@ -131,14 +138,16 @@ var loadpage = function () {
     for (c in e) r.push(c);
     for (r.sort(), i = 0; i < r.length; i++) a.append(e[r[i]]);
     $('body').append(a)
-}, completedwords = function (e) {
+}
+var completedwords = function (e) {
     var t = Math.random().toString().substr(2);
     return $('<div>').attr('class', 'rowgroup').append($('<div>').attr('class', 'grouptitle').text('Phrases with translations (' + $('.wordrow', e).size() + ')').append($('<a>').attr('href', '#').text('show').click(function () {
         return 'hide' == $(this).text() ? ($(this).text('show'), $('#' + t + 'group').animate({
             height: 'hide',
             opacity: 0
-        }, 200)) : ($(this).text('hide'), $('#' + t + 'group').animate({height: 'show', opacity: 1}, 200)), !1
+        }, 200)) : ($(this).text('hide'), $('#' + t + 'group').animate({height: 'show', opacity: 1}, 200)), false
     }))).append(e.attr('id', t + 'group').attr('class', 'grouprows').css({display: 'none'}))
-}, buildword = function (e) {
+}
+var buildword = function (e) {
     return e.src ? $('<div>').attr('class', 'wordrow').append($('<div>').attr('class', 'descrip').text(e.src.description + ' ').append($('<span>').text('[ ' + e.id + ' ]'))).append($('<div>').attr('class', 'message').html(e.src.message.replace(/\n/g, '<br>\n'))).append($('<textarea>').attr('id', 'edit-' + e.id).text(e.res ? e.res.message : res[e.id] ? res[e.id].message : '')) : '<div>' + e.id
 };

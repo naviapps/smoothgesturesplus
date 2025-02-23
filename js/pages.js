@@ -47,7 +47,7 @@
                     o && a(o[1], 300)
                 });
                 var o = $.fx.off;
-                $.fx.off = !0, i(), c(), $.fx.off = o
+                $.fx.off = true, i(), c(), $.fx.off = o
             })
         }, show: a, refpoint_set: c, refpoint_goto: o, resize: i, onresize: void 0, onactive: void 0
     }

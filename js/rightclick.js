@@ -22,11 +22,11 @@
     var l = function () {
         $(function () {
             $('#doubleclick, #chromeosdouble').click(function () {
-                i({blockDoubleclickAlert: !0}), window.close()
+                i({blockDoubleclickAlert: true}), window.close()
             }), $('#installplugin').click(function () {
-                i({blockDoubleclickAlert: !1}), chrome.permissions.request({permissions: ['nativeMessaging']}, function (t) {
+                i({blockDoubleclickAlert: false}), chrome.permissions.request({permissions: ['nativeMessaging']}, function (t) {
                     if (t || n.forceInstallRightclick) {
-                        n.forceInstallRightclick && i({forceInstallRightclick: !1}), chrome.runtime.getBackgroundPage(function (t) {
+                        n.forceInstallRightclick && i({forceInstallRightclick: false}), chrome.runtime.getBackgroundPage(function (t) {
                             t.connectNative(10)
                         });
                         var e = document.createElement('a');

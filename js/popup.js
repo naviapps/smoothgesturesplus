@@ -9,11 +9,11 @@
         if ('local' == t) for (key in e) o[key] = e[key].newValue
     });
     var s = function () {
-        chrome.tabs.reload({bypassCache: !0}), window.close()
+        chrome.tabs.reload({bypassCache: true}), window.close()
     };
     init = function () {
         chrome.runtime.getBackgroundPage(function (o) {
-            chrome.tabs.query({active: !0, lastFocusedWindow: !0}, function (e) {
+            chrome.tabs.query({active: true, lastFocusedWindow: true}, function (e) {
                 var t = e[0];
                 o.getTabStatus(t.id, function (e) {
                     console.log(t, e), 'broken' == e ? $('body').append('<div id=statuslight class=red>').append($('<h1>').text(chrome.i18n.getMessage('popup_status_broken_short'))).append($('<p>').text(chrome.i18n.getMessage('popup_status_broken'))).append($('<div class=button>').text(chrome.i18n.getMessage('popup_button_options')).css({float: 'right'}).click(function () {

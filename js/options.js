@@ -6,19 +6,23 @@
         chrome.storage.local.set(e)
     };
     chrome.storage.local.get(null, function (e) {
-        l = e, chrome.storage.onChanged.addListener(t), o()
+        l = e
+        chrome.storage.onChanged.addListener(t)
+        o()
     });
     var t = function (e, t) {
         if ('local' == t) {
             for (key in e) l[key] = e[key].newValue;
             (e.license || e.license_expires || e.license_showactivated || e.license_showexpired || e.license_showdeactivated) && f()
         }
-    }, c = function (e, t) {
+    }
+    var c = function (e, t) {
         return chrome.i18n.getMessage(e.replace(/-/g, '_'), t)
     };
     chrome.runtime.getBackgroundPage(function (e) {
         e.ping()
-    }), $(function () {
+    })
+    $(function () {
         for (var e, t = $('body').html(), n = 0; e = t.match(/__MSG_([a-zA-Z0-9_\-@]+)(\{\{([^|}]+(\|\|[^|}]+)*)\}\})?__/);) {
             console.log(e);
             var s = [e[1], e[3] ? e[3].split('||') : void 0];
@@ -86,7 +90,7 @@
                 s = document.createElement('a');
             s.href = n, s.download = 'Smooth Gestures Plus Settings.txt';
             var o = document.createEvent('MouseEvents');
-            o.initMouseEvent('click', !0, !1, window, 0, 0, 0, 0, 0, !1, !1, !1, !1, 0, null), s.dispatchEvent(o), URL.revokeObjectURL(n)
+            o.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null), s.dispatchEvent(o), URL.revokeObjectURL(n)
         }), $('#importbutton.button input[type=file]').on('change', function () {
             if (!(this.files.length <= 0)) {
                 var s = new FileReader;
@@ -101,12 +105,12 @@
                             try {
                                 e = e.substring(e.indexOf('{'), e.lastIndexOf('}') + 1), t = e, (n = document.createElement('div')).innerHTML = t.replace(/</g, '[leftangle]'), e = n.childNodes[0].nodeValue.replace(/\[leftangle\]/g, '<');
                                 var s = JSON.parse(e);
-                                if ('Smooth Gestures Settings' != s.title) return !1;
+                                if ('Smooth Gestures Settings' != s.title) return false;
                                 for (var o in s.gestures && (l.gestures = s.gestures), s.settings) -1 != a.indexOf(o) && (l[o] = s.settings[o]);
-                                return i(l), alert('Import Successful'), !0
+                                return i(l), alert('Import Successful'), true
                             } catch (e) {
                             }
-                            return !1
+                            return false
                         })(t) || alert('Import Failed')
                     }
                     if (n) {
@@ -117,26 +121,28 @@
                 }, s.readAsText(this.files[0])
             }
         })
-    }, s = function () {
+    }
+    var s = function () {
         $('#extras.setting select').val(l.blockDoubleclickAlert ? 0 : 1);
         var n = -1 != navigator.platform.indexOf('Mac') ? '0.7' : '0.6';
         chrome.runtime.getBackgroundPage(function (e) {
             var t = e.isNative();
             console.log('native', t), $('#note_extras_installed').css({display: t && (!t.loaded || t.version >= n) ? 'block' : 'none'}), $('#note_extras_update').css({display: t && t.loaded && t.version < n ? 'block' : 'none'}), $('#note_extras_notinstalled').css({display: t ? 'none' : 'block'})
         })
-    }, o = function () {
+    }
+    var o = function () {
         $(function () {
             var e = location.hash.replace(/^#(.+)$/, '$1') || l.lastpage || 'config';
-            $.fx.off = !0, pages.init(), $('.upgradebutton').remove(), d.init(), $('.addgesture').html('<span>+</span> ' + c('options_button_startaddgesture')).click(d.open.bind(null, null)), function () {
-                l.showNoteUpdated ? ($('#note_updated p:first-child').html(c('options_note_updated', ['<span class=sgtitle>' + c('name') + '<span class=sgplus> plus</span></span>', chrome.runtime.getManifest().version])), i({showNoteUpdated: !1})) : $('#note_updated').css({display: 'none'});
+            $.fx.off = true, pages.init(), $('.upgradebutton').remove(), d.init(), $('.addgesture').html('<span>+</span> ' + c('options_button_startaddgesture')).click(d.open.bind(null, null)), function () {
+                l.showNoteUpdated ? ($('#note_updated p:first-child').html(c('options_note_updated', ['<span class=sgtitle>' + c('name') + '<span class=sgplus> plus</span></span>', chrome.runtime.getManifest().version])), i({showNoteUpdated: false})) : $('#note_updated').css({display: 'none'});
                 var e = 336 - Math.ceil((Date.now() - l.firstinstalled) / 1e3 / 60 / 60);
                 l.license && $('#trialperiod').css({display: 'none'}), $('#expirein').append($('<span>').css({
                     'background-color': e < 0 ? 'rgba(255,0,0,.2)' : e < 120 ? 'rgba(255,255,0,.2)' : 'rgba(0,255,0,.2)',
                     'font-weight': 'bold'
                 }).text('Your trial period ' + (e < 0 ? 'has expired' : 'will expire in ' + (24 <= e ? Math.round(e / 24) + ' days' : 0 < e ? e + ' hours' : 'less than an hour')))), (l.hideNoteRemindRate || -1 == ['full', '1yrmul'].indexOf(l.license)) && $('.note_remindrate').css({display: 'none'}), $('.note_remindrate .close').click(function () {
-                    $('.note_remindrate').css({display: 'none'}), i({hideNoteRemindRate: !0})
+                    $('.note_remindrate').css({display: 'none'}), i({hideNoteRemindRate: true})
                 }), l.hideNotePrint && $('#note_print').css({display: 'none'}), $('#note_print .close').click(function () {
-                    $('#note_print').css({display: 'none'}), i({hideNotePrint: !0})
+                    $('#note_print').css({display: 'none'}), i({hideNotePrint: true})
                 }), $('#note_print .button').click(function () {
                     window.print()
                 }), $('.page[page=about] .content').append($('<div>').attr('class', 'footer').html('You have gestured approximately ' + (254e-6 * (l.log.line ? l.log.line.distance : 0)).toFixed(2) + ' meters.'))
@@ -155,7 +161,7 @@
                 (e || t) && ($('.navbutton[nav=extras]').css({display: 'none'}), $('.page[page=extras]').css({display: 'none'})), $('#extras.setting select').on('change', function () {
                     i({blockDoubleclickAlert: 0 == $(this).val()})
                 }), $('#installplugin,#updateplugin').click(function () {
-                    i({blockDoubleclickAlert: !1}), chrome.permissions.request({permissions: ['nativeMessaging']}, function (e) {
+                    i({blockDoubleclickAlert: false}), chrome.permissions.request({permissions: ['nativeMessaging']}, function (e) {
                         if (e) {
                             chrome.runtime.getBackgroundPage(function (e) {
                                 e.connectNative(1e3)
@@ -170,34 +176,38 @@
             }, 100), setTimeout(function () {
                 pages.show(e)
             }, 500), setTimeout(function () {
-                pages.show(e), $.fx.off = !1
+                pages.show(e), $.fx.off = false
             }, 900)
         })
-    }, a = function () {
+    }
+    var a = function () {
         var e = {
             title: 'Navigate to Page',
             descrip: 'Go to Google',
             code: 'location.href = "http://www.google.com";',
             env: 'page',
-            share: !0,
+            share: true,
             context: ''
         }, t = 'custom' + Math.floor(Math.random() * Math.pow(2, 30)).toString(32);
         l.customactions[t] = e, i({customactions: l.customactions}), m(), setTimeout(u.bind(null, t), 500)
-    }, r = function (t) {
+    }
+    var r = function (t) {
         if (confirm('Delete this custom action?')) {
             for (var e in delete l.customactions[t], i({customactions: l.customactions}), l.gestures) l.gestures[e] == t && p(e);
             chrome.runtime.getBackgroundPage(function (e) {
                 delete e.contexts[t]
             }), m()
         }
-    }, u = function (e) {
+    }
+    var u = function (e) {
         var t = l.customactions[e], n = $('.action[action=' + e + ']');
         $('#customedit').remove(), $('.page[page=custom] .action').css({display: ''}), n.css({display: 'none'}), n.after($('<div id=customedit>').append($("<div class='button gray customsave' tabindex=0>").text('save').on('click', function () {
             t.title = $('.customtitle').val(), t.descrip = $('.customdescrip').val(), t.code = $('.customcode').val(), t.context = $('.customcontext').val(), l.customactions[e] = t, i({customactions: l.customactions}), $('#customedit').remove(), $('.page[page=custom] .action').css({display: ''}), m()
         })).append($("<div class='button gray customcancel' tabindex=0>").text('cancel').on('click', function () {
             $('#customedit').remove(), $('.page[page=custom] .action').css({display: ''})
         })).append($('<input type=text class=customtitle placeholder=Title>').val(t.title)).append($('<input type=text class=customdescrip placeholder=Description>').val(t.descrip)).append($("<textarea class=customcode placeholder='Javascript Code'>").text(t.code)))
-    }, d = {
+    }
+    var d = {
         action: null, gesture: null, init: function () {
             $('#drawingcanvas .close').on('click', d.close), $('#tryagain').on('click', function () {
                 $('#nowwhat').css({display: 'none'}), $('#canvasdescrip').css({display: 'table'}), setTimeout(function () {
@@ -207,12 +217,12 @@
                 d.action = $('#chooseaction').val(), d.choose()
             }), chrome.runtime.getBackgroundPage(function (e) {
                 for (var t in e.categories) if (e.categories[t].actions) {
-                    $('#chooseaction').append($('<option>').text(c(t)).prop('disabled', !0));
+                    $('#chooseaction').append($('<option>').text(c(t)).prop('disabled', true));
                     for (var n = 0; n < e.categories[t].actions.length; n++) $('#chooseaction').append($('<option>').text('- ' + c('action_' + e.categories[t].actions[n])).val(e.categories[t].actions[n]))
-                } else if (e.categories[t].customActions) for (var s in $('#chooseaction').append($('<option>').text('Custom Actions').prop('disabled', !0)), l.customactions) $('#chooseaction').append($('<option>').text('- ' + l.customactions[s].title).val(s))
+                } else if (e.categories[t].customActions) for (var s in $('#chooseaction').append($('<option>').text('Custom Actions').prop('disabled', true)), l.customactions) $('#chooseaction').append($('<option>').text('- ' + l.customactions[s].title).val(s))
             })
         }, close: function () {
-            d.action = null, d.gesture = null, window.SG.callback = null, $('#drawingcanvas').css({display: 'none'}), window.removeEventListener('mousewheel', d.blockevent, !1), document.removeEventListener('keydown', d.blockevent, !0)
+            d.action = null, d.gesture = null, window.SG.callback = null, $('#drawingcanvas').css({display: 'none'}), window.removeEventListener('mousewheel', d.blockevent, false), document.removeEventListener('keydown', d.blockevent, true)
         }, choose: function () {
             d.action && d.gesture && (l.gestures[d.gesture] && p(d.gesture), l.gestures[d.gesture] = d.action, i({gestures: l.gestures}), d.close(), h())
         }, gesturecallback: function (s) {
@@ -221,18 +231,20 @@
                 var t = null;
                 l.gestures[s] ? (t = c('options_button_overwrite'), $('#gestureoverwrite').css({display: 'block'}).text(c('options_addgesture_overwrite', c('action_' + l.gestures[s]) || (l.customactions[l.gestures[s]] ? l.customactions[l.gestures[s]].title : '')))) : (t = c('options_button_addgesture'), $('#gestureoverwrite').css({display: 'none'}));
                 t = l.gestures[s] ? c('options_button_overwrite') : c('options_button_addgesture');
-                d.action ? ($('#doaddgesture').css({display: 'block'}).text(t), $('#chooseaction').css({display: 'none'})) : ($('#doaddgesture').css({display: 'none'}), $('#chooseaction').css({display: 'block'}), $('#chooseaction option:nth-child(1)').prop('disabled', !0).text(t)), $('#canvasdescrip').css({display: 'none'}), $('#nowwhat').css({display: 'block'});
+                d.action ? ($('#doaddgesture').css({display: 'block'}).text(t), $('#chooseaction').css({display: 'none'})) : ($('#doaddgesture').css({display: 'none'}), $('#chooseaction').css({display: 'block'}), $('#chooseaction option:nth-child(1)').prop('disabled', true).text(t)), $('#canvasdescrip').css({display: 'none'}), $('#nowwhat').css({display: 'block'});
                 var n = Math.min(.8 * window.innerWidth / 2, .8 * window.innerHeight / 2);
                 $('#gesturedisplay').empty().append(drawGesture(s, n, n))
             })
         }, blockevent: function (e) {
             e.preventDefault()
         }, open: function (e) {
-            window.SG && !window.SG.callback && (d.action = e, d.gesture = null, window.addEventListener('mousewheel', d.blockevent, !1), document.addEventListener('keydown', d.blockevent, !0), $('#canvastitle').text(c('options_addgesture_title', c('action_' + e) || (l.customactions[e] ? l.customactions[e].title : ''))), $('#canvasdescrip li:nth-child(1)').text(c('options_addgesture_instruct_2', c('options_mousebutton_' + l.holdButton))), $('#canvasdescrip li:nth-child(2)').text(c('options_addgesture_instruct_3', c('options_mousebutton_' + l.holdButton))), $('#drawingcanvas').css({display: 'block'}), $('#canvasdescrip').css({display: 'table'}), $('#nowwhat').css({display: 'none'}), window.SG.callback = d.gesturecallback)
+            window.SG && !window.SG.callback && (d.action = e, d.gesture = null, window.addEventListener('mousewheel', d.blockevent, false), document.addEventListener('keydown', d.blockevent, true), $('#canvastitle').text(c('options_addgesture_title', c('action_' + e) || (l.customactions[e] ? l.customactions[e].title : ''))), $('#canvasdescrip li:nth-child(1)').text(c('options_addgesture_instruct_2', c('options_mousebutton_' + l.holdButton))), $('#canvasdescrip li:nth-child(2)').text(c('options_addgesture_instruct_3', c('options_mousebutton_' + l.holdButton))), $('#drawingcanvas').css({display: 'block'}), $('#canvasdescrip').css({display: 'table'}), $('#nowwhat').css({display: 'none'}), window.SG.callback = d.gesturecallback)
         }
-    }, p = function (e) {
+    }
+    var p = function (e) {
         $('.gesture[gesture=' + e.replace(/\:/g, '\\:').replace(/\+/g, '\\+') + ']').remove(), delete l.gestures[e], i({gestures: l.gestures}), h()
-    }, g = [{
+    }
+    var g = [{
         id: 'page_navigation',
         actions: ['page-back', 'page-forward', 'page-back-close', 'reload-tab', 'reload-tab-full', 'reload-all-tabs', 'stop', 'parent-dir', 'page-next', 'page-prev']
     }, {
@@ -244,7 +256,8 @@
     }, {
         id: 'other',
         actions: ['options', 'fullscreen-window', 'minimize-window', 'maximize-window', 'open-screenshot', 'save-screenshot', 'open-screenshot-full', 'save-screenshot-full', 'open-history', 'open-downloads', 'open-extensions', 'open-bookmarks']
-    }], m = function () {
+    }]
+    var m = function () {
         chrome.runtime.getBackgroundPage(function (e) {
             for (var t = 0; t < g.length; t++) {
                 var n = $('.page[page=' + g[t].id + ']');
@@ -264,9 +277,11 @@
             }
             h()
         })
-    }, h = function () {
+    }
+    var h = function () {
         for (gesture in $('.action .gesture').remove(), l.gestures) e(gesture)
-    }, e = function (e) {
+    }
+    var e = function (e) {
         var n = $('.action[action=' + l.gestures[e] + ']');
         if ($('.gestures', n).append($('<div class=gesture>').attr('gesture', e).append($("<div class='button gray removegesture' tabindex=0>&times;</div>").on('click', p.bind(null, e))).append(drawGesture(e, 100, 100))), n.parent().hasClass('disabled')) {
             var t = $('.actiongroup.enabled', n.parent().parent()), s = $('.action', t);
@@ -277,9 +292,11 @@
                 }), o ? n.insertAfter(o) : t.prepend(n)
             }
         }
-    }, v = function () {
+    }
+    var v = function () {
         $('#newtab_url.setting select').val(l.newTabUrl), $('#newtab_url.setting select').val() != l.newTabUrl ? ($('#newtab_url.setting select').val('custom'), $('#newtab_url.setting input[type=text]').val(l.newTabUrl), $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({display: ''})) : $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({display: 'none'}), $('#newtab_right.setting select').val(l.newTabRight ? 1 : 0), $('#newtab_linkright.setting select').val(l.newTabLinkRight ? 1 : 0), $('#trail_draw.setting select').val(l.trailBlock ? 0 : 1), $('#trail_properties').css({display: l.trailBlock ? 'none' : 'block'}), $('#trail_color_r input[type=range]').val(l.trailColor.r), $('#trail_color_g input[type=range]').val(l.trailColor.g), $('#trail_color_b input[type=range]').val(l.trailColor.b), $('#trail_color_a input[type=range]').val(l.trailColor.a), $('#trail_width input[type=range]').val(l.trailWidth), $('#trail_color_r').css({'background-image': 'linear-gradient(to right, rgba(0,' + l.trailColor.g + ',' + l.trailColor.b + ',' + l.trailColor.a + '), rgba(255,' + l.trailColor.g + ',' + l.trailColor.b + ',' + l.trailColor.a + '))'}), $('#trail_color_g').css({'background-image': 'linear-gradient(to right, rgba(' + l.trailColor.r + ',0,' + l.trailColor.b + ',' + l.trailColor.a + '), rgba(' + l.trailColor.r + ',255,' + l.trailColor.b + ',' + l.trailColor.a + '))'}), $('#trail_color_b').css({'background-image': 'linear-gradient(to right, rgba(' + l.trailColor.r + ',' + l.trailColor.g + ',0,' + l.trailColor.a + '), rgba(' + l.trailColor.r + ',' + l.trailColor.g + ',255,' + l.trailColor.a + '))'}), $('#trail_color_a').css({'background-image': 'linear-gradient(to right, rgba(' + l.trailColor.r + ',' + l.trailColor.g + ',' + l.trailColor.b + ',0), rgba(' + l.trailColor.r + ',' + l.trailColor.g + ',' + l.trailColor.b + ',255))'}), $('#trail_example').empty().append(drawGesture('URU', 100, 100, l.trailWidth)), $('#trail_style select').val(l.trailLegacy ? 'legacy' : 'default'), $('#force_context.setting select').val(l.contextOnLink ? 1 : 0), $('#closelastblock.setting select').val(l.closeLastBlock ? 1 : 0), $('#selecttolink.setting select').val(l.selectToLink ? 1 : 0), $('#blacklist.setting textarea').val(l.blacklist.join('\n')), $('#hold_button.setting select').val(l.holdButton)
-    }, b = function () {
+    }
+    var b = function () {
         $('#keybutton').on('click', function () {
             $('#keybutton').css({display: 'none'}), $('#key').css({display: 'table'})
         }), $('#setkey .start').on('click', function () {
@@ -291,10 +308,12 @@
                     e.ping(), $('#setkey input, #setkey .submit').css({display: ''}), $('#setkey .start').css({display: ''})
                 })
             })
-        }), f()
-    }, f = function () {
+        })
+        f()
+    }
+    var f = function () {
         if ($('.upgradebutton').html((l.license ? 'Buy' : 'Activate') + ' <span class=sgtitle>Smooth Gestures <span class=sgplus>plus<span class=arrow></span></span></span></span>'), setTimeout(function () {
-            i({license_showactivated: !1, license_showexpired: !1, license_showdeactivated: !1})
+            i({license_showactivated: false, license_showexpired: false, license_showdeactivated: false})
         }, 1e3), 'full' == l.license ? ($('#note_licensestatus .title').html('You have the full license!'), $('#note_licensestatus').addClass('green').removeClass('yellow'), $('#noplus').css({display: 'none'})) : '1yrmul' == l.license ? ($('#note_licensestatus .title').html('You have the 1 year license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '6mnmul' == l.license ? ($('#note_licensestatus .title').html('You have the 6 month license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '1mnmul' == l.license ? ($('#note_licensestatus .title').html('You have the 1 month license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '2wkmul' == l.license ? ($('#note_licensestatus .title').html('You have the 2 week license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '1wkmul' == l.license ? ($('#note_licensestatus .title').html('You have the 1 week license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '1yr1cl' == l.license ? ($('#note_licensestatus .title').html('You have the 1 year / 1 install license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '1mn1cl' == l.license ? ($('#note_licensestatus .title').html('You have the 1 month / 1 install license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : '1wk1cl' == l.license ? ($('#note_licensestatus .title').html('You have the 1 week / 1 install license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : 'free' == l.license ? ($('#note_licensestatus .title').html('You have the free license'), $('#note_licensestatus').addClass('green').removeClass('yellow')) : l.license ? ($('#note_licensestatus .title').html('You have an unknown license'), $('#note_licensestatus').addClass('yellow').removeClass('green'), $('#nolicense').css({display: 'block'})) : ($('#note_licensestatus .title').html('You do not have an active license'), $('#note_licensestatus').addClass('yellow').removeClass('green')), l.license_expires) {
             var e = (l.license_expires - Date.now()) / 1e3 / 60 / 60;
             $('#note_licensestatus .descrip').html('This license expires in ' + (24 < e ? Math.round(e / 24) + ' days' : Math.round(2 * e) / 2 + ' hours'))
