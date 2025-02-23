@@ -1,21 +1,21 @@
-"use strict";
+'use strict';
 var sjcl = {
     cipher: {}, hash: {}, keyexchange: {}, mode: {}, misc: {}, codec: {}, exception: {
         corrupt: function (t) {
             this.toString = function () {
-                return "CORRUPT: " + this.message
+                return 'CORRUPT: ' + this.message
             }, this.message = t
         }, invalid: function (t) {
             this.toString = function () {
-                return "INVALID: " + this.message
+                return 'INVALID: ' + this.message
             }, this.message = t
         }, bug: function (t) {
             this.toString = function () {
-                return "BUG: " + this.message
+                return 'BUG: ' + this.message
             }, this.message = t
         }, notReady: function (t) {
             this.toString = function () {
-                return "NOT READY: " + this.message
+                return 'NOT READY: ' + this.message
             }, this.message = t
         }
     }
@@ -27,7 +27,7 @@ function n(t, r) {
     l[0] = l[0] + e | 0, l[1] = l[1] + s | 0, l[2] = l[2] + c | 0, l[3] = l[3] + a | 0, l[4] = l[4] + o | 0
 }
 
-"undefined" != typeof module && module.exports && (module.exports = sjcl), sjcl.bitArray = {
+'undefined' != typeof module && module.exports && (module.exports = sjcl), sjcl.bitArray = {
     bitSlice: function (t, r, i) {
         return t = sjcl.bitArray.d(t.slice(r / 32), 32 - (31 & r)).slice(1), void 0 === i ? t : sjcl.bitArray.clamp(t, i - r)
     }, extract: function (t, r, i) {
@@ -64,7 +64,7 @@ function n(t, r) {
     }
 }, sjcl.codec.utf8String = {
     fromBits: function (t) {
-        var r, i, n = "", e = sjcl.bitArray.bitLength(t);
+        var r, i, n = '', e = sjcl.bitArray.bitLength(t);
         for (r = 0; r < e / 8; r++) 0 == (3 & r) && (i = t[r / 4]), n += String.fromCharCode(i >>> 24), i <<= 8;
         return decodeURIComponent(escape(n))
     }, toBits: function (t) {
@@ -75,12 +75,12 @@ function n(t, r) {
     }
 }, sjcl.codec.hex = {
     fromBits: function (t) {
-        var r, i = "";
+        var r, i = '';
         for (r = 0; r < t.length; r++) i += (0xf00000000000 + (0 | t[r])).toString(16).substr(4);
         return i.substr(0, sjcl.bitArray.bitLength(t) / 4)
     }, toBits: function (t) {
         var r, i, n = [];
-        for (i = (t = t.replace(/\s|0x/g, "")).length, t += "00000000", r = 0; r < t.length; r += 8) n.push(0 ^ parseInt(t.substr(r, 8), 16));
+        for (i = (t = t.replace(/\s|0x/g, '')).length, t += '00000000', r = 0; r < t.length; r += 8) n.push(0 ^ parseInt(t.substr(r, 8), 16));
         return sjcl.bitArray.clamp(n, 4 * i)
     }
 }, sjcl.hash.sha1 = function (t) {
@@ -93,7 +93,7 @@ function n(t, r) {
         return this.c = this.e.slice(0), this.b = [], this.a = 0, this
     },
     update: function (t) {
-        "string" == typeof t && (t = sjcl.codec.utf8String.toBits(t));
+        'string' == typeof t && (t = sjcl.codec.utf8String.toBits(t));
         var r, i = this.b = sjcl.bitArray.concat(this.b, t);
         for (r = this.a, t = this.a = r + sjcl.bitArray.bitLength(t), r = this.blockSize + r & -this.blockSize; r <= t; r += this.blockSize) n(this, i.splice(0, 16));
         return this
