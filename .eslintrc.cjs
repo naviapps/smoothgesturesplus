@@ -4,7 +4,11 @@ module.exports = {
     node: true,
     es6: true,
   },
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  parserOptions: {
+    project: './tsconfig.json',
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   ignorePatterns: ['node_modules/*'],
   extends: ['airbnb-base'],
   plugins: ['check-file'],
@@ -24,13 +28,18 @@ module.exports = {
       },
       extends: [
         'airbnb-base',
+        'airbnb-typescript/base',
         'plugin:import/errors',
         'plugin:import/warnings',
         'plugin:import/typescript',
         'plugin:@typescript-eslint/recommended',
         'plugin:prettier/recommended',
+        'plugin:vitest/legacy-recommended',
       ],
       rules: {
+        'import/no-named-as-default-member': 'off',
+        'no-use-before-define': 'off',
+        eqeqeq: ['error', 'always'],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         'check-file/filename-naming-convention': [
           'error',

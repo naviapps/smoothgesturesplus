@@ -51,40 +51,50 @@ const langs = {
   zh_TW: 'Chinese: Traditional',
 };
 let accept = [];
-chrome.i18n.getAcceptLanguages(function (e) {
-  for (
-    e.indexOf(window.navigator.language.replace('-', '_')) != -1 &&
-      e.splice(e.indexOf(window.navigator.language.replace('-', '_')), 1),
-      e.unshift(window.navigator.language.replace('-', '_')),
-      i = 0;
-    i < e.length;
-    i++
-  )
-    langs[e[i]] || (e.splice(i, 1), i--);
-  (language = (accept = e)[0]),
-    $('body').append(
-      $('<div>')
-        .attr('id', 'instruct')
-        .append(
-          $('<p>').text(
-            'Choose the language to translate to from the dropdown box. Type translations for some or all phrases, then click Submit.',
-          ),
-        )
-        .append(
-          $('<p>').text(
-            'The gray words are a description of the phrase. The bold phrases are the English to be translated. Type the translation in the textbox.',
-          ),
-        )
-        .append(
-          $('<p>').text(
-            'It is not neccessary to fill out all of the empty boxes, only the ones that need to be translated. You can edit any already existing translations to make changes.',
-          ),
+chrome.i18n.getAcceptLanguages((ls) => {
+  if (ls.indexOf(window.navigator.language.replace('-', '_')) !== -1) {
+    ls.splice(ls.indexOf(window.navigator.language.replace('-', '_')), 1);
+  }
+  ls.unshift(window.navigator.language.replace('-', '_'));
+  for (let i = 0; i < ls.length; i += 1) {
+    if (!langs[ls[i]]) {
+      ls.splice(i, 1);
+      i -= 1;
+    }
+  }
+  accept = ls;
+  language = accept[0];
+
+  $('body').append(
+    $('<div>')
+      .attr('id', 'instruct')
+      .append(
+        $('<p>').text(
+          'Choose the language to translate to from the dropdown box. Type translations for some or all phrases, then click Submit.',
         ),
-    );
-  const t = $('<optgroup>').attr('label', 'Detected Languages');
-  const a = $('<optgroup>').attr('label', 'Other Languages');
-  for (i = 0; i < accept.length; i++) t.append($('<option>').val(accept[i]).text(langs[accept[i]]));
-  for (l in langs) accept.indexOf(l) == -1 && a.append($('<option>').val(l).text(langs[l]));
+      )
+      .append(
+        $('<p>').text(
+          'The gray words are a description of the phrase. The bold phrases are the English to be translated. Type the translation in the textbox.',
+        ),
+      )
+      .append(
+        $('<p>').text(
+          'It is not neccessary to fill out all of the empty boxes, only the ones that need to be translated. You can edit any already existing translations to make changes.',
+        ),
+      ),
+  );
+
+  const acceptgroup = $('<optgroup>').attr('label', 'Detected Languages');
+  const othergroup = $('<optgroup>').attr('label', 'Other Languages');
+  for (let i = 0; i < accept.length; i += 1) {
+    acceptgroup.append($('<option>').val(accept[i]).text(langs[accept[i]]));
+  }
+  for (l in langs) {
+    if (accept.indexOf(l) === -1) {
+      othergroup.append($('<option>').val(l).text(langs[l]));
+    }
+  }
   $('body').append(
     $('<div>')
       .attr('id', 'languages')
@@ -93,181 +103,232 @@ chrome.i18n.getAcceptLanguages(function (e) {
           .text('Translate to: ')
           .append(
             $('<select>')
-              .append(t)
-              .append(a)
-              .change(function (e) {
-                (language = $(this).val()), loadpage();
+              .append(acceptgroup)
+              .append(othergroup)
+              .change(() => {
+                language = $(this).val();
+                loadpage();
               }),
           ),
       ),
-  ),
-    $('body').append(
-      $('<div>')
-        .attr('id', 'generatediv')
-        .append(
-          $('<input>')
-            .attr('type', 'button')
-            .val('Submit >')
-            .click(function () {
-              const e = new Date();
-              const t =
-                e.getUTCFullYear().toString() +
-                (e.getUTCMonth() + 1 < 10 ? '0' : '') +
-                (e.getUTCMonth() + 1).toString() +
-                (e.getUTCDate() < 10 ? '0' : '') +
-                e.getUTCDate().toString();
-              const a = {};
-              for (id in src) {
-                const i = $(`#edit-${id}`).val();
-                const r = res[id] ? res[id].message : null;
-                if (i && i != '' && i != r) {
-                  const n = JSON.parse(JSON.stringify(src[id]));
-                  (n.message = i), (n.update = t), (a[id] = n);
-                }
+  );
+
+  $('body').append(
+    $('<div>')
+      .attr('id', 'generatediv')
+      .append(
+        $('<input>')
+          .attr('type', 'button')
+          .val('Submit >')
+          .click(() => {
+            const d = new Date();
+            const update =
+              d.getUTCFullYear().toString() +
+              (d.getUTCMonth() + 1 < 10 ? '0' : '') +
+              (d.getUTCMonth() + 1).toString() +
+              (d.getUTCDate() < 10 ? '0' : '') +
+              d.getUTCDate().toString();
+            const messages = {};
+            for (id in src) {
+              const e = $(`#edit-${id}`).val();
+              const r = res[id] ? res[id].message : null;
+              if (!e || e === '' || e === r) {
+                return;
               }
-              JSON.stringify(a) != '{}'
-                ? ($('#generatediv input').val('Uploading...'),
-                  $.ajax({
-                    url: 'http://fujan.name/smoothgestures/translate.php',
-                    type: 'post',
-                    data: { key: 'smooth', lang: language, tran: JSON.stringify(a) },
-                    success(e) {
-                      $('#generatediv input').val('Submit >'),
-                        e == 'success'
-                          ? setTimeout(function () {
-                              alert(
-                                'Translation Sent. Thanks!\n\nFeel free to email smoothgestures@fujan.name to notify the developer that you have submitted a translation.',
-                              );
-                            }, 0)
-                          : setTimeout(function () {
-                              alert('Error Sending Translation');
-                            }, 0);
-                    },
-                    error() {
-                      $('#generatediv input').val('Submit >'),
-                        setTimeout(function () {
-                          alert('Error Sending Translation');
-                        }, 0);
-                    },
-                  }))
-                : alert('No changes submitted.');
-            }),
-        ),
-    ),
-    $.get(chrome.runtime.getURL('_locales/en/messages.json'), null, function (e) {
-      (src = JSON.parse(e)), loadpage();
-    });
+              const trans = JSON.parse(JSON.stringify(src[id]));
+              trans.message = e;
+              trans.update = update;
+              messages[id] = trans;
+            }
+            if (JSON.stringify(messages) === '{}') {
+              alert('No changes submitted.');
+              return;
+            }
+            $('#generatediv input').val('Uploading...');
+            $.ajax({
+              url: 'http://fujan.name/smoothgestures/translate.php',
+              type: 'post',
+              data: {
+                key: 'smooth',
+                lang: language,
+                tran: JSON.stringify(messages),
+              },
+              success: (data) => {
+                $('#generatediv input').val('Submit >');
+                if (data === 'success') {
+                  setTimeout(() => {
+                    alert(
+                      'Translation Sent. Thanks!\n\nFeel free to email smoothgestures@fujan.name to notify the developer that you have submitted a translation.',
+                    );
+                  }, 0);
+                } else {
+                  setTimeout(() => {
+                    alert('Error Sending Translation');
+                  }, 0);
+                }
+              },
+              error: () => {
+                $('#generatediv input').val('Submit >');
+                setTimeout(() => {
+                  alert('Error Sending Translation');
+                }, 0);
+              },
+            });
+          }),
+      ),
+  );
+
+  $.get(chrome.runtime.getURL('_locales/en/messages.json'), null, (data) => {
+    src = JSON.parse(data);
+    loadpage();
+  });
 });
+
 var src = null;
 var res = null;
 var language = 'zh';
+
 let words = null;
 let tree = null;
-(document.title = 'Smooth Gestures: Translate'),
-  $('body').append(
-    $('<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>'),
-  );
-var loadpage = function () {
-  $.get(chrome.runtime.getURL(`_locales/${language}/messages.json`), null, function (e) {
-    (res = e && e != '' ? JSON.parse(e) : {}), formpage();
+
+document.title = 'Smooth Gestures: Translate';
+$('body').append(
+  $('<h1 id="translatetitle"><img src="/img/icon48.png"/> Smooth Gestures: Translate</h1>'),
+);
+
+const loadpage = () => {
+  $.get(chrome.runtime.getURL(`_locales/${language}/messages.json`), null, (data) => {
+    if (data && data !== '') {
+      res = JSON.parse(data);
+    } else {
+      res = {};
+    }
+    formpage();
   });
 };
-var formpage = function () {
-  const e = JSON.parse(JSON.stringify(res));
-  for (id in ((words = []), src))
-    id != '_' &&
+
+const formpage = () => {
+  const r = JSON.parse(JSON.stringify(res));
+
+  words = [];
+  for (id in src) {
+    if (id !== '_') {
       words.push({
         id,
         src: src[id],
-        res: e[id] && e[id].update && e[id].update > src[id].update ? e[id] : void 0,
-      }),
-      delete e[id];
-  for (id in e) words.push({ id, src: void 0, res: e[id] });
-  for (tree = { empty: [], complete: [], old: [] }, i = 0; i < words.length; i++)
-    words[i].res
-      ? words[i].src
-        ? tree.complete.push(words[i])
-        : tree.old.push(words[i])
-      : tree.empty.push(words[i]);
-  for (s in tree) {
-    const t = {};
-    for (i = 0; i < tree[s].length; i++) {
-      const a = tree[s][i].src ? tree[s][i].src.category : tree[s][i].res.category;
-      t[a] || (t[a] = []), t[a].push(tree[s][i]);
+        res: r[id] && r[id].update && r[id].update > src[id].update ? r[id] : undefined,
+      });
     }
-    tree[s] = t;
+    delete r[id];
   }
+  for (id in r) {
+    words.push({ id, src: undefined, res: r[id] });
+  }
+
+  tree = { empty: [], complete: [], old: [] };
+  for (let i = 0; i < words.length; i += 1) {
+    if (!words[i].res) {
+      tree.empty.push(words[i]);
+    } else if (words[i].src) {
+      tree.complete.push(words[i]);
+    } else {
+      tree.old.push(words[i]);
+    }
+  }
+
+  for (s in tree) {
+    const cat = {};
+    for (let i = 0; i < tree[s].length; i += 1) {
+      const c = tree[s][i].src ? tree[s][i].src.category : tree[s][i].res.category;
+      if (!cat[c]) {
+        cat[c] = [];
+      }
+      cat[c].push(tree[s][i]);
+    }
+    tree[s] = cat;
+  }
+
   buildpage();
 };
-var buildpage = function () {
-  const e = {};
-  for (c in tree.empty)
-    for (
-      e[c] = $('<div>')
-        .attr('class', 'translatetable')
-        .append($('<div>').attr('class', 'tabletitle').text(c)),
-        i = 0;
-      i < tree.empty[c].length;
-      i++
-    )
-      e[c].append(buildword(tree.empty[c][i]));
+
+const buildpage = () => {
+  const table = {};
+  for (c in tree.empty) {
+    table[c] = $('<div>')
+      .attr('class', 'translatetable')
+      .append($('<div>').attr('class', 'tabletitle').text(c));
+    for (let i = 0; i < tree.empty[c].length; i += 1) {
+      table[c].append(buildword(tree.empty[c][i]));
+    }
+  }
   for (c in tree.complete) {
     const t = $('<div>');
-    for (i = 0; i < tree.complete[c].length; i++) t.append(buildword(tree.complete[c][i]));
-    e[c] ||
-      (e[c] = $('<div>')
+    for (i = 0; i < tree.complete[c].length; i += 1) {
+      t.append(buildword(tree.complete[c][i]));
+    }
+    if (!table[c]) {
+      table[c] = $('<div>')
         .attr('class', 'translatetable')
-        .append($('<div>').attr('class', 'tabletitle').text(c))),
-      e[c].append(completedwords(t));
+        .append($('<div>').attr('class', 'tabletitle').text(c));
+    }
+    table[c].append(completedwords(t));
   }
   $('#translateroot').remove();
-  const a = $('<div>').attr('id', 'translateroot');
-  const r = [];
-  for (c in e) r.push(c);
-  for (r.sort(), i = 0; i < r.length; i++) a.append(e[r[i]]);
-  $('body').append(a);
+  const root = $('<div>').attr('id', 'translateroot');
+  const cats = [];
+  for (c in table) {
+    cats.push(c);
+  }
+  cats.sort();
+  for (let i = 0; i < cats.length; i += 1) {
+    root.append(table[cats[i]]);
+  }
+  $('body').append(root);
 };
-var completedwords = function (e) {
-  const t = Math.random().toString().substr(2);
+
+const completedwords = (rows) => {
+  const label = Math.random().toString().substr(2);
   return $('<div>')
     .attr('class', 'rowgroup')
     .append(
       $('<div>')
         .attr('class', 'grouptitle')
-        .text(`Phrases with translations (${$('.wordrow', e).size()})`)
+        .text(`Phrases with translations (${$('.wordrow', rows).size()})`)
         .append(
           $('<a>')
             .attr('href', '#')
             .text('show')
-            .click(function () {
-              return (
-                $(this).text() == 'hide'
-                  ? ($(this).text('show'),
-                    $(`#${t}group`).animate({ height: 'hide', opacity: 0 }, 200))
-                  : ($(this).text('hide'),
-                    $(`#${t}group`).animate({ height: 'show', opacity: 1 }, 200)),
-                !1
-              );
+            .click(() => {
+              if ($(this).text() === 'hide') {
+                $(this).text('show');
+                $(`#${label}group`).animate({ height: 'hide', opacity: 0 }, 200);
+              } else {
+                $(this).text('hide');
+                $(`#${label}group`).animate({ height: 'show', opacity: 1 }, 200);
+              }
+              return false;
             }),
         ),
     )
-    .append(e.attr('id', `${t}group`).attr('class', 'grouprows').css({ display: 'none' }));
+    .append(rows.attr('id', `${label}group`).attr('class', 'grouprows').css({ display: 'none' }));
 };
-var buildword = function (e) {
-  return e.src
-    ? $('<div>')
-        .attr('class', 'wordrow')
-        .append(
-          $('<div>')
-            .attr('class', 'descrip')
-            .text(`${e.src.description} `)
-            .append($('<span>').text(`[ ${e.id} ]`)),
-        )
-        .append($('<div>').attr('class', 'message').html(e.src.message.replace(/\n/g, '<br>\n')))
-        .append(
-          $('<textarea>')
-            .attr('id', `edit-${e.id}`)
-            .text(e.res ? e.res.message : res[e.id] ? res[e.id].message : ''),
-        )
-    : `<div>${e.id}`;
+
+const buildword = (word) => {
+  if (!word.src) {
+    return `<div>${word.id}`;
+  }
+  return $('<div>')
+    .attr('class', 'wordrow')
+    .append(
+      $('<div>')
+        .attr('class', 'descrip')
+        .text(`${word.src.description} `)
+        .append($('<span>').text(`[ ${word.id} ]`)),
+    )
+    .append($('<div>').attr('class', 'message').html(word.src.message.replace(/\n/g, '<br>\n')))
+    .append(
+      $('<textarea>')
+        .attr('id', `edit-${word.id}`)
+        .text(word.res ? word.res.message : res[word.id] ? res[word.id].message : ''),
+    );
 };
