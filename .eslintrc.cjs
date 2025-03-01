@@ -31,6 +31,8 @@ module.exports = {
         'plugin:prettier/recommended',
       ],
       rules: {
+        'no-use-before-define': 'off',
+        eqeqeq: ['error', 'always'],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         'check-file/filename-naming-convention': [
           'error',
