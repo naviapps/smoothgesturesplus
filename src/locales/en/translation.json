@@ -1,0 +1,19 @@
+{
+  "context_not_image": "not on image",
+  "context_not_link": "not on link",
+  "context_not_links_images": "not on links or images",
+  "context_not_selection": "not with selection",
+  "context_on_image": "on image",
+  "context_on_link": "on link",
+  "context_with_selection": "with selection",
+  "gesture_rLR": "Rocker Right",
+  "gesture_rRL": "Rocker Left",
+  "gesture_rocker_descrip": "Hold {{button1}} button, Click {{button2}}",
+  "gesture_wD": "Scroll Down",
+  "gesture_wD_descrip": "Hold action button, Scroll down",
+  "gesture_wU": "Scroll Up",
+  "gesture_wU_descrip": "Hold action button, Scroll up",
+  "options_mousebutton_0": "left",
+  "options_mousebutton_1": "middle",
+  "options_mousebutton_2": "right"
+}
