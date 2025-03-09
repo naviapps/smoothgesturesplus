@@ -1,0 +1,193 @@
+body, html {
+    padding: 0;
+    background-color: #e0e8ff;
+    margin: 0
+}
+
+body, html, p, select, ul {
+    margin: 0
+}
+
+.button, .close, select {
+    text-transform: uppercase
+}
+
+.sgtitle, body {
+    font-weight: 400
+}
+
+.upgradebutton, em {
+    font-style: normal
+}
+
+@font-face {
+    font-family: VarelaRound;
+    font-style: normal;
+    font-weight: 400;
+    src: url(VarelaRound-Regular.ttf)
+}
+
+*, ::after, ::before {
+    box-sizing: border-box
+}
+
+body {
+    font-size: 18px;
+    font-family: sans-serif;
+    color: #000
+}
+
+h1, h2, h3, h4 {
+    font-family: inherit
+}
+
+.sgplus, .sgtitle {
+    font-family: VarelaRound, sans-serif
+}
+
+a {
+    color: #1c70a8;
+    text-decoration: none
+}
+
+a:hover {
+    color: #299ffa;
+    text-decoration: underline
+}
+
+select {
+    font-size: 1em
+}
+
+input, textarea {
+    font-size: .8em;
+    padding: .3em;
+    margin: 0;
+    border: 1px solid #ddd
+}
+
+em {
+    background-color: rgba(255, 255, 0, .2)
+}
+
+p, ul {
+    max-width: 30em
+}
+
+p + p, p + ul, ul + p, ul + ul {
+    margin-top: .7em
+}
+
+li + li, p + p {
+    margin-top: .5em
+}
+
+li {
+    margin: 0
+}
+
+.clear {
+    clear: both
+}
+
+.group::after, .group::before {
+    content: "";
+    display: table;
+    clear: both
+}
+
+.section {
+    margin: 0 auto 3em
+}
+
+.subsection {
+    margin: 0 auto 1em
+}
+
+.title {
+    font-size: 2em;
+    margin-bottom: .5em
+}
+
+.sub {
+    font-size: .8em
+}
+
+.button, .close {
+    float: right;
+    color: #000;
+    margin: 0 0 0 .5em;
+    padding: 0 1em;
+    font-size: 15px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, .7)
+}
+
+.button:hover, .close:hover {
+    background-color: #fff
+}
+
+.button.gray, .close.gray {
+    background-color: #dcdcdc
+}
+
+.button.gray:hover, .close.gray:hover {
+    background-color: #e6e6e6
+}
+
+.sgtitle {
+    text-transform: lowercase;
+    font-size: 1.2em;
+    white-space: nowrap
+}
+
+.sgplus {
+    text-transform: uppercase;
+    font-size: .8em;
+    color: #108dec
+}
+
+.sglogo .sgtitle {
+    display: inline-block;
+    font-size: 30px;
+    line-height: .7em;
+    white-space: normal
+}
+
+.upgradebutton {
+    display: table;
+    margin: 2em auto;
+    background-image: linear-gradient(#71ac28, #659324);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, .2), inset 0 -1px 0 0 rgba(0, 0, 0, .3);
+    border-radius: 6px;
+    color: #fff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .25);
+    padding: .5em 2em;
+    border: 1px solid #666;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 20px
+}
+
+.upgradebutton:hover {
+    background-image: linear-gradient(#81bc2e, #659324)
+}
+
+.upgradebutton .sgplus {
+    position: relative;
+    display: inline;
+    color: #fff !important
+}
+
+.upgradebutton .arrow {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-image: url("data:image/svg+xml,<svg viewBox='0 0 32 32' height='100' width='100' xmlns='http://www.w3.org/2000/svg'><path fill='#fff' d='M10.129,22.186 16.316,15.999 10.129,9.812 13.665,6.276 23.389,15.999 13.665,25.725z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: 120% 120%
+}

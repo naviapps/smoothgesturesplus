@@ -1,0 +1,64 @@
+{
+  "background": {
+    "scripts": [
+      "js/jquery.min.js",
+      "js/sjcl.js",
+      "js/bg.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "all_frames": true,
+      "js": [
+        "js/gestures.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "\u003Call_urls>"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "all_frames": true,
+      "js": [
+        "js/gestures.js",
+        "js/jquery.min.js"
+      ],
+      "match_about_blank": true,
+      "matches": [
+        "\u003Call_urls>"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "default_locale": "en",
+  "description": "__MSG_description__",
+  "differential_fingerprint": "1.b4763ef5e1658773c65ecdc8fdd8c716ef18e3a8a8d07f9cb2f9f75ce84bdb65",
+  "icons": {
+    "128": "img/icon128.png",
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqWc8n+BBq1zC8wybwtzhJCpapnE7T+wOLdCy0vm2z/2fA0LRjek8KGOjM+kRMGhPHXg1jxQ1umFWyiyLxNLtGCIQodc66c2HWnDPgWp8XNhJ/1UmJF61GggiwAP1trhabhsDtroM45bJQ26hDnRwQu2kx5M6b16xnk1kAkjG2M5gb7haNyprdCusXtoX0+MZkT74tc8QjL4CZrICNGacAHTG/hMf5AO9VmzsvcMEIBWCqjDZ+984EuNwBJtSy4axJLaTSMbdeG3sgV1arhCpEJEnui3FhspX3qOc/ZFPGF5yI2dkrmowfSoKLv7mqG1TEP94QEIWlL51nJ817+7ogwIDAQAB",
+  "manifest_version": 2,
+  "minimum_chrome_version": "20",
+  "name": "Smooth Gestures Plus",
+  "optional_permissions": [
+    "nativeMessaging",
+    "bookmarks"
+  ],
+  "options_page": "options.html",
+  "page_action": {
+    "default_icon": "img/pageaction.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "tabs",
+    "storage",
+    "\u003Call_urls>"
+  ],
+  "short_name": "Smooth Gestures Plus",
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  "version": "2.9"
+}
