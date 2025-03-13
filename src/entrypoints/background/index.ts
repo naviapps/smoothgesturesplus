@@ -1,6 +1,6 @@
 import browser from 'webextension-polyfill';
 
-import { actions } from '@/entrypoints/background/actions';
+import createActions from '@/entrypoints/background/actions';
 import { settingsStore } from '@/stores/settings-store';
 
 export default defineBackground(() => {
@@ -14,8 +14,9 @@ export default defineBackground(() => {
     const { gestures } = settingsStore.getState();
 
     const key = gestures[message.gesture];
+    const actions = createActions(message, sender);
     if (key in actions) {
-      await actions['open-screenshot-full'].call(null, message, sender);
+      await actions[key]();
       // await actions[key](message, sender);
     } else {
       await actions['']();

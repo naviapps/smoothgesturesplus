@@ -550,7 +550,7 @@ const initConnectTab = (port) => {
       chainGesture = null;
     }
   }
-  let i = tab.url.substr(tab.url.indexOf('//') + 2);
+  let i = tab.url.slice(tab.url.indexOf('//') + 2);
   i = i.substr(0, i.indexOf('/')).toLowerCase();
   for (let a = 0; settings.blacklist && a < settings.blacklist.length; a += 1) {
     if (new RegExp(`^(.+\\.)?${settings.blacklist[a].replace('.', '\\.')}$`).test(i)) {
@@ -710,20 +710,14 @@ const updateValidGestures = () => {
       g = g.slice(1);
     }
     if (g[0] === 'k') {
-      if (!validGestures.k) {
-        validGestures.k = {};
-      }
+      validGestures.k ??= {};
       const mod = g.slice(1, 5);
-      if (validGestures.k[mod]) {
-        validGestures.k[mod] = [];
-      }
+      validGestures.k[mod] ??= [];
       validGestures.k[mod].push(g.slice(6));
     } else {
       let cur = validGestures;
       for (let i = 0; i < g.length; i += 1) {
-        if (!cur[g[i]]) {
-          cur[g[i]] = {};
-        }
+        cur[g[i]] ??= {};
         cur = cur[g[i]];
       }
       cur[''] = true;

@@ -72,7 +72,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
      * Extension Communication
      */
     // TODO
-    const receiveMessage = (mess: unknown): void => {
+    const receiveMessage = async (mess: unknown, sender, sendResponse): void => {
       const message = mess as BackgroundMessage;
       /*
       if (message.action) {

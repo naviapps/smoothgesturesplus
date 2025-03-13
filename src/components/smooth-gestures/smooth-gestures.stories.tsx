@@ -6,7 +6,7 @@ const meta: Meta<typeof SmoothGestures> = {
   title: 'Components/SmoothGestures',
   component: SmoothGestures,
   args: {
-    callback: () => {},
+    // callback: () => {},
   },
 };
 
