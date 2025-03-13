@@ -305,15 +305,6 @@ const o = () => {
       $('#note_print .button').click(() => {
         window.print();
       });
-      $('.page[page=about] .content').append(
-        $('<div>')
-          .attr('class', 'footer')
-          .html(
-            `You have gestured approximately ${(
-              254e-6 * (settings.log.line ? settings.log.line.distance : 0)
-            ).toFixed(2)} meters.`,
-          ),
-      );
     })();
     (() => {
       for (

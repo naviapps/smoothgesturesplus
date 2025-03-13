@@ -19,12 +19,12 @@ export type ValidGestures = ValidLineGestures & {
 
 export type Point = { x: number; y: number };
 
-export type Link = {
+export type LinkMessage = {
   src: string;
   gestureid?: string;
 };
 
-export type Image = {
+export type ImageMessage = {
   src: string;
   gestureid?: string;
 };
@@ -33,8 +33,8 @@ export type ContentMessage = {
   gesture?: string;
   startPoint?: Point;
   targets?: { gestureid: string }[];
-  links?: Link[];
-  images?: Image[];
+  links?: LinkMessage[];
+  images?: ImageMessage[];
   selection?: string;
   line?: {
     distance: number;
@@ -51,7 +51,7 @@ export type ContentMessage = {
 };
 
 export type BackgroundMessage = {
-  chain: {
+  chain?: {
     startPoint?: Point;
     rocker?: boolean;
     wheel?: boolean;

@@ -1,876 +1,585 @@
 {
    "action_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Aggiungi la pagina ai preferiti",
-      "update": "20110423"
+      "message": "Aggiungi la pagina ai preferiti"
    },
    "action_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Duplica scheda",
-      "update": "20110423"
+      "message": "Duplica scheda"
    },
    "action_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Duplica la scheda (hack)",
-      "update": "20110218"
+      "message": "Duplica la scheda (hack)"
    },
    "action_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Chiudi schede a sinistra",
-      "update": "20110423"
+      "message": "Chiudi schede a sinistra"
    },
    "action_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Chiudi le altre schede",
-      "update": "20110423"
+      "message": "Chiudi le altre schede"
    },
    "action_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Chiudi schede a destra",
-      "update": "20110423"
+      "message": "Chiudi schede a destra"
    },
    "action_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for close_tab",
-      "message": "Chiudi scheda",
-      "update": "20110423"
+      "message": "Chiudi scheda"
    },
    "action_close_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for close_window",
-      "message": "Chiudi la finestra",
-      "update": "20110423"
+      "message": "Chiudi la finestra"
    },
    "action_copy": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Copia il testo negli appunti",
-      "update": "20110423"
+      "message": "Copia il testo negli appunti"
    },
    "action_goto_bottom": {
-      "category": "Options Page: Actions",
       "description": "Action title for goto_bottom",
-      "message": "Vai al fondo pagina",
-      "update": "20110315"
+      "message": "Vai al fondo pagina"
    },
    "action_goto_top": {
-      "category": "Options Page: Actions",
       "description": "Action title for goto_top",
-      "message": "Vai all'inizio pagina",
-      "update": "20110315"
+      "message": "Vai all'inizio pagina"
    },
    "action_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Nascondi Immagini",
-      "update": "20110315"
+      "message": "Nascondi Immagini"
    },
    "action_maximize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Massimizza la Finestra",
-      "update": "20110315"
+      "message": "Massimizza la Finestra"
    },
    "action_merge_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title for merge_tabs",
-      "message": "Unisci le Schede",
-      "update": "20110423"
+      "message": "Unisci le Schede"
    },
    "action_minimize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Minimizza la Finestra",
-      "update": "20110423"
+      "message": "Minimizza la Finestra"
    },
    "action_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "Vai alla pagina Nuova scheda",
-      "update": "20110423"
+      "message": "Vai alla pagina Nuova scheda"
    },
    "action_new_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "Nuova scheda",
-      "update": "20110423"
+      "message": "Nuova scheda"
    },
    "action_new_tab_back": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_back",
-      "message": "Apri nuova scheda in secondo piano",
-      "update": "20110228"
+      "message": "Apri nuova scheda in secondo piano"
    },
    "action_new_tab_link": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_link",
-      "message": "Apri link in nuova scheda",
-      "update": "20110315"
+      "message": "Apri link in nuova scheda"
    },
    "action_new_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_window",
-      "message": "Nuova finestra",
-      "update": "20110423"
+      "message": "Nuova finestra"
    },
    "action_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Nuova finestra (Apri Link)",
-      "update": "20110423"
+      "message": "Nuova finestra (Apri Link)"
    },
    "action_next_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for next_tab",
-      "message": "Prossima scheda",
-      "update": "20110423"
+      "message": "Prossima scheda"
    },
    "action_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Finestra successiva",
-      "update": "20110318"
+      "message": "Finestra successiva"
    },
    "action_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Apri gestione Preferiti",
-      "update": "20110315"
+      "message": "Apri gestione Preferiti"
    },
    "action_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Apri Download",
-      "update": "20110315"
+      "message": "Apri Download"
    },
    "action_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Apri Estensioni",
-      "update": "20110315"
+      "message": "Apri Estensioni"
    },
    "action_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Apri Cronologia",
-      "update": "20110315"
+      "message": "Apri Cronologia"
    },
    "action_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Apri immagine",
-      "update": "20110423"
+      "message": "Apri immagine"
    },
    "action_options": {
-      "category": "Options Page: Actions",
       "description": "Action title for options",
-      "message": "Apri le Opzioni",
-      "update": "20110315"
+      "message": "Apri le Opzioni"
    },
    "action_page_back": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_back",
-      "message": "Indietro",
-      "update": "20110228"
+      "message": "Indietro"
    },
    "action_page_back_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_back_close",
-      "message": "Indietro o Chiudi",
-      "update": "20110228"
+      "message": "Indietro o Chiudi"
    },
    "action_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_down",
-      "message": "Pagina giù",
-      "update": "20110423"
+      "message": "Pagina giù"
    },
    "action_page_forward": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_forward",
-      "message": "Avanti",
-      "update": "20110228"
+      "message": "Avanti"
    },
    "action_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_next",
-      "message": "Prossima Pagina",
-      "update": "20110315"
+      "message": "Prossima Pagina"
    },
    "action_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_prev",
-      "message": "Pagina Precedente",
-      "update": "20110315"
+      "message": "Pagina Precedente"
    },
    "action_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_up",
-      "message": "Pagina Su",
-      "update": "20110315"
+      "message": "Pagina Su"
    },
    "action_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Directory superiore",
-      "update": "20110423"
+      "message": "Directory superiore"
    },
    "action_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Blocca scheda",
-      "update": "20110228"
+      "message": "Blocca scheda"
    },
    "action_prev_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for prev_tab",
-      "message": "Scheda Precedente",
-      "update": "20110423"
+      "message": "Scheda Precedente"
    },
    "action_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Finestra precedente",
-      "update": "20110318"
+      "message": "Finestra precedente"
    },
    "action_print": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Stampa pagina",
-      "update": "20110423"
+      "message": "Stampa pagina"
    },
    "action_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ricarica tutte le schede",
-      "update": "20110423"
+      "message": "Ricarica tutte le schede"
    },
    "action_reload_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab",
-      "message": "Ricarica scheda",
-      "update": "20110423"
+      "message": "Ricarica scheda"
    },
    "action_reload_tab_full": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab_full",
-      "message": "Ricarica scheda (non dalla cache)",
-      "update": "20110423"
+      "message": "Ricarica scheda (non dalla cache)"
    },
    "action_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Cerca con Google",
-      "update": "20110315"
+      "message": "Cerca con Google"
    },
    "action_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Elenca cookies",
-      "update": "20110423"
+      "message": "Elenca cookies"
    },
    "action_split_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title for split_tabs",
-      "message": "Dividi schede",
-      "update": "20110423"
+      "message": "Dividi schede"
    },
    "action_status": {
-      "category": "Options Page: Actions",
       "description": "Action title for status",
-      "message": "Apri pagina di status",
-      "update": "20110423"
+      "message": "Apri pagina di status"
    },
    "action_stop": {
-      "category": "Options Page: Actions",
       "description": "Action title for stop",
-      "message": "Ferma caricamento",
-      "update": "20110423"
+      "message": "Ferma caricamento"
    },
    "action_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Sposta la scheda a sinistra",
-      "update": "20110228"
+      "message": "Sposta la scheda a sinistra"
    },
    "action_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Sposta la scheda a destra",
-      "update": "20110228"
+      "message": "Sposta la scheda a destra"
    },
    "action_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Alterna preferito",
-      "update": "20110423"
+      "message": "Alterna preferito"
    },
    "action_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Blocca/Sblocca Scheda",
-      "update": "20110228"
+      "message": "Blocca/Sblocca Scheda"
    },
    "action_translate": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Traduci selezione",
-      "update": "20110423"
+      "message": "Traduci selezione"
    },
    "action_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Rimuovi la pagina dai preferiti",
-      "update": "20110423"
+      "message": "Rimuovi la pagina dai preferiti"
    },
    "action_undo_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close",
-      "message": "Riapri scheda chiusa",
-      "update": "20110423"
+      "message": "Riapri scheda chiusa"
    },
    "action_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close_hack",
-      "message": "Annulla la chiusura della scheda",
-      "update": "20110318"
+      "message": "Annulla la chiusura della scheda"
    },
    "action_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Sblocca scheda",
-      "update": "20110228"
+      "message": "Sblocca scheda"
    },
    "action_view_source": {
-      "category": "Options Page: Actions",
       "description": "Action title for view_source",
-      "message": "Vedi sorgente della pagina",
-      "update": "20110423"
+      "message": "Vedi sorgente della pagina"
    },
    "action_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ingrandisci l'immagine",
-      "update": "20110228"
+      "message": "Ingrandisci l'immagine"
    },
    "action_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Rimpicciolisci l'immagine",
-      "update": "20110228"
+      "message": "Rimpicciolisci l'immagine"
    },
    "action_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ripristina dimensione immagine",
-      "update": "20110228"
+      "message": "Ripristina dimensione immagine"
    },
    "action_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ingrandisci la pagina",
-      "update": "20110228"
+      "message": "Ingrandisci la pagina"
    },
    "action_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Rimpiccolisci la pagina",
-      "update": "20110228"
+      "message": "Rimpiccolisci la pagina"
    },
    "action_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ripristina zoom pagina",
-      "update": "20110228"
+      "message": "Ripristina zoom pagina"
    },
    "cat_custom": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for all custom actions",
-      "message": "Azioni Personali",
-      "update": "20110315"
+      "message": "Azioni Personali"
    },
    "cat_other": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for actions that don't have a category",
-      "message": "Altre Azioni",
-      "update": "20110315"
+      "message": "Altre Azioni"
    },
    "cat_page_navigation": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category encompassing basic page navigation actions",
-      "message": "Navigazione della pagina",
-      "update": "20110315"
+      "message": "Navigazione della pagina"
    },
    "cat_settings": {
-      "category": "Options Page: Action Categories",
       "description": "Title of the settings group",
-      "message": "Altre Configurazioni",
-      "update": "20110315"
+      "message": "Altre Configurazioni"
    },
    "cat_tab_management": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category encompassing tab manipulation actions",
-      "message": "Gestione Tab",
-      "update": "20110315"
+      "message": "Gestione Tab"
    },
    "cat_utilities": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for general utility actions",
-      "message": "Utilità",
-      "update": "20110315"
+      "message": "Utilità"
    },
    "context_not_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on an image",
-      "message": "non sull'immagine",
-      "update": "20110328"
+      "message": "non sull'immagine"
    },
    "context_not_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on a link",
-      "message": "non sul link",
-      "update": "20110328"
+      "message": "non sul link"
    },
    "context_not_links_images": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
-      "message": "non sull'immagine o sul link",
-      "update": "20110328"
+      "message": "non sull'immagine o sul link"
    },
    "context_not_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
-      "message": "senza selezione",
-      "update": "20110328"
+      "message": "senza selezione"
    },
    "context_on_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
-      "message": "sull'immagine",
-      "update": "20110328"
+      "message": "sull'immagine"
    },
    "context_on_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
-      "message": "sul link",
-      "update": "20110328"
+      "message": "sul link"
    },
    "context_with_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
-      "message": "selezionato",
-      "update": "20110328"
+      "message": "selezionato"
    },
    "descrip_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Aggiungi la pagina corrente ai preferiti.",
-      "update": "20110423"
+      "message": "Aggiungi la pagina corrente ai preferiti."
    },
    "descrip_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Apri un duplicato della scheda della pagina corrente. La scheda duplicata non sarà nella cronologia della scheda originale.",
-      "update": "20110323"
+      "message": "Apri un duplicato della scheda della pagina corrente. La scheda duplicata non sarà nella cronologia della scheda originale."
    },
    "descrip_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Apri una scheda duplicata della pagina corrente. Carica la cronologia con una soluzione imperfetta",
-      "update": "20110423"
+      "message": "Apri una scheda duplicata della pagina corrente. Carica la cronologia con una soluzione imperfetta"
    },
    "descrip_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Chiudi tutte le schede a sinistra della scheda corrente",
-      "update": "20110323"
+      "message": "Chiudi tutte le schede a sinistra della scheda corrente"
    },
    "descrip_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Chiudi tutte le schede nella finestra corrente eccetto la scheda selezionata",
-      "update": "20110323"
+      "message": "Chiudi tutte le schede nella finestra corrente eccetto la scheda selezionata"
    },
    "descrip_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Chiudi tutte le schede a destra della scheda corrente",
-      "update": "20110323"
+      "message": "Chiudi tutte le schede a destra della scheda corrente"
    },
    "descrip_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_tab",
-      "message": "Chiudi la scheda selezionata ",
-      "update": "20110423"
+      "message": "Chiudi la scheda selezionata "
    },
    "descrip_close_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_window",
-      "message": "Chiudi tutte le schede della finestra selezionata",
-      "update": "20110423"
+      "message": "Chiudi tutte le schede della finestra selezionata"
    },
    "descrip_copy": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Copia il testo selezionato negli appunti",
-      "update": "20110323"
+      "message": "Copia il testo selezionato negli appunti"
    },
    "descrip_goto_bottom": {
-      "category": "Options Page: Actions",
       "description": "Action description for goto_bottom",
-      "message": "Scorri la pagina verso il basso",
-      "update": "20110323"
+      "message": "Scorri la pagina verso il basso"
    },
    "descrip_goto_top": {
-      "category": "Options Page: Actions",
       "description": "Action description for goto_top",
-      "message": "Scorri la pagina verso l'alto",
-      "update": "20110323"
+      "message": "Scorri la pagina verso l'alto"
    },
    "descrip_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Rimuovi dalla pagina l'immagine sotto il cursore del mouse",
-      "update": "20110323"
+      "message": "Rimuovi dalla pagina l'immagine sotto il cursore del mouse"
    },
    "descrip_merge_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description for merge_tabs",
-      "message": "Unisci tutte le schede della finestra corrente con quelli dell'ultima finestra attiva",
-      "update": "20110323"
+      "message": "Unisci tutte le schede della finestra corrente con quelli dell'ultima finestra attiva"
    },
    "descrip_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab",
-      "message": "Passare alla pagina della Nuova scheda (l'URL può essere impostato sotto)",
-      "update": "20110323"
+      "message": "Passare alla pagina della Nuova scheda (l'URL può essere impostato sotto)"
    },
    "descrip_new_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab",
-      "message": "Apri una nuova scheda nella finestra corrente (l'URL può essere impostato sotto)",
-      "update": "20110323"
+      "message": "Apri una nuova scheda nella finestra corrente (l'URL può essere impostato sotto)"
    },
    "descrip_new_tab_back": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab_back",
-      "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda, ma non visualizzare la nuova scheda",
-      "update": "20110323"
+      "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda, ma non visualizzare la nuova scheda"
    },
    "descrip_new_tab_link": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab_link",
-      "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda",
-      "update": "20110323"
+      "message": "Avvia un gesto su un link per aprire quel link in una nuova scheda"
    },
    "descrip_new_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_window",
-      "message": "Aprire una nuova finestra con la scheda di default",
-      "update": "20110323"
+      "message": "Aprire una nuova finestra con la scheda di default"
    },
    "descrip_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Avviare un gesto su un link per aprire quel link in una nuova finestra",
-      "update": "20110323"
+      "message": "Avviare un gesto su un link per aprire quel link in una nuova finestra"
    },
    "descrip_next_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for next_tab",
-      "message": "Selezionare la scheda a destra della scheda corrente",
-      "update": "20110323"
+      "message": "Selezionare la scheda a destra della scheda corrente"
    },
    "descrip_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Seleziona la finestra attivata da tempo",
-      "update": "20110323"
+      "message": "Seleziona la finestra attivata da tempo"
    },
    "descrip_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Apri il gestore dei segnalibri in una nuova scheda",
-      "update": "20110323"
+      "message": "Apri il gestore dei segnalibri in una nuova scheda"
    },
    "descrip_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Apri la pagina dei download in una nuova scheda",
-      "update": "20110323"
+      "message": "Apri la pagina dei download in una nuova scheda"
    },
    "descrip_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Apri la pagina delle estensioni in una nuova scheda",
-      "update": "20110323"
+      "message": "Apri la pagina delle estensioni in una nuova scheda"
    },
    "descrip_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Aprire la Cronologia in una nuova scheda",
-      "update": "20110323"
+      "message": "Aprire la Cronologia in una nuova scheda"
    },
    "descrip_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Apri l'immagine sotto il cursore del mouse in una nuova scheda",
-      "update": "20110323"
+      "message": "Apri l'immagine sotto il cursore del mouse in una nuova scheda"
    },
    "descrip_options": {
-      "category": "Options Page: Actions",
       "description": "Action description for options",
-      "message": "Apri la pagina delle Opzioni",
-      "update": "20110323"
+      "message": "Apri la pagina delle Opzioni"
    },
    "descrip_page_back": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_back",
-      "message": "Vai indietro di una pagina della Cronologia per la scheda corrente",
-      "update": "20110323"
+      "message": "Vai indietro di una pagina della Cronologia per la scheda corrente"
    },
    "descrip_page_back_close": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_back_close",
-      "message": "Vai indietro di una pagina della Cronologia per la scheda corrente o se chiudi la scheda se non resta nessuna Cronologia",
-      "update": "20110323"
+      "message": "Vai indietro di una pagina della Cronologia per la scheda corrente o se chiudi la scheda se non resta nessuna Cronologia"
    },
    "descrip_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_down",
-      "message": "Scorri verso il basso l'80% della pagina",
-      "update": "20110323"
+      "message": "Scorri verso il basso l'80% della pagina"
    },
    "descrip_page_forward": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_forward",
-      "message": "Vai avanti di una pagina nella scheda corrente",
-      "update": "20110323"
+      "message": "Vai avanti di una pagina nella scheda corrente"
    },
    "descrip_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_next",
-      "message": "Vai alla pagina successiva seguendo il link 'prossimo'",
-      "update": "20110323"
+      "message": "Vai alla pagina successiva seguendo il link 'prossimo'"
    },
    "descrip_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_prev",
-      "message": "Vai alla pagina precedente seguendo il link 'precedente'",
-      "update": "20110323"
+      "message": "Vai alla pagina precedente seguendo il link 'precedente'"
    },
    "descrip_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_up",
-      "message": "Scorri verso l'alto l'80% della pagina",
-      "update": "20110323"
+      "message": "Scorri verso l'alto l'80% della pagina"
    },
    "descrip_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Passa alla directory principale della pagina corrente. Se sei già nella directory principale, provare a rimuovere sottodomini",
-      "update": "20110323"
+      "message": "Passa alla directory principale della pagina corrente. Se sei già nella directory principale, provare a rimuovere sottodomini"
    },
    "descrip_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Blocca la scheda corrente",
-      "update": "20110323"
+      "message": "Blocca la scheda corrente"
    },
    "descrip_prev_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for prev_tab",
-      "message": "Seleziona la scheda a sinistra della scheda corrente",
-      "update": "20110323"
+      "message": "Seleziona la scheda a sinistra della scheda corrente"
    },
    "descrip_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Seleziona la finestra attiva subito prima della finestra corrente",
-      "update": "20110323"
+      "message": "Seleziona la finestra attiva subito prima della finestra corrente"
    },
    "descrip_print": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Stampa la pagina corrente",
-      "update": "20110323"
+      "message": "Stampa la pagina corrente"
    },
    "descrip_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Aggiorna tutte le schede nella finestra corrente",
-      "update": "20110323"
+      "message": "Aggiorna tutte le schede nella finestra corrente"
    },
    "descrip_reload_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for reload_tab",
-      "message": "Aggiorna il contenuto della scheda corrente",
-      "update": "20110323"
+      "message": "Aggiorna il contenuto della scheda corrente"
    },
    "descrip_reload_tab_full": {
-      "category": "Options Page: Actions",
       "description": "Action description for reload_tab_full",
-      "message": "Aggiorna completamente il contenuto della scheda corrente (salta la cache)",
-      "update": "20110323"
+      "message": "Aggiorna completamente il contenuto della scheda corrente (salta la cache)"
    },
    "descrip_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Cerca il testo selezionato su Google ",
-      "update": "20110323"
+      "message": "Cerca il testo selezionato su Google "
    },
    "descrip_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Mostra la lista di tutti i cookies per la pagina corrente",
-      "update": "20110323"
+      "message": "Mostra la lista di tutti i cookies per la pagina corrente"
    },
    "descrip_split_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description for split_tabs",
-      "message": "Separa tutte le schede a destra della scheda corrente (inclusa) in una nuova finestra",
-      "update": "20110323"
+      "message": "Separa tutte le schede a destra della scheda corrente (inclusa) in una nuova finestra"
    },
    "descrip_status": {
-      "category": "Options Page: Actions",
       "description": "Action description for status",
-      "message": "Apri la pagina di stato delle estensioni di Smooth Gestures",
-      "update": "20110323"
+      "message": "Apri la pagina di stato delle estensioni di Smooth Gestures"
    },
    "descrip_stop": {
-      "category": "Options Page: Actions",
       "description": "Action description for stop",
-      "message": "Interrompi il caricamento della scheda corrente. (potrebbe non funzionare su alcune pagine, come le pagine di immagini)",
-      "update": "20110323"
+      "message": "Interrompi il caricamento della scheda corrente. (potrebbe non funzionare su alcune pagine, come le pagine di immagini)"
    },
    "descrip_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Sposta la scheda corrente a sinistra",
-      "update": "20110323"
+      "message": "Sposta la scheda corrente a sinistra"
    },
    "descrip_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Sposta la scheda corrente a destra",
-      "update": "20110323"
+      "message": "Sposta la scheda corrente a destra"
    },
    "descrip_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Rimuovi un segnalibro se già impostato. Altrimenti aggiungi un segnalibro alla pagina corrente.",
-      "update": "20110323"
+      "message": "Rimuovi un segnalibro se già impostato. Altrimenti aggiungi un segnalibro alla pagina corrente."
    },
    "descrip_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Alterna il blocco della scheda",
-      "update": "20110323"
+      "message": "Alterna il blocco della scheda"
    },
    "descrip_translate": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Traduci il testo selezionato nella lingua di default di Chrome",
-      "update": "20110323"
+      "message": "Traduci il testo selezionato nella lingua di default di Chrome"
    },
    "descrip_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Rimuovi, se esiste, un segnalibro alla pagina corrente.",
-      "update": "20110323"
+      "message": "Rimuovi, se esiste, un segnalibro alla pagina corrente."
    },
    "descrip_undo_close": {
-      "category": "Options Page: Actions",
       "description": "Action description for undo_close",
-      "message": "Apri l'ultima scheda chiusa. Questo carica solo l'URL della pagina - CTRL-SHIFT-T è ancora superiore, perché mantiene la cronologia",
-      "update": "20110323"
+      "message": "Apri l'ultima scheda chiusa. Questo carica solo l'URL della pagina - CTRL-SHIFT-T è ancora superiore, perché mantiene la cronologia"
    },
    "descrip_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for undo_close",
-      "message": "Apri l'ultima scheda chiusa. Carica la cronologia attraverso l'uso di una soluzione imperfetta",
-      "update": "20110323"
+      "message": "Apri l'ultima scheda chiusa. Carica la cronologia attraverso l'uso di una soluzione imperfetta"
    },
    "descrip_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Sblocca la scheda corrente",
-      "update": "20110323"
+      "message": "Sblocca la scheda corrente"
    },
    "descrip_view_source": {
-      "category": "Options Page: Actions",
       "description": "Action description for view_source",
-      "message": "Visualizza il codice sorgente della pagina corrente",
-      "update": "20110323"
+      "message": "Visualizza il codice sorgente della pagina corrente"
    },
    "descrip_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Ingrandisci l'immagine sotto il cursore del mouse",
-      "update": "20110323"
+      "message": "Ingrandisci l'immagine sotto il cursore del mouse"
    },
    "descrip_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Rimpicciolisci l'immagine sotto il cursore del mouse",
-      "update": "20110323"
+      "message": "Rimpicciolisci l'immagine sotto il cursore del mouse"
    },
    "descrip_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Imposta l'immagine alla sua dimensione originale",
-      "update": "20110323"
+      "message": "Imposta l'immagine alla sua dimensione originale"
    },
    "descrip_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Ingrandisci il contenuto della pagina",
-      "update": "20110323"
+      "message": "Ingrandisci il contenuto della pagina"
    },
    "descrip_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Rimpicciolisci il contenuto della pagina",
-      "update": "20110323"
+      "message": "Rimpicciolisci il contenuto della pagina"
    },
    "descrip_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Annulla le precedenti azioni di ingrandimento sulla pagina",
-      "update": "20110323"
+      "message": "Annulla le precedenti azioni di ingrandimento sulla pagina"
    },
    "description": {
-      "category": "About",
       "description": "short extension description",
-      "message": "Mouse Gestures! Naviga nelle pagine web in maniera semplice e veloce usando il mouse o la tastiera.",
-      "update": "20110318"
+      "message": "Mouse Gestures! Naviga nelle pagine web in maniera semplice e veloce usando il mouse o la tastiera."
    },
    "doubleclick_alert": {
-      "category": "Options Page",
       "description": "Pop up an alert box the first time a user right-clicks to let them know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "Fai doppio click con il tasto destro del mouse per ottenere il menu contestuale\n\nVale solo per le versioni Linux e Mac di Chrome. (necessario per il corretto funzionamento delle gestures)",
-      "update": "20100830"
+      "message": "Fai doppio click con il tasto destro del mouse per ottenere il menu contestuale\n\nVale solo per le versioni Linux e Mac di Chrome. (necessario per il corretto funzionamento delle gestures)"
    },
    "gesture_rLR": {
-      "category": "Options Page: Gestures",
       "description": "rocker right gesture title",
-      "message": "Rocker destra",
-      "update": "20101007"
+      "message": "Rocker destra"
    },
    "gesture_rRL": {
-      "category": "Options Page: Gestures",
       "description": "rocker left gesture title",
-      "message": "Rocker sinistra",
-      "update": "20101007"
+      "message": "Rocker sinistra"
    },
    "gesture_rocker_descrip": {
-      "category": "Options Page: Gestures",
       "description": "rocker right gesture description",
       "message": "Tieni premuto il tasto $BUTTON1$, clicca $BUTTON2$",
       "placeholders": {
@@ -882,53 +591,37 @@
             "content": "$2",
             "example": "right"
          }
-      },
-      "update": "20101007"
+      }
    },
    "gesture_wD": {
-      "category": "Options Page: Gestures",
       "description": "wheel down gesture title",
-      "message": "Scorri in basso",
-      "update": "20101007"
+      "message": "Scorri in basso"
    },
    "gesture_wD_descrip": {
-      "category": "Options Page: Gestures",
       "description": "wheel down gesture description",
-      "message": "Tieni premuto il tasto azione, scorri in basso",
-      "update": "20101007"
+      "message": "Tieni premuto il tasto azione, scorri in basso"
    },
    "gesture_wU": {
-      "category": "Options Page: Gestures",
       "description": "wheel up gesture title",
-      "message": "Scorri in alto",
-      "update": "20101007"
+      "message": "Scorri in alto"
    },
    "gesture_wU_descrip": {
-      "category": "Options Page: Gestures",
       "description": "wheel up gesture description",
-      "message": "Tieni premuto il tasto azione, scorri in alto",
-      "update": "20101007"
+      "message": "Tieni premuto il tasto azione, scorri in alto"
    },
    "long_description": {
-      "category": "About",
       "description": "complete extension description",
-      "message": "Con l'estensione Mouse Gestures, muovendo il mouse e contemporaneamente premendo il tasto destro, puoi eseguire azioni, come la gestione delle tab o le azioni di navigazione. L'estensione supporta click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), e scorciatoie da tastiera!\n\n• Incredibile personalizzazione delle gestures (ed azioni personalizzate!)\n• Supporta gestures diagonali, sincronizzazione/importazione/esportazione delle impostazioni\n• Non è disponibile su questo sito, o in altra pagine di servizio di Chrome a causa di restrizioni di sicurezza per le estensioni, ma funziona su quasi la totalità delle pagine http:// e https://",
-      "update": "20110423"
+      "message": "Con l'estensione Mouse Gestures, muovendo il mouse e contemporaneamente premendo il tasto destro, puoi eseguire azioni, come la gestione delle tab o le azioni di navigazione. L'estensione supporta click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), e scorciatoie da tastiera!\n\n• Incredibile personalizzazione delle gestures (ed azioni personalizzate!)\n• Supporta gestures diagonali, sincronizzazione/importazione/esportazione delle impostazioni\n• Non è disponibile su questo sito, o in altra pagine di servizio di Chrome a causa di restrizioni di sicurezza per le estensioni, ma funziona su quasi la totalità delle pagine http:// e https://"
    },
    "name": {
-      "category": "About",
       "description": "\"Smooth Gestures\" in your language",
-      "message": "Gesti facili",
-      "update": "20110423"
+      "message": "Gesti facili"
    },
    "options_addgesture_instruct_1": {
-      "category": "Options Page",
       "description": "instructions for making a gesture (just before bullet point list)",
-      "message": "Esegui una delle seguenti gestures:",
-      "update": "20101007"
+      "message": "Esegui una delle seguenti gestures:"
    },
    "options_addgesture_instruct_2": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Mouse Gesture: tieni premuto il tasto $BUTTON$ del mouse e disegna una gesture muovendo il mouse, poi rilascia",
       "placeholders": {
@@ -936,11 +629,9 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_addgesture_instruct_3": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Scroll Gesture: tieni premuto il tasto $BUTTON$ del mouse e muovi la rotellina",
       "placeholders": {
@@ -948,23 +639,17 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_addgesture_instruct_4": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (rocker)",
-      "message": "Rocker Gesture: tieni premuto un tasto qualunque del mouse, poi premine un altro",
-      "update": "20101007"
+      "message": "Rocker Gesture: tieni premuto un tasto qualunque del mouse, poi premine un altro"
    },
    "options_addgesture_instruct_5": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for doing a keyboard shortcut",
-      "message": "Scorciatoia da tastiera: premi un tasto speciale (o nessuno), poi premi un altro tasto",
-      "update": "20101007"
+      "message": "Scorciatoia da tastiera: premi un tasto speciale (o nessuno), poi premi un altro tasto"
    },
    "options_addgesture_overwrite": {
-      "category": "Options Page",
       "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "Questa Gesture è già assegnata a $ACTION$",
       "placeholders": {
@@ -972,11 +657,9 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_addgesture_title": {
-      "category": "Options Page",
       "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "Assegna una Gesture all'azione $ACTION$",
       "placeholders": {
@@ -984,119 +667,81 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_button_addcustomaction": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new custom action",
-      "message": "Aggiungi Azioni Personali",
-      "update": "20110328"
+      "message": "Aggiungi Azioni Personali"
    },
    "options_button_addgesture": {
-      "category": "Options Page",
       "description": "button to add the new gesture to the action",
-      "message": "Aggiungi questa Gesture",
-      "update": "20101007"
+      "message": "Aggiungi questa Gesture"
    },
    "options_button_overwrite": {
-      "category": "Options Page",
       "description": "button to overwrite the gesture made to the new action",
-      "message": "Sovrascrivi la Gesture",
-      "update": "20101007"
+      "message": "Sovrascrivi la Gesture"
    },
    "options_button_startaddgesture": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new gesture",
-      "message": "Aggiungi Gesture",
-      "update": "20110328"
+      "message": "Aggiungi Gesture"
    },
    "options_button_tryagain": {
-      "category": "Options Page",
       "description": "button to reject the gesture made and try to make a new one",
-      "message": "Prova ancora",
-      "update": "20101007"
+      "message": "Prova ancora"
    },
    "options_contents_actions": {
-      "category": "Options Page",
       "description": "category type for all actions links",
-      "message": "Gesture di azioni",
-      "update": "20101007"
+      "message": "Gesture di azioni"
    },
    "options_contents_more": {
-      "category": "Options Page",
       "description": "category type for all external links",
-      "message": "Altre Gesture",
-      "update": "20101007"
+      "message": "Altre Gesture"
    },
    "options_contents_settings": {
-      "category": "Options Page",
       "description": "category type for all settings links",
-      "message": "Impostazioni",
-      "update": "20101007"
+      "message": "Impostazioni"
    },
    "options_contents_status": {
-      "category": "Options Page",
       "description": "link to open the status page",
-      "message": "Visualizza lo stato",
-      "update": "20101007"
+      "message": "Visualizza lo stato"
    },
    "options_externalactions": {
-      "category": "Options Page",
       "description": "link to external actions",
-      "message": "Azioni Esterne",
-      "update": "20110328"
+      "message": "Azioni Esterne"
    },
    "options_moreactions": {
-      "category": "Options Page",
       "description": "Link to access more actions. These actions don't currently have a gesture assigned",
-      "message": "Altre Azioni Disponibili",
-      "update": "20110328"
+      "message": "Altre Azioni Disponibili"
    },
    "options_mousebutton_0": {
-      "category": "Options Page",
       "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
-      "message": "Tasto sinistro",
-      "update": "20101117"
+      "message": "Tasto sinistro"
    },
    "options_mousebutton_1": {
-      "category": "Options Page",
       "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
-      "message": "Tasto centrale",
-      "update": "20101117"
+      "message": "Tasto centrale"
    },
    "options_mousebutton_2": {
-      "category": "Options Page",
       "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
-      "message": "Tasto destro",
-      "update": "20101117"
+      "message": "Tasto destro"
    },
    "options_note_doubleclick": {
-      "category": "Options Page",
       "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "Nelle versioni di Chrome per Linux e Mac, potresti dover fare un doppio click con il tasto destro del mouse per aprire il menù contestuale.",
-      "update": "20101007"
+      "message": "Nelle versioni di Chrome per Linux e Mac, potresti dover fare un doppio click con il tasto destro del mouse per aprire il menù contestuale."
    },
    "options_note_hidepageaction_button": {
-      "category": "Options Page",
       "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
-      "message": "Nascondi Icone",
-      "update": "20110328"
+      "message": "Nascondi Icone"
    },
    "options_note_print": {
-      "category": "Options Page",
       "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
-      "message": "Hai problemi a ricordare tutte le Gesture che hai configurato? Stampa uno schema riassuntivo!",
-      "update": "20110423"
+      "message": "Hai problemi a ricordare tutte le Gesture che hai configurato? Stampa uno schema riassuntivo!"
    },
    "options_note_print_button": {
-      "category": "Options Page",
       "description": "Label on the button to print the page",
-      "message": "Stampa",
-      "update": "20110328"
+      "message": "Stampa"
    },
    "options_note_remindrate": {
-      "category": "Options Page",
       "description": "Notify the user that they can rate this extension to help promote it",
       "message": "Ti piace Smooth Gestures? Per favore $LINK$",
       "placeholders": {
@@ -1104,17 +749,13 @@
             "content": "$1",
             "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_note_remindrate_link": {
-      "category": "Options Page",
       "description": "Text for the link leading to the extension's page",
-      "message": "Lascia una valutazione di 5 stelle",
-      "update": "20110423"
+      "message": "Lascia una valutazione di 5 stelle"
    },
    "options_note_translate": {
-      "category": "Options Page",
       "description": "Solicit translation requests",
       "message": "Conosci l'inglese? Contribuisci $LINK$",
       "placeholders": {
@@ -1122,17 +763,13 @@
             "content": "$1",
             "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
          }
-      },
-      "update": "20110423"
+      }
    },
    "options_note_translate_link": {
-      "category": "Options Page",
       "description": "Link for soliciting translation requests",
-      "message": "traduci Smooth Gestures nella tua lingua",
-      "update": "20110318"
+      "message": "traduci Smooth Gestures nella tua lingua"
    },
    "options_note_updated": {
-      "category": "Options Page",
       "description": "Notify that the extension has been updated",
       "message": "Smooth Gestures è stato aggiornato alla versione $VERSION$",
       "placeholders": {
@@ -1140,89 +777,61 @@
             "content": "$2",
             "example": "0.13.1"
          }
-      },
-      "update": "20101007"
+      }
    },
    "options_title": {
-      "category": "Options Page",
       "description": "The title of the options page, at top and tab name",
-      "message": "Opzioni!",
-      "update": "20101007"
+      "message": "Opzioni!"
    },
    "options_welcome_0": {
-      "category": "Options Page",
       "description": "First just-installed line",
-      "message": "Benvenuto in Smooth Gestures!",
-      "update": "20110328"
+      "message": "Benvenuto in Smooth Gestures!"
    },
    "options_welcome_1": {
-      "category": "Options Page",
       "description": "First just-installed line",
-      "message": "Hai installato Smooth Gestures! Puoi aprire questa pagina delle Opzioni tenendo premuto il tasto destro del mouse e disegnando una \"O\" (prova: destra-giù-sinistra-su-destra).",
-      "update": "20101007"
+      "message": "Hai installato Smooth Gestures! Puoi aprire questa pagina delle Opzioni tenendo premuto il tasto destro del mouse e disegnando una \"O\" (prova: destra-giù-sinistra-su-destra)."
    },
    "options_welcome_2": {
-      "category": "Options Page",
       "description": "Second just-installed bullet point",
-      "message": "Per impostare nuove gesture o azioni clicca sul bottone \"+\" qui sotto.",
-      "update": "20110423"
+      "message": "Per impostare nuove gesture o azioni clicca sul bottone \"+\" qui sotto."
    },
    "options_welcome_3": {
-      "category": "Options Page",
       "description": "Third just-installed line",
-      "message": "Imposta le differenti opzioni cliccando \"Impostazioni\" sulla destra o scorrendo in basso fino al fondo della pagina.",
-      "update": "20101007"
+      "message": "Imposta le differenti opzioni cliccando \"Impostazioni\" sulla destra o scorrendo in basso fino al fondo della pagina."
    },
    "popup_button_hidepageaction": {
-      "category": "Status Notification",
       "description": "a button to hide the pageaction",
-      "message": "Nascondi questa icona URL",
-      "update": "20110423"
+      "message": "Nascondi questa icona URL"
    },
    "popup_button_options": {
-      "category": "Status Notification",
       "description": "a button to go to the options page",
-      "message": "Opzioni",
-      "update": "20110328"
+      "message": "Opzioni"
    },
    "popup_button_reload": {
-      "category": "Status Notification",
       "description": "a button to reload the current page",
-      "message": "Ricarica",
-      "update": "20110315"
+      "message": "Ricarica"
    },
    "popup_link_status": {
-      "category": "Status Notification",
       "description": "link to the status page",
-      "message": "Vedi lo Status di tutti i Tabs",
-      "update": "20110315"
+      "message": "Vedi lo Status di tutti i Tabs"
    },
    "popup_status_blocked_1": {
-      "category": "Status Notification",
       "description": "text explaining a blocked tab",
-      "message": "Chrome blocca le estensioni su questa pagina per motivi di sicurezza.",
-      "update": "20110315"
+      "message": "Chrome blocca le estensioni su questa pagina per motivi di sicurezza."
    },
    "popup_status_blocked_2": {
-      "category": "Status Notification",
       "description": "text explaining a blocked tab",
-      "message": "Smooth Gestures non può funzionare su questa pagina a causa di questa policy.",
-      "update": "20110315"
+      "message": "Smooth Gestures non può funzionare su questa pagina a causa di questa policy."
    },
    "popup_status_blocked_file2": {
-      "category": "Status Notification",
       "description": "text explaining how to make a file:// tab work",
-      "message": "Per far funzionare Smooth Gestures sui protocolli file:// e ftp://, vai in chrome://extensions/ e seleziona \"permetti l'accesso ai file URLs\" tra le opzioni di Smooth Gestures. ",
-      "update": "20110315"
+      "message": "Per far funzionare Smooth Gestures sui protocolli file:// e ftp://, vai in chrome://extensions/ e seleziona \"permetti l'accesso ai file URLs\" tra le opzioni di Smooth Gestures. "
    },
    "popup_status_blocked_file2_link": {
-      "category": "Status Notification",
       "description": "text naming the link that goes to chrome://extensions/",
-      "message": "Estensioni",
-      "update": "20110328"
+      "message": "Estensioni"
    },
    "popup_status_blocked_newtab": {
-      "category": "Status Notification",
       "description": "text explaining how to make a newtab page work",
       "message": "Prova il $LINK$ per abilitare i gesti sulla nuova scheda.",
       "placeholders": {
@@ -1230,355 +839,238 @@
             "content": "$1",
             "example": "Smooth Gestures New Tab Add-on"
          }
-      },
-      "update": "20110318"
+      }
    },
    "popup_status_broken": {
-      "category": "Status Notification",
       "description": "text explaining a broken tab",
-      "message": "Gestures non sta funzionando su questa pagina in questo momento.",
-      "update": "20110315"
+      "message": "Gestures non sta funzionando su questa pagina in questo momento."
    },
    "popup_status_question": {
-      "category": "Status Notification",
       "description": "text explaining a questionable tab",
-      "message": "Gesture potrebbe non funzionare su questa pagina adesso.",
-      "update": "20110315"
+      "message": "Gesture potrebbe non funzionare su questa pagina adesso."
    },
    "popup_status_unable_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are blocked by this page.",
-      "message": "Gesture bloccata",
-      "update": "20110423"
+      "message": "Gesture bloccata"
    },
    "popup_status_working": {
-      "category": "Status Notification",
       "description": "text explaining a working tab",
-      "message": "Le gesture sono abilitate in questa pagina",
-      "update": "20110423"
+      "message": "Le gesture sono abilitate in questa pagina"
    },
    "popup_status_working_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are working on this page.",
-      "message": "Gesture funzionanti",
-      "update": "20110423"
+      "message": "Gesture funzionanti"
    },
    "setting_blacklist": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Lista nera",
-      "update": "20110228"
+      "message": "Lista nera"
    },
    "setting_blacklist_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Disabilita le azioni sui domini inclusi nella lista nera. Separa i domini con le virgole. (Esempio: \"mail.google.com, www.example.com\")",
-      "update": "20110323"
+      "message": "Disabilita le azioni sui domini inclusi nella lista nera. Separa i domini con le virgole. (Esempio: \"mail.google.com, www.example.com\")"
    },
    "setting_button_export": {
-      "category": "Options Page: Settings",
       "description": "button to save settings as a backup file",
-      "message": "Salva impostazioni",
-      "update": "20110228"
+      "message": "Salva impostazioni"
    },
    "setting_button_import": {
-      "category": "Options Page: Settings",
       "description": "button to load a settings file",
-      "message": "Carica file impostazioni",
-      "update": "20110228"
+      "message": "Carica file impostazioni"
    },
    "setting_button_left": {
-      "category": "Options Page: Settings",
       "description": "choose left mouse button",
-      "message": "Tasto sinistro",
-      "update": "20110228"
+      "message": "Tasto sinistro"
    },
    "setting_button_middle": {
-      "category": "Options Page: Settings",
       "description": "choose middle mouse button",
-      "message": "Tasto centrale",
-      "update": "20110228"
+      "message": "Tasto centrale"
    },
    "setting_button_off": {
-      "category": "Options Page: Settings",
       "description": "setting label",
-      "message": "Off",
-      "update": "20110228"
+      "message": "Off"
    },
    "setting_button_on": {
-      "category": "Options Page: Settings",
       "description": "setting label",
-      "message": "On",
-      "update": "20110228"
+      "message": "On"
    },
    "setting_button_reset": {
-      "category": "Options Page: Settings",
       "description": "button label",
-      "message": "Ripristina",
-      "update": "20110228"
+      "message": "Ripristina"
    },
    "setting_button_right": {
-      "category": "Options Page: Settings",
       "description": "choose right mouse button",
-      "message": "Tasto destro",
-      "update": "20110228"
+      "message": "Tasto destro"
    },
    "setting_button_update": {
-      "category": "Options Page: Settings",
       "description": "button label",
-      "message": "Aggiorna",
-      "update": "20110228"
+      "message": "Aggiorna"
    },
    "setting_closelastblock": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Non chiudere l'ultima scheda.",
-      "update": "20110329"
+      "message": "Non chiudere l'ultima scheda."
    },
    "setting_closelastblock_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Non chiudere l'ultimo tab con il gesto di chiusura tab. Invece, crea un nuovo tab.",
-      "update": "20110403"
+      "message": "Non chiudere l'ultimo tab con il gesto di chiusura tab. Invece, crea un nuovo tab."
    },
    "setting_disabled": {
-      "category": "Options Page: Settings",
       "description": "choose no mouse button (gestures are disabled)",
-      "message": "Disabilitato",
-      "update": "20110228"
+      "message": "Disabilitato"
    },
    "setting_force_context": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Forza il Menu contestuale sui links",
-      "update": "20110423"
+      "message": "Forza il Menu contestuale sui links"
    },
    "setting_force_context2": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Forza il Menu contestuale",
-      "update": "20110423"
+      "message": "Forza il Menu contestuale"
    },
    "setting_force_context2_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Mostra sempre il Menu contestuale cliccando col tasto destro. Utile se si attivano i gesti con il tasto centrale del mouse.",
-      "update": "20110423"
+      "message": "Mostra sempre il Menu contestuale cliccando col tasto destro. Utile se si attivano i gesti con il tasto centrale del mouse."
    },
    "setting_force_context_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Blocca le gestures che partono dei link. Su sistemi con conflitti del menu contestuale, ciò consente di ottenere il menu contestuali facendo click con il tasto destro del mouse solo una volta invece di due. Tuttavia, così facendo si disabilita l'opzione Nuova scheda dal link",
-      "update": "20110423"
+      "message": "Blocca le gestures che partono dei link. Su sistemi con conflitti del menu contestuale, ciò consente di ottenere il menu contestuali facendo click con il tasto destro del mouse solo una volta invece di due. Tuttavia, così facendo si disabilita l'opzione Nuova scheda dal link"
    },
    "setting_group_assorted": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Altre impostazioni",
-      "update": "20110228"
+      "message": "Altre impostazioni"
    },
    "setting_group_context": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Impostazioni Menu contestuale",
-      "update": "20110423"
+      "message": "Impostazioni Menu contestuale"
    },
    "setting_group_hide": {
-      "category": "Options Page: Settings",
       "description": "button to hide a group of settings",
-      "message": "nascondi",
-      "update": "20110228"
+      "message": "nascondi"
    },
    "setting_group_newtab": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Impostazioni nuova scheda",
-      "update": "20110228"
+      "message": "Impostazioni nuova scheda"
    },
    "setting_group_show": {
-      "category": "Options Page: Settings",
       "description": "button to show a group of settings",
-      "message": "mostra",
-      "update": "20110228"
+      "message": "mostra"
    },
    "setting_group_trail": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Impostazioni tracciato",
-      "update": "20110228"
+      "message": "Impostazioni tracciato"
    },
    "setting_hidepageaction": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Mostra l'icona.",
-      "update": "20110329"
+      "message": "Mostra l'icona."
    },
    "setting_hidepageaction_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "L'icona sulla barra degli indirizzi permette di accedere velocemente alla pagina delle opzioni di Smooth Gesture. In alternativa vi puoi accedere tramite Chiave Inglese > Strumenti > Estensioni > Smooth Gesture > Opzioni",
-      "update": "20110423"
+      "message": "L'icona sulla barra degli indirizzi permette di accedere velocemente alla pagina delle opzioni di Smooth Gesture. In alternativa vi puoi accedere tramite Chiave Inglese > Strumenti > Estensioni > Smooth Gesture > Opzioni"
    },
    "setting_hold_button": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Bottone del mouse per iniziare una gesture",
-      "update": "20110423"
+      "message": "Bottone del mouse per iniziare una gesture"
    },
    "setting_hold_button_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Permetti di iniziare una gesture premendo il tasto centrale o sinistro del mouse, invece che quello destro.",
-      "update": "20110423"
+      "message": "Permetti di iniziare una gesture premendo il tasto centrale o sinistro del mouse, invece che quello destro."
    },
    "setting_import": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Backup Impostazioni",
-      "update": "20110228"
+      "message": "Backup Impostazioni"
    },
    "setting_import_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Salva le impostazioni correnti (incluse le gesture, azioni personali e opzioni). Carica il file per ripristinare le impostazioni perdute o spostarle su un altro computer.",
-      "update": "20110423"
+      "message": "Salva le impostazioni correnti (incluse le gesture, azioni personali e opzioni). Carica il file per ripristinare le impostazioni perdute o spostarle su un altro computer."
    },
    "setting_newtab_linkright": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Nuove schede da link si aprono accanto alla scheda corrente",
-      "update": "20110423"
+      "message": "Nuove schede da link si aprono accanto alla scheda corrente"
    },
    "setting_newtab_linkright_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Simile al comportamento di default di Chromium quando si aprono link in una nuova scheda.",
-      "update": "20110423"
+      "message": "Simile al comportamento di default di Chromium quando si aprono link in una nuova scheda."
    },
    "setting_newtab_url": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "URL della nuova scheda.",
-      "update": "20110329"
+      "message": "URL della nuova scheda."
    },
    "setting_newtab_url_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Impostare l'URL dell'azione per la nuova scheda.",
-      "update": "20110329"
+      "message": "Impostare l'URL dell'azione per la nuova scheda."
    },
    "setting_reset": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Ripristina i valori.",
-      "update": "20110329"
+      "message": "Ripristina i valori."
    },
    "setting_reset_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Ripristina tutte le gesture e le impostazioni di default",
-      "update": "20110423"
+      "message": "Ripristina tutte le gesture e le impostazioni di default"
    },
    "setting_sendstats_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Invia un rapporto anonimo dei principali gesti utilizzati, influenzando i gesti di default di versioni future.",
-      "update": "20110329"
+      "message": "Invia un rapporto anonimo dei principali gesti utilizzati, influenzando i gesti di default di versioni future."
    },
    "setting_sync": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Sincronizza",
-      "update": "20110228"
+      "message": "Sincronizza"
    },
    "setting_sync_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Sincronizza le impostazione e le gesture con altri computer tramite i segnalibri. Devi prima abilitare la sincronizzazione dei segnalibri.",
-      "update": "20110423"
+      "message": "Sincronizza le impostazione e le gesture con altri computer tramite i segnalibri. Devi prima abilitare la sincronizzazione dei segnalibri."
    },
    "setting_trail_color_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Modifica il colore e la trasparenza della linea disegnata quando si effettua un gesto.",
-      "update": "20110329"
+      "message": "Modifica il colore e la trasparenza della linea disegnata quando si effettua un gesto."
    },
    "setting_trail_width": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Grandezza della linea.",
-      "update": "20110329"
+      "message": "Grandezza della linea."
    },
    "setting_trail_width_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Modifica lo spessore della linea che viene visualizzata quando fai un gesto.",
-      "update": "20110329"
+      "message": "Modifica lo spessore della linea che viene visualizzata quando fai un gesto."
    },
    "setting_warning_reset": {
-      "category": "Options Page: Settings",
       "description": "warn that setting will be lost during a reset",
-      "message": "Sei sicuro di voler resettare? Perderai tutti i tuoi settaggi personalizzati.",
-      "update": "20110329"
+      "message": "Sei sicuro di voler resettare? Perderai tutti i tuoi settaggi personalizzati."
    },
    "status_button_reloadall": {
-      "category": "Tab Status Page",
       "description": "button to reload all broken pages",
-      "message": "Ricarica tutte le pagine non funzionanti",
-      "update": "20101007"
+      "message": "Ricarica tutte le pagine non funzionanti"
    },
    "status_button_reloadone": {
-      "category": "Tab Status Page",
       "description": "button to reload single broken page",
-      "message": "Ricarica la pagina",
-      "update": "20101007"
+      "message": "Ricarica la pagina"
    },
    "status_legend_blocked": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Pagine bloccate dal sistema",
-      "update": "20101007"
+      "message": "Pagine bloccate dal sistema"
    },
    "status_legend_broken": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Non funzionante",
-      "update": "20101007"
+      "message": "Non funzionante"
    },
    "status_legend_loading": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "In caricamento",
-      "update": "20101007"
+      "message": "In caricamento"
    },
    "status_legend_working": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Funzionante",
-      "update": "20101007"
+      "message": "Funzionante"
    },
    "status_link_options": {
-      "category": "Tab Status Page",
       "description": "Link to go to the options page",
-      "message": "Imposta Smooth Gestures: Opzioni!",
-      "update": "20101007"
+      "message": "Imposta Smooth Gestures: Opzioni!"
    },
    "status_title": {
-      "category": "Tab Status Page",
       "description": "The title of the status page, at top and tab name",
-      "message": "Stato",
-      "update": "20101007"
+      "message": "Stato"
    },
    "status_window_other": {
-      "category": "Tab Status Page",
       "description": "title for a group of tab statuses",
-      "message": "Altra finestra",
-      "update": "20101007"
+      "message": "Altra finestra"
    },
    "status_window_this": {
-      "category": "Tab Status Page",
       "description": "title for a group of tab statuses",
-      "message": "Questa finestra",
-      "update": "20101007"
+      "message": "Questa finestra"
    }
 }

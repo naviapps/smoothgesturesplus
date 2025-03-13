@@ -1,882 +1,589 @@
 {
    "action_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Bookmark Trang",
-      "update": "20110412"
+      "message": "Bookmark Trang"
    },
    "action_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Duplicate Tab",
-      "update": "20110412"
+      "message": "Duplicate Tab"
    },
    "action_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Duplicate Tab (hack)",
-      "update": "20110412"
+      "message": "Duplicate Tab (hack)"
    },
    "action_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Đóng Tabs",
-      "update": "20110412"
+      "message": "Đóng Tabs"
    },
    "action_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "đóng tất cả Tabs khác",
-      "update": "20110412"
+      "message": "đóng tất cả Tabs khác"
    },
    "action_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Đóng phải Tabs",
-      "update": "20110412"
+      "message": "Đóng phải Tabs"
    },
    "action_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for close_tab",
-      "message": "đóng tab\n",
-      "update": "20110412"
+      "message": "đóng tab\n"
    },
    "action_close_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for close_window",
-      "message": "Đóng cửa sổ",
-      "update": "20110412"
+      "message": "Đóng cửa sổ"
    },
    "action_copy": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Sao chép văn bản vào Clipboard",
-      "update": "20110412"
+      "message": "Sao chép văn bản vào Clipboard"
    },
    "action_goto_bottom": {
-      "category": "Options Page: Actions",
       "description": "Action title for goto_bottom",
-      "message": "đến nút",
-      "update": "20110412"
+      "message": "đến nút"
    },
    "action_goto_top": {
-      "category": "Options Page: Actions",
       "description": "Action title for goto_top",
-      "message": "Về đầu trang",
-      "update": "20110412"
+      "message": "Về đầu trang"
    },
    "action_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Ẩn Hình ảnh",
-      "update": "20110412"
+      "message": "Ẩn Hình ảnh"
    },
    "action_maximize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Tối đa hóa cửa sổ (hack)",
-      "update": "20110412"
+      "message": "Tối đa hóa cửa sổ (hack)"
    },
    "action_merge_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title for merge_tabs",
-      "message": " Kết hợp các Tabs",
-      "update": "20110412"
+      "message": " Kết hợp các Tabs"
    },
    "action_minimize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Giảm thiểu Window (hack)",
-      "update": "20110412"
+      "message": "Giảm thiểu Window (hack)"
    },
    "action_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "Đi đến Trang Tab mới",
-      "update": "20110412"
+      "message": "Đi đến Trang Tab mới"
    },
    "action_new_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "New Tab",
-      "update": "20110412"
+      "message": "New Tab"
    },
    "action_new_tab_back": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_back",
-      "message": "New Tab (Open Link trong nền)",
-      "update": "20110412"
+      "message": "New Tab (Open Link trong nền)"
    },
    "action_new_tab_link": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_link",
-      "message": "New Tab (Open Link)",
-      "update": "20110412"
+      "message": "New Tab (Open Link)"
    },
    "action_new_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_window",
-      "message": "New Window",
-      "update": "20110412"
+      "message": "New Window"
    },
    "action_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "New Window (Open Link)",
-      "update": "20110412"
+      "message": "New Window (Open Link)"
    },
    "action_next_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for next_tab",
-      "message": " Tab Tiếp theo",
-      "update": "20110412"
+      "message": " Tab Tiếp theo"
    },
    "action_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "Cửa sổ tiếp theo ",
-      "update": "20110412"
+      "message": "Cửa sổ tiếp theo "
    },
    "action_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Mở trang quản lý",
-      "update": "20110412"
+      "message": "Mở trang quản lý"
    },
    "action_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Mở Tải xuống",
-      "update": "20110412"
+      "message": "Mở Tải xuống"
    },
    "action_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Phần mở rộng mở",
-      "update": "20110412"
+      "message": "Phần mở rộng mở"
    },
    "action_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Lịch sử mở",
-      "update": "20110412"
+      "message": "Lịch sử mở"
    },
    "action_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Mở ảnh",
-      "update": "20110412"
+      "message": "Mở ảnh"
    },
    "action_options": {
-      "category": "Options Page: Actions",
       "description": "Action title for options",
-      "message": "Mở Options Trang",
-      "update": "20110412"
+      "message": "Mở Options Trang"
    },
    "action_page_back": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_back",
-      "message": "Quay lại lịch sử",
-      "update": "20110412"
+      "message": "Quay lại lịch sử"
    },
    "action_page_back_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_back_close",
-      "message": "Lịch sử trở lại hoặc Close",
-      "update": "20110412"
+      "message": "Lịch sử trở lại hoặc Close"
    },
    "action_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_down",
-      "message": "trang dưới",
-      "update": "20110412"
+      "message": "trang dưới"
    },
    "action_page_forward": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_forward",
-      "message": "Chuyển tiếp lịch sử",
-      "update": "20110412"
+      "message": "Chuyển tiếp lịch sử"
    },
    "action_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_next",
-      "message": "Trang sau",
-      "update": "20110412"
+      "message": "Trang sau"
    },
    "action_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_prev",
-      "message": "Trang trước",
-      "update": "20110412"
+      "message": "Trang trước"
    },
    "action_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_up",
-      "message": "trang trên",
-      "update": "20110412"
+      "message": "trang trên"
    },
    "action_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "thư mục cha",
-      "update": "20110412"
+      "message": "thư mục cha"
    },
    "action_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "ghim tab",
-      "update": "20110412"
+      "message": "ghim tab"
    },
    "action_prev_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for prev_tab",
-      "message": " xem trước Tab",
-      "update": "20110412"
+      "message": " xem trước Tab"
    },
    "action_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "xen trước cửa sổ",
-      "update": "20110412"
+      "message": "xen trước cửa sổ"
    },
    "action_print": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "In Trang",
-      "update": "20110412"
+      "message": "In Trang"
    },
    "action_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Reload Mọi Tabs",
-      "update": "20110412"
+      "message": "Reload Mọi Tabs"
    },
    "action_reload_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab",
-      "message": "Reload Tab",
-      "update": "20110412"
+      "message": "Reload Tab"
    },
    "action_reload_tab_full": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab_full",
-      "message": "Reload Tab (không có bộ nhớ cache)",
-      "update": "20110412"
+      "message": "Reload Tab (không có bộ nhớ cache)"
    },
    "action_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Tìm kiếm Google",
-      "update": "20110412"
+      "message": "Tìm kiếm Google"
    },
    "action_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Danh sách Cookies",
-      "update": "20110412"
+      "message": "Danh sách Cookies"
    },
    "action_split_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title for split_tabs",
-      "message": "tách tab",
-      "update": "20110412"
+      "message": "tách tab"
    },
    "action_status": {
-      "category": "Options Page: Actions",
       "description": "Action title for status",
-      "message": "mở trang trạng thái",
-      "update": "20110412"
+      "message": "mở trang trạng thái"
    },
    "action_stop": {
-      "category": "Options Page: Actions",
       "description": "Action title for stop",
-      "message": "Stop Loading",
-      "update": "20110412"
+      "message": "Stop Loading"
    },
    "action_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Di chuyển Tab còn lại",
-      "update": "20110412"
+      "message": "Di chuyển Tab còn lại"
    },
    "action_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Di chuyển chuột Tab",
-      "update": "20110412"
+      "message": "Di chuyển chuột Tab"
    },
    "action_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": " Bật tắtBookmark",
-      "update": "20110412"
+      "message": " Bật tắtBookmark"
    },
    "action_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Bật tắt ghim tab",
-      "update": "20110412"
+      "message": "Bật tắt ghim tab"
    },
    "action_translate": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": " lựa chọn Dịch",
-      "update": "20110412"
+      "message": " lựa chọn Dịch"
    },
    "action_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Hủy bỏ Bookmark",
-      "update": "20110412"
+      "message": "Hủy bỏ Bookmark"
    },
    "action_undo_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close",
-      "message": "Undo Close Tab",
-      "update": "20110412"
+      "message": "Undo Close Tab"
    },
    "action_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close_hack",
-      "message": "Undo Close Tab (hack)",
-      "update": "20110412"
+      "message": "Undo Close Tab (hack)"
    },
    "action_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "đánh giá tab",
-      "update": "20110412"
+      "message": "đánh giá tab"
    },
    "action_view_source": {
-      "category": "Options Page: Actions",
       "description": "Action title for view_source",
-      "message": "xem trang nguồn",
-      "update": "20110412"
+      "message": "xem trang nguồn"
    },
    "action_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "phóng to ảnh",
-      "update": "20110412"
+      "message": "phóng to ảnh"
    },
    "action_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "thu nhỏ ảnh",
-      "update": "20110412"
+      "message": "thu nhỏ ảnh"
    },
    "action_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Thiết lập lại Zoom trên ảnh",
-      "update": "20110412"
+      "message": "Thiết lập lại Zoom trên ảnh"
    },
    "action_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "phóng to trang",
-      "update": "20110412"
+      "message": "phóng to trang"
    },
    "action_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "thu nhỏ trang",
-      "update": "20110412"
+      "message": "thu nhỏ trang"
    },
    "action_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "Thiết lập lại Zoom trên Trang",
-      "update": "20110412"
+      "message": "Thiết lập lại Zoom trên Trang"
    },
    "cat_custom": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for all custom actions",
-      "message": "Tuỳ chỉnh hành động",
-      "update": "20110412"
+      "message": "Tuỳ chỉnh hành động"
    },
    "cat_other": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for actions that don't have a category",
-      "message": "Các hành động",
-      "update": "20110412"
+      "message": "Các hành động"
    },
    "cat_page_navigation": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category encompassing basic page navigation actions",
-      "message": "Trang mục chính",
-      "update": "20110412"
+      "message": "Trang mục chính"
    },
    "cat_settings": {
-      "category": "Options Page: Action Categories",
       "description": "Title of the settings group",
-      "message": "Cài đặt khác",
-      "update": "20110412"
+      "message": "Cài đặt khác"
    },
    "cat_tab_management": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category encompassing tab manipulation actions",
-      "message": "Quản lý Tab",
-      "update": "20110412"
+      "message": "Quản lý Tab"
    },
    "cat_utilities": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for general utility actions",
-      "message": "Tiện ích",
-      "update": "20110412"
+      "message": "Tiện ích"
    },
    "context_not_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on an image",
-      "message": "không có hình ảnh",
-      "update": "20110412"
+      "message": "không có hình ảnh"
    },
    "context_not_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on a link",
-      "message": "không liên kết",
-      "update": "20110412"
+      "message": "không liên kết"
    },
    "context_not_links_images": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
-      "message": "không liên kết hoặc hình ảnh",
-      "update": "20110412"
+      "message": "không liên kết hoặc hình ảnh"
    },
    "context_not_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
-      "message": "không có lựa chọn",
-      "update": "20110412"
+      "message": "không có lựa chọn"
    },
    "context_on_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
-      "message": "về hình ảnh",
-      "update": "20110412"
+      "message": "về hình ảnh"
    },
    "context_on_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
-      "message": "vào liên kết",
-      "update": "20110412"
+      "message": "vào liên kết"
    },
    "context_with_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
-      "message": "với lựa chọn",
-      "update": "20110412"
+      "message": "với lựa chọn"
    },
    "descrip_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Thêm một dấu trang hiện hành.",
-      "update": "20110412"
+      "message": "Thêm một dấu trang hiện hành."
    },
    "descrip_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Mở một bản tab của trang hiện hành. Các tab bị trùng lặp sẽ không có lịch sử của tab gốc.",
-      "update": "20110412"
+      "message": "Mở một bản tab của trang hiện hành. Các tab bị trùng lặp sẽ không có lịch sử của tab gốc."
    },
    "descrip_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Mở một bản tab của trang hiện hành. Tải lịch sử với một cách giải quyết không hoàn hảo",
-      "update": "20110412"
+      "message": "Mở một bản tab của trang hiện hành. Tải lịch sử với một cách giải quyết không hoàn hảo"
    },
    "descrip_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Đóng tất cả các tab bên trái của tab hiện tại",
-      "update": "20110412"
+      "message": "Đóng tất cả các tab bên trái của tab hiện tại"
    },
    "descrip_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Đóng tất cả các tab trong cửa sổ hiện hành, trừ các tab đã chọn",
-      "update": "20110412"
+      "message": "Đóng tất cả các tab trong cửa sổ hiện hành, trừ các tab đã chọn"
    },
    "descrip_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Đóng tất cả các tab ở bên phải của tab hiện tại",
-      "update": "20110412"
+      "message": "Đóng tất cả các tab ở bên phải của tab hiện tại"
    },
    "descrip_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_tab",
-      "message": "Đóng tab hiện đang được chọn",
-      "update": "20110412"
+      "message": "Đóng tab hiện đang được chọn"
    },
    "descrip_close_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_window",
-      "message": "Đóng tất cả các tab trong cửa sổ đang được chọn",
-      "update": "20110412"
+      "message": "Đóng tất cả các tab trong cửa sổ đang được chọn"
    },
    "descrip_copy": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Lựa chọn sao chép văn bản vào clipboard.",
-      "update": "20110412"
+      "message": "Lựa chọn sao chép văn bản vào clipboard."
    },
    "descrip_goto_bottom": {
-      "category": "Options Page: Actions",
       "description": "Action description for goto_bottom",
-      "message": "Di chuyển trang xuống đáy",
-      "update": "20110412"
+      "message": "Di chuyển trang xuống đáy"
    },
    "descrip_goto_top": {
-      "category": "Options Page: Actions",
       "description": "Action description for goto_top",
-      "message": "Di chuyển trang đầu trang",
-      "update": "20110412"
+      "message": "Di chuyển trang đầu trang"
    },
    "descrip_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Hủy bỏ các hình ảnh con chuột trên từ trang",
-      "update": "20110412"
+      "message": "Hủy bỏ các hình ảnh con chuột trên từ trang"
    },
    "descrip_maximize_x": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Đây là một lộn xộn hack để mô phỏng tối đa hóa cửa sổ",
-      "update": "20110412"
+      "message": "Đây là một lộn xộn hack để mô phỏng tối đa hóa cửa sổ"
    },
    "descrip_merge_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description for merge_tabs",
-      "message": "Kết hợp tất cả các tab của cửa sổ hiện hành với các cửa sổ tập trung cuối cùng",
-      "update": "20110412"
+      "message": "Kết hợp tất cả các tab của cửa sổ hiện hành với các cửa sổ tập trung cuối cùng"
    },
    "descrip_minimize_x": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Đây là một _very_ lộn xộn hack để mô phỏng giảm thiểu một cửa sổ",
-      "update": "20110412"
+      "message": "Đây là một _very_ lộn xộn hack để mô phỏng giảm thiểu một cửa sổ"
    },
    "descrip_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab",
-      "message": "Điều hướng đến trang New Tab (URL này có thể được thiết lập dưới đây)",
-      "update": "20110412"
+      "message": "Điều hướng đến trang New Tab (URL này có thể được thiết lập dưới đây)"
    },
    "descrip_new_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab",
-      "message": "Mở một tab mới trong cửa sổ hiện tại (URL này có thể được thiết lập dưới đây)",
-      "update": "20110412"
+      "message": "Mở một tab mới trong cửa sổ hiện tại (URL này có thể được thiết lập dưới đây)"
    },
    "descrip_new_tab_back": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab_back",
-      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một tab mới, nhưng không thấy tab mới nào",
-      "update": "20110412"
+      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một tab mới, nhưng không thấy tab mới nào"
    },
    "descrip_new_tab_link": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab_link",
-      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một tab mới",
-      "update": "20110412"
+      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một tab mới"
    },
    "descrip_new_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_window",
-      "message": "Mở một cửa sổ mới với các tab mặc định",
-      "update": "20110412"
+      "message": "Mở một cửa sổ mới với các tab mặc định"
    },
    "descrip_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một cửa sổ mới",
-      "update": "20110412"
+      "message": "Bắt đầu một cử chỉ vào một liên kết để mở liên kết trong một cửa sổ mới"
    },
    "descrip_next_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for next_tab",
-      "message": "Chọn tab bên phải của tab hiện tại",
-      "update": "20110412"
+      "message": "Chọn tab bên phải của tab hiện tại"
    },
    "descrip_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Chọn cửa sổ đã được tập trung dài nhất trước",
-      "update": "20110412"
+      "message": "Chọn cửa sổ đã được tập trung dài nhất trước"
    },
    "descrip_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Mở trình quản lý bookmark trong một tab mới",
-      "update": "20110412"
+      "message": "Mở trình quản lý bookmark trong một tab mới"
    },
    "descrip_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Mở trang tải trong một tab mới",
-      "update": "20110412"
+      "message": "Mở trang tải trong một tab mới"
    },
    "descrip_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Mở trang mở rộng trong một tab mới",
-      "update": "20110412"
+      "message": "Mở trang mở rộng trong một tab mới"
    },
    "descrip_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Mở trang lịch sử trong một tab mới",
-      "update": "20110412"
+      "message": "Mở trang lịch sử trong một tab mới"
    },
    "descrip_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "ở hình ảnh con chuột trên trong một tab mới",
-      "update": "20110412"
+      "message": "ở hình ảnh con chuột trên trong một tab mới"
    },
    "descrip_options": {
-      "category": "Options Page: Actions",
       "description": "Action description for options",
-      "message": "Mở trang này lựa chọn",
-      "update": "20110412"
+      "message": "Mở trang này lựa chọn"
    },
    "descrip_page_back": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_back",
-      "message": "Quay trở lại một trang trong lịch sử cho các tab hiện hành",
-      "update": "20110412"
+      "message": "Quay trở lại một trang trong lịch sử cho các tab hiện hành"
    },
    "descrip_page_back_close": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_back_close",
-      "message": "Quay trở lại một trang trong lịch sử cho các tab hiện tại, hoặc, nếu không có lịch sử vẫn còn, đóng tab",
-      "update": "20110412"
+      "message": "Quay trở lại một trang trong lịch sử cho các tab hiện tại, hoặc, nếu không có lịch sử vẫn còn, đóng tab"
    },
    "descrip_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_down",
-      "message": "Cuộn trang xuống dưới 80%",
-      "update": "20110412"
+      "message": "Cuộn trang xuống dưới 80%"
    },
    "descrip_page_forward": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_forward",
-      "message": "Chuyển tới trang cho các tab hiện hành",
-      "update": "20110412"
+      "message": "Chuyển tới trang cho các tab hiện hành"
    },
    "descrip_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_next",
-      "message": "Hãy cố gắng để đi đến trang tiếp theo bằng cách làm theo một liên kết có nội dung: 'bên cạnh'",
-      "update": "20110412"
+      "message": "Hãy cố gắng để đi đến trang tiếp theo bằng cách làm theo một liên kết có nội dung: 'bên cạnh'"
    },
    "descrip_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_prev",
-      "message": "Cố gắng để đến trang trước đó bằng cách làm theo một liên kết có nội dung: 'trước'",
-      "update": "20110412"
+      "message": "Cố gắng để đến trang trước đó bằng cách làm theo một liên kết có nội dung: 'trước'"
    },
    "descrip_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_up",
-      "message": "Cuộn trang lên đến 80%",
-      "update": "20110412"
+      "message": "Cuộn trang lên đến 80%"
    },
    "descrip_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Điều hướng đến thư mục cha của trang hiện hành. Nếu đã có tại thư mục gốc, cố gắng loại bỏ các tên miền phụ.",
-      "update": "20110412"
+      "message": "Điều hướng đến thư mục cha của trang hiện hành. Nếu đã có tại thư mục gốc, cố gắng loại bỏ các tên miền phụ."
    },
    "descrip_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "ghim tab hiện tại",
-      "update": "20110412"
+      "message": "ghim tab hiện tại"
    },
    "descrip_prev_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for prev_tab",
-      "message": "Chọn tab bên trái của tab hiện tại",
-      "update": "20110412"
+      "message": "Chọn tab bên trái của tab hiện tại"
    },
    "descrip_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "Chọn cửa sổ tập trung ngay trước cửa sổ hiện tại",
-      "update": "20110412"
+      "message": "Chọn cửa sổ tập trung ngay trước cửa sổ hiện tại"
    },
    "descrip_print": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "In trang hiện tại",
-      "update": "20110412"
+      "message": "In trang hiện tại"
    },
    "descrip_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Làm mới tất cả các tab trong cửa sổ hiện hành",
-      "update": "20110412"
+      "message": "Làm mới tất cả các tab trong cửa sổ hiện hành"
    },
    "descrip_reload_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for reload_tab",
-      "message": "Làm mới nội dung của tab hiện tại",
-      "update": "20110412"
+      "message": "Làm mới nội dung của tab hiện tại"
    },
    "descrip_reload_tab_full": {
-      "category": "Options Page: Actions",
       "description": "Action description for reload_tab_full",
-      "message": "Hoàn toàn làm mới các nội dung của tab hiện tại (bỏ qua cache)",
-      "update": "20110412"
+      "message": "Hoàn toàn làm mới các nội dung của tab hiện tại (bỏ qua cache)"
    },
    "descrip_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Tìm kiếm Google cho các văn bản đã chọn",
-      "update": "20110412"
+      "message": "Tìm kiếm Google cho các văn bản đã chọn"
    },
    "descrip_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Hiển thị một danh sách của tất cả các cookie cho các trang hiện tại",
-      "update": "20110412"
+      "message": "Hiển thị một danh sách của tất cả các cookie cho các trang hiện tại"
    },
    "descrip_split_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description for split_tabs",
-      "message": "Chia tất cả các tab ở bên phải của tab (và bao gồm) hiện tại vào một cửa sổ mới",
-      "update": "20110412"
+      "message": "Chia tất cả các tab ở bên phải của tab (và bao gồm) hiện tại vào một cửa sổ mới"
    },
    "descrip_status": {
-      "category": "Options Page: Actions",
       "description": "Action description for status",
-      "message": "Mở Smooth cử chỉ trang trạng thái mở rộng",
-      "update": "20110412"
+      "message": "Mở Smooth cử chỉ trang trạng thái mở rộng"
    },
    "descrip_stop": {
-      "category": "Options Page: Actions",
       "description": "Action description for stop",
-      "message": "Dừng tải tab hiện tại. (Có thể không làm việc trên một số trang, như các trang hình ảnh)",
-      "update": "20110412"
+      "message": "Dừng tải tab hiện tại. (Có thể không làm việc trên một số trang, như các trang hình ảnh)"
    },
    "descrip_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Di chuyển các tab hiện một lần để bên trái",
-      "update": "20110412"
+      "message": "Di chuyển các tab hiện một lần để bên trái"
    },
    "descrip_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Di chuyển các tab hiện một lần về bên phải",
-      "update": "20110412"
+      "message": "Di chuyển các tab hiện một lần về bên phải"
    },
    "descrip_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Loại bỏ một trang đánh dấu nếu có đã được thiết lập. Thêm một dấu để trang hiện tại nếu nó không được.",
-      "update": "20110412"
+      "message": "Loại bỏ một trang đánh dấu nếu có đã được thiết lập. Thêm một dấu để trang hiện tại nếu nó không được."
    },
    "descrip_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Chuyển đổi trạng thái hạ của tab",
-      "update": "20110412"
+      "message": "Chuyển đổi trạng thái hạ của tab"
    },
    "descrip_translate": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Dịch các văn bản được lựa chọn để ngôn ngữ mặc định của Chrome",
-      "update": "20110412"
+      "message": "Dịch các văn bản được lựa chọn để ngôn ngữ mặc định của Chrome"
    },
    "descrip_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Loại bỏ các dấu trang cho trang hiện tại, nếu có.",
-      "update": "20110412"
+      "message": "Loại bỏ các dấu trang cho trang hiện tại, nếu có."
    },
    "descrip_undo_close": {
-      "category": "Options Page: Actions",
       "description": "Action description for undo_close",
-      "message": "Mở tab cuối cùng đóng cửa. Điều này chỉ tải các URL của trang - Ctrl-Shift-T vẫn còn cao, bởi vì nó vẫn duy trì lịch sử",
-      "update": "20110412"
+      "message": "Mở tab cuối cùng đóng cửa. Điều này chỉ tải các URL của trang - Ctrl-Shift-T vẫn còn cao, bởi vì nó vẫn duy trì lịch sử"
    },
    "descrip_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for undo_close",
-      "message": "Mở tab cuối cùng đóng cửa. Tải lịch sử thông qua việc sử dụng một cách giải quyết không hoàn hảo",
-      "update": "20110412"
+      "message": "Mở tab cuối cùng đóng cửa. Tải lịch sử thông qua việc sử dụng một cách giải quyết không hoàn hảo"
    },
    "descrip_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Đánh giá tab hiện tại",
-      "update": "20110412"
+      "message": "Đánh giá tab hiện tại"
    },
    "descrip_view_source": {
-      "category": "Options Page: Actions",
       "description": "Action description for view_source",
-      "message": "Xem mã nguồn của trang hiện tại",
-      "update": "20110412"
+      "message": "Xem mã nguồn của trang hiện tại"
    },
    "descrip_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Phóng to hình ảnh mà chuột đã qua",
-      "update": "20110412"
+      "message": "Phóng to hình ảnh mà chuột đã qua"
    },
    "descrip_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Thu nhỏ về hình ảnh mà con chuột đã qua",
-      "update": "20110412"
+      "message": "Thu nhỏ về hình ảnh mà con chuột đã qua"
    },
    "descrip_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Thiết lập các hình ảnh với kích thước ban đầu của nó trước khi phóng to",
-      "update": "20110412"
+      "message": "Thiết lập các hình ảnh với kích thước ban đầu của nó trước khi phóng to"
    },
    "descrip_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Phóng to trên tất cả các nội dung của trang",
-      "update": "20110412"
+      "message": "Phóng to trên tất cả các nội dung của trang"
    },
    "descrip_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Zoom ra trên tất cả các nội dung của trang",
-      "update": "20110412"
+      "message": "Zoom ra trên tất cả các nội dung của trang"
    },
    "descrip_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "Tháo zoom trước hành động để trang",
-      "update": "20110412"
+      "message": "Tháo zoom trước hành động để trang"
    },
    "description": {
-      "category": "About",
       "description": "short extension description",
-      "message": "việt",
-      "update": "20110323"
+      "message": "việt"
    },
    "gesture_rLR": {
-      "category": "Options Page: Gestures",
       "description": "rocker right gesture title",
-      "message": "nút chỉnh phải",
-      "update": "20110605"
+      "message": "nút chỉnh phải"
    },
    "gesture_rRL": {
-      "category": "Options Page: Gestures",
       "description": "rocker left gesture title",
-      "message": "nút chỉnh trái",
-      "update": "20110412"
+      "message": "nút chỉnh trái"
    },
    "gesture_rocker_descrip": {
-      "category": "Options Page: Gestures",
       "description": "rocker right gesture description",
       "message": "Giữ nút button1 $ $, Click BUTTON2 $ $",
       "placeholders": {
@@ -888,41 +595,29 @@
             "content": "$2",
             "example": "right"
          }
-      },
-      "update": "20110412"
+      }
    },
    "gesture_wD": {
-      "category": "Options Page: Gestures",
       "description": "wheel down gesture title",
-      "message": "Di chuyển xuống",
-      "update": "20110412"
+      "message": "Di chuyển xuống"
    },
    "gesture_wD_descrip": {
-      "category": "Options Page: Gestures",
       "description": "wheel down gesture description",
-      "message": "Giữ nút hành động, Di chuyển xuống",
-      "update": "20110412"
+      "message": "Giữ nút hành động, Di chuyển xuống"
    },
    "gesture_wU": {
-      "category": "Options Page: Gestures",
       "description": "wheel up gesture title",
-      "message": "Di chuyển lên",
-      "update": "20110412"
+      "message": "Di chuyển lên"
    },
    "gesture_wU_descrip": {
-      "category": "Options Page: Gestures",
       "description": "wheel up gesture description",
-      "message": "Giữ nút hành động, Di chuyển lên",
-      "update": "20110412"
+      "message": "Giữ nút hành động, Di chuyển lên"
    },
    "options_addgesture_instruct_1": {
-      "category": "Options Page",
       "description": "instructions for making a gesture (just before bullet point list)",
-      "message": "Do một trong những cử chỉ sau đây:",
-      "update": "20110412"
+      "message": "Do một trong những cử chỉ sau đây:"
    },
    "options_addgesture_instruct_2": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Mouse Gesture: Nhấn giữ nút chuột BUTTON $ $ và rút ra một cử chỉ bằng cách di chuyển chuột, sau đó phát hành",
       "placeholders": {
@@ -930,11 +625,9 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_addgesture_instruct_3": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Di chuyển cử chỉ: Nhấn giữ nút chuột BUTTON $ $ và di chuyển các bánh xe di chuyển",
       "placeholders": {
@@ -942,23 +635,17 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_addgesture_instruct_4": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (rocker)",
-      "message": "Rocker cử chỉ: Giữ phím bất kỳ nút chuột, sau đó nhấp vào một",
-      "update": "20110412"
+      "message": "Rocker cử chỉ: Giữ phím bất kỳ nút chuột, sau đó nhấp vào một"
    },
    "options_addgesture_instruct_5": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for doing a keyboard shortcut",
-      "message": "Bàn phím tắt: Giữ bất kỳ phím sửa đổi (hoặc không có), sau đó bấm phím khác",
-      "update": "20110412"
+      "message": "Bàn phím tắt: Giữ bất kỳ phím sửa đổi (hoặc không có), sau đó bấm phím khác"
    },
    "options_addgesture_overwrite": {
-      "category": "Options Page",
       "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "cử chỉ này đã được sử dụng bởi $hành động $",
       "placeholders": {
@@ -966,11 +653,9 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_addgesture_title": {
-      "category": "Options Page",
       "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "Thiết lập một cử chỉ cho các hành động $ hành động $",
       "placeholders": {
@@ -978,113 +663,77 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_button_addcustomaction": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new custom action",
-      "message": "Thêm hành động Custom",
-      "update": "20110412"
+      "message": "Thêm hành động Custom"
    },
    "options_button_addgesture": {
-      "category": "Options Page",
       "description": "button to add the new gesture to the action",
-      "message": "Thêm cử chỉ này",
-      "update": "20110412"
+      "message": "Thêm cử chỉ này"
    },
    "options_button_overwrite": {
-      "category": "Options Page",
       "description": "button to overwrite the gesture made to the new action",
-      "message": "Ghi đè lên cử chỉ",
-      "update": "20110412"
+      "message": "Ghi đè lên cử chỉ"
    },
    "options_button_startaddgesture": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new gesture",
-      "message": "Thêm cử chỉ",
-      "update": "20110412"
+      "message": "Thêm cử chỉ"
    },
    "options_button_tryagain": {
-      "category": "Options Page",
       "description": "button to reject the gesture made and try to make a new one",
-      "message": "Thử lại",
-      "update": "20110412"
+      "message": "Thử lại"
    },
    "options_contents_actions": {
-      "category": "Options Page",
       "description": "category type for all actions links",
-      "message": "Cử chỉ hành động",
-      "update": "20110412"
+      "message": "Cử chỉ hành động"
    },
    "options_contents_more": {
-      "category": "Options Page",
       "description": "category type for all external links",
-      "message": "Nhiều",
-      "update": "20110412"
+      "message": "Nhiều"
    },
    "options_contents_settings": {
-      "category": "Options Page",
       "description": "category type for all settings links",
-      "message": "Cài đặt",
-      "update": "20110412"
+      "message": "Cài đặt"
    },
    "options_contents_status": {
-      "category": "Options Page",
       "description": "link to open the status page",
-      "message": "Xem Tình trạng",
-      "update": "20110412"
+      "message": "Xem Tình trạng"
    },
    "options_externalactions": {
-      "category": "Options Page",
       "description": "link to external actions",
-      "message": "Hành động bên ngoài",
-      "update": "20110412"
+      "message": "Hành động bên ngoài"
    },
    "options_moreactions": {
-      "category": "Options Page",
       "description": "Link to access more actions. These actions don't currently have a gesture assigned",
-      "message": "hành động không hợp lệ",
-      "update": "20110412"
+      "message": "hành động không hợp lệ"
    },
    "options_mousebutton_0": {
-      "category": "Options Page",
       "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
-      "message": "trái",
-      "update": "20110412"
+      "message": "trái"
    },
    "options_mousebutton_1": {
-      "category": "Options Page",
       "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
-      "message": "trung",
-      "update": "20110412"
+      "message": "trung"
    },
    "options_mousebutton_2": {
-      "category": "Options Page",
       "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
-      "message": "phải",
-      "update": "20110412"
+      "message": "phải"
    },
    "options_note_hidepageaction_button": {
-      "category": "Options Page",
       "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
-      "message": "Ẩn Icon",
-      "update": "20110412"
+      "message": "Ẩn Icon"
    },
    "options_note_print": {
-      "category": "Options Page",
       "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
-      "message": "Có vấn đề ghi nhớ tất cả những cử chỉ mà bạn đã thiết lập? In một cheatsheet!",
-      "update": "20110412"
+      "message": "Có vấn đề ghi nhớ tất cả những cử chỉ mà bạn đã thiết lập? In một cheatsheet!"
    },
    "options_note_print_button": {
-      "category": "Options Page",
       "description": "Label on the button to print the page",
-      "message": "In",
-      "update": "20110412"
+      "message": "In"
    },
    "options_note_remindrate": {
-      "category": "Options Page",
       "description": "Notify the user that they can rate this extension to help promote it",
       "message": "Bạn có thích Smooth cử chỉ? Xin vui lòng $ LINK $!",
       "placeholders": {
@@ -1092,17 +741,13 @@
             "content": "$1",
             "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_note_remindrate_link": {
-      "category": "Options Page",
       "description": "Text for the link leading to the extension's page",
-      "message": "để lại một đánh giá 5 sao",
-      "update": "20110412"
+      "message": "để lại một đánh giá 5 sao"
    },
    "options_note_translate": {
-      "category": "Options Page",
       "description": "Solicit translation requests",
       "message": "Bạn có biết tiếng Anh không? Trợ giúp LINK $ $",
       "placeholders": {
@@ -1110,17 +755,13 @@
             "content": "$1",
             "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_note_translate_link": {
-      "category": "Options Page",
       "description": "Link for soliciting translation requests",
-      "message": "Smooth dịch sang ngôn ngữ cử chỉ của bạn",
-      "update": "20110412"
+      "message": "Smooth dịch sang ngôn ngữ cử chỉ của bạn"
    },
    "options_note_updated": {
-      "category": "Options Page",
       "description": "Notify that the extension has been updated",
       "message": "Smooth cử chỉ đã được cập nhật đến $ VERSION $",
       "placeholders": {
@@ -1128,65 +769,45 @@
             "content": "$2",
             "example": "0.13.1"
          }
-      },
-      "update": "20110412"
+      }
    },
    "options_title": {
-      "category": "Options Page",
       "description": "The title of the options page, at top and tab name",
-      "message": "Tùy chọn!",
-      "update": "20110412"
+      "message": "Tùy chọn!"
    },
    "options_welcome_0": {
-      "category": "Options Page",
       "description": "First just-installed line",
-      "message": "Chào mừng đến với cử chỉ Smooth!",
-      "update": "20110412"
+      "message": "Chào mừng đến với cử chỉ Smooth!"
    },
    "options_welcome_1": {
-      "category": "Options Page",
       "description": "First just-installed bullet point",
-      "message": "Bạn có thể vào trang này Tùy chọn bằng cách giữ nút chuột phải và vẽ một 'O' (thử: phải xuống-trái-lên-phải)",
-      "update": "20110412"
+      "message": "Bạn có thể vào trang này Tùy chọn bằng cách giữ nút chuột phải và vẽ một 'O' (thử: phải xuống-trái-lên-phải)"
    },
    "options_welcome_2": {
-      "category": "Options Page",
       "description": "Second just-installed bullet point",
-      "message": "Để thiết lập các cử chỉ hành động mới hoặc click vào nút \"+\" bên dưới.",
-      "update": "20110412"
+      "message": "Để thiết lập các cử chỉ hành động mới hoặc click vào nút \"+\" bên dưới."
    },
    "options_welcome_3": {
-      "category": "Options Page",
       "description": "Third just-installed bullet point",
-      "message": "Cấu hình khác nhau tùy chọn bằng cách nhấp vào 'Cài đặt' ở bên phải hoặc di chuyển xuống phía dưới của trang.",
-      "update": "20110412"
+      "message": "Cấu hình khác nhau tùy chọn bằng cách nhấp vào 'Cài đặt' ở bên phải hoặc di chuyển xuống phía dưới của trang."
    },
    "popup_button_hidepageaction": {
-      "category": "Status Notification",
       "description": "a button to hide the pageaction",
-      "message": "Ẩn biểu tượng này URL",
-      "update": "20110412"
+      "message": "Ẩn biểu tượng này URL"
    },
    "popup_button_options": {
-      "category": "Status Notification",
       "description": "a button to go to the options page",
-      "message": "Tùy chọn",
-      "update": "20110412"
+      "message": "Tùy chọn"
    },
    "popup_button_reload": {
-      "category": "Status Notification",
       "description": "a button to reload the current page",
-      "message": "Cập Nhật",
-      "update": "20110412"
+      "message": "Cập Nhật"
    },
    "popup_status_blocked_1": {
-      "category": "Status Notification",
       "description": "text explaining a blocked tab",
-      "message": "Chrome khối mở rộng từ chạy trên trang này để đề phòng an ninh.",
-      "update": "20110412"
+      "message": "Chrome khối mở rộng từ chạy trên trang này để đề phòng an ninh."
    },
    "popup_status_blocked_file2": {
-      "category": "Status Notification",
       "description": "text explaining how to make a file:// tab work",
       "message": "Để có được Smooth cử chỉ để làm việc trên tập tin: / giao thức ftp:// / và, vào LINK $ $ và đánh dấu \"Cho phép truy cập đến tập tin URL\" dưới mục Gestures Smooth.",
       "placeholders": {
@@ -1194,17 +815,13 @@
             "content": "$1",
             "example": "Extensions"
          }
-      },
-      "update": "20110412"
+      }
    },
    "popup_status_blocked_file2_link": {
-      "category": "Status Notification",
       "description": "text naming the link that goes to chrome://extensions/",
-      "message": "Phần mở rộng",
-      "update": "20110412"
+      "message": "Phần mở rộng"
    },
    "popup_status_blocked_newtab2": {
-      "category": "Status Notification",
       "description": "text explaining how to make a newtab page work",
       "message": "Hãy thử LINK $ $ để cho phép những cử chỉ trên trang New Tab.",
       "placeholders": {
@@ -1212,409 +829,274 @@
             "content": "$1",
             "example": "Smooth Gestures New Tab Add-on"
          }
-      },
-      "update": "20110412"
+      }
    },
    "popup_status_blocked_newtab2_link": {
-      "category": "Status Notification",
       "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
-      "message": "Ultimate New Tab",
-      "update": "20110412"
+      "message": "Ultimate New Tab"
    },
    "popup_status_broken": {
-      "category": "Status Notification",
       "description": "text explaining a broken tab",
-      "message": "Cử chỉ không làm việc trên trang này ngay bây giờ.",
-      "update": "20110412"
+      "message": "Cử chỉ không làm việc trên trang này ngay bây giờ."
    },
    "popup_status_broken_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are broken on this page.",
-      "message": "Cử chỉ Broken",
-      "update": "20110412"
+      "message": "Cử chỉ Broken"
    },
    "popup_status_unable_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are blocked by this page.",
-      "message": "Cử chỉ bị chặn",
-      "update": "20110412"
+      "message": "Cử chỉ bị chặn"
    },
    "popup_status_working": {
-      "category": "Status Notification",
       "description": "text explaining a working tab",
-      "message": "Cử chỉ được làm việc trên trang này.",
-      "update": "20110412"
+      "message": "Cử chỉ được làm việc trên trang này."
    },
    "popup_status_working_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are working on this page.",
-      "message": "Cử chỉ làm việc",
-      "update": "20110412"
+      "message": "Cử chỉ làm việc"
    },
    "setting_blacklist": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Danh sách đen",
-      "update": "20110412"
+      "message": "Danh sách đen"
    },
    "setting_blacklist_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Vô hiệu hóa những cử chỉ trên lĩnh vực bao gồm trong danh sách đen. Lĩnh vực riêng biệt với dấu phẩy. (Ví dụ: \"mail.google.com, www.example.com\")",
-      "update": "20110412"
+      "message": "Vô hiệu hóa những cử chỉ trên lĩnh vực bao gồm trong danh sách đen. Lĩnh vực riêng biệt với dấu phẩy. (Ví dụ: \"mail.google.com, www.example.com\")"
    },
    "setting_button_export": {
-      "category": "Options Page: Settings",
       "description": "button to save settings as a backup file",
-      "message": "Lưu Cài đặt",
-      "update": "20110412"
+      "message": "Lưu Cài đặt"
    },
    "setting_button_import": {
-      "category": "Options Page: Settings",
       "description": "button to load a settings file",
-      "message": "Cài đặt Tải tập tin",
-      "update": "20110412"
+      "message": "Cài đặt Tải tập tin"
    },
    "setting_button_left": {
-      "category": "Options Page: Settings",
       "description": "choose left mouse button",
-      "message": "nút trái",
-      "update": "20110412"
+      "message": "nút trái"
    },
    "setting_button_middle": {
-      "category": "Options Page: Settings",
       "description": "choose middle mouse button",
-      "message": "nút giữa",
-      "update": "20110412"
+      "message": "nút giữa"
    },
    "setting_button_off": {
-      "category": "Options Page: Settings",
       "description": "setting label",
-      "message": "tắt",
-      "update": "20110412"
+      "message": "tắt"
    },
    "setting_button_on": {
-      "category": "Options Page: Settings",
       "description": "setting label",
-      "message": "Trên",
-      "update": "20110412"
+      "message": "Trên"
    },
    "setting_button_reset": {
-      "category": "Options Page: Settings",
       "description": "button label",
-      "message": "Thiết lập lại",
-      "update": "20110412"
+      "message": "Thiết lập lại"
    },
    "setting_button_right": {
-      "category": "Options Page: Settings",
       "description": "choose right mouse button",
-      "message": "nút phải",
-      "update": "20110412"
+      "message": "nút phải"
    },
    "setting_button_update": {
-      "category": "Options Page: Settings",
       "description": "button label",
-      "message": "cập nhật",
-      "update": "20110412"
+      "message": "cập nhật"
    },
    "setting_closelastblock": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "không đóng tab cuối cùng",
-      "update": "20110412"
+      "message": "không đóng tab cuối cùng"
    },
    "setting_closelastblock_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Đừng đóng tab mới nhất với các cử chỉ đóng tab, thay vào đó, hãy vào URL New Tab.",
-      "update": "20110412"
+      "message": "Đừng đóng tab mới nhất với các cử chỉ đóng tab, thay vào đó, hãy vào URL New Tab."
    },
    "setting_disabled": {
-      "category": "Options Page: Settings",
       "description": "choose no mouse button (gestures are disabled)",
-      "message": "không hoạt động",
-      "update": "20110412"
+      "message": "không hoạt động"
    },
    "setting_force_context": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Hiệu lực ngữ cảnh trình đơn trên Liên kết",
-      "update": "20110412"
+      "message": "Hiệu lực ngữ cảnh trình đơn trên Liên kết"
    },
    "setting_force_context2": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Hiệu lực ngữ cảnh trình đơn",
-      "update": "20110412"
+      "message": "Hiệu lực ngữ cảnh trình đơn"
    },
    "setting_force_context2_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Luôn luôn hiển thị menu ngữ cảnh trên nhấp chuột phải. Giữa những cử chỉ hữu ích cho nút kích hoạt",
-      "update": "20110412"
+      "message": "Luôn luôn hiển thị menu ngữ cảnh trên nhấp chuột phải. Giữa những cử chỉ hữu ích cho nút kích hoạt"
    },
    "setting_force_context_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Khối cử chỉ bắt đầu từ các liên kết. Trên hệ thống với các cuộc xung đột menu ngữ cảnh này cho phép các nút chuột phải để được bấm một lần, thay vì hai lần để có được vào menu ngữ cảnh. Tuy nhiên, nó cũng vô hiệu hóa tính năng tab mới từ liên kết.",
-      "update": "20110412"
+      "message": "Khối cử chỉ bắt đầu từ các liên kết. Trên hệ thống với các cuộc xung đột menu ngữ cảnh này cho phép các nút chuột phải để được bấm một lần, thay vì hai lần để có được vào menu ngữ cảnh. Tuy nhiên, nó cũng vô hiệu hóa tính năng tab mới từ liên kết."
    },
    "setting_group_assorted": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Cài đặt các loại",
-      "update": "20110412"
+      "message": "Cài đặt các loại"
    },
    "setting_group_context": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "cài đặt trình đơn ngữ cãnh",
-      "update": "20110412"
+      "message": "cài đặt trình đơn ngữ cãnh"
    },
    "setting_group_hide": {
-      "category": "Options Page: Settings",
       "description": "button to hide a group of settings",
-      "message": "ẩn",
-      "update": "20110412"
+      "message": "ẩn"
    },
    "setting_group_newtab": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "New Tab Settings",
-      "update": "20110412"
+      "message": "New Tab Settings"
    },
    "setting_group_show": {
-      "category": "Options Page: Settings",
       "description": "button to show a group of settings",
-      "message": "hiện",
-      "update": "20110412"
+      "message": "hiện"
    },
    "setting_group_trail": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "Cài đặt Xếp tiếp theo Line",
-      "update": "20110412"
+      "message": "Cài đặt Xếp tiếp theo Line"
    },
    "setting_hidepageaction": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Luôn luôn hiển thị Icon",
-      "update": "20110412"
+      "message": "Luôn luôn hiển thị Icon"
    },
    "setting_hidepageaction_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Các biểu tượng trên thanh URL cho phép truy cập nhanh vào trang này Smooth tùy chọn cử chỉ. Ngoài ra, bạn có thể tìm thấy trang này tại Wrench> Tools> Extensions> Smooth cử chỉ> Tùy chọn",
-      "update": "20110412"
+      "message": "Các biểu tượng trên thanh URL cho phép truy cập nhanh vào trang này Smooth tùy chọn cử chỉ. Ngoài ra, bạn có thể tìm thấy trang này tại Wrench> Tools> Extensions> Smooth cử chỉ> Tùy chọn"
    },
    "setting_hold_button": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Chuột Nút để bắt đầu cử chỉ",
-      "update": "20110412"
+      "message": "Chuột Nút để bắt đầu cử chỉ"
    },
    "setting_hold_button_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Cho phép vẽ cử chỉ với nút chuột giữa hoặc trái, thay vì các nút chuột phải.",
-      "update": "20110412"
+      "message": "Cho phép vẽ cử chỉ với nút chuột giữa hoặc trái, thay vì các nút chuột phải."
    },
    "setting_import": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "cài đặt sao lưu",
-      "update": "20110412"
+      "message": "cài đặt sao lưu"
    },
    "setting_import_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Lưu cài đặt hiện tại của bạn (bao gồm cả cử chỉ, hành động tùy chỉnh, và các tùy chọn). Tải tập tin để khôi phục lại các thiết lập bị mất hoặc thiết lập di chuyển đến một máy tính khác",
-      "update": "20110412"
+      "message": "Lưu cài đặt hiện tại của bạn (bao gồm cả cử chỉ, hành động tùy chỉnh, và các tùy chọn). Tải tập tin để khôi phục lại các thiết lập bị mất hoặc thiết lập di chuyển đến một máy tính khác"
    },
    "setting_newtab_linkright": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Liên kết-có nguồn gốc New Tabs Open Tiếp đến hiện tại",
-      "update": "20110412"
+      "message": "Liên kết-có nguồn gốc New Tabs Open Tiếp đến hiện tại"
    },
    "setting_newtab_linkright_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Tương tự như hành vi mặc định của Chromium khi liên kết mở trong một tab mới. Điều này có xu hướng các tab cùng nhóm theo chủ đề. (Hữu ích cho Split và Hợp nhất Tabs; xem ở trên)",
-      "update": "20110412"
+      "message": "Tương tự như hành vi mặc định của Chromium khi liên kết mở trong một tab mới. Điều này có xu hướng các tab cùng nhóm theo chủ đề. (Hữu ích cho Split và Hợp nhất Tabs; xem ở trên)"
    },
    "setting_newtab_right": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "New Tabs Open Tiếp đến hiện tại",
-      "update": "20110412"
+      "message": "New Tabs Open Tiếp đến hiện tại"
    },
    "setting_newtab_right_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "New tab (không phải từ các liên kết) mở bên cạnh các tab hiện hành.",
-      "update": "20110412"
+      "message": "New tab (không phải từ các liên kết) mở bên cạnh các tab hiện hành."
    },
    "setting_newtab_url": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "New Tab URL",
-      "update": "20110412"
+      "message": "New Tab URL"
    },
    "setting_newtab_url_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Thiết lập các URL mà New Tab hành động đi.",
-      "update": "20110412"
+      "message": "Thiết lập các URL mà New Tab hành động đi."
    },
    "setting_reset": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Thiết lập lại để giá trị mặc định",
-      "update": "20110412"
+      "message": "Thiết lập lại để giá trị mặc định"
    },
    "setting_reset_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Đặt tất cả những cử chỉ và các thiết lập mặc định các giá trị",
-      "update": "20110412"
+      "message": "Đặt tất cả những cử chỉ và các thiết lập mặc định các giá trị"
    },
    "setting_selecttolink": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Sử dụng các URL được chọn để liên kết",
-      "update": "20110412"
+      "message": "Sử dụng các URL được chọn để liên kết"
    },
    "setting_selecttolink_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Chọn văn bản với một hoặc nhiều url làm đầu vào cho một cử chỉ liên kết. Ví dụ: chọn 2 url trong văn bản, thực hiện các Tab mới từ cử chỉ Link - cả hai url sẽ mở hai tab mới.",
-      "update": "20110412"
+      "message": "Chọn văn bản với một hoặc nhiều url làm đầu vào cho một cử chỉ liên kết. Ví dụ: chọn 2 url trong văn bản, thực hiện các Tab mới từ cử chỉ Link - cả hai url sẽ mở hai tab mới."
    },
    "setting_sendstats": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Trình sử dụng",
-      "update": "20110412"
+      "message": "Trình sử dụng"
    },
    "setting_sendstats_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Gửi một báo cáo sử dụng cử chỉ vô danh để thông báo chương trình của các cử chỉ thông dụng nhất, do đó ảnh hưởng đến cử chỉ mặc định của bản phát hành trong tương lai",
-      "update": "20110412"
+      "message": "Gửi một báo cáo sử dụng cử chỉ vô danh để thông báo chương trình của các cử chỉ thông dụng nhất, do đó ảnh hưởng đến cử chỉ mặc định của bản phát hành trong tương lai"
    },
    "setting_sync": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Đồng bộ hóa",
-      "update": "20110412"
+      "message": "Đồng bộ hóa"
    },
    "setting_sync_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Đồng bộ hóa các thiết lập và cử chỉ với các máy tính khác thông qua các dấu trang. Để sử dụng tính năng này bạn cũng phải bật tính năng đồng bộ hóa bookmark.",
-      "update": "20110412"
+      "message": "Đồng bộ hóa các thiết lập và cử chỉ với các máy tính khác thông qua các dấu trang. Để sử dụng tính năng này bạn cũng phải bật tính năng đồng bộ hóa bookmark."
    },
    "setting_trail_color": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Màu sắc của Trailing Line",
-      "update": "20110412"
+      "message": "Màu sắc của Trailing Line"
    },
    "setting_trail_color_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Điều chỉnh màu sắc và minh bạch của các đường vẽ khi bạn thực hiện một cử chỉ.",
-      "update": "20110412"
+      "message": "Điều chỉnh màu sắc và minh bạch của các đường vẽ khi bạn thực hiện một cử chỉ."
    },
    "setting_trail_draw": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Vẽ một đường dây Trailing",
-      "update": "20110412"
+      "message": "Vẽ một đường dây Trailing"
    },
    "setting_trail_draw_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Vẽ một đường thẳng theo sau ra màn hình bất cứ khi nào cử chỉ đang được rút ra.",
-      "update": "20110412"
+      "message": "Vẽ một đường thẳng theo sau ra màn hình bất cứ khi nào cử chỉ đang được rút ra."
    },
    "setting_trail_width": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "Chiều rộng của Trailing Line",
-      "update": "20110412"
+      "message": "Chiều rộng của Trailing Line"
    },
    "setting_trail_width_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "Điều chỉnh độ rộng của đường vẽ khi bạn thực hiện một cử chỉ.",
-      "update": "20110412"
+      "message": "Điều chỉnh độ rộng của đường vẽ khi bạn thực hiện một cử chỉ."
    },
    "setting_warning_reset": {
-      "category": "Options Page: Settings",
       "description": "warn that setting will be lost during a reset",
-      "message": "Bạn có chắc chắn muốn thiết lập lại? Bạn sẽ mất tất cả các thiết lập tùy chỉnh của bạn",
-      "update": "20110412"
+      "message": "Bạn có chắc chắn muốn thiết lập lại? Bạn sẽ mất tất cả các thiết lập tùy chỉnh của bạn"
    },
    "status_button_reloadall": {
-      "category": "Tab Status Page",
       "description": "button to reload all broken pages",
-      "message": "Cập Nhật Tất cả không làm việc trang",
-      "update": "20110412"
+      "message": "Cập Nhật Tất cả không làm việc trang"
    },
    "status_button_reloadone": {
-      "category": "Tab Status Page",
       "description": "button to reload single broken page",
-      "message": "Cập nhật",
-      "update": "20110412"
+      "message": "Cập nhật"
    },
    "status_legend_blocked": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Hệ thống trang bị chặn",
-      "update": "20110412"
+      "message": "Hệ thống trang bị chặn"
    },
    "status_legend_broken": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Không phải làm việc",
-      "update": "20110412"
+      "message": "Không phải làm việc"
    },
    "status_legend_loading": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Loading",
-      "update": "20110412"
+      "message": "Loading"
    },
    "status_legend_working": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "Làm việc",
-      "update": "20110412"
+      "message": "Làm việc"
    },
    "status_link_options": {
-      "category": "Tab Status Page",
       "description": "Link to go to the options page",
-      "message": "Thiết lập cử chỉ mượt: Tùy chọn!",
-      "update": "20110412"
+      "message": "Thiết lập cử chỉ mượt: Tùy chọn!"
    },
    "status_title": {
-      "category": "Tab Status Page",
       "description": "The title of the status page, at top and tab name",
-      "message": "Trạng thái",
-      "update": "20110321"
+      "message": "Trạng thái"
    },
    "status_window_other": {
-      "category": "Tab Status Page",
       "description": "title for a group of tab statuses",
-      "message": "Cửa sổ khác",
-      "update": "20110321"
+      "message": "Cửa sổ khác"
    },
    "status_window_this": {
-      "category": "Tab Status Page",
       "description": "title for a group of tab statuses",
-      "message": "Cửa sổ này",
-      "update": "20110321"
+      "message": "Cửa sổ này"
    }
 }

@@ -28,6 +28,7 @@ module.exports = {
         es6: true,
       },
       extends: [
+        './.wxt/eslintrc-auto-import.js',
         'airbnb',
         'airbnb-typescript',
         'airbnb/hooks',

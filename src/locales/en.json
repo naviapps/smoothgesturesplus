@@ -1,587 +1,682 @@
 {
+   "_": {
+      "message": "_"
+   },
    "action_bookmark": {
       "description": "Action title",
-      "message": "북마크 페이지"
+      "message": "Bookmark Page"
    },
    "action_clone_tab": {
       "description": "Action title for clone_tab",
-      "message": "탭 복제"
+      "message": "Duplicate Tab"
    },
    "action_clone_tab_hack": {
       "description": "Action title for clone_tab",
-      "message": "탭 복제 (hack)"
+      "message": "Duplicate Tab (hack)"
    },
    "action_close_left_tabs": {
       "description": "Action title",
-      "message": "좌측 탭 닫기"
+      "message": "Close Left Tabs"
    },
    "action_close_other_tabs": {
       "description": "Action title",
-      "message": "모든 다른 탭 닫기"
+      "message": "Close All Other Tabs"
    },
    "action_close_right_tabs": {
       "description": "Action title",
-      "message": "우측 탭 닫기"
+      "message": "Close Right Tabs"
    },
    "action_close_tab": {
       "description": "Action title for close_tab",
-      "message": "탭 닫기"
+      "message": "Close Tab"
    },
    "action_close_window": {
       "description": "Action title for close_window",
-      "message": "창 닫기"
+      "message": "Close Window"
    },
    "action_copy": {
       "description": "Action title",
-      "message": "텍스트를 복사해서 클립보드로"
+      "message": "Copy Text to Clipboard"
+   },
+   "action_copy_link": {
+      "description": "Action title",
+      "message": "Copy Link to Clipboard"
+   },
+   "action_find_next": {
+      "description": "Action title",
+      "message": "Find Selection (Next)"
+   },
+   "action_find_prev": {
+      "description": "Action title",
+      "message": "Find Selection (Previous)"
+   },
+   "action_fullscreen_window": {
+      "description": "Action title for fullscreen_window",
+      "message": "Fullscreen Window"
    },
    "action_goto_bottom": {
       "description": "Action title for goto_bottom",
-      "message": "맨 아래로"
+      "message": "Go to Bottom"
    },
    "action_goto_top": {
       "description": "Action title for goto_top",
-      "message": "맨 위로"
+      "message": "Go to Top"
    },
    "action_hide_image": {
       "description": "Action title",
-      "message": "이미지 숨기기"
+      "message": "Hide Image"
+   },
+   "action_maximize_window": {
+      "description": "Action title for maximize_window",
+      "message": "Maximize Window"
    },
    "action_maximize_x": {
       "description": "Action title for clone_tab",
-      "message": "창 크기 최대화 (hack)"
+      "message": "Maximize Window (hack)"
    },
    "action_merge_tabs": {
       "description": "Action title for merge_tabs",
-      "message": "탭 합치기"
+      "message": "Merge Tabs"
+   },
+   "action_minimize_window": {
+      "description": "Action title for minimize_window",
+      "message": "Minimize Window"
    },
    "action_minimize_x": {
       "description": "Action title for clone_tab",
-      "message": "창 크기 최소화 (hack)"
+      "message": "Minimize Window (hack)"
    },
    "action_navigate_tab": {
       "description": "Action title for new_tab",
-      "message": "새 탭 페이지로"
+      "message": "Go to New Tab Page"
    },
    "action_new_tab": {
       "description": "Action title for new_tab",
-      "message": "새 탭"
+      "message": "New Tab"
    },
    "action_new_tab_back": {
       "description": "Action title for new_tab_back",
-      "message": "새 탭 (Open Link in Background)"
+      "message": "New Tab (Open Link in Background)"
    },
    "action_new_tab_link": {
       "description": "Action title for new_tab_link",
-      "message": "새 탭 (링크 열기)"
+      "message": "New Tab (Open Link)"
    },
    "action_new_window": {
       "description": "Action title for new_window",
-      "message": "새 창"
+      "message": "New Window"
    },
    "action_new_window_link": {
       "description": "Action title",
-      "message": "새 창 (링크 열기)"
+      "message": "New Window (Open Link)"
    },
    "action_next_tab": {
       "description": "Action title for next_tab",
-      "message": "다음 탭"
+      "message": "Next Tab"
    },
    "action_next_window": {
       "description": "Action title for clone_tab",
-      "message": "다음 창 (hack)"
+      "message": "Next Window (hack)"
    },
    "action_open_bookmarks": {
       "description": "Action title",
-      "message": "북마크 관리자 열기"
+      "message": "Open Bookmark Manager"
    },
    "action_open_downloads": {
       "description": "Action title",
-      "message": "다운로드 열기"
+      "message": "Open Downloads"
    },
    "action_open_extensions": {
       "description": "Action title",
-      "message": "확장 프로그램 열기"
+      "message": "Open Extensions"
    },
    "action_open_history": {
       "description": "Action title",
-      "message": "방문 기록 열기"
+      "message": "Open History"
    },
    "action_open_image": {
       "description": "Action title",
-      "message": "이미지 열기"
+      "message": "Open Image"
+   },
+   "action_open_screenshot": {
+      "description": "Action title for open_screenshot",
+      "message": "Tab Screenshot"
+   },
+   "action_open_screenshot_full": {
+      "description": "Action title for open_screenshot_full",
+      "message": "Full Tab Screenshot"
    },
    "action_options": {
       "description": "Action title for options",
-      "message": "옵션 페이지 열기"
+      "message": "Open Options Page"
    },
    "action_page_back": {
       "description": "Action title for page_back",
-      "message": "히스토리 뒤로"
+      "message": "History Back"
    },
    "action_page_back_close": {
       "description": "Action title for page_back_close",
-      "message": "히스토리 뒤로 또는 닫기"
+      "message": "History Back or Close"
    },
    "action_page_down": {
       "description": "Action title for page_down",
-      "message": "페이지 아래로"
+      "message": "Page Down"
    },
    "action_page_forward": {
       "description": "Action title for page_forward",
-      "message": "히스토리 앞으로"
+      "message": "History Forward"
    },
    "action_page_next": {
       "description": "Action title for page_next",
-      "message": "다음 페이지"
+      "message": "Next Page"
    },
    "action_page_prev": {
       "description": "Action title for page_prev",
-      "message": "이전 페이지"
+      "message": "Previous Page"
    },
    "action_page_up": {
       "description": "Action title for page_up",
-      "message": "페이지 올리기"
+      "message": "Page Up"
    },
    "action_parent_dir": {
       "description": "Action title",
-      "message": "상위 디렉터리"
+      "message": "Parent Directory"
    },
    "action_pin": {
       "description": "Action title",
-      "message": "탭 고정"
+      "message": "Pin Tab"
    },
    "action_prev_tab": {
       "description": "Action title for prev_tab",
-      "message": "이전 탭"
+      "message": "Previous Tab"
    },
    "action_prev_window": {
       "description": "Action title for clone_tab",
-      "message": "앞 윈도우"
+      "message": "Previous Window (hack)"
    },
    "action_print": {
       "description": "Action title",
-      "message": "페이지 인쇄"
+      "message": "Print Page"
    },
    "action_reload_all_tabs": {
       "description": "Action title",
-      "message": "모든 탭 새로고침"
+      "message": "Reload All Tabs"
    },
    "action_reload_tab": {
       "description": "Action title for reload_tab",
-      "message": "탭 새로고침"
+      "message": "Reload Tab"
    },
    "action_reload_tab_full": {
       "description": "Action title for reload_tab_full",
-      "message": "탭 새로고침 (캐시 갱신)"
+      "message": "Reload Tab (no cache)"
+   },
+   "action_save_image": {
+      "description": "Action title",
+      "message": "Save Image"
+   },
+   "action_save_screenshot": {
+      "description": "Action title for save_screenshot",
+      "message": "Save Tab Screenshot"
+   },
+   "action_save_screenshot_full": {
+      "description": "Action title for save_screenshot_full",
+      "message": "Save Full Tab Screenshot"
    },
    "action_search_sel": {
       "description": "Action title",
-      "message": "구글 검색"
+      "message": "Search Google"
    },
    "action_show_cookies": {
       "description": "Action title",
-      "message": "쿠키 목록"
+      "message": "List Cookies"
    },
    "action_split_tabs": {
       "description": "Action title for split_tabs",
-      "message": "탭 자르기"
+      "message": "Split Tabs"
    },
    "action_status": {
       "description": "Action title for status",
-      "message": "상태 페이지 열기"
+      "message": "Open Status Page"
    },
    "action_stop": {
       "description": "Action title for stop",
-      "message": "로딩 중지"
+      "message": "Stop Loading"
    },
    "action_tab_to_left": {
       "description": "Action title",
-      "message": "탭 왼쪽으로 이동"
+      "message": "Move Tab Left"
    },
    "action_tab_to_right": {
       "description": "Action title",
-      "message": "탭 오른쪽으로 이동"
+      "message": "Move Tab Right"
    },
    "action_toggle_bookmark": {
       "description": "Action title",
-      "message": "북마크 추가"
+      "message": "Toggle Bookmark"
    },
    "action_toggle_pin": {
       "description": "Action title",
-      "message": "탭 고정 전환"
+      "message": "Toggle Pin Tab"
    },
    "action_translate": {
       "description": "Action title",
-      "message": "선택영역 번역"
+      "message": "Translate Selection"
    },
    "action_unbookmark": {
       "description": "Action title",
-      "message": "북마크 제거"
+      "message": "Remove Bookmark"
    },
    "action_undo_close": {
       "description": "Action title for undo_close",
-      "message": "닫은 탭 다시 열기"
+      "message": "Undo Close Tab"
    },
    "action_undo_close_hack": {
       "description": "Action title for undo_close_hack",
-      "message": "닫은 탭 다시 열기 (hack)"
+      "message": "Undo Close Tab (hack)"
    },
    "action_unpin": {
       "description": "Action title",
-      "message": "탭 고정 해제"
+      "message": "Unpin Tab"
    },
    "action_view_source": {
       "description": "Action title for view_source",
-      "message": "페이지 소스 보기"
+      "message": "View Page Source"
    },
    "action_zoom_img_in": {
       "description": "Action title",
-      "message": "이미지 확대"
+      "message": "Zoom In on Image"
    },
    "action_zoom_img_out": {
       "description": "Action title",
-      "message": "이미지 축소"
+      "message": "Zoom Out on Image"
    },
    "action_zoom_img_zero": {
       "description": "Action title",
-      "message": "이미지 확대 원래대로"
+      "message": "Reset Zoom on Image"
    },
    "action_zoom_in": {
       "description": "Action title",
-      "message": "페이지 확대"
+      "message": "Zoom In on Page"
    },
    "action_zoom_out": {
       "description": "Action title",
-      "message": "페이지 축소"
+      "message": "Zoom Out on Page"
    },
    "action_zoom_zero": {
       "description": "Action title",
-      "message": "페이지 확대 원래대로"
+      "message": "Reset Zoom on Page"
    },
    "cat_custom": {
       "description": "Name of category for all custom actions",
-      "message": "사용자 지정 명령"
+      "message": "Custom Actions"
    },
    "cat_other": {
       "description": "Name of category for actions that don't have a category",
-      "message": "기타 명령"
+      "message": "Other Actions"
    },
    "cat_page_navigation": {
       "description": "Name of category encompassing basic page navigation actions",
-      "message": "페이지 탐색"
+      "message": "Page Navigation"
    },
    "cat_settings": {
       "description": "Title of the settings group",
-      "message": "기타 설정"
+      "message": "Other Settings"
    },
    "cat_tab_management": {
       "description": "Name of category encompassing tab manipulation actions",
-      "message": "탭 관리"
+      "message": "Tab Management"
    },
    "cat_utilities": {
       "description": "Name of category for general utility actions",
-      "message": "유용한 명령"
+      "message": "Utilities"
    },
    "context_not_image": {
       "description": "A short label for a gesture indicating that the gesture is not valid on an image",
-      "message": "이미지 위에 있지 않음"
+      "message": "not on image"
    },
    "context_not_link": {
       "description": "A short label for a gesture indicating that the gesture is not valid on a link",
-      "message": "링크 위에 있지 않음"
+      "message": "not on link"
    },
    "context_not_links_images": {
       "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
-      "message": "이미지나 링크 위에 있지 않음"
+      "message": "not on links or images"
    },
    "context_not_selection": {
       "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
-      "message": "선택 안됨"
+      "message": "not with selection"
    },
    "context_on_image": {
       "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
-      "message": "이미지 위"
+      "message": "on image"
    },
    "context_on_link": {
       "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
-      "message": "링크 위"
+      "message": "on link"
    },
    "context_with_selection": {
       "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
-      "message": "선택됨"
+      "message": "with selection"
    },
    "descrip_bookmark": {
       "description": "Action description",
-      "message": "이 페이지를 북마크에 추가"
+      "message": "Add a bookmark to the current page."
    },
    "descrip_clone_tab": {
       "description": "Action description for clone_tab",
-      "message": "탭 복제. 히스토리까지 복제되지는 않음."
+      "message": "Open a duplicate tab of the current page. The duplicate tab will not have the history of the original tab."
    },
    "descrip_clone_tab_hack": {
       "description": "Action description for clone_tab",
-      "message": "탭 복제. 히스토리까지 복제(완벽하진 않음)."
+      "message": "Open a duplicate tab of the current page. Load the history with an imperfect workaround"
    },
    "descrip_close_left_tabs": {
       "description": "Action description",
-      "message": "현재 탭의 왼쪽에 있는 모든 탭 닫기"
+      "message": "Close all tabs to the left of the current tab"
    },
    "descrip_close_other_tabs": {
       "description": "Action description",
-      "message": "현재 탭을 제외하고 현재 창에 있는 모든 탭 닫기"
+      "message": "Close all tabs in the current window, except for the selected tab"
    },
    "descrip_close_right_tabs": {
       "description": "Action description",
-      "message": "현재 탭의 오른쪽에 있는 모든 탭 닫기"
+      "message": "Close all tabs to the right of the current tab"
    },
    "descrip_close_tab": {
       "description": "Action description for close_tab",
-      "message": "현재 선택된 탭 닫기"
+      "message": "Close the currently selected tab"
    },
    "descrip_close_window": {
       "description": "Action description for close_window",
-      "message": "현재 선택된 창에서 모든 탭 닫기"
+      "message": "Close all tabs in the currently selected window"
    },
    "descrip_copy": {
       "description": "Action description",
-      "message": "선택된 텍스트를 복사해 클립보드로 저장합니다."
+      "message": "Copy selected text to the clipboard."
+   },
+   "descrip_copy_link": {
+      "description": "Action description",
+      "message": "Start a gesture on a link to copy it to the clipboard."
+   },
+   "descrip_find_next": {
+      "description": "Action description",
+      "message": "Find the next copy of the selected text"
+   },
+   "descrip_find_prev": {
+      "description": "Action description",
+      "message": "Find a previous copy of the selected text"
+   },
+   "descrip_fullscreen_window": {
+      "description": "Action description for fullscreen_window",
+      "message": "Toggle the fullscreen mode of the current window"
    },
    "descrip_goto_bottom": {
       "description": "Action description for goto_bottom",
-      "message": "페이지 맨 아래로 스크롤"
+      "message": "Scroll page to the bottom"
    },
    "descrip_goto_top": {
       "description": "Action description for goto_top",
-      "message": "페이지 맨 위로 스크롤"
+      "message": "Scroll page to the top"
    },
    "descrip_hide_image": {
       "description": "Action description",
-      "message": "마우스에 위치한 이미지 제거"
+      "message": "Remove the image that the mouse is over from the page"
+   },
+   "descrip_maximize_window": {
+      "description": "Action description for maximize_window",
+      "message": "Toggle maximization of the current window"
    },
    "descrip_maximize_x": {
       "description": "Action description for clone_tab",
-      "message": "이것은 창 최대로하기를 시뮬레이션하기위한 임시방편입니다."
+      "message": "This is a messy hack to simulate maximizing a window"
    },
    "descrip_merge_tabs": {
       "description": "Action description for merge_tabs",
-      "message": "현재 창의 모든 탭을, 직전에 활성화된 창의 탭들과 병합합니다."
+      "message": "Merge all of the tabs of the current window with those of the last focused window"
+   },
+   "descrip_minimize_window": {
+      "description": "Action description for minimize_window",
+      "message": "Minimize the current window"
    },
    "descrip_minimize_x": {
       "description": "Action description for clone_tab",
-      "message": "이것은 창 최소로하기를 시뮬레이션하기위한 아주 임시방편입니다."
+      "message": "This is a _very_ messy hack to simulate minimizing a window"
    },
    "descrip_navigate_tab": {
       "description": "Action description for new_tab",
-      "message": "새 탭 페이지에서 웹서핑 하기 (URL은 아래 설정할 수 있음)"
+      "message": "Navigate to the New Tab page (the URL can be set below)"
    },
    "descrip_new_tab": {
       "description": "Action description for new_tab",
-      "message": "현재 창에서 새 탭 열기 (URL을 아래에 설정할 수 있음)"
+      "message": "Open a new tab in the current window (the URL can be set below)"
    },
    "descrip_new_tab_back": {
       "description": "Action description for new_tab_back",
-      "message": "새 탭에서 열 링크 위에서 제스처를 시작하지만 그 탭을 활성화하진 않음."
+      "message": "Start a gesture on a link to open that link in a new tab, but don't view the new tab yet"
    },
    "descrip_new_tab_link": {
       "description": "Action description for new_tab_link",
-      "message": "새 탭에서 열 링크 위에서 제스처를 시작"
+      "message": "Start a gesture on a link to open that link in a new tab"
    },
    "descrip_new_window": {
       "description": "Action description for new_window",
-      "message": "한 개의 기본 탭이 있는 새 창 열기"
+      "message": "Open a new window with the one default tab"
    },
    "descrip_new_window_link": {
       "description": "Action description",
-      "message": "새 창에서 열 링크 위에서 제스처를 시작"
+      "message": "Start a gesture on a link to open that link in a new window"
    },
    "descrip_next_tab": {
       "description": "Action description for next_tab",
-      "message": "현재 탭의 오른쪽 탭 선택"
+      "message": "Select the tab to the right of the current tab"
    },
    "descrip_next_window": {
       "description": "Action description for clone_tab",
-      "message": "가장 오래전에 활성화됐던 윈도우 선택"
+      "message": "Select the window that was focused longest ago"
    },
    "descrip_open_bookmarks": {
       "description": "Action description",
-      "message": "새 탭에서 북마크 관리자 열기"
+      "message": "Open the bookmark manager in a new tab"
    },
    "descrip_open_downloads": {
       "description": "Action description",
-      "message": "새 탭에서 다운로드 페이지 열기"
+      "message": "Open the downloads page in a new tab"
    },
    "descrip_open_extensions": {
       "description": "Action description",
-      "message": "새 탭에서 확장 프로그램 페이지 열기"
+      "message": "Open the extensions page in a new tab"
    },
    "descrip_open_history": {
       "description": "Action description",
-      "message": "새 탭에서 방문 기록 열기"
+      "message": "Open the history page in a new tab"
    },
    "descrip_open_image": {
       "description": "Action description",
-      "message": "마우스가 위치한 이미지를 새 탭에서 열기"
+      "message": "Open the image that the mouse is over in a new tab"
+   },
+   "descrip_open_screenshot": {
+      "description": "Action description for open_screenshot",
+      "message": "Take a screenshot of the current view and open in a new tab"
+   },
+   "descrip_open_screenshot_full": {
+      "description": "Action description for open_screenshot_full",
+      "message": "Take a full-page screenshot of the current view and open in a new tab"
    },
    "descrip_options": {
       "description": "Action description for options",
-      "message": "이 옵션 페이지 열기"
+      "message": "Open this options page"
    },
    "descrip_page_back": {
       "description": "Action description for page_back",
-      "message": "현재 탭에서 히스토리의 바로 전 링크로 돌아가기"
+      "message": "Go back one page in history for the current tab"
    },
    "descrip_page_back_close": {
       "description": "Action description for page_back_close",
-      "message": "현재 탭에서 히스토리의 바로 전 링크로 돌아가기; 바로 전 링크가 없으면 탭 닫기"
+      "message": "Go back one page in history for the current tab; or, if no history remains, close the tab"
    },
    "descrip_page_down": {
       "description": "Action description for page_down",
-      "message": "80% 정도 페이지를 내리기"
+      "message": "Scroll the page down 80%"
    },
    "descrip_page_forward": {
       "description": "Action description for page_forward",
-      "message": "현재 탭에서 히스토리의 바로 다음 링크로 가기"
+      "message": "Go forward one page for the current tab"
    },
    "descrip_page_next": {
       "description": "Action description for page_next",
-      "message": "'next'라는 텍스트에 있는 링크로 가기"
+      "message": "Try to go to the next page by following a link with the text: 'next'"
    },
    "descrip_page_prev": {
       "description": "Action description for page_prev",
-      "message": "'previous'라는 텍스트에 있는 링크로 가기"
+      "message": "Try to go to the previous page by following a link with the text: 'previous'"
    },
    "descrip_page_up": {
       "description": "Action description for page_up",
-      "message": "80% 정도 페이지를 올리기"
+      "message": "Scroll the page up 80%"
    },
    "descrip_parent_dir": {
       "description": "Action description",
-      "message": "현재 페이지의 상위 디렉터리를 탐색합니다. 루트 디렉터리에 있다면 하위 도메인을 제거합니다."
+      "message": "Navigate to the parent directory of the current page. If already at the root directory, try to remove subdomains."
    },
    "descrip_pin": {
       "description": "Action description",
-      "message": "현재 탭 항상 보이기"
+      "message": "Pin the current tab"
    },
    "descrip_prev_tab": {
       "description": "Action description for prev_tab",
-      "message": "왼쪽 탭 선택"
+      "message": "Select the tab to the left of the current tab"
    },
    "descrip_prev_window": {
       "description": "Action description for clone_tab",
-      "message": "현재 윈도우가 활성화되기 바로 전에 활성화됐던 창 선택"
+      "message": "Select the window focused immediately before the current window"
    },
    "descrip_print": {
       "description": "Action description",
-      "message": "현재 페이지 인쇄"
+      "message": "Print the current page"
    },
    "descrip_reload_all_tabs": {
       "description": "Action description",
-      "message": "현재 윈도우의 모든 탭 새로고침"
+      "message": "Refresh all of the tabs in the current window"
    },
    "descrip_reload_tab": {
       "description": "Action description for reload_tab",
-      "message": "현재 탭 새로고침"
+      "message": "Refresh the contents of the current tab"
    },
    "descrip_reload_tab_full": {
       "description": "Action description for reload_tab_full",
-      "message": "현재탭의 내용 완전히 새로고침 (캐시에서 읽어오지 않고)"
+      "message": "Fully refresh the contents of the current tab (skip the cache)"
+   },
+   "descrip_save_image": {
+      "description": "Action description",
+      "message": "Save the image that the mouse is over in a new tab"
+   },
+   "descrip_save_screenshot": {
+      "description": "Action description for save_screenshot",
+      "message": "Take a screenshot of the current view and save to the computer"
+   },
+   "descrip_save_screenshot_full": {
+      "description": "Action description for save_screenshot_full",
+      "message": "Take a full-page screenshot of the current view and save to the computer"
    },
    "descrip_search_sel": {
       "description": "Action description",
-      "message": "구글에서 선택된 텍스트 검색"
+      "message": "Search Google for the selected text"
    },
    "descrip_show_cookies": {
       "description": "Action description",
-      "message": "현재 페이지의 모든 쿠키 목록 보이기"
+      "message": "Show a list of all of the cookies for the current page"
    },
    "descrip_split_tabs": {
       "description": "Action description for split_tabs",
-      "message": "현재탭과 현재탭 오른쪽의 모든 탭을 모두 새 창으로 나누기"
+      "message": "Split all tabs to the right of (and including) the current tab into a new window"
    },
    "descrip_status": {
       "description": "Action description for status",
-      "message": "스무드 제스처 확장 프로그램의 상태 페이지 열기"
+      "message": "Open the Smooth Gestures Plus extension status page"
    },
    "descrip_stop": {
       "description": "Action description for stop",
-      "message": "현재 탭 중지. (이미지 페이지 등등에서 동작하지 않을 수 있음)"
+      "message": "Stop loading the current tab. (May not work on some pages, like image pages)"
    },
    "descrip_tab_to_left": {
       "description": "Action description",
-      "message": "현재탭을 한칸 왼쪽으로 옮기기"
+      "message": "Move the current tab once to the left"
    },
    "descrip_tab_to_right": {
       "description": "Action description",
-      "message": "현재탭을 한칸 오른쪽으로 옮기기"
+      "message": "Move the current tab once to the right"
    },
    "descrip_toggle_bookmark": {
       "description": "Action description",
-      "message": "이미 북마크에 있으면 그 내용을 지우고, 북마크에 없으면 북마크에 등록하기."
+      "message": "Removes a bookmark if one is already set. Adds a bookmark to current page if it isn't."
    },
    "descrip_toggle_pin": {
       "description": "Action description",
-      "message": "핀(항상 보기) 상태 켜기/끄기"
+      "message": "Toggle the pinned state of the tab"
    },
    "descrip_translate": {
       "description": "Action description",
-      "message": "선택된 텍스트를 크롬의 기본 언어로 번역"
+      "message": "Translate the selected text to Chrome's default language"
    },
    "descrip_unbookmark": {
       "description": "Action description",
-      "message": "현재 페이지에 대한 북마크 지우기."
+      "message": "Removes a bookmark to the current page, if one exists."
    },
    "descrip_undo_close": {
       "description": "Action description for undo_close",
-      "message": "최근 닫힌 탭 다시열기. URL만 다시 엽니다. CTRL-SHIFT-T 를 누르면 히스토리까지 유지된 채로 다시 엽니다."
+      "message": "Open the last closed tab. This only loads the URL of the page; For a more complete version install the Extras"
    },
    "descrip_undo_close_hack": {
       "description": "Action description for undo_close",
-      "message": "최근 닫힌 탭 다시 열기. 비정상적인 동작이 있었으면 히스토리까지 유지됨."
+      "message": "Open the last closed tab. Load the history through the use of an imperfect workaround"
    },
    "descrip_unpin": {
       "description": "Action description",
-      "message": "현재탭 항상보기 해제"
+      "message": "Unpin the current tab"
    },
    "descrip_view_source": {
       "description": "Action description for view_source",
-      "message": "현재 페이지의 소스 코드 보기"
+      "message": "View the source code of the current page"
    },
    "descrip_zoom_img_in": {
       "description": "Action description",
-      "message": "마우스에 위치한 이미지 확대"
+      "message": "Zoom in on the image that the mouse is over"
    },
    "descrip_zoom_img_out": {
       "description": "Action description",
-      "message": "마우스에 위치한 이미지 축소"
+      "message": "Zoom out on the image that the mouse is over"
    },
    "descrip_zoom_img_zero": {
       "description": "Action description",
-      "message": "이미지를 확대하기전에 원래 크기로 설정"
+      "message": "Set the image to its original size before zoom"
    },
    "descrip_zoom_in": {
       "description": "Action description",
-      "message": "페이지의 모든 내용 확대"
+      "message": "Zoom in on all of the content of the page. For a more complete version install the Extras"
    },
    "descrip_zoom_out": {
       "description": "Action description",
-      "message": "페이지의 모든 내용 확대"
+      "message": "Zoom out on all of the content of the page. For a more complete version install the Extras"
    },
    "descrip_zoom_zero": {
       "description": "Action description",
-      "message": "방금한 페이지 확대축소액션 취소"
+      "message": "Undo the previous zoom actions to the page. For a more complete version install the Extras"
    },
    "description": {
       "description": "short extension description",
-      "message": "'마우스제스쳐'! 마우스나 키보드를 사용해 빠르고 쉽게 웹 페이지를 탐색할 수 있습니다."
+      "message": "The Complete Mouse Gestures solution"
    },
-   "doubleclick_alert": {
-      "description": "Pop up an alert box the first time a user right-clicks to let them know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "오른쪽 마우스 더블 클릭으로 컨텍스트 메뉴를 활성화 시키세요\n\n리눅스와 Mac 버전의 크롬에서 작동합니다"
+   "gesture_rLR": {
+      "description": "rocker right gesture title",
+      "message": "Rocker Right"
+   },
+   "gesture_rRL": {
+      "description": "rocker left gesture title",
+      "message": "Rocker Left"
    },
    "gesture_rocker_descrip": {
       "description": "rocker right gesture description",
-      "message": "$BUTTON1$ 버튼을 누른 상태에서 $BUTTON2$를 클릭합니다.",
+      "message": "Hold $BUTTON1$ button, Click $BUTTON2$",
       "placeholders": {
          "button1": {
             "content": "$1",
@@ -595,35 +690,35 @@
    },
    "gesture_wD": {
       "description": "wheel down gesture title",
-      "message": "아래로 스크롤"
+      "message": "Scroll Down"
    },
    "gesture_wD_descrip": {
       "description": "wheel down gesture description",
-      "message": "명령 버튼을 누른 상태에서 아래로 스크롤"
+      "message": "Hold action button, Scroll down"
    },
    "gesture_wU": {
       "description": "wheel up gesture title",
-      "message": "위로 스크롤"
+      "message": "Scroll Up"
    },
    "gesture_wU_descrip": {
       "description": "wheel up gesture description",
-      "message": "명령 버튼을 누른 상태에서 위로 스크롤"
+      "message": "Hold action button, Scroll up"
    },
    "long_description": {
       "description": "complete extension description",
-      "message": "이 마우스 제스쳐 확장 프로그램은 오른쪽 마우스 버튼을 누른 상태에서 마우스를 움직여 페이지 탐색 또는 탭 관리와 같은 명령을 실행합니다. 클릭하여 끌기 (마우스 동작), 클릭하여 스크롤하기 (스크롤 동작), 클릭하여 클릭하기 (로커 동작), 키보드 단축키를 지원합니다!\n\n• 마음대로 제스쳐을 설정할 수 있습니다. (새로운 제스쳐도 설정 가능!)\n• 대각선 동작 지원, 설정의 동기화/가져오기/내보내기\n• 확장 프로그램의 보안 제한 때문에 확장 프로그램 사이트와 다른 내장된 크롬 페이지에서는 작동하지 않습니다. 그렇지만 http://와 https:// 페이지에서 거의 대부분 작동합니다."
+      "message": "This Mouse Gestures extension enables you to move the mouse while holding the right mouse button to trigger actions, such as page navigation or tab management. Supports click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), and keyboard shortcuts!\n\n• Powerful customization of gestures (and custom actions!)\n• supports diagonal gestures, syncing/import/export of settings\n• Does not work on this extension website, or other built-in chrome pages due to security restrictions for extensions. But it does work on almost all http:// and https:// pages."
    },
    "name": {
       "description": "\"Smooth Gestures\" in your language",
-      "message": "스무드제스처"
+      "message": "Smooth Gestures"
    },
    "options_addgesture_instruct_1": {
       "description": "instructions for making a gesture (just before bullet point list)",
-      "message": "다음의 마우스 제스쳐 중 하나를 수행"
+      "message": "Do one of the following gestures:"
    },
    "options_addgesture_instruct_2": {
       "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
-      "message": "마우스 동작 : Hold down the $BUTTON$ mouse button and draw a gesture by moving the mouse, then release",
+      "message": "Mouse Gesture: Hold down the $BUTTON$ mouse button and draw a gesture by moving the mouse, then release",
       "placeholders": {
          "button": {
             "content": "$1",
@@ -633,7 +728,7 @@
    },
    "options_addgesture_instruct_3": {
       "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
-      "message": "스크롤 동작 : Hold down the $BUTTON$ mouse button and scroll the scroll-wheel",
+      "message": "Scroll Gesture: Hold down the $BUTTON$ mouse button and scroll the scroll-wheel",
       "placeholders": {
          "button": {
             "content": "$1",
@@ -643,15 +738,15 @@
    },
    "options_addgesture_instruct_4": {
       "description": "[bullet point] instructions for making a gesture (rocker)",
-      "message": "로커 동작 : Hold down any mouse button, then click another"
+      "message": "Rocker Gesture: Hold down any mouse button, then click another"
    },
    "options_addgesture_instruct_5": {
       "description": "[bullet point] instructions for doing a keyboard shortcut",
-      "message": "키보드 단축키 : Hold any modifier keys (or none), then press another key"
+      "message": "Keyboard Shortcut: Hold any modifier keys (or none), then press another key"
    },
    "options_addgesture_overwrite": {
       "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
-      "message": "이 동작은 $ACTION$에 의해 이미 사용되고 있습니다.",
+      "message": "This gesture is already used by $ACTION$",
       "placeholders": {
          "action": {
             "content": "$1",
@@ -661,7 +756,7 @@
    },
    "options_addgesture_title": {
       "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
-      "message": "$ACTION$ 명령에 대한 동작 설정",
+      "message": "Set a gesture for the $ACTION$ action",
       "placeholders": {
          "action": {
             "content": "$1",
@@ -671,104 +766,112 @@
    },
    "options_button_addcustomaction": {
       "description": "Label for a button to start setting up a new custom action",
-      "message": "커스텀 동작 추가"
+      "message": "Add Custom Action"
    },
    "options_button_addgesture": {
       "description": "button to add the new gesture to the action",
-      "message": "동작 추가"
+      "message": "Add this Gesture"
    },
    "options_button_overwrite": {
       "description": "button to overwrite the gesture made to the new action",
-      "message": "동작 덮어쓰기"
+      "message": "Overwrite Gesture"
    },
    "options_button_startaddgesture": {
       "description": "Label for a button to start setting up a new gesture",
-      "message": "제스쳐 추가"
+      "message": "Add Gesture"
    },
    "options_button_tryagain": {
       "description": "button to reject the gesture made and try to make a new one",
-      "message": "다시 시도"
+      "message": "Try Again"
    },
    "options_contents_actions": {
       "description": "category type for all actions links",
-      "message": "동작 명령"
+      "message": "Gesture Actions"
    },
    "options_contents_more": {
       "description": "category type for all external links",
-      "message": "기타"
+      "message": "More"
    },
    "options_contents_settings": {
       "description": "category type for all settings links",
-      "message": "설정"
+      "message": "Settings"
    },
    "options_contents_status": {
       "description": "link to open the status page",
-      "message": "상태 보기"
+      "message": "View Status"
    },
    "options_externalactions": {
       "description": "link to external actions",
-      "message": "외부 제스쳐"
+      "message": "External Actions"
    },
    "options_moreactions": {
       "description": "Link to access more actions. These actions don't currently have a gesture assigned",
-      "message": "더 많은 동작"
+      "message": "More Available Actions"
    },
    "options_mousebutton_0": {
       "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
-      "message": "왼쪽"
+      "message": "left"
    },
    "options_mousebutton_1": {
       "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
-      "message": "가운데"
+      "message": "middle"
    },
    "options_mousebutton_2": {
       "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
-      "message": "오른쪽"
+      "message": "right"
    },
    "options_note_hidepageaction_button": {
-      "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
-      "message": "아이콘 숨기기"
+      "description": "Label on the button to hide the Smooth Gestures Plus icon in the url bar",
+      "message": "Hide Icon"
    },
    "options_note_print": {
       "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
-      "message": "당신이 세팅한 값을 기억하기 어려운가요? 치트시트를 프린트 해두세요."
+      "message": "Having trouble remembering all of the gestures that you have set up? Just print this page for a cheatsheet!"
    },
    "options_note_print_button": {
       "description": "Label on the button to print the page",
-      "message": "출력"
+      "message": "Print"
    },
    "options_note_remindrate": {
       "description": "Notify the user that they can rate this extension to help promote it",
-      "message": "스무드 제스처를 좋아하십니까? 그렇다면 $LINK$!",
+      "message": "Do you like $SMOOTHGESTURES$?\u003Cbr>Please $LINK$!",
       "placeholders": {
          "link": {
-            "content": "$1",
+            "content": "$2",
             "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
+         },
+         "smoothgestures": {
+            "content": "$1",
+            "example": "Smooth Gestures Plus"
          }
       }
    },
    "options_note_remindrate_link": {
       "description": "Text for the link leading to the extension's page",
-      "message": "별 점수를 5개 주십시오"
+      "message": "write a 5 star review"
    },
    "options_note_translate": {
       "description": "Solicit translation requests",
-      "message": "영어를 아시나요? 그러면 다음의 링크를 도와주세요",
+      "message": "Do you know English? Help $LINK$",
       "placeholders": {
          "link": {
             "content": "$1",
-            "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
+            "example": "\u003Ca href=''>translate Smooth Gestures Plus into your language\u003C/a>"
          }
       }
    },
    "options_note_translate_link": {
       "description": "Link for soliciting translation requests",
-      "message": "Smooth Gestures를 당신의 언어로 번역해보세요!"
+      "message": "translate Smooth Gestures Plus into your language"
    },
    "options_note_updated": {
       "description": "Notify that the extension has been updated",
-      "message": "스무드 제스처는 $VERSION$로 업데이트되었습니다.",
+      "message": "$SMOOTHGESTURES$ has been updated to $VERSION$!",
       "placeholders": {
+         "smoothgestures": {
+            "content": "$1",
+            "example": "Smooth Gestures Plus"
+         },
          "version": {
             "content": "$2",
             "example": "0.13.1"
@@ -777,47 +880,45 @@
    },
    "options_title": {
       "description": "The title of the options page, at top and tab name",
-      "message": "옵션!"
+      "message": "Options!"
    },
    "options_welcome_0": {
       "description": "First just-installed line",
-      "message": "스무드 제스처의 세계에 오신 것을 환영합니다!"
+      "message": "Welcome to $SMOOTHGESTURES$!",
+      "placeholders": {
+         "smoothgestures": {
+            "content": "$1",
+            "example": "Smooth Gestures Plus"
+         }
+      }
    },
    "options_welcome_1": {
       "description": "First just-installed bullet point",
-      "message": "Smooth Gesture를 설치했습니다! 마우스 오른쪽 버튼을 누른 채 우측에서부터 시계 방향으로 원을 그리면 옵션 페이지가 열립니다 (우-하-좌-상-우)."
-   },
-   "options_welcome_2": {
-      "description": "Second just-installed line",
-      "message": "새로운 동작 또는 명령을 설정하려면 아래의 '+' 버튼을 클릭하십시오."
+      "message": "Ad-free and Privacy-friendly"
    },
    "options_welcome_3": {
       "description": "Third just-installed bullet point",
-      "message": "바로 오른쪽이나 이 페이지의 맨 아래로 스크롤 하여 'Settings(설정)'을 눌러서 옵션을 설정하세요."
+      "message": "You can get back to this Options page by holding down the right mouse button and drawing an \"O\" (try: → ↓ ← ↑ → )"
    },
    "popup_button_hidepageaction": {
       "description": "a button to hide the pageaction",
-      "message": "URL 아이콘 숨김"
+      "message": "Hide this icon"
    },
    "popup_button_options": {
       "description": "a button to go to the options page",
-      "message": "설정"
+      "message": "Options"
    },
    "popup_button_reload": {
       "description": "a button to reload the current page",
-      "message": "새로고침"
+      "message": "Reload"
    },
    "popup_status_blocked_1": {
       "description": "text explaining a blocked tab",
-      "message": "보안상의 이유로 크롬이 확장기능 실행을 차단했습니다."
-   },
-   "popup_status_blocked_2": {
-      "description": "text explaining a blocked tab",
-      "message": "이 정책 때문에 스무드 제스처는 이 페이지에서 작동할 수 없습니다."
+      "message": "Chrome blocks extensions from running on this page as a security precaution."
    },
    "popup_status_blocked_file2": {
       "description": "text explaining how to make a file:// tab work",
-      "message": "file:// 이나 ftp:// 에서도 스무드 제스처를 사용하려면 $LINK$ 로 가서 스무드 제스처의 \"Allow access to file URLs(파일 URL에 접근 허용)\"에 체크하세요.",
+      "message": "To get Smooth Gestures Plus to work on file:// and ftp:// protocols, go to $LINK$ and mark \"Allow access to file URLs\" under the Smooth Gestures Plus entry.",
       "placeholders": {
          "link": {
             "content": "$1",
@@ -827,284 +928,292 @@
    },
    "popup_status_blocked_file2_link": {
       "description": "text naming the link that goes to chrome://extensions/",
-      "message": "확장기능"
+      "message": "Extensions"
    },
    "popup_status_blocked_newtab2": {
       "description": "text explaining how to make a newtab page work",
-      "message": "새 탭에서 제스처를 사용하려면 $LINK$ 로 들어가세요.",
+      "message": "Try $LINK$ to enable gestures on the New Tab page.",
       "placeholders": {
          "link": {
             "content": "$1",
-            "example": "Smooth Gestures New Tab Add-on"
+            "example": "Smooth Gestures Plus New Tab Add-on"
          }
       }
    },
    "popup_status_blocked_newtab2_link": {
-      "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
-      "message": "궁극의 새 탭"
+      "description": "text naming the extension that adds newtab functionality to Smooth Gestures Plus",
+      "message": "Ultimate New Tab"
    },
    "popup_status_broken": {
       "description": "text explaining a broken tab",
-      "message": "동작은 이 페이지에서 작동하지 않습니다."
+      "message": "Gestures are not working on this page right now."
    },
    "popup_status_broken_short": {
       "description": "short text saying that gestures are broken on this page.",
-      "message": "제스쳐 동작안함"
+      "message": "Gestures Broken"
    },
    "popup_status_unable_short": {
       "description": "short text saying that gestures are blocked by this page.",
-      "message": "제스쳐 차단됨"
+      "message": "Gestures Blocked"
    },
    "popup_status_working": {
       "description": "text explaining a working tab",
-      "message": "마우스제스쳐를 사용할 수 있음"
+      "message": "Gestures are working on this page."
    },
    "popup_status_working_short": {
       "description": "short text saying that gestures are working on this page.",
-      "message": "제스쳐 작동"
+      "message": "Gestures Working"
    },
    "setting_blacklist": {
       "description": "setting title",
-      "message": "블랙 리스트"
+      "message": "Blacklist"
    },
    "setting_blacklist_descrip": {
       "description": "setting description",
-      "message": "제스쳐를 사용하지 않을 도메인을 지정합니다 쉼표로 도메인을 구분할 수 있습니다. ( 예 : \"mail.google.com, www.example.com\")"
+      "message": "Disables gestures on domains included in the blacklist. Separate domains with commas. (Example: \"mail.google.com, www.example.com\")"
    },
    "setting_button_export": {
       "description": "button to save settings as a backup file",
-      "message": "설정 저장"
+      "message": "Save Settings"
    },
    "setting_button_import": {
       "description": "button to load a settings file",
-      "message": "설정 파일 불러오기"
+      "message": "Load Settings File"
    },
    "setting_button_left": {
       "description": "choose left mouse button",
-      "message": "왼쪽 버튼"
+      "message": "Left Button"
    },
    "setting_button_middle": {
       "description": "choose middle mouse button",
-      "message": "가운데 버튼"
+      "message": "Middle Button"
    },
    "setting_button_off": {
       "description": "setting label",
-      "message": "끄기"
+      "message": "Off"
    },
    "setting_button_on": {
       "description": "setting label",
-      "message": "켜기"
+      "message": "On"
    },
    "setting_button_reset": {
       "description": "button label",
-      "message": "초기화"
+      "message": "Reset"
    },
    "setting_button_right": {
       "description": "choose right mouse button",
-      "message": "오른쪽 버튼"
+      "message": "Right Button"
    },
    "setting_button_update": {
       "description": "button label",
-      "message": "업데이트"
+      "message": "Update"
    },
    "setting_closelastblock": {
       "description": "setting title",
-      "message": "마지막 탭을 닫지 마십시오"
+      "message": "Don't Close Last Tab"
    },
    "setting_closelastblock_descrip": {
       "description": "setting description",
-      "message": "탭 닫기 제스쳐로 마지막 탭을 닫지 마세요. 대신, 새탭 URL을 누르세요."
+      "message": "Don't close the last tab with the close tab gesture; instead, go to the New Tab URL."
    },
    "setting_disabled": {
       "description": "choose no mouse button (gestures are disabled)",
-      "message": "사용 안 함"
+      "message": "Disabled"
+   },
+   "setting_extras": {
+      "description": "setting title",
+      "message": "Use Extras"
+   },
+   "setting_extras_descrip": {
+      "description": "setting description",
+      "message": "Extras are automatically set to be used. Disable if you don't want to use the Extras"
    },
    "setting_force_context": {
       "description": "setting title",
-      "message": "오른버튼 클릭금지를 해제"
+      "message": "Force Context Menu on Links"
    },
    "setting_force_context2": {
       "description": "setting title",
-      "message": "컨텍스트 메뉴 강제실행"
+      "message": "Force Context Menu"
    },
    "setting_force_context2_descrip": {
       "description": "setting description",
-      "message": "오른쪽 버튼 클릭시 항상 컨텍스트 메뉴 보기. 가운데 버튼 제스처가 활성화되었을 때 유용함."
+      "message": "Always show the context menu on right click. Useful for middle button activated gestures."
    },
    "setting_force_context_descrip": {
       "description": "setting description",
-      "message": "링크에서 시작된 제스처 금지. 시스템에서 컨텍스트메뉴와 충돌이 일어나면 우클릭이 한번만 되게 하며, 두번 클릭하면 컨텍스트메뉴를 표시함. 하지만 링크를 새탭으로 여는 동작을 할 수 없게 함."
+      "message": "Blocks gestures starting from links. On systems with context menu conflicts this allows the right mouse button to be clicked only once, instead of twice to get to the context menu. However, it also disables the New Tab from Link feature."
    },
    "setting_group_assorted": {
       "description": "title of a group of settings",
-      "message": "다양한 설정"
+      "message": "Assorted Settings"
    },
    "setting_group_context": {
       "description": "title of a group of settings",
-      "message": "문맥 메뉴 설정"
+      "message": "Context Menu Settings"
    },
    "setting_group_hide": {
       "description": "button to hide a group of settings",
-      "message": "숨기기"
+      "message": "hide"
    },
    "setting_group_newtab": {
       "description": "title of a group of settings",
-      "message": "새 탭 설정"
+      "message": "New Tab Settings"
    },
    "setting_group_show": {
       "description": "button to show a group of settings",
-      "message": "보이기"
+      "message": "show"
    },
    "setting_group_trail": {
       "description": "title of a group of settings",
-      "message": "동작 선 설정"
+      "message": "Trailing Line Settings"
    },
    "setting_hidepageaction": {
       "description": "setting title",
-      "message": "아이콘 항상 보임"
+      "message": "Always Show Icon"
    },
    "setting_hidepageaction_descrip": {
       "description": "setting description",
-      "message": "URL 바의 이 아이콘은 스무드 제스쳐의 옵션에 바로 갈 수 있습니다. 또한 렌치아이콘 > 도구 > 확장 프로그램 > 스무드 제스처 > 옵션 으로도 갈 수 있습니다."
+      "message": "The icon in the URL bar enables quick access to this options page. Alternatively, you can find this page at Menu > Tools > Extensions > Smooth Gestures Plus > Options"
    },
    "setting_hold_button": {
       "description": "setting title",
-      "message": "동작하기 위한 마우스 버튼"
+      "message": "Mouse Button to Start Gesture"
    },
    "setting_hold_button_descrip": {
       "description": "setting description",
-      "message": "마우스의 오른쪽 버튼 대신, 가운데나 왼쪽 버튼으로 제스처 그리기 허용."
+      "message": "Allows drawing gestures with the middle or left mouse button, instead of the right mouse button."
    },
    "setting_import": {
       "description": "setting title",
-      "message": "백업 설정"
+      "message": "Backup Settings"
    },
    "setting_import_descrip": {
       "description": "setting description",
-      "message": "현재 설정(동작, 사용자 지정 명령, 옵션)을 저장하십시오. Load the file to restore lost settings or move settings to another computer"
+      "message": "Save your current settings (including gestures, custom actions, and options). Load the file to restore lost settings or move settings to another computer"
    },
    "setting_newtab_linkright": {
       "description": "setting title",
-      "message": "링크의 소스에 대한 새 탭을 현재 탭 옆에 열기"
+      "message": "Link-sourced New Tabs Open Next to Current"
    },
    "setting_newtab_linkright_descrip": {
       "description": "setting description",
-      "message": "새 텝으로 링크 열 때, 크롬처럼 하기. 이렇게 하면 탭이 주제별로 묶이는 경향이 생김. (탭을 나누고 합할 때 유용함; 위를 보세요)"
+      "message": "Similar to Chromium's default behavior when opening links in a new tab. This tends to group tabs together by topic. (Useful for Split and Merge Tabs; see above)"
    },
    "setting_newtab_right": {
       "description": "setting title",
-      "message": "새 탭을 현재탭 옆에 열기"
+      "message": "New Tabs Open Next to Current"
    },
    "setting_newtab_right_descrip": {
       "description": "setting description",
-      "message": "(링크 없이) 새 탭을 현재탭 옆에 열기."
+      "message": "New tabs (not from links) open next to the current tab."
    },
    "setting_newtab_url": {
       "description": "setting title",
-      "message": "새 탭 URL"
+      "message": "New Tab URL"
    },
    "setting_newtab_url_descrip": {
       "description": "setting description",
-      "message": "새 탭에서 열 URL을 설정하세요."
+      "message": "Set the URL that the New Tab action goes to."
    },
    "setting_reset": {
       "description": "setting title",
-      "message": "기본값으로 초기화"
+      "message": "Reset to default values"
    },
    "setting_reset_descrip": {
       "description": "setting description",
-      "message": "모든 동작과 설정을 기본값으로 설정합니다."
+      "message": "Set all gestures and settings to the default values"
    },
    "setting_selecttolink": {
       "description": "setting title",
-      "message": "선택된 URL을 링크로 사용합니다."
+      "message": "Use Selected URLs to Link"
    },
    "setting_selecttolink_descrip": {
       "description": "setting description",
-      "message": "링크 제스처에 사용할 1개 이상의 텍스트를 선택하세요. 예를들면: 2개의 URL 텍스트를 선택하고 링크를 새탭으로 여는 제스처를 하면 그 2개의 URL이 두 텝에 열립니다."
+      "message": "Select text with one or more urls as input to a linking gesture. For example: select 2 urls in text, perform the New Tab from Link gesture -- both urls will open in two new tabs."
    },
    "setting_sendstats": {
       "description": "setting title",
-      "message": "사용법 제출"
+      "message": "Submit Usage"
    },
    "setting_sendstats_descrip": {
       "description": "setting description",
-      "message": "당신이 사용하는 마우스제스쳐 동작을 익명으로 보냅니다. 보내주신 제스쳐는동작은 차후 배포될 프로그램에서 기본값으로 사용될 수 있습니다."
+      "message": "Send an anonymous gesture usage report to inform the program of the most commonly used gestures, thereby influencing the default gestures of future releases."
    },
    "setting_sync": {
       "description": "setting title",
-      "message": "동기화"
+      "message": "Synchronize"
    },
    "setting_sync_descrip": {
       "description": "setting description",
-      "message": "북마크를 통해 다른 컴퓨터의 설정과 동작을 동기화합니다. 이 기능을 사용하려면 북마크 동기화를 사용해야 합니다."
+      "message": "Synchronize settings and gestures with other computers through bookmarks. To use this feature you must also enable bookmark synchronization."
    },
    "setting_trail_color": {
       "description": "setting title",
-      "message": "선 색상"
+      "message": "Color of Trailing Line"
    },
    "setting_trail_color_descrip": {
       "description": "setting description",
-      "message": "동작을 따라 그려지는 선의 색상과 투명도를 조절합니다."
+      "message": "Adjust the color and transparency of the line drawn when you make a gesture."
    },
    "setting_trail_draw": {
       "description": "setting title",
-      "message": "선 그리기"
+      "message": "Draw a Trailing Line"
    },
    "setting_trail_draw_descrip": {
       "description": "setting description",
-      "message": "동작을 따라 화면에 선이 그려집니다."
+      "message": "Draw a trailing line to the screen whenever gestures are being drawn."
    },
    "setting_trail_width": {
       "description": "setting title",
-      "message": "선 굵기"
+      "message": "Width of Trailing Line"
    },
    "setting_trail_width_descrip": {
       "description": "setting description",
-      "message": "동작을 따라 그려지는 선 굵기를 조절합니다."
+      "message": "Adjust the width of the line drawn when you make a gesture."
    },
    "setting_warning_reset": {
       "description": "warn that setting will be lost during a reset",
-      "message": "초기화하시겠습니까? 사용자가 지정한 설정은 모두 초기화됩니다."
+      "message": "Are you sure you want to reset? You will lose all of your custom settings."
    },
    "status_button_reloadall": {
       "description": "button to reload all broken pages",
-      "message": "작동하지 않는 페이지 모두 새로고침"
+      "message": "Reload All Not Working Pages"
    },
    "status_button_reloadone": {
       "description": "button to reload single broken page",
-      "message": "페이지 새로고침"
+      "message": "Reload Page"
    },
    "status_legend_blocked": {
       "description": "status of a page",
-      "message": "차단됨"
+      "message": "Blocked System Pages"
    },
    "status_legend_broken": {
       "description": "status of a page",
-      "message": "작동하지 않음"
+      "message": "Not Working"
    },
    "status_legend_loading": {
       "description": "status of a page",
-      "message": "로딩 중"
+      "message": "Loading"
    },
    "status_legend_working": {
       "description": "status of a page",
-      "message": "작동"
+      "message": "Working"
    },
    "status_link_options": {
       "description": "Link to go to the options page",
-      "message": "스무드 제스처 설정 : 옵션"
+      "message": "Set Options!"
    },
    "status_title": {
       "description": "The title of the status page, at top and tab name",
-      "message": "상태"
+      "message": "Status"
    },
    "status_window_other": {
       "description": "title for a group of tab statuses",
-      "message": "다른 창"
+      "message": "Other Window"
    },
    "status_window_this": {
       "description": "title for a group of tab statuses",
-      "message": "이 창"
+      "message": "This Window"
    }
 }

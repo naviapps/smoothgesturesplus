@@ -1,5 +1,4 @@
-import React, { ComponentPropsWithoutRef } from 'react';
-import { useTranslation } from 'react-i18next';
+import React, { ComponentPropsWithoutRef, CSSProperties, JSX } from 'react';
 
 import { useSettings } from '@/stores/settings-store';
 
@@ -13,7 +12,7 @@ type LineProps = ComponentPropsWithoutRef<'canvas'> & {
   lineWidth?: number;
 };
 
-function Line({ gesture, width, height, lineWidth = 3, style }: LineProps): React.ReactNode {
+function Line({ gesture, width, height, lineWidth = 3, style }: LineProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { trailColor } = useSettings();
 
@@ -232,9 +231,7 @@ type RockerProps = ComponentPropsWithoutRef<'div'> & {
   width: number;
 };
 
-function Rocker({ gesture, width, style }: RockerProps): React.ReactNode {
-  const { t } = useTranslation();
-
+function Rocker({ gesture, width, style }: RockerProps): JSX.Element {
   let first: 0 | 1 | 2;
   if (gesture[1] === 'L') {
     first = 0;
@@ -262,7 +259,7 @@ function Rocker({ gesture, width, style }: RockerProps): React.ReactNode {
           fontWeight: 'bold',
         }}
       >
-        {t(`gesture_${gesture}`)}
+        {i18n.t(`gesture_${gesture}`)}
       </div>
       <div
         style={{
@@ -271,10 +268,10 @@ function Rocker({ gesture, width, style }: RockerProps): React.ReactNode {
           textAlign: 'center',
         }}
       >
-        {t('gesture_rocker_descrip', {
-          button1: t(`options_mousebutton_${first}`),
-          button2: t(`options_mousebutton_${second}`),
-        })}
+        {i18n.t('gesture_rocker_descrip', [
+          i18n.t(`options_mousebutton_${first}`),
+          i18n.t(`options_mousebutton_${second}`),
+        ])}
       </div>
     </div>
   );
@@ -285,9 +282,7 @@ type WheelProps = ComponentPropsWithoutRef<'div'> & {
   width: number;
 };
 
-function Wheel({ gesture, width, style }: WheelProps): React.ReactNode {
-  const { t } = useTranslation();
-
+function Wheel({ gesture, width, style }: WheelProps): JSX.Element {
   return (
     <div style={{ ...style, width: `${width - 2}px`, padding: '5px 1px' }}>
       <div
@@ -298,7 +293,7 @@ function Wheel({ gesture, width, style }: WheelProps): React.ReactNode {
           fontWeight: 'bold',
         }}
       >
-        {t(`gesture_${gesture}`)}
+        {i18n.t(`gesture_${gesture}`)}
       </div>
       <div
         style={{
@@ -307,7 +302,7 @@ function Wheel({ gesture, width, style }: WheelProps): React.ReactNode {
           textAlign: 'center',
         }}
       >
-        {t(`gesture_${gesture}_descrip`)}
+        {i18n.t(`gesture_${gesture}_descrip`)}
       </div>
     </div>
   );
@@ -373,7 +368,7 @@ type KeyProps = ComponentPropsWithoutRef<'div'> & {
   width: number;
 };
 
-function Key({ gesture, width, style }: KeyProps): React.ReactNode {
+function Key({ gesture, width, style }: KeyProps): JSX.Element {
   return (
     <div style={{ ...style, width: `${width - 2}px`, padding: '5px 1px' }}>
       <div
@@ -401,8 +396,7 @@ export type GestureProps = {
   lineWidth?: number;
 };
 
-export function Gesture({ gesture, width, height, lineWidth }: GestureProps): React.ReactNode {
-  const { t } = useTranslation();
+export function Gesture({ gesture, width, height, lineWidth }: GestureProps): JSX.Element {
   const { gestures } = useSettings();
 
   let context = '';
@@ -418,7 +412,7 @@ export function Gesture({ gesture, width, height, lineWidth }: GestureProps): Re
     newGesture = gesture.slice(1);
   }
 
-  let c: React.ReactNode;
+  let c: JSX.Element;
   const style: React.CSSProperties = { minHeight: '2em', overflow: 'hidden' };
   if (gesture[0] === 'r') {
     c = <Rocker gesture={newGesture as RockerGesture} width={width} style={style} />;
@@ -440,19 +434,19 @@ export function Gesture({ gesture, width, height, lineWidth }: GestureProps): Re
 
   let message: string | undefined;
   if (context === 's') {
-    message = `* ${t('context_with_selection')}`;
+    message = `* ${i18n.t('context_with_selection')}`;
   } else if (context === 'l') {
-    message = `* ${t('context_on_link')}`;
+    message = `* ${i18n.t('context_on_link')}`;
   } else if (context === 'i') {
-    message = `* ${t('context_on_image')}`;
+    message = `* ${i18n.t('context_on_image')}`;
   } else if (gestures[`s${gesture}`]) {
-    message = `* ${t('context_not_selection')}`;
+    message = `* ${i18n.t('context_not_selection')}`;
   } else if (gestures[`l${gesture}`] && gestures[`i${gesture}`]) {
-    message = `* ${t('context_not_links_images')}`;
+    message = `* ${i18n.t('context_not_links_images')}`;
   } else if (gestures[`l${gesture}`]) {
-    message = `* ${t('context_not_link')}`;
+    message = `* ${i18n.t('context_not_link')}`;
   } else if (gestures[`i${gesture}`]) {
-    message = `* ${t('context_not_image')}`;
+    message = `* ${i18n.t('context_not_image')}`;
   }
 
   if (!message) {

@@ -1,8 +1,5 @@
-import browser from '#webextension-polyfill';
 import React from 'react';
 
-import useDisclosure from '@/hooks/use-disclosure';
-import useWindowSize from '@/hooks/use-window-size';
 import { useSettings } from '@/stores/settings-store';
 import {
   BackgroundMessage,
@@ -13,6 +10,8 @@ import {
   ValidGestures,
   WheelDirection,
 } from '@/types';
+import { onMessage, removeAllListeners } from '@/messaging.ts';
+import * as actions from '@/entrypoints/content/actions';
 
 type Gesture = {
   events?: boolean;
@@ -30,6 +29,7 @@ type Gesture = {
   };
   rocker?: boolean;
   wheel?: boolean;
+  payload?: any;
 };
 
 export type SmoothGesturesProps = {
@@ -72,12 +72,9 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
      * Extension Communication
      */
     // TODO
-    const receiveMessage = (mess: unknown): void => {
-      const message = mess as BackgroundMessage;
+    const handleMessage = (message: unknown): void => {
+      const mess = message as BackgroundMessage;
       /*
-      if (message.action) {
-        // localAction(message.action);
-      }
       if (message.windowBlurred) {
         buttonDown = {};
         blockClick = {};
@@ -85,7 +82,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         endGesture();
       }
        */
-      if (message.chain) {
+      if (mess.chain) {
         /*
         startGesture(
           message.chain.startPoint,
@@ -98,14 +95,14 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         );
         blockContext = true;
        */
-        if (message.chain.buttonDown) {
-          if (message.chain.buttonDown[0]) {
+        if (mess.chain.buttonDown) {
+          if (mess.chain.buttonDown[0]) {
             blockClick[0] = true;
           }
-          if (message.chain.buttonDown[1]) {
+          if (mess.chain.buttonDown[1]) {
             blockClick[1] = true;
           }
-          if (message.chain.buttonDown[2]) {
+          if (mess.chain.buttonDown[2]) {
             blockClick[2] = true;
           }
           /*
@@ -148,7 +145,9 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
 
       if (syncButtons) {
-        await browser.runtime.sendMessage({ syncButton: { id: event.button, down: true } });
+        await browser.runtime.sendMessage<ContentMessage>({
+          syncButton: { id: event.button, down: true },
+        });
       }
       buttonDown[event.button] = true;
 
@@ -296,7 +295,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           point.x += window.screenLeft;
           point.y += window.screenTop;
         }
-        await browser.runtime.sendMessage({ nativeport: { rightclick: point } });
+        await browser.runtime.sendMessage<ContentMessage>({ nativeport: { rightclick: point } });
       }
 
       if (blockClick[event.button]) {
@@ -304,7 +303,9 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
       buttonDown[event.button] = false;
       if (syncButtons) {
-        await browser.runtime.sendMessage({ syncButton: { id: event.button, down: false } });
+        await browser.runtime.sendMessage<ContentMessage>({
+          syncButton: { id: event.button, down: false },
+        });
       }
 
       if (!buttonDown[0] && !buttonDown[2]) {
@@ -629,7 +630,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           if (syncButtons) {
             message.buttonDown = buttonDown;
           }
-          await browser.runtime.sendMessage(message);
+          await browser.runtime.sendMessage<ContentMessage>(message);
         }
       }
       if (code[0] === 'w') {
@@ -844,7 +845,24 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     window.addEventListener('mousemove', handleMouseMove, true);
     window.addEventListener('wheel', handleWheel, true);
 
-    browser.runtime.onMessage.addListener(receiveMessage);
+    onMessage('action-stop', actions.stop);
+    onMessage('action-goto-top', actions.gotoTop);
+    onMessage('action-goto-bottom', actions.gotoBottom);
+    onMessage('action-page-up', actions.pageUp);
+    onMessage('action-page-down', actions.pageDown);
+    onMessage('action-page-next', actions.pageNext);
+    onMessage('action-page-prev', actions.pagePrev);
+    onMessage('action-zoom-img-in', ({ data }) => actions.zoomImgIn(data));
+    onMessage('action-zoom-img-out', ({ data }) => actions.zoomImgOut(data));
+    onMessage('action-zoom-img-zero', ({ data }) => actions.zoomImgZero(data));
+    onMessage('action-hide-image', ({ data }) => actions.hideImage(data));
+    onMessage('action-show-cookies', actions.showCookies);
+    onMessage('action-print', actions.print);
+    onMessage('action-copy', ({ data }) => actions.copy(data));
+    onMessage('action-copy-link', ({ data }) => actions.copyLink(data));
+    onMessage('action-find-prev', ({ data }) => actions.findPrev(data));
+    onMessage('action-find-next', ({ data }) => actions.findNext(data));
+    browser.runtime.onMessage.addListener(handleMessage);
 
     return () => {
       window.removeEventListener('mousedown', handleMouseDown, true);
@@ -860,7 +878,8 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       window.removeEventListener('mousemove', handleMouseMove, true);
       window.removeEventListener('wheel', handleWheel, true);
 
-      browser.runtime.onMessage.removeListener(receiveMessage);
+      removeAllListeners();
+      browser.runtime.onMessage.removeListener(handleMessage);
     };
   }, [
     holdButton,

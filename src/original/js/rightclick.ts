@@ -16,15 +16,12 @@ const i = (t, e) => {
   for (key in t) {
     settings[key] = t[key];
   }
-  if (!key.match(/\+ts$/)) {
-    settings[`${key}+ts`] = t[`${key}+ts`] = i;
-  }
   chrome.storage.local.set(t, e);
 };
 
-const o = navigator.platform.indexOf('Mac') !== -1;
-const t = navigator.platform.indexOf('CrOS') !== -1;
-const e = navigator.platform.indexOf('Linux') !== -1;
+const isMac = navigator.userAgent.indexOf('Mac') !== -1;
+const isChromeOS = navigator.userAgent.indexOf('CrOS') !== -1;
+const isLinux = navigator.userAgent.indexOf('Linux') !== -1;
 chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (t) => {
   chrome.runtime.getBackgroundPage((t) => {
     t.connectNative();
@@ -48,7 +45,7 @@ const l = () => {
             t.connectNative(10);
           });
           const e = document.createElement('a');
-          if (o) {
+          if (isMac) {
             e.setAttribute('href', '/nat/SmoothGesturesPlusExtras-0.7.dmg');
             e.setAttribute('download', 'SmoothGesturesPlusExtras-0.7.dmg');
           } else {
@@ -61,16 +58,18 @@ const l = () => {
         }
       });
     });
-    if (o) {
+    if (isMac) {
       $('#instruct').html('<ul><li>Open the dmg file</li><li>Right-click the app > Open</li></ul>');
     }
-    if (e) {
+    if (isLinux) {
       $('#instruct').html('<ul><li>Extract the tar file</li><li>Run install.py</li></ul>');
     }
-    if (t) {
+    if (isChromeOS) {
       $('#extras').hide();
       $('#chromeos').show();
     }
-    settings.forceInstallRightclick && $('#installplugin').click();
+    if (settings.forceInstallRightclick) {
+      $('#installplugin').click();
+    }
   });
 };

@@ -3,56 +3,40 @@
       "message": "_"
    },
    "action_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "书签页",
-      "update": "20110323"
+      "message": "书签页"
    },
    "action_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "复制标签页",
-      "update": "20100707"
+      "message": "复制标签页"
    },
    "action_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "复制标签页(hack)",
-      "update": "20100904"
+      "message": "复制标签页(hack)"
    },
    "action_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "关闭左侧标签页",
-      "update": "20100904"
+      "message": "关闭左侧标签页"
    },
    "action_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "关闭其它标签页",
-      "update": "20100707"
+      "message": "关闭其它标签页"
    },
    "action_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "关闭右侧标签页",
-      "update": "20100904"
+      "message": "关闭右侧标签页"
    },
    "action_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for close_tab",
-      "message": "关闭标签页",
-      "update": "20110418"
+      "message": "关闭标签页"
    },
    "action_close_window": {
       "description": "Action title for close_window",
       "message": "关闭窗口"
    },
    "action_copy": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "拷贝文本到剪贴板",
-      "update": "20110308"
+      "message": "拷贝文本到剪贴板"
    },
    "action_goto_bottom": {
       "description": "Action title for goto_bottom",
@@ -63,208 +47,144 @@
       "message": "跳至页首"
    },
    "action_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "隐藏图片",
-      "update": "20100904"
+      "message": "隐藏图片"
    },
    "action_maximize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "最大化窗口(hack)",
-      "update": "20100904"
+      "message": "最大化窗口(hack)"
    },
    "action_merge_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title for merge_tabs",
-      "message": "合并标签",
-      "update": "20110422"
+      "message": "合并标签"
    },
    "action_minimize_x": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "最小化窗口(hack)",
-      "update": "20100904"
+      "message": "最小化窗口(hack)"
    },
    "action_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "打开新标签页",
-      "update": "20100707"
+      "message": "打开新标签页"
    },
    "action_new_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab",
-      "message": "新建标签",
-      "update": "20110422"
+      "message": "新建标签"
    },
    "action_new_tab_back": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_back",
-      "message": "新建标签（并保留在当前页）",
-      "update": "20110422"
+      "message": "新建标签（并保留在当前页）"
    },
    "action_new_tab_link": {
-      "category": "Options Page: Actions",
       "description": "Action title for new_tab_link",
-      "message": "新建标签（并跳至新标签）",
-      "update": "20110422"
+      "message": "新建标签（并跳至新标签）"
    },
    "action_new_window": {
       "description": "Action title for new_window",
       "message": "新建窗口"
    },
    "action_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开新窗口（打开链接）",
-      "update": "20110418"
+      "message": "打开新窗口（打开链接）"
    },
    "action_next_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for next_tab",
-      "message": "下一标签",
-      "update": "20110422"
+      "message": "下一标签"
    },
    "action_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "下一个窗口",
-      "update": "20100805"
+      "message": "下一个窗口"
    },
    "action_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开书签管理器",
-      "update": "20100707"
+      "message": "打开书签管理器"
    },
    "action_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开下载",
-      "update": "20100707"
+      "message": "打开下载"
    },
    "action_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开插件",
-      "update": "20100707"
+      "message": "打开插件"
    },
    "action_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开历史",
-      "update": "20100707"
+      "message": "打开历史"
    },
    "action_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打开图片",
-      "update": "20100707"
+      "message": "打开图片"
    },
    "action_options": {
-      "category": "Options Page: Actions",
       "description": "Action title for options",
-      "message": "打开选项",
-      "update": "20110422"
+      "message": "打开选项"
    },
    "action_page_back": {
       "description": "Action title for page_back",
       "message": "后退"
    },
    "action_page_back_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_back_close",
-      "message": "后退或关闭标签页",
-      "update": "20100726"
+      "message": "后退或关闭标签页"
    },
    "action_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_down",
-      "message": "下一页",
-      "update": "20110323"
+      "message": "下一页"
    },
    "action_page_forward": {
       "description": "Action title for page_forward",
       "message": "前进"
    },
    "action_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_next",
-      "message": "下一页",
-      "update": "20100707"
+      "message": "下一页"
    },
    "action_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_prev",
-      "message": "上一页",
-      "update": "20100707"
+      "message": "上一页"
    },
    "action_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action title for page_up",
-      "message": "上一页",
-      "update": "20110323"
+      "message": "上一页"
    },
    "action_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "上级文件夹",
-      "update": "20100703"
+      "message": "上级文件夹"
    },
    "action_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "固定标签",
-      "update": "20110326"
+      "message": "固定标签"
    },
    "action_prev_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for prev_tab",
-      "message": "上一标签",
-      "update": "20110422"
+      "message": "上一标签"
    },
    "action_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action title for clone_tab",
-      "message": "上一个窗口",
-      "update": "20100805"
+      "message": "上一个窗口"
    },
    "action_print": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "打印页面",
-      "update": "20100912"
+      "message": "打印页面"
    },
    "action_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "重新载入所有标签页",
-      "update": "20100707"
+      "message": "重新载入所有标签页"
    },
    "action_reload_tab": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab",
-      "message": "刷新",
-      "update": "20110422"
+      "message": "刷新"
    },
    "action_reload_tab_full": {
-      "category": "Options Page: Actions",
       "description": "Action title for reload_tab_full",
-      "message": "刷新（不读缓存）",
-      "update": "20110422"
+      "message": "刷新（不读缓存）"
    },
    "action_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "在谷歌中搜索",
-      "update": "20100707"
+      "message": "在谷歌中搜索"
    },
    "action_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "列出 Cookies",
-      "update": "20101105"
+      "message": "列出 Cookies"
    },
    "action_split_tabs": {
       "description": "Action title for split_tabs",
@@ -275,104 +195,72 @@
       "message": "打开状态页"
    },
    "action_stop": {
-      "category": "Options Page: Actions",
       "description": "Action title for stop",
-      "message": "停止",
-      "update": "20110422"
+      "message": "停止"
    },
    "action_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "左移标签页",
-      "update": "20100707"
+      "message": "左移标签页"
    },
    "action_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "右移标签页",
-      "update": "20100707"
+      "message": "右移标签页"
    },
    "action_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "切换标记书签",
-      "update": "20110323"
+      "message": "切换标记书签"
    },
    "action_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "切换 固定/取消固定标签",
-      "update": "20110326"
+      "message": "切换 固定/取消固定标签"
    },
    "action_translate": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "翻译所选文本",
-      "update": "20110326"
+      "message": "翻译所选文本"
    },
    "action_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "移除书签",
-      "update": "20110323"
+      "message": "移除书签"
    },
    "action_undo_close": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close",
-      "message": "撤消已关闭标签",
-      "update": "20110422"
+      "message": "撤消已关闭标签"
    },
    "action_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action title for undo_close_hack",
-      "message": "恢复关闭的标签页",
-      "update": "20100805"
+      "message": "恢复关闭的标签页"
    },
    "action_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "取消固定标签",
-      "update": "20110326"
+      "message": "取消固定标签"
    },
    "action_view_source": {
       "description": "Action title for view_source",
       "message": "查看源文件"
    },
    "action_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "放大图片",
-      "update": "20100707"
+      "message": "放大图片"
    },
    "action_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "缩小图片",
-      "update": "20100707"
+      "message": "缩小图片"
    },
    "action_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "重置图片",
-      "update": "20100707"
+      "message": "重置图片"
    },
    "action_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "放大页面",
-      "update": "20100707"
+      "message": "放大页面"
    },
    "action_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "缩小页面",
-      "update": "20100707"
+      "message": "缩小页面"
    },
    "action_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action title",
-      "message": "重置页面",
-      "update": "20100707"
+      "message": "重置页面"
    },
    "cat_custom": {
       "description": "Name of category for all custom actions",
@@ -391,112 +279,76 @@
       "message": "其它设置"
    },
    "cat_tab_management": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category encompassing tab manipulation actions",
-      "message": "标签管理",
-      "update": "20110422"
+      "message": "标签管理"
    },
    "cat_utilities": {
-      "category": "Options Page: Action Categories",
       "description": "Name of category for general utility actions",
-      "message": "公共设置",
-      "update": "20100707"
+      "message": "公共设置"
    },
    "context_not_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on an image",
-      "message": "不在图片上",
-      "update": "20110326"
+      "message": "不在图片上"
    },
    "context_not_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid on a link",
-      "message": "不在链接上",
-      "update": "20110326"
+      "message": "不在链接上"
    },
    "context_not_links_images": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
-      "message": "不在链接或图片上",
-      "update": "20110326"
+      "message": "不在链接或图片上"
    },
    "context_not_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
-      "message": "没有选区",
-      "update": "20110325"
+      "message": "没有选区"
    },
    "context_on_image": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
-      "message": "在图片上",
-      "update": "20110326"
+      "message": "在图片上"
    },
    "context_on_link": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
-      "message": "在链接上",
-      "update": "20110326"
+      "message": "在链接上"
    },
    "context_with_selection": {
-      "category": "Gesture Contexts",
       "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
-      "message": "包含选区",
-      "update": "20110325"
+      "message": "包含选区"
    },
    "descrip_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "添加当前页到书签",
-      "update": "20110323"
+      "message": "添加当前页到书签"
    },
    "descrip_clone_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "复制当前标签页。新建的标签页不具有当前标签页的历史浏览记录。",
-      "update": "20100726"
+      "message": "复制当前标签页。新建的标签页不具有当前标签页的历史浏览记录。"
    },
    "descrip_clone_tab_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "复制当前标签页。新建的标签页具有当前标签页的历史浏览记录。",
-      "update": "20100726"
+      "message": "复制当前标签页。新建的标签页具有当前标签页的历史浏览记录。"
    },
    "descrip_close_left_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "关闭当前页面左侧所有的标签页",
-      "update": "20100904"
+      "message": "关闭当前页面左侧所有的标签页"
    },
    "descrip_close_other_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "关闭当前窗口中的所有标签页，除开选定的标签页。",
-      "update": "20100726"
+      "message": "关闭当前窗口中的所有标签页，除开选定的标签页。"
    },
    "descrip_close_right_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "关闭当前页面右侧所有的标签页",
-      "update": "20100904"
+      "message": "关闭当前页面右侧所有的标签页"
    },
    "descrip_close_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_tab",
-      "message": "关闭当前标签",
-      "update": "20110422"
+      "message": "关闭当前标签"
    },
    "descrip_close_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for close_window",
-      "message": "关闭当前窗口所有标签",
-      "update": "20110422"
+      "message": "关闭当前窗口所有标签"
    },
    "descrip_copy": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "已选文本复制到剪贴板",
-      "update": "20110326"
+      "message": "已选文本复制到剪贴板"
    },
    "descrip_goto_bottom": {
       "description": "Action description for goto_bottom",
@@ -507,32 +359,24 @@
       "message": "滚动到页面顶部。"
    },
    "descrip_hide_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "从页面上移除鼠标位置下的图像",
-      "update": "20101122"
+      "message": "从页面上移除鼠标位置下的图像"
    },
    "descrip_maximize_x": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "“模拟的”最大化窗口操作。",
-      "update": "20100726"
+      "message": "“模拟的”最大化窗口操作。"
    },
    "descrip_merge_tabs": {
       "description": "Action description for merge_tabs",
       "message": "将当前窗口所有标签页合并到最后查看的窗口中。"
    },
    "descrip_minimize_x": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "“模拟的”最小化窗口操作。",
-      "update": "20100726"
+      "message": "“模拟的”最小化窗口操作。"
    },
    "descrip_navigate_tab": {
-      "category": "Options Page: Actions",
       "description": "Action description for new_tab",
-      "message": "导航到新建标签页面。（地址在下面设置）",
-      "update": "20100726"
+      "message": "导航到新建标签页面。（地址在下面设置）"
    },
    "descrip_new_tab": {
       "description": "Action description for new_tab",
@@ -551,50 +395,36 @@
       "message": "新建一个窗口并打开一个默认的标签页。"
    },
    "descrip_new_window_link": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新窗口打开链接",
-      "update": "20100707"
+      "message": "在新窗口打开链接"
    },
    "descrip_next_tab": {
       "description": "Action description for next_tab",
       "message": "打开当前标签页右边的标签页"
    },
    "descrip_next_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "选择长期关注的窗口",
-      "update": "20100912"
+      "message": "选择长期关注的窗口"
    },
    "descrip_open_bookmarks": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新标签页打开书签管理器",
-      "update": "20100707"
+      "message": "在新标签页打开书签管理器"
    },
    "descrip_open_downloads": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新标签页打开下载管理",
-      "update": "20100707"
+      "message": "在新标签页打开下载管理"
    },
    "descrip_open_extensions": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新标签页打开扩展管理",
-      "update": "20100707"
+      "message": "在新标签页打开扩展管理"
    },
    "descrip_open_history": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新标签中打开历史页面",
-      "update": "20100802"
+      "message": "在新标签中打开历史页面"
    },
    "descrip_open_image": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在新标签页中打开鼠标所指的图像",
-      "update": "20100726"
+      "message": "在新标签页中打开鼠标所指的图像"
    },
    "descrip_options": {
       "description": "Action description for options",
@@ -609,66 +439,48 @@
       "message": "后退至当前标签页上一个访问记录；如果到达第一个访问记录则关闭当前标签页。"
    },
    "descrip_page_down": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_down",
-      "message": "页面向下滚动一页的 80%",
-      "update": "20101105"
+      "message": "页面向下滚动一页的 80%"
    },
    "descrip_page_forward": {
       "description": "Action description for page_forward",
       "message": "前进到当前标签页下一个访问记录。"
    },
    "descrip_page_next": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_next",
-      "message": "尝试生成一个'下一页'链接到下一个页面",
-      "update": "20100912"
+      "message": "尝试生成一个'下一页'链接到下一个页面"
    },
    "descrip_page_prev": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_prev",
-      "message": "尝试生成一个'上一页'链接到上一个页面",
-      "update": "20100912"
+      "message": "尝试生成一个'上一页'链接到上一个页面"
    },
    "descrip_page_up": {
-      "category": "Options Page: Actions",
       "description": "Action description for page_up",
-      "message": "页面向上滚动一页的 80%。",
-      "update": "20101105"
+      "message": "页面向上滚动一页的 80%。"
    },
    "descrip_parent_dir": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "导航到当前页面的上一级路径。如果已经在跟路径，则尝试移除域名当中的子域名。",
-      "update": "20100726"
+      "message": "导航到当前页面的上一级路径。如果已经在跟路径，则尝试移除域名当中的子域名。"
    },
    "descrip_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "固定当前标签",
-      "update": "20110326"
+      "message": "固定当前标签"
    },
    "descrip_prev_tab": {
       "description": "Action description for prev_tab",
       "message": "打开当前标签页左边的标签页。"
    },
    "descrip_prev_window": {
-      "category": "Options Page: Actions",
       "description": "Action description for clone_tab",
-      "message": "立即将焦点切换至当前窗口之前的窗口",
-      "update": "20110116"
+      "message": "立即将焦点切换至当前窗口之前的窗口"
    },
    "descrip_print": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "打印当前页面",
-      "update": "20100912"
+      "message": "打印当前页面"
    },
    "descrip_reload_all_tabs": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "刷新当前窗口中的所有标签页",
-      "update": "20100726"
+      "message": "刷新当前窗口中的所有标签页"
    },
    "descrip_reload_tab": {
       "description": "Action description for reload_tab",
@@ -679,16 +491,12 @@
       "message": "跳过缓存，刷新当前标签页。"
    },
    "descrip_search_sel": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "在Google中搜索选中文字",
-      "update": "20100731"
+      "message": "在Google中搜索选中文字"
    },
    "descrip_show_cookies": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "显示含有当前页的所有cookies的一个列表",
-      "update": "20100805"
+      "message": "显示含有当前页的所有cookies的一个列表"
    },
    "descrip_split_tabs": {
       "description": "Action description for split_tabs",
@@ -703,108 +511,76 @@
       "message": "停止载入当前标签页。（可能在某些页面无效，比如图片）"
    },
    "descrip_tab_to_left": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "向左移动当前标签页",
-      "update": "20100805"
+      "message": "向左移动当前标签页"
    },
    "descrip_tab_to_right": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "向右移动当前标签页",
-      "update": "20100805"
+      "message": "向右移动当前标签页"
    },
    "descrip_toggle_bookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "如果已经添加书签，则移除，否则添加一个新的书签。",
-      "update": "20110323"
+      "message": "如果已经添加书签，则移除，否则添加一个新的书签。"
    },
    "descrip_toggle_pin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "切换当前标签页的锁定状态",
-      "update": "20110308"
+      "message": "切换当前标签页的锁定状态"
    },
    "descrip_translate": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "将选中文本翻译为Chrome的默认语言",
-      "update": "20110308"
+      "message": "将选中文本翻译为Chrome的默认语言"
    },
    "descrip_unbookmark": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "如果已经添加了书签，则移除。",
-      "update": "20110323"
+      "message": "如果已经添加了书签，则移除。"
    },
    "descrip_undo_close": {
       "description": "Action description for undo_close",
       "message": "打开最后关闭的标签页，这一操作只是载入最后关闭页面地址。快捷键CTRL-SHIFT-T具有更高优先级，因为它是基于历史记录的。"
    },
    "descrip_undo_close_hack": {
-      "category": "Options Page: Actions",
       "description": "Action description for undo_close",
-      "message": "打开上次关闭的标签。通过使用不太完善的工作环境机制加载历史记录",
-      "update": "20101122"
+      "message": "打开上次关闭的标签。通过使用不太完善的工作环境机制加载历史记录"
    },
    "descrip_unpin": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "解锁当前标签页",
-      "update": "20110308"
+      "message": "解锁当前标签页"
    },
    "descrip_view_source": {
       "description": "Action description for view_source",
       "message": "查看当前页面源代码。"
    },
    "descrip_zoom_img_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "放大鼠标在其上的图片",
-      "update": "20100805"
+      "message": "放大鼠标在其上的图片"
    },
    "descrip_zoom_img_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "缩小鼠标在其上的图片",
-      "update": "20100805"
+      "message": "缩小鼠标在其上的图片"
    },
    "descrip_zoom_img_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "重置图片为其放大前的原始大小",
-      "update": "20100805"
+      "message": "重置图片为其放大前的原始大小"
    },
    "descrip_zoom_in": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "放大所有的网页内容",
-      "update": "20100805"
+      "message": "放大所有的网页内容"
    },
    "descrip_zoom_out": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "缩小所有的网页内容",
-      "update": "20100805"
+      "message": "缩小所有的网页内容"
    },
    "descrip_zoom_zero": {
-      "category": "Options Page: Actions",
       "description": "Action description",
-      "message": "取消之前所做的缩放动作",
-      "update": "20100912"
+      "message": "取消之前所做的缩放动作"
    },
    "description": {
-      "category": "About",
       "description": "short extension description",
-      "message": "立即拥有鼠标手势，通过鼠标或键盘便捷地浏览网页。",
-      "update": "20110723"
+      "message": "立即拥有鼠标手势，通过鼠标或键盘便捷地浏览网页。"
    },
    "doubleclick_alert": {
-      "category": "Options Page",
       "description": "Pop up an alert box the first time a user right-clicks to let them know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "双击鼠标右键访问环境菜单。Linux 和 Mac 版本的 Chrome 受此影响。(手势生效必须)",
-      "update": "20101105"
+      "message": "双击鼠标右键访问环境菜单。Linux 和 Mac 版本的 Chrome 受此影响。(手势生效必须)"
    },
    "gesture_rLR": {
       "description": "rocker right gesture title",
@@ -853,25 +629,18 @@
       "message": "按下开启鼠标动作按键再向上滚动滚轮。"
    },
    "long_description": {
-      "category": "About",
       "description": "complete extension description",
-      "message": "这款鼠标手势扩展使你用按着右键拖动鼠标的方式触发页面操作，比如页面导航或者标签操作。\n此扩展支持：鼠标手势（单击并拖动），滚动手势（点击和滚动），摇杆手势（点击加点击），键盘快捷键！\n\n•强大的自定义的手势（和自定义动作）！\n•支持对角线手势，支持设置的同步/导出/导入。\n•此扩展支持几乎所有的http://和https://协议页面。 注：由于Chrome的插件限制策略，此插件在包括此页面在内的一些Chrome内建页面无法生效。",
-      "update": "20110723"
+      "message": "这款鼠标手势扩展使你用按着右键拖动鼠标的方式触发页面操作，比如页面导航或者标签操作。\n此扩展支持：鼠标手势（单击并拖动），滚动手势（点击和滚动），摇杆手势（点击加点击），键盘快捷键！\n\n•强大的自定义的手势（和自定义动作）！\n•支持对角线手势，支持设置的同步/导出/导入。\n•此扩展支持几乎所有的http://和https://协议页面。 注：由于Chrome的插件限制策略，此插件在包括此页面在内的一些Chrome内建页面无法生效。"
    },
    "name": {
-      "category": "About",
       "description": "\"Smooth Gestures\" in your language",
-      "message": "滑动手势",
-      "update": "20110422"
+      "message": "滑动手势"
    },
    "options_addgesture_instruct_1": {
-      "category": "Options Page",
       "description": "instructions for making a gesture (just before bullet point list)",
-      "message": "做以下鼠标手势之一：",
-      "update": "20110616"
+      "message": "做以下鼠标手势之一："
    },
    "options_addgesture_instruct_2": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "按住鼠标$BUTTON$ 键，画出一个手势。",
       "placeholders": {
@@ -879,11 +648,9 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20110422"
+      }
    },
    "options_addgesture_instruct_3": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "按住鼠标$BUTTON$并滚动滚轮。",
       "placeholders": {
@@ -891,23 +658,17 @@
             "content": "$1",
             "example": "right"
          }
-      },
-      "update": "20110422"
+      }
    },
    "options_addgesture_instruct_4": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for making a gesture (rocker)",
-      "message": "按住鼠标任意键，然后在按下另一个。",
-      "update": "20110422"
+      "message": "按住鼠标任意键，然后在按下另一个。"
    },
    "options_addgesture_instruct_5": {
-      "category": "Options Page",
       "description": "[bullet point] instructions for doing a keyboard shortcut",
-      "message": "键盘快捷键：按住任意希望修改的按键（或者什么都不按），然后按任意键。",
-      "update": "20110401"
+      "message": "键盘快捷键：按住任意希望修改的按键（或者什么都不按），然后按任意键。"
    },
    "options_addgesture_overwrite": {
-      "category": "Options Page",
       "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "此手势已经被指定为$ACTION$",
       "placeholders": {
@@ -915,11 +676,9 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20110422"
+      }
    },
    "options_addgesture_title": {
-      "category": "Options Page",
       "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "为$动作$设置手势",
       "placeholders": {
@@ -927,50 +686,35 @@
             "content": "$1",
             "example": "History Back"
          }
-      },
-      "update": "20110723"
+      }
    },
    "options_button_addcustomaction": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new custom action",
-      "message": "添加自定义动作",
-      "update": "20110327"
+      "message": "添加自定义动作"
    },
    "options_button_addgesture": {
-      "category": "Options Page",
       "description": "button to add the new gesture to the action",
-      "message": "添加这个手势",
-      "update": "20110418"
+      "message": "添加这个手势"
    },
    "options_button_overwrite": {
-      "category": "Options Page",
       "description": "button to overwrite the gesture made to the new action",
-      "message": "options_button_overwrite",
-      "update": "20110601"
+      "message": "options_button_overwrite"
    },
    "options_button_startaddgesture": {
-      "category": "Options Page",
       "description": "Label for a button to start setting up a new gesture",
-      "message": "添加手势",
-      "update": "20110327"
+      "message": "添加手势"
    },
    "options_button_tryagain": {
-      "category": "Options Page",
       "description": "button to reject the gesture made and try to make a new one",
-      "message": "options_button_overwrite",
-      "update": "20110601"
+      "message": "options_button_overwrite"
    },
    "options_contents_actions": {
-      "category": "Options Page",
       "description": "category type for all actions links",
-      "message": "options_contents_actions",
-      "update": "20110601"
+      "message": "options_contents_actions"
    },
    "options_contents_more": {
-      "category": "Options Page",
       "description": "category type for all external links",
-      "message": "options_contents_more",
-      "update": "20110601"
+      "message": "options_contents_more"
    },
    "options_contents_settings": {
       "description": "category type for all settings links",
@@ -981,16 +725,12 @@
       "message": "查看状态"
    },
    "options_externalactions": {
-      "category": "Options Page",
       "description": "link to external actions",
-      "message": "扩展动作",
-      "update": "20110325"
+      "message": "扩展动作"
    },
    "options_moreactions": {
-      "category": "Options Page",
       "description": "Link to access more actions. These actions don't currently have a gesture assigned",
-      "message": "更多可用动作",
-      "update": "20110327"
+      "message": "更多可用动作"
    },
    "options_mousebutton_0": {
       "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
@@ -1005,31 +745,22 @@
       "message": "右键"
    },
    "options_note_doubleclick": {
-      "category": "Options Page",
       "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "你也可以双击右键激活上下文菜单，仅对 Linux 和 Mac 中的 Chrome 有效。",
-      "update": "20101105"
+      "message": "你也可以双击右键激活上下文菜单，仅对 Linux 和 Mac 中的 Chrome 有效。"
    },
    "options_note_hidepageaction_button": {
-      "category": "Options Page",
       "description": "Label on the button to hide the Smooth Gestures icon in the url bar",
-      "message": "隐藏图标",
-      "update": "20110327"
+      "message": "隐藏图标"
    },
    "options_note_print": {
-      "category": "Options Page",
       "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
-      "message": "记不住所有你所设置过的手势吗？打印一份“小抄”吧！",
-      "update": "20110327"
+      "message": "记不住所有你所设置过的手势吗？打印一份“小抄”吧！"
    },
    "options_note_print_button": {
-      "category": "Options Page",
       "description": "Label on the button to print the page",
-      "message": "打印",
-      "update": "20110327"
+      "message": "打印"
    },
    "options_note_remindrate": {
-      "category": "Options Page",
       "description": "Notify the user that they can rate this extension to help promote it",
       "message": "你喜欢 Smooth Gestures 吗？你可以参与改进这个插件，点击这个链接 $LINK$。",
       "placeholders": {
@@ -1037,23 +768,17 @@
             "content": "$1",
             "example": "\u003Ca href=''>leave a 5 star rating\u003C/a>"
          }
-      },
-      "update": "20110401"
+      }
    },
    "options_note_remindrate_link": {
-      "category": "Options Page",
       "description": "Text for the link leading to the extension's page",
-      "message": "为此项目进行评级，并留言。",
-      "update": "20110422"
+      "message": "为此项目进行评级，并留言。"
    },
    "options_note_sync": {
-      "category": "Options Page",
       "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
-      "message": "你也可以双击右键激活上下文菜单，仅对Linux和Mac中的Chrome有效。",
-      "update": "20100707"
+      "message": "你也可以双击右键激活上下文菜单，仅对Linux和Mac中的Chrome有效。"
    },
    "options_note_translate": {
-      "category": "Options Page",
       "description": "Solicit translation requests",
       "message": "您会英语吗？帮助 $LINK$",
       "placeholders": {
@@ -1061,17 +786,13 @@
             "content": "$1",
             "example": "\u003Ca href=''>translate Smooth Gestures into your language\u003C/a>"
          }
-      },
-      "update": "20110323"
+      }
    },
    "options_note_translate_link": {
-      "category": "Options Page",
       "description": "Link for soliciting translation requests",
-      "message": "翻译 Smooth Gestures 为你的语言",
-      "update": "20110323"
+      "message": "翻译 Smooth Gestures 为你的语言"
    },
    "options_note_updated": {
-      "category": "Options Page",
       "description": "Notify that the extension has been updated",
       "message": "Smooth Gestures 已更新为 $VERSION$",
       "placeholders": {
@@ -1079,40 +800,31 @@
             "content": "$2",
             "example": "0.13.1"
          }
-      },
-      "update": "20100802"
+      }
    },
    "options_remind_doubleclick": {
       "description": "Let the user know that they may need to double-click the right mouse button to get to the context menu",
       "message": "提示: 根据你使用的操作系统平台，你可能要双击鼠标右键来打开快捷菜单。"
    },
    "options_title": {
-      "category": "Options Page",
       "description": "The title of the options page, at top and tab name",
-      "message": "选项",
-      "update": "20110422"
+      "message": "选项"
    },
    "options_welcome_0": {
-      "category": "Options Page",
       "description": "First just-installed line",
-      "message": "欢迎使用Smooth Gestures！",
-      "update": "20110327"
+      "message": "欢迎使用Smooth Gestures！"
    },
    "options_welcome_1": {
-      "category": "Options Page",
       "description": "First just-installed bullet point",
-      "message": "您已安装 Smooth Gestures！请按下鼠标右键按右－下－左－上顺序画‘0’打开‘选项’页面。",
-      "update": "20110401"
+      "message": "您已安装 Smooth Gestures！请按下鼠标右键按右－下－左－上顺序画‘0’打开‘选项’页面。"
    },
    "options_welcome_2": {
       "description": "Second just-installed line",
       "message": "按下面的‘+’添加手势或动作。"
    },
    "options_welcome_3": {
-      "category": "Options Page",
       "description": "Third just-installed bullet point",
-      "message": "请点击右边的“设置”按钮，或滚动至页面底部以更改各设置项。",
-      "update": "20110723"
+      "message": "请点击右边的“设置”按钮，或滚动至页面底部以更改各设置项。"
    },
    "options_welcome_4": {
       "description": "Bold reload all tabs just-installed",
@@ -1123,16 +835,12 @@
       "message": "查看所有页面状态"
    },
    "popup_button_hidepageaction": {
-      "category": "Status Notification",
       "description": "a button to hide the pageaction",
-      "message": "隐藏地址栏图标",
-      "update": "20110327"
+      "message": "隐藏地址栏图标"
    },
    "popup_button_options": {
-      "category": "Status Notification",
       "description": "a button to go to the options page",
-      "message": "设置",
-      "update": "20110327"
+      "message": "设置"
    },
    "popup_button_reload": {
       "description": "a button to reload the current page",
@@ -1143,19 +851,14 @@
       "message": "查看所有页面状态"
    },
    "popup_status_blocked_1": {
-      "category": "Status Notification",
       "description": "text explaining a blocked tab",
-      "message": "基于安全考虑，Chrome 阻止了扩展程序在当前标签页的运行。",
-      "update": "20110326"
+      "message": "基于安全考虑，Chrome 阻止了扩展程序在当前标签页的运行。"
    },
    "popup_status_blocked_2": {
-      "category": "Status Notification",
       "description": "text explaining a blocked tab",
-      "message": "因此 Smooth Gestures 在当前标签页无效。",
-      "update": "20101105"
+      "message": "因此 Smooth Gestures 在当前标签页无效。"
    },
    "popup_status_blocked_file": {
-      "category": "Status Notification",
       "description": "text explaining how to make a file:// tab work",
       "message": "尝试使用 $LINK$ 为 file:// 和 ftp:// 协议启用手势。",
       "placeholders": {
@@ -1163,29 +866,21 @@
             "content": "$1",
             "example": "Smooth Gestures New Tab Add-on"
          }
-      },
-      "update": "20101105"
+      }
    },
    "popup_status_blocked_file2": {
-      "category": "Status Notification",
       "description": "text explaining how to make a file:// tab work",
-      "message": "地址栏输入“chrome://extensions/”，勾选Smooth Gestures下的“允许访问文件网址”，以开启“file://”和“ftp://”协议支持。",
-      "update": "20110116"
+      "message": "地址栏输入“chrome://extensions/”，勾选Smooth Gestures下的“允许访问文件网址”，以开启“file://”和“ftp://”协议支持。"
    },
    "popup_status_blocked_file2_link": {
-      "category": "Status Notification",
       "description": "text naming the link that goes to chrome://extensions/",
-      "message": "扩展程序",
-      "update": "20110326"
+      "message": "扩展程序"
    },
    "popup_status_blocked_file_link": {
-      "category": "Status Notification",
       "description": "text naming the extension that adds file:// functionality to Smooth Gestures",
-      "message": "Smooth Gestures 文件协议扩展",
-      "update": "20101105"
+      "message": "Smooth Gestures 文件协议扩展"
    },
    "popup_status_blocked_newtab": {
-      "category": "Status Notification",
       "description": "text explaining how to make a newtab page work",
       "message": "尝试用手势将链接指向新选项卡",
       "placeholders": {
@@ -1193,11 +888,9 @@
             "content": "$1",
             "example": "Smooth Gestures New Tab Add-on"
          }
-      },
-      "update": "20110326"
+      }
    },
    "popup_status_blocked_newtab2": {
-      "category": "Status Notification",
       "description": "text explaining how to make a newtab page work",
       "message": "在新Tab中访问 $LINK$ 来启用鼠标手势",
       "placeholders": {
@@ -1205,52 +898,39 @@
             "content": "$1",
             "example": "Smooth Gestures New Tab Add-on"
          }
-      },
-      "update": "20110325"
+      }
    },
    "popup_status_blocked_newtab2_link": {
-      "category": "Status Notification",
       "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
-      "message": "固定新标签页",
-      "update": "20110325"
+      "message": "固定新标签页"
    },
    "popup_status_blocked_newtab_link": {
-      "category": "Status Notification",
       "description": "text naming the extension that adds newtab functionality to Smooth Gestures",
-      "message": "Smooth Gestures 新标签页扩展",
-      "update": "20101105"
+      "message": "Smooth Gestures 新标签页扩展"
    },
    "popup_status_broken": {
       "description": "text explaining a broken tab",
       "message": "鼠标手势在当前标签页无效。"
    },
    "popup_status_broken_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are broken on this page.",
-      "message": "手势失效",
-      "update": "20110325"
+      "message": "手势失效"
    },
    "popup_status_question": {
       "description": "text explaining a questionable tab",
       "message": "鼠标手势可能在当前标签页无效。"
    },
    "popup_status_unable_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are blocked by this page.",
-      "message": "手势被阻止",
-      "update": "20110325"
+      "message": "手势被阻止"
    },
    "popup_status_working": {
-      "category": "Status Notification",
       "description": "text explaining a working tab",
-      "message": "手势在本页可用",
-      "update": "20110325"
+      "message": "手势在本页可用"
    },
    "popup_status_working_short": {
-      "category": "Status Notification",
       "description": "short text saying that gestures are working on this page.",
-      "message": "手势有效",
-      "update": "20110326"
+      "message": "手势有效"
    },
    "setting_blacklist": {
       "description": "setting title",
@@ -1261,16 +941,12 @@
       "message": "在这些站点禁用鼠标手势。多个输入用英文状态下的逗号分隔，如：\"mail.google.com, www.example.com\")"
    },
    "setting_button_export": {
-      "category": "Options Page: Settings",
       "description": "button to save settings as a backup file",
-      "message": "保存设置",
-      "update": "20100805"
+      "message": "保存设置"
    },
    "setting_button_import": {
-      "category": "Options Page: Settings",
       "description": "button to load a settings file",
-      "message": "载入设置文件",
-      "update": "20100805"
+      "message": "载入设置文件"
    },
    "setting_button_left": {
       "description": "choose left mouse button",
@@ -1301,54 +977,40 @@
       "message": "更新"
    },
    "setting_closelastblock": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "不要关闭最后一个标签",
-      "update": "20100805"
+      "message": "不要关闭最后一个标签"
    },
    "setting_closelastblock_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "不要使用关闭标签手势关闭最后一个标签；而是，跳转到到新的标签地址",
-      "update": "20101105"
+      "message": "不要使用关闭标签手势关闭最后一个标签；而是，跳转到到新的标签地址"
    },
    "setting_disabled": {
-      "category": "Options Page: Settings",
       "description": "choose no mouse button (gestures are disabled)",
-      "message": "禁用",
-      "update": "20100703"
+      "message": "禁用"
    },
    "setting_force_context": {
       "description": "setting title",
       "message": "禁止在链接上使用快捷菜单"
    },
    "setting_force_context2": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "强制上下文菜",
-      "update": "20100805"
+      "message": "强制上下文菜"
    },
    "setting_force_context2_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "按右键时总是显示上下文菜单。使用中键作为手势键时很有用。",
-      "update": "20100912"
+      "message": "按右键时总是显示上下文菜单。使用中键作为手势键时很有用。"
    },
    "setting_force_context_descrip": {
       "description": "setting description",
       "message": "禁止在链接上使用鼠标手势。在某些会发生快捷菜单冲突的操作系统环境下，这一设置允许右键单击弹出快捷菜单而不需要双击右键。然而这样也禁用了在链接上使用鼠标手势打开新页面这一功能。"
    },
    "setting_group_assorted": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "杂项设置",
-      "update": "20100805"
+      "message": "杂项设置"
    },
    "setting_group_context": {
-      "category": "Options Page: Settings",
       "description": "title of a group of settings",
-      "message": "上下文菜单设置",
-      "update": "20100805"
+      "message": "上下文菜单设置"
    },
    "setting_group_hide": {
       "description": "button to hide a group of settings",
@@ -1367,16 +1029,12 @@
       "message": "拖动轨迹设置"
    },
    "setting_hidepageaction": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "总是显示图标",
-      "update": "20110326"
+      "message": "总是显示图标"
    },
    "setting_hidepageaction_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "地址栏的图标允许你快速访问Smooth Gestures的设置页面。或者，你可以通过“扳手键 > 工具 > 扩展 > Smooth Gestures > 选项”找到这个页面。",
-      "update": "20110327"
+      "message": "地址栏的图标允许你快速访问Smooth Gestures的设置页面。或者，你可以通过“扳手键 > 工具 > 扩展 > Smooth Gestures > 选项”找到这个页面。"
    },
    "setting_hold_button": {
       "description": "setting title",
@@ -1387,50 +1045,36 @@
       "message": "允许使用鼠标的左键、中键或右键开启鼠标手势。"
    },
    "setting_import": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "备份设置",
-      "update": "20100703"
+      "message": "备份设置"
    },
    "setting_import_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "保存你的当前设置(包括手势,习惯,动作,和选项).加载文件来恢复丢失的设置或移动设置到另一台计算机",
-      "update": "20100805"
+      "message": "保存你的当前设置(包括手势,习惯,动作,和选项).加载文件来恢复丢失的设置或移动设置到另一台计算机"
    },
    "setting_newtab_linkright": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "在当前标签页右边打开使用从链接上新建页面手势的页面。",
-      "update": "20101105"
+      "message": "在当前标签页右边打开使用从链接上新建页面手势的页面。"
    },
    "setting_newtab_linkright_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "与 Chromium 中在新页面中打开链接的默认动作一样，这样类似于以主题分组标签。（在拆分和合并标签时非常有用，见下面的设置）",
-      "update": "20101105"
+      "message": "与 Chromium 中在新页面中打开链接的默认动作一样，这样类似于以主题分组标签。（在拆分和合并标签时非常有用，见下面的设置）"
    },
    "setting_newtab_right": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "在当前标签旁打开新标签",
-      "update": "20100703"
+      "message": "在当前标签旁打开新标签"
    },
    "setting_newtab_right_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "在当前选项卡旁边打开新标签(不从链接).",
-      "update": "20100805"
+      "message": "在当前选项卡旁边打开新标签(不从链接)."
    },
    "setting_newtab_url": {
       "description": "setting title",
       "message": "新建页面地址"
    },
    "setting_newtab_url_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "设置新建页面的地址。（默认为 chrome://newtab/）",
-      "update": "20101105"
+      "message": "设置新建页面的地址。（默认为 chrome://newtab/）"
    },
    "setting_reset": {
       "description": "setting title",
@@ -1441,40 +1085,28 @@
       "message": "将所有手势和设置恢复到初始状态。"
    },
    "setting_selecttolink": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "使用所选的网址来链接",
-      "update": "20100805"
+      "message": "使用所选的网址来链接"
    },
    "setting_selecttolink_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "选择一个或者多个链接文本作为链接手势。（举例：选择两个链接文本，使用链接手势后两个链接会分别在两个选项卡打开）",
-      "update": "20100912"
+      "message": "选择一个或者多个链接文本作为链接手势。（举例：选择两个链接文本，使用链接手势后两个链接会分别在两个选项卡打开）"
    },
    "setting_sendstats": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "提交用法",
-      "update": "20100805"
+      "message": "提交用法"
    },
    "setting_sendstats_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "匿名发送手势用途报告以提交最常用手势，新版本中的默认手势将以此为参考。",
-      "update": "20100731"
+      "message": "匿名发送手势用途报告以提交最常用手势，新版本中的默认手势将以此为参考。"
    },
    "setting_sync": {
-      "category": "Options Page: Settings",
       "description": "setting title",
-      "message": "同步",
-      "update": "20100703"
+      "message": "同步"
    },
    "setting_sync_descrip": {
-      "category": "Options Page: Settings",
       "description": "setting description",
-      "message": "与其它计算机同步设置和手势。此功能需要启用书签同步。",
-      "update": "20100731"
+      "message": "与其它计算机同步设置和手势。此功能需要启用书签同步。"
    },
    "setting_trail_color": {
       "description": "setting title",
@@ -1505,20 +1137,16 @@
       "message": "是否确定重置？这一操作将清除所有自定义设置。"
    },
    "status_button_reloadall": {
-      "category": "Tab Status Page",
       "description": "button to reload all broken pages",
-      "message": "重新载入所有无效页面?",
-      "update": "20110110"
+      "message": "重新载入所有无效页面?"
    },
    "status_button_reloadone": {
       "description": "button to reload single broken page",
       "message": "重新载入页面"
    },
    "status_legend_blocked": {
-      "category": "Tab Status Page",
       "description": "status of a page",
-      "message": "被阻止的系统页面",
-      "update": "20110318"
+      "message": "被阻止的系统页面"
    },
    "status_legend_broken": {
       "description": "status of a page",
@@ -1533,10 +1161,8 @@
       "message": "有效"
    },
    "status_link_options": {
-      "category": "Tab Status Page",
       "description": "Link to go to the options page",
-      "message": "设置 Smooth Gestures：选项!",
-      "update": "20101105"
+      "message": "设置 Smooth Gestures：选项!"
    },
    "status_title": {
       "description": "The title of the options page, at top and tab name",

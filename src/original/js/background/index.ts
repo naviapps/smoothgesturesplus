@@ -1,21 +1,14 @@
-import browser from 'webextension-polyfill';
-
 import { createActions } from './actions';
 
-const e = {};
 let settings = {};
 let r = {};
 
-const c = (e, t) => {
-  const n = Date.now();
+const updateSettings = (e, t) => {
   for (key in e) {
     settings[key] = e[key];
   }
   if (undefined === e[key]) {
     chrome.storage.local.remove(key);
-  }
-  if (!key.match(/\+ts$/)) {
-    settings[`${key}+ts`] = e[`${key}+ts`] = n;
   }
   chrome.storage.local.set(e, t);
 };
@@ -24,13 +17,7 @@ const l = { initcount: 2 };
 
 chrome.storage.local.get(null, (items) => {
   if (chrome.runtime.lastError) {
-    if (!l.failed) {
-      alert(
-        "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
-      );
-    }
     l.failed = true;
-    console.log('chrome.storage failure');
     settings = JSON.parse(localStorage.local);
   } else {
     settings = items;
@@ -43,13 +30,7 @@ chrome.storage.local.get(null, (items) => {
 
 chrome.storage.sync.get(null, (items) => {
   if (chrome.runtime.lastError) {
-    if (l.failed) {
-      alert(
-        "Google Chrome's storage may be corrupted. Extensions may not work properly.\n\nTry closing and restarting Chrome.\n\nIf that doesn't work, reinstall the browser to fix this problem.",
-      );
-    }
     l.failed = true;
-    console.log('chrome.storage failure');
     r = JSON.parse(localStorage.sync);
   } else {
     r = items;
@@ -114,7 +95,6 @@ l.init = () => {
     settings.id =
       Math.floor(Math.random() * 2 ** 30).toString(32) +
       Math.floor(Math.random() * 2 ** 30).toString(32);
-    settings.log = { action: {} };
     settings.gestures = JSON.parse(defaults.gestures);
     const e = JSON.parse(defaults.settings);
     for (key in e) {
@@ -124,7 +104,7 @@ l.init = () => {
       custom000000: {
         title: 'Navigate to Google (example)',
         descrip: 'Go to Google',
-        code: 'location.href = "http://www.google.com/"',
+        code: 'location.href = "https://www.google.com/"',
         env: 'page',
         share: false,
         context: '',
@@ -139,20 +119,10 @@ l.init = () => {
     r.firstinstalled = settings.installed;
   }
   for (key in r.sync) {
-    if (
-      r.sync[key] &&
-      undefined !== r[key] &&
-      (r[`${key}+ts`] || 0) >= (settings[`${key}+ts`] || 0)
-    ) {
+    if (r.sync[key] && undefined !== r[key]) {
       settings[key] = r[key];
-      settings[`${key}+ts`] = r[`${key}+ts`] || Date.now();
-    } else if (
-      r.sync[key] &&
-      undefined !== settings[key] &&
-      (settings[`${key}+ts`] || 0) >= (r[`${key}+ts`] || 0)
-    ) {
+    } else if (r.sync[key] && undefined !== settings[key]) {
       r[key] = settings[key];
-      r[`${key}+ts`] = settings[`${key}+ts`] || Date.now();
     }
   }
   settings.version = chrome.runtime.getManifest().version;
@@ -166,7 +136,7 @@ l.init = () => {
     window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${t},left=${n}`);
   }
   chrome.storage.sync.set(r, () => {
-    chrome.storage.local.set(settings, F);
+    chrome.storage.local.set(settings, initialize);
   });
 };
 
@@ -174,24 +144,10 @@ l.localChanged = (e) => {
   if (e.gestures) {
     updateValidGestures();
   }
-  if (
-    e.version &&
-    settings.version === '2.8.1' &&
-    e.version.oldValue &&
-    e.version.oldValue !== '2.8.1'
-  ) {
-    c({ showNoteUpdated: true }, () => {
-      chrome.tabs.create({
-        url: chrome.runtime.getURL('/options.html#changelog'),
-      });
-    });
-  }
 };
 
-l.syncChanged = () => {};
-navigator.platform.indexOf('Win');
-const d = navigator.platform.indexOf('Mac') !== -1;
-const u = navigator.platform.indexOf('Linux') !== -1;
+const isMac = navigator.platform.indexOf('Mac') !== -1;
+const isLinux = navigator.platform.indexOf('Linux') !== -1;
 let m = null;
 const contents = {};
 const f = { active: null, prevActive: null, closed: [], tab: {} };
@@ -364,9 +320,6 @@ browser.runtime.onMessage.addListener((e, t, n) => {
       n(JSON.stringify({ states: e }));
     });
   } else {
-    if (e.log) {
-      console.log(e.log);
-    }
     n(null);
   }
 });
@@ -404,7 +357,6 @@ const initConnectTab = (port) => {
       }
 
       if (mess.gesture && settings.gestures[mess.gesture]) {
-        if (v) return void J();
         const e = settings.gestures[mess.gesture];
         console.log('gesture', mess.gesture, e);
         if (chainGesture) {
@@ -467,27 +419,6 @@ const initConnectTab = (port) => {
             }
           }
         } catch (err) {}
-
-        if (!settings.log.action[e]) {
-          settings.log.action[e] = {};
-        }
-
-        if (!settings.log.action[e][mess.gesture]) {
-          settings.log.action[e][mess.gesture] = { count: 0 };
-        }
-
-        settings.log.action[e][mess.gesture].count += 1;
-
-        if (!settings.log.line) {
-          settings.log.line = { distance: 0, segments: 0 };
-        }
-
-        if (mess.line) {
-          settings.log.line.distance += mess.line.distance;
-          settings.log.line.segments += mess.line.segments;
-        }
-
-        c({ log: settings.log });
       }
       if (mess.syncButton) {
         if (chainGesture) {
@@ -508,12 +439,6 @@ const initConnectTab = (port) => {
         }, 20);
       }
 
-      if (mess.closetab) {
-        chrome.tabs.get(contents[id].detail.tabId, (tab) => {
-          chrome.tabs.remove(tab.id);
-        });
-      }
-
       if (mess.nativeport && mess.nativeport.rightclick) {
         if (
           typeof mess.nativeport.rightclick.x !== 'number' ||
@@ -530,7 +455,7 @@ const initConnectTab = (port) => {
             },
             timestamp: Date.now(),
           });
-        } else if (!settings.blockDoubleclickAlert && (d || u)) {
+        } else if (!settings.blockDoubleclickAlert && (isMac || isLinux)) {
           const a = screen.availHeight / 2 - 320 / 1.5;
           const r = screen.availWidth / 2 - 375;
           window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${a},left=${r}`);
@@ -550,7 +475,7 @@ const initConnectTab = (port) => {
       chainGesture = null;
     }
   }
-  let i = tab.url.substr(tab.url.indexOf('//') + 2);
+  let i = tab.url.slice(tab.url.indexOf('//') + 2);
   i = i.substr(0, i.indexOf('/')).toLowerCase();
   for (let a = 0; settings.blacklist && a < settings.blacklist.length; a += 1) {
     if (new RegExp(`^(.+\\.)?${settings.blacklist[a].replace('.', '\\.')}$`).test(i)) {
@@ -622,9 +547,9 @@ chrome.windows.onFocusChanged.addListener((e) => {
       b[e] = {};
     }
     b[e].focused = Date.now();
-    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
-      if (e.length) {
-        n(e[0].id);
+    chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+      if (tabs.length) {
+        n(tabs[0].id);
       }
     });
   }
@@ -702,35 +627,6 @@ chrome.tabs.onRemoved.addListener((e) => {
 chrome.windows.onRemoved.addListener((e) => {
   delete b[e];
 });
-
-const updateValidGestures = () => {
-  const validGestures = {};
-  Object.keys(settings.gestures).forEach((g) => {
-    if (g[0] === 'l' || g[0] === 'i' || g[0] === 's') {
-      g = g.slice(1);
-    }
-    if (g[0] === 'k') {
-      if (!validGestures.k) {
-        validGestures.k = {};
-      }
-      const mod = g.slice(1, 5);
-      if (validGestures.k[mod]) {
-        validGestures.k[mod] = [];
-      }
-      validGestures.k[mod].push(g.slice(6));
-    } else {
-      let cur = validGestures;
-      for (let i = 0; i < g.length; i += 1) {
-        if (!cur[g[i]]) {
-          cur[g[i]] = {};
-        }
-        cur = cur[g[i]];
-      }
-      cur[''] = true;
-    }
-  });
-  c({ validGestures });
-};
 
 const contentForTab = (tabId) => {
   let frameContent = null;
@@ -842,19 +738,6 @@ const refreshPageAction = (tabId) => {
   });
 };
 
-const J = () => {
-  chrome.runtime.requestUpdateCheck(() => {});
-  setTimeout(() => {
-    window.open(
-      '/update.html',
-      'sgupdate',
-      `chrome,innerWidth=700,innerHeight=250,left=${(window.screen.width - 700) / 2},top=${
-        (window.screen.height - 250) / 2 - 100
-      }`,
-    );
-  }, 2e3);
-};
-
 const q = {};
 
 const E = () => {
@@ -963,7 +846,7 @@ const connectExistingTabs = () => {
   });
 };
 
-const F = () => {
+const initialize = () => {
   for (id in settings.customactions) {
     contexts[id] = settings.customactions[id].context;
   }
@@ -983,11 +866,11 @@ const F = () => {
     }
     return e.length > t.length;
   })(chrome.runtime.getManifest().version, settings.version) &&
-    c({ version: chrome.runtime.getManifest().version, updated: Date.now() });
+    updateSettings({ version: chrome.runtime.getManifest().version, updated: Date.now() });
   for (id in settings.externalactions) {
     delete settings.externalactions[id];
   }
-  c({ externalactions: settings.externalactions });
+  updateSettings({ externalactions: settings.externalactions });
   chrome.runtime.sendMessage(id, { getexternalactions: true });
   setTimeout(connectExistingTabs, 0);
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
@@ -997,33 +880,11 @@ const F = () => {
   });
 };
 
-chrome.runtime.onUpdateAvailable.addListener(() => {
-  chrome.runtime.reload();
-});
-
 window.defaults = defaults;
 window.categories = categories;
 window.contexts = contexts;
-window.continue_permissions = () => {
-  setTimeout(() => {
-    if (R) {
-      R();
-    }
-    setTimeout(() => {
-      chrome.runtime.reload();
-    }, 500);
-  }, 0);
-};
-window.getTabStates = getTabStates;
 window.getTabStatus = getTabStatus;
-window.refreshPageAction = refreshPageAction;
 window.connectNative = P;
-window.disconnectNative = () => {
-  if (m) {
-    m.disconnect();
-    m = null;
-  }
-};
 window.isNative = () => {
   return !!m && (m.version ? { loaded: true, version: m.version } : { loaded: false });
 };

@@ -1,8 +1,5 @@
-import browser from 'webextension-polyfill';
-
 export type Actions = {
   //
-  'close-window': undefined;
   'split-tabs': undefined;
   'merge-tabs': () => Promise<void>;
   options: undefined;
@@ -18,38 +15,10 @@ export type Actions = {
   'maximize-window': undefined;
   'open-screenshot': undefined;
   'save-screenshot': undefined;
-  'open-screenshot-full': undefined;
-  'save-screenshot-full': undefined;
+  'open-screenshot-full': () => Promise<void>;
+  'save-screenshot-full': () => Promise<void>;
   'clone-tab': undefined;
-  'zoom-in': undefined;
-  'zoom-out': undefined;
-  'zoom-zero': undefined;
-  'zoom-img-in': undefined;
-  'zoom-img-out': undefined;
-  'zoom-img-zero': undefined;
-  'tab-to-left': undefined;
-  'tab-to-right': undefined;
-  'parent-dir': undefined;
-  'open-history': undefined;
-  'open-downloads': undefined;
-  'open-extensions': undefined;
-  'open-bookmarks': undefined;
-  'open-image': undefined;
-  'save-image': undefined;
-  'hide-image': undefined;
-  'show-cookies': undefined;
-  'search-sel': undefined;
-  print: undefined;
-  'toggle-pin': undefined;
-  pin: undefined;
-  unpin: undefined;
-  copy: undefined;
-  'copy-link': undefined;
-  'find-prev': () => Promise<void>;
-  'find-next': () => Promise<void>;
-  'toggle-bookmark': undefined;
-  bookmark: undefined;
-  unbookmark: undefined;
+  //
 };
 
 type Message = {
@@ -134,74 +103,88 @@ export const createActions = (
     n.dispatchEvent(o);
   };
 
-  const U = (c, l) => {
-    chrome.tabs.update(c.id, { active: true }, () => {
-      chrome.tabs.executeScript(
-        c.id,
-        {
-          code: 'var ssfo=document.body.style.overflow;document.body.style.overflow="hidden";var ssf={top:document.body.scrollTop,left:document.body.scrollLeft,height:document.body.scrollHeight,width:document.body.scrollWidth,screenh:window.innerHeight,screenw:window.innerWidth,overflow:ssfo};ssf;',
-        },
-        (e) => {
-          const t = e[0];
-          const n = document.createElement('canvas');
-          n.height = Math.min(t.height, 32768);
-          n.width = Math.min(t.width, 32768);
-          const o = document.createElement('img');
-          const i = n.getContext('2d');
-          let a = 0;
-          let r = 0;
-          const s = () => {
-            chrome.tabs.executeScript(
-              c.id,
-              {
-                code: `document.body.scrollTop=${a * t.screenh};document.body.scrollLeft=${
-                  r * t.screenw
-                };`,
-              },
-              () => {
-                setTimeout(() => {
-                  chrome.tabs.captureVisibleTab(c.windowId, { format: 'png' }, (e) => {
-                    o.src = e;
-                  });
-                }, 80);
-              },
-            );
-          };
-          o.addEventListener('load', () => {
-            i.drawImage(
-              o,
-              0,
-              0,
-              o.width,
-              o.height,
-              Math.min(r * o.width, t.width - t.screenw),
-              Math.min(a * o.height, t.height - t.screenh),
-              o.width,
-              o.height,
-            );
-            if (a + 1 < n.height / t.screenh) {
-              a += 1;
-              s();
-            } else if (r + 1 < n.width / t.screenw) {
-              a = 0;
-              r += 1;
-              s();
-            } else {
-              chrome.tabs.executeScript(
-                c.id,
-                {
-                  code: `document.body.scrollTop=${t.top};document.body.scrollLeft=${t.left};document.body.style.overflow="${t.overflow}"`,
-                },
-                () => {
-                  l(S(n.toDataURL()));
-                },
-              );
-            }
-          });
-          s();
-        },
-      );
+  const U = async (tab, call) => {
+    await browser.tabs.update(tab.id, { active: true });
+    const results = await browser.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: () => {
+        const ssfo = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        return {
+          top: document.body.scrollTop,
+          left: document.body.scrollLeft,
+          height: document.body.scrollHeight,
+          width: document.body.scrollWidth,
+          screenh: window.innerHeight,
+          screenw: window.innerWidth,
+          overflow: ssfo,
+        };
+      },
     });
+    type Ssf = {
+      top: number;
+      left: number;
+      height: number;
+      width: number;
+      screenh: number;
+      screenw: number;
+      overflow: string;
+    };
+    const ssf = results[0]?.result as Ssf | undefined;
+    if (!ssf) {
+      return;
+    }
+    const canvas = document.createElement('canvas');
+    canvas.height = Math.min(ssf.height, 32768);
+    canvas.width = Math.min(ssf.width, 32768);
+    const img = document.createElement('img');
+    const ctx = canvas.getContext('2d');
+    let hNum = 0;
+    let wNum = 0;
+    const captureTab = async () => {
+      await browser.scripting.executeScript({
+        target: { tabId: tab.id },
+        func: () => {
+          window.scrollTo(hNum * ssf.screenh, wNum * ssf.screenw);
+        },
+      });
+      setTimeout(async () => {
+        const dataUrl = await chrome.tabs.captureVisibleTab(tab.windowId, { format: 'png' });
+        img.src = dataUrl;
+      }, 80);
+    };
+    img.addEventListener('load', async () => {
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        img.width,
+        img.height,
+        Math.min(wNum * img.width, ssf.width - ssf.screenw),
+        Math.min(hNum * img.height, ssf.height - ssf.screenh),
+        img.width,
+        img.height,
+      );
+      if (hNum + 1 < canvas.height / ssf.screenh) {
+        hNum += 1;
+        await captureTab();
+      } else if (wNum + 1 < canvas.width / ssf.screenw) {
+        hNum = 0;
+        wNum += 1;
+        await captureTab();
+      } else {
+        await browser.scripting.executeScript({
+          target: { tabId: tab.id },
+          func: () => {
+            document.body.scrollTop = ssf.top;
+            document.body.scrollLeft = ssf.left;
+            document.body.style.overflow = ssf.overflow;
+          },
+        });
+        call(S(canvas.toDataURL()));
+      }
+    });
+    captureTab();
   };
 
   const S = (e) => {
@@ -235,23 +218,8 @@ export const createActions = (
     });
   };
 
-  const findPrev = async () => {
-    if (!sender.tab || !sender.tab.id || !message.selection) {
-      return;
-    }
-    sendResponse({ action: { id: 'find-prev', selection: message.selection } });
-  };
-
-  const findNext = async () => {
-    if (!sender.tab || !sender.tab.id || !message.selection) {
-      return;
-    }
-    sendResponse({ action: { id: 'find-next', selection: message.selection } });
-  };
-
   return {
     //
-    'close-window': undefined,
     'split-tabs': undefined,
     'merge-tabs': mergeTabs,
     options: undefined,
@@ -267,37 +235,8 @@ export const createActions = (
     'maximize-window': undefined,
     'open-screenshot': undefined,
     'save-screenshot': undefined,
-    'open-screenshot-full': undefined,
-    'save-screenshot-full': undefined,
+    'open-screenshot-full': openScreenshotFull,
+    'save-screenshot-full': saveScreenshotFull,
     'clone-tab': undefined,
-    'zoom-in': undefined,
-    'zoom-out': undefined,
-    'zoom-zero': undefined,
-    'zoom-img-in': undefined,
-    'zoom-img-out': undefined,
-    'zoom-img-zero': undefined,
-    'tab-to-left': undefined,
-    'tab-to-right': undefined,
-    'parent-dir': undefined,
-    'open-history': undefined,
-    'open-downloads': undefined,
-    'open-extensions': undefined,
-    'open-bookmarks': undefined,
-    'open-image': undefined,
-    'save-image': undefined,
-    'hide-image': undefined,
-    'show-cookies': undefined,
-    'search-sel': undefined,
-    print: undefined,
-    'toggle-pin': undefined,
-    pin: undefined,
-    unpin: undefined,
-    copy: undefined,
-    'copy-link': undefined,
-    'find-prev': findPrev,
-    'find-next': findNext,
-    'toggle-bookmark': undefined,
-    bookmark: undefined,
-    unbookmark: undefined,
   };
 };
