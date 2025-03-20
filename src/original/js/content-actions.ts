@@ -1,9 +1,9 @@
-const findPrev = async () => {
+const findPrevious = async () => {
   if (!message.selection) return call();
-  window.find(message.selection.replace(/[\\"']/g, '\\$&'), false, true, true, false, true, true);
+  globalThis.find(message.selection.replaceAll(/[\\"']/g, String.raw`\$&`), false, true, true, false, true, true);
 };
 
 const findNext = async () => {
   if (!message.selection) return call();
-  window.find(message.selection.replace(/[\\"']/g, '\\$&'), false, false, true, false, true, true);
+  globalThis.find(message.selection.replaceAll(/[\\"']/g, String.raw`\$&`), false, false, true, false, true, true);
 };

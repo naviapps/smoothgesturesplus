@@ -146,127 +146,126 @@ l.localChanged = (e) => {
   }
 };
 
-const isMac = navigator.platform.indexOf('Mac') !== -1;
-const isLinux = navigator.platform.indexOf('Linux') !== -1;
-let m = null;
+const navMac = navigator.userAgent.includes('Mac');
+const navLinux = navigator.userAgent.includes('Linux');
+let nativePort = null;
 const contents = {};
-const f = { active: null, prevActive: null, closed: [], tab: {} };
-const b = {};
+const states = { active: null, prevActive: null, closed: [], tab: {} };
+const focusWindows = {};
 const w = null;
 let chainGesture = null;
 const o = null;
-const v = Date.now() / 1000 > 1745208e3;
+const v = Date.now() / 1000 > 1_745_208e3;
 
 /*
  * System Defaults
  */
 const defaults = {
-  settings: JSON.stringify({
+  settings: {
     holdButton: 2,
     contextOnLink: false,
     newTabUrl: 'chrome://newtab/',
     newTabRight: false,
     newTabLinkRight: true,
-    trailColor: { r: 255, g: 0, b: 0, a: 1 },
-    trailWidth: 2,
-    trailBlock: false,
-    blacklist: [],
+    stroke: { r: 255, g: 0, b: 0, a: 1 },
+    strokeWidth: 2,
+    blacklists: [],
     selectToLink: true,
-  }),
-  gestures: JSON.stringify({
-    U: 'new-tab',
-    lU: 'new-tab-link',
-    D: 'toggle-pin',
-    L: 'page-back',
-    rRL: 'page-back',
-    R: 'page-forward',
-    rLR: 'page-forward',
-    UL: 'prev-tab',
-    UR: 'next-tab',
-    wU: 'goto-top',
-    wD: 'goto-bottom',
-    DR: 'close-tab',
-    LU: 'undo-close',
-    DU: 'clone-tab',
-    lDU: 'new-tab-back',
-    UD: 'reload-tab',
-    UDU: 'reload-tab-full',
-    URD: 'view-source',
-    UDR: 'split-tabs',
-    UDL: 'merge-tabs',
-    LDR: 'show-cookies',
-    RULD: 'fullscreen-window',
-    DL: 'minimize-window',
-    RU: 'maximize-window',
+  },
+  gestures: {
+    U: 'newTab',
+    lU: 'newTabLink',
+    D: 'togglePin',
+    L: 'pageBack',
+    rRL: 'pageBack',
+    R: 'pageForward',
+    rLR: 'pageForward',
+    UL: 'previousTab',
+    UR: 'nextTab',
+    wU: 'gotoTop',
+    wD: 'gotoBottom',
+    DR: 'closeTab',
+    LU: 'undoClose',
+    DU: 'cloneTab',
+    lDU: 'newTabBack',
+    UD: 'reloadTab',
+    UDU: 'reloadTabFull',
+    URD: 'viewSource',
+    UDR: 'splitTabs',
+    UDL: 'mergeTabs',
+    LDR: 'showCookies',
+    RULD: 'fullscreenWindow',
+    DL: 'minimizeWindow',
+    RU: 'maximizeWindow',
     RDLUR: 'options',
-  }),
+  },
 };
 
 const categories = {
   cat_page_navigation: {
     actions: [
-      'page-back',
-      'page-forward',
-      'page-back-close',
-      'reload-tab',
-      'reload-tab-full',
-      'reload-all-tabs',
+      'pageBack',
+      'pageForward',
+      'pageBackClose',
+      'reloadTab',
+      'reloadTabFull',
+      'reloadAllTabs',
       'stop',
-      'parent-dir',
-      'page-next',
-      'page-prev',
+      'parentDirectory',
+      'pageNext',
+      'pagePrevious',
     ],
   },
   cat_tab_management: {
     actions: [
-      'new-tab',
-      'new-tab-link',
-      'new-tab-back',
-      'navigate-tab',
-      'close-tab',
-      'close-other-tabs',
-      'close-left-tabs',
-      'close-right-tabs',
-      'undo-close',
-      'clone-tab',
-      'new-window',
-      'new-window-link',
-      'close-window',
-      'prev-tab',
-      'next-tab',
-      'split-tabs',
-      'merge-tabs',
-      'tab-to-left',
-      'tab-to-right',
-      'toggle-pin',
+      'newTab',
+      'newTabLink',
+      'newTabBack',
+      'navigateTab',
+      'closeTab',
+      'closeOtherTabs',
+      'closeLeftTabs',
+      'closeRightTabs',
+      'undoClose',
+      'cloneTab',
+      'newWindow',
+      'newWindowLink',
+      'closeWindow',
+      'previousTab',
+      'nextTab',
+      'splitTabs',
+      'mergeTabs',
+      'tabToLeft',
+      'tabToRight',
+      'togglePin',
       'pin',
       'unpin',
     ],
   },
   cat_utilities: {
     actions: [
-      'goto-top',
-      'goto-bottom',
-      'page-up',
-      'page-down',
+      'gotoTop',
+      'gotoBottom',
+      'pageUp',
+      'pageDown',
       'print',
-      'view-source',
-      'show-cookies',
-      'search-sel',
-      'zoom-in',
-      'zoom-out',
-      'zoom-zero',
-      'open-image',
-      'save-image',
-      'hide-image',
-      'zoom-img-in',
-      'zoom-img-out',
-      'zoom-img-zero',
-      'find-prev',
-      'find-next',
+      'viewSource',
+      'showCookies',
+      'searchSel',
+      'zoomIn',
+      'zoomOut',
+      'zoomZero',
+      'openImage',
+      'saveImage',
+      'hideImage',
+      'zoomImgIn',
+      'zoomImgOut',
+      'zoomImgZero',
+      'findPrevious',
+      'findNext',
       'copy',
-      'copy-link',
-      'toggle-bookmark',
+      'copyLink',
+      'toggleBookmark',
       'bookmark',
       'unbookmark',
     ],
@@ -274,17 +273,17 @@ const categories = {
   cat_other: {
     actions: [
       'options',
-      'fullscreen-window',
-      'minimize-window',
-      'maximize-window',
-      'open-screenshot',
-      'save-screenshot',
-      'open-screenshot-full',
-      'save-screenshot-full',
-      'open-history',
-      'open-downloads',
-      'open-extensions',
-      'open-bookmarks',
+      'fullscreenWindow',
+      'minimizeWindow',
+      'maximizeWindow',
+      'openScreenshot',
+      'saveScreenshot',
+      'openScreenshotFull',
+      'saveScreenshotFull',
+      'openHistory',
+      'openDownloads',
+      'openExtensions',
+      'openBookmarks',
     ],
   },
   cat_custom: { customActions: true },
@@ -296,20 +295,20 @@ const categories = {
  * Action Functions
  */
 const contexts = {
-  'new-tab-link': 'l',
-  'new-tab-back': 'l',
-  'new-window-link': 'l',
-  'copy-link': 'l',
-  'zoom-img-in': 'i',
-  'zoom-img-out': 'i',
-  'zoom-img-zero': 'i',
-  'open-image': 'i',
-  'save-image': 'i',
-  'hide-image': 'i',
-  'search-sel': 's',
+  newTabLink: 'l',
+  newTabBack: 'l',
+  newWindowLink: 'l',
+  copyLink: 'l',
+  zoomImgIn: 'i',
+  zoomImgOut: 'i',
+  zoomImgZero: 'i',
+  openImage: 'i',
+  saveImage: 'i',
+  hideImage: 'i',
+  searchSel: 's',
   copy: 's',
-  'find-prev': 's',
-  'find-next': 's',
+  findPrevious: 's',
+  findNext: 's',
 };
 
 const R = null;
@@ -335,6 +334,105 @@ chrome.runtime.onConnect.addListener((e) => {
   }
 });
 
+const handleMessage = function (id, data) {
+  if (data.selection && settings.gestures[`s${data.gesture}`]) {
+    data.gesture = `s${data.gesture}`;
+  } else if (data.links && data.links.length > 0 && settings.gestures[`l${data.gesture}`]) {
+    data.gesture = `l${data.gesture}`;
+  } else if (data.images && data.images.length > 0 && settings.gestures[`i${data.gesture}`]) {
+    data.gesture = `i${data.gesture}`;
+  }
+
+  if (data.gesture && settings.gestures[data.gesture]) {
+    const e = settings.gestures[data.gesture];
+    if (chainGesture) {
+      clearTimeout(chainGesture.timeout);
+    }
+    chainGesture = null;
+    if (data.gesture[0] === 'r') {
+      chainGesture = {
+        rocker: true,
+        timeout: globalThis.setTimeout(() => {
+          chainGesture = null;
+        }, 2000),
+      };
+    }
+
+    if (data.gesture[0] === 'w') {
+      chainGesture = {
+        wheel: true,
+        timeout: globalThis.setTimeout(() => {
+          chainGesture = null;
+        }, 2000),
+      };
+    }
+
+    if (chainGesture && data.buttonDown) {
+      chainGesture.buttonDown = data.buttonDown;
+    }
+
+    if (chainGesture && data.startPoint) {
+      chainGesture.startPoint = data.startPoint;
+    }
+
+    const call = chainGesture
+      ? async () => {
+          if (!chainGesture) {
+            return;
+          }
+          const tabs = await browser.tabs.query({ active: true, lastFocusedWindow: true });
+          if (tabs.length === 0) {
+            return;
+          }
+          chainGesture.tabId = tabs[0].id;
+          for (id in contents) {
+            if (tabs[0].id === contents[id].detail.tabId) {
+              contents[id].postMessage({ chain: chainGesture });
+            }
+          }
+        }
+      : () => {};
+
+    try {
+      const actions = createActions(id, call, data, settings);
+      if (actions[e]) {
+        actions[e]();
+      } else if (settings.externalactions[e.slice(0, 32)]) {
+        chrome.runtime.sendMessage(e.slice(0, 32), {
+          doaction: e.slice(33),
+        });
+      } else if (settings.customactions[e]) {
+        const index = settings.customactions[e];
+        if (index.env === 'page') {
+          O(id, index.code, call);
+        }
+      }
+    } catch {}
+  }
+};
+
+const handleNativeport = async (mess) => {
+  if (mess && mess.rightclick) {
+    if (typeof mess.rightclick.x !== 'number' || typeof mess.rightclick.y !== 'number') {
+      return;
+    }
+    if (nativePort) {
+      nativePort.postMessage({
+        click: {
+          x: mess.rightclick.x,
+          y: mess.rightclick.y,
+          b: 2,
+        },
+        timestamp: Date.now(),
+      });
+    } else if (!settings.blockDoubleclickAlert && (navMac || navLinux)) {
+      const a = screen.availHeight / 2 - 320 / 1.5;
+      const r = screen.availWidth / 2 - 375;
+      window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${a},left=${r}`);
+    }
+  }
+};
+
 /*
  * Connect Tabs
  */
@@ -345,124 +443,7 @@ const initConnectTab = (port) => {
   const { tab } = port.sender;
   const { id } = port.detail;
   contents[id] = port;
-  contents[id].onMessage.addListener(
-    function (id, mess) {
-      console.log('content_message', JSON.stringify(mess));
-      if (mess.selection && mess.selection.length > 0 && settings.gestures[`s${mess.gesture}`]) {
-        mess.gesture = `s${mess.gesture}`;
-      } else if (mess.links && mess.links.length > 0 && settings.gestures[`l${mess.gesture}`]) {
-        mess.gesture = `l${mess.gesture}`;
-      } else if (mess.images && mess.images.length > 0 && settings.gestures[`i${mess.gesture}`]) {
-        mess.gesture = `i${mess.gesture}`;
-      }
-
-      if (mess.gesture && settings.gestures[mess.gesture]) {
-        const e = settings.gestures[mess.gesture];
-        console.log('gesture', mess.gesture, e);
-        if (chainGesture) {
-          clearTimeout(chainGesture.timeout);
-        }
-        chainGesture = null;
-        if (mess.gesture[0] === 'r') {
-          chainGesture = {
-            rocker: true,
-            timeout: setTimeout(() => {
-              chainGesture = null;
-            }, 2e3),
-          };
-        }
-
-        if (mess.gesture[0] === 'w') {
-          chainGesture = {
-            wheel: true,
-            timeout: setTimeout(() => {
-              chainGesture = null;
-            }, 2e3),
-          };
-        }
-
-        if (chainGesture && mess.buttonDown) {
-          chainGesture.buttonDown = mess.buttonDown;
-        }
-
-        if (chainGesture && mess.startPoint) {
-          chainGesture.startPoint = mess.startPoint;
-        }
-
-        const call = chainGesture
-          ? () => {
-              chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
-                if (chainGesture && e.length) {
-                  chainGesture.tabId = e[0].id;
-                  for (id in contents) {
-                    if (e[0].id === contents[id].detail.tabId) {
-                      contents[id].postMessage({ chain: chainGesture });
-                    }
-                  }
-                }
-              });
-            }
-          : () => {};
-
-        try {
-          const actions = createActions(id, call, mess, settings);
-          if (actions[e]) {
-            actions[e]();
-          } else if (settings.externalactions[e.substr(0, 32)]) {
-            chrome.runtime.sendMessage(e.substr(0, 32), {
-              doaction: e.substr(33),
-            });
-          } else if (settings.customactions[e]) {
-            const i = settings.customactions[e];
-            if (i.env === 'page') {
-              O(id, i.code, call);
-            }
-          }
-        } catch (err) {}
-      }
-      if (mess.syncButton) {
-        if (chainGesture) {
-          if (chainGesture.buttonDown) {
-            chainGesture.buttonDown = {};
-          }
-          chainGesture.buttonDown[mess.syncButton.id] = mess.syncButton.down;
-        }
-
-        setTimeout(() => {
-          chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
-            for (id in contents) {
-              if (tab[0].id === contents[id].detail.tabId) {
-                contents[id].postMessage({ syncButton: mess.syncButton });
-              }
-            }
-          });
-        }, 20);
-      }
-
-      if (mess.nativeport && mess.nativeport.rightclick) {
-        if (
-          typeof mess.nativeport.rightclick.x !== 'number' ||
-          typeof mess.nativeport.rightclick.y !== 'number'
-        ) {
-          return;
-        }
-        if (m) {
-          m.postMessage({
-            click: {
-              x: mess.nativeport.rightclick.x,
-              y: mess.nativeport.rightclick.y,
-              b: 2,
-            },
-            timestamp: Date.now(),
-          });
-        } else if (!settings.blockDoubleclickAlert && (isMac || isLinux)) {
-          const a = screen.availHeight / 2 - 320 / 1.5;
-          const r = screen.availWidth / 2 - 375;
-          window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${a},left=${r}`);
-        }
-      }
-    }.bind(null, id),
-  );
+  contents[id].onMessage.addListener(handleMessage.bind(null, id));
   contents[id].onDisconnect.addListener(() => {
     delete contents[id];
   });
@@ -475,10 +456,10 @@ const initConnectTab = (port) => {
       chainGesture = null;
     }
   }
-  let i = tab.url.slice(tab.url.indexOf('//') + 2);
-  i = i.substr(0, i.indexOf('/')).toLowerCase();
+  let index = tab.url.slice(tab.url.indexOf('//') + 2);
+  index = index.slice(0, Math.max(0, index.indexOf('/'))).toLowerCase();
   for (let a = 0; settings.blacklist && a < settings.blacklist.length; a += 1) {
-    if (new RegExp(`^(.+\\.)?${settings.blacklist[a].replace('.', '\\.')}$`).test(i)) {
+    if (new RegExp(`^(.+\\.)?${settings.blacklist[a].replace('.', String.raw`\.`)}$`).test(index)) {
       o.enable = false;
     }
   }
@@ -514,8 +495,8 @@ const O = (e, t, n, o) => {
       contents[e].sender.tab.id,
       { code: t, allFrames: true, matchAboutBlank: true },
       (e) => {
-        for (let t = 0; t < e.length; t += 1) {
-          if (e[t] !== null) return void o(e[t]);
+        for (const element of e) {
+          if (element !== null) return void o(element);
         }
         if (o) {
           o();
@@ -526,14 +507,14 @@ const O = (e, t, n, o) => {
 };
 
 const n = (e) => {
-  if (f.active != e) {
+  if (states.active != e) {
     for (id in contents) {
-      if (f.active == contents[id].detail.tabId) {
+      if (states.active == contents[id].detail.tabId) {
         contents[id].postMessage({ windowBlurred: true });
       }
     }
-    f.prevActive = f.active;
-    f.active = e;
+    states.prevActive = states.active;
+    states.active = e;
   }
 };
 
@@ -543,12 +524,12 @@ chrome.tabs.onActivated.addListener((e) => {
 
 chrome.windows.onFocusChanged.addListener((e) => {
   if (e !== chrome.windows.WINDOW_ID_NONE) {
-    if (!b[e]) {
-      b[e] = {};
+    if (!focusWindows[e]) {
+      focusWindows[e] = {};
     }
-    b[e].focused = Date.now();
+    focusWindows[e].focused = Date.now();
     chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-      if (tabs.length) {
+      if (tabs.length > 0) {
         n(tabs[0].id);
       }
     });
@@ -562,38 +543,38 @@ const z = (d, u) => {
         e.url = u.url;
         e.title = u.url;
       }
-      if (e.url.substr(0, 29) === 'http://www.google.com/?index=') {
+      if (e.url.slice(0, 29) === 'http://www.google.com/?index=') {
         const t = e.url.split('#');
         const n = t[0].split('?');
-        const o = t[1].substr(4).split(':--:');
-        const i = JSON.parse(unescape(o[1]));
+        const o = t[1].slice(4).split(':--:');
+        const index = JSON.parse(unescape(o[1]));
         const a = JSON.parse(unescape(o[2]));
-        const r = 1 * n[1].substr(6);
+        const r = 1 * n[1].slice(6);
         e.url = '';
         for (let s = 0; s < a[r].length; s += 1) {
           e.url += String.fromCharCode(a[r].charCodeAt(s) - 10);
         }
         e.title = '';
-        for (let s = 0; s < i[r].length; s += 1) {
-          e.title += String.fromCharCode(i[r].charCodeAt(s) - 10);
+        for (let s = 0; s < index[r].length; s += 1) {
+          e.title += String.fromCharCode(index[r].charCodeAt(s) - 10);
         }
       }
-      f.tab[d] || (f.tab[d] = { history: [], titles: [] });
-      const c = f.tab[d];
+      states.tab[d] || (states.tab[d] = { history: [], titles: [] });
+      const c = states.tab[d];
       c.winId = e.windowId;
       c.index = e.index;
       const l = c.history.indexOf(e.url);
-      if (l >= 0) {
-        c.history = c.history.slice(0, l + 1);
-        c.titles = c.titles.slice(0, l + 1);
-        c.titles[l] = e.title;
-      } else {
+      if (l === -1) {
         c.history.push(e.url);
         c.titles.push(e.title);
         if (c.history.length > 10) {
           c.history.shift();
           c.titles.shift();
         }
+      } else {
+        c.history = c.history.slice(0, l + 1);
+        c.titles = c.titles.slice(0, l + 1);
+        c.titles[l] = e.title;
       }
       if (e.status === 'loading') {
         chrome.pageAction.setIcon({
@@ -616,16 +597,16 @@ chrome.tabs.onUpdated.addListener(z);
 chrome.tabs.onMoved.addListener(z);
 chrome.tabs.onAttached.addListener(z);
 chrome.tabs.onRemoved.addListener((e) => {
-  if (f.tab[e]) {
-    f.closed.push(f.tab[e]);
+  if (states.tab[e]) {
+    states.closed.push(states.tab[e]);
   }
-  while (f.closed.length > 50) {
-    f.closed.shift();
+  while (states.closed.length > 50) {
+    states.closed.shift();
   }
-  delete f.tab[e];
+  delete states.tab[e];
 });
 chrome.windows.onRemoved.addListener((e) => {
-  delete b[e];
+  delete focusWindows[e];
 });
 
 const contentForTab = (tabId) => {
@@ -659,11 +640,10 @@ const getTabStates = (callback) => {
   }
   chrome.windows.getAll({ populate: true }, (windows) => {
     const states = {};
-    for (let j = 0; j < windows.length; j += 1) {
-      const win = windows[j];
+    for (const win of windows) {
       states[win.id] = [];
-      for (let i = 0; i < win.tabs.length; i += 1) {
-        const tab = win.tabs[i];
+      for (let index = 0; index < win.tabs.length; index += 1) {
+        const tab = win.tabs[index];
         let state = null;
         if (tabs[tab.id]) {
           state = tabs[tab.id];
@@ -672,9 +652,9 @@ const getTabStates = (callback) => {
           state = { root: false, frames: 0 };
         }
         state.goodurl =
-          tab.url.substr(0, 9) !== 'chrome://' &&
-          tab.url.substr(0, 19) !== 'chrome-extension://' &&
-          tab.url.substr(0, 26) !== 'https://chrome.google.com/';
+          tab.url.slice(0, 9) !== 'chrome://' &&
+          tab.url.slice(0, 19) !== 'chrome-extension://' &&
+          tab.url.slice(0, 26) !== 'https://chrome.google.com/';
         state.title = tab.title;
         state.url = tab.url;
         state.tabStatus = tab.status;
@@ -689,12 +669,14 @@ const getTabStates = (callback) => {
 
 const getTabStatus = (tabId, callback) => {
   const content = contentForTab(tabId);
-  if (!content) {
+  if (content) {
+    callback('working');
+  } else {
     chrome.tabs.get(tabId, (tab) => {
       if (
         tab &&
-        tab.url.match(
-          /^(chrome:\/\/|chrome-extension:\/\/|https:\/\/chrome\.google\.com|file:\/\/|[^:\/]+:[^:\/]+)/,
+        /^(chrome:\/\/|chrome-extension:\/\/|https:\/\/chrome\.google\.com|file:\/\/|[^:\/]+:[^:\/]+)/.test(
+          tab.url,
         )
       ) {
         callback('unable'); // fix for "no tab with id:"
@@ -702,8 +684,6 @@ const getTabStatus = (tabId, callback) => {
         callback('broken'); // broken (not connected)
       }
     });
-  } else {
-    callback('working');
   }
 };
 
@@ -746,39 +726,39 @@ const E = () => {
   }
 };
 
-window.addEventListener('online', E, true);
+globalThis.addEventListener('online', E, true);
 
 let B = null;
 
-const P = (o) => {
-  m ||
+const connectNative = (o) => {
+  nativePort ||
     chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (e) => {
       console.log('connectNative', e);
       if (e) {
         B = true;
         try {
-          m = chrome.runtime.connectNative('com.smoothgesturesplus.extras');
-          m.onMessage.addListener((e) => {
+          nativePort = chrome.runtime.connectNative('com.smoothgesturesplus.extras');
+          nativePort.onMessage.addListener((e) => {
             console.log('nativemessage', e);
-            if (m) {
+            if (nativePort) {
               if (n) {
                 clearTimeout(n);
                 n = null;
                 t();
               }
               if (e.version) {
-                m.version = e.version;
+                nativePort.version = e.version;
               }
             }
           });
-          m.onDisconnect.addListener(() => {
-            if (m) {
-              m = null;
-              console.log('nativedisconnect: retryTimeout: ', o);
+          nativePort.onDisconnect.addListener(() => {
+            if (nativePort) {
+              nativePort = null;
+              console.log('nativedisconnect: retryTimeout:', o);
               clearTimeout(n);
               n = null;
               if (o > 0 && o < 6e4) {
-                setTimeout(P, o, 1.01 * o);
+                setTimeout(connectNative, o, 1.01 * o);
               }
             }
           });
@@ -790,8 +770,8 @@ const P = (o) => {
             }
           };
           var n = setTimeout(t, 1000);
-        } catch (e) {
-          console.error('connectNative', B, e);
+        } catch (error) {
+          console.error('connectNative', B, error);
           if (B) {
             setTimeout(() => {
               chrome.runtime.reload();
@@ -802,32 +782,32 @@ const P = (o) => {
     });
 };
 
-P(1000);
+connectNative(1000);
 
 const connectExistingTabs = () => {
-  chrome.windows.getAll({ populate: true }, (e) => {
-    for (x in e) {
-      b[e[x].id] = {};
-      for (y in e[x].tabs) {
-        ((e) => {
-          f.tab[e.id] = {
-            winId: e.windowId,
-            index: e.index,
-            history: [e.url],
-            titles: [e.title],
+  chrome.windows.getAll({ populate: true }, (wins) => {
+    for (const x in wins) {
+      focusWindows[wins[x].id] = {};
+      for (const y in wins[x].tabs) {
+        ((tab) => {
+          states.tab[tab.id] = {
+            winId: tab.windowId,
+            index: tab.index,
+            history: [tab.url],
+            titles: [tab.title],
           };
           if (
-            !e.url.match(
-              /(^chrome(|-devtools|-extension):\/\/)|(:\/\/chrome.google.com\/)|(^view-source:)/,
+            !/(^chrome(|-devtools|-extension):\/\/)|(:\/\/chrome.google.com\/)|(^view-source:)/.test(
+              tab.url,
             )
           ) {
-            chrome.tabs.executeScript(e.id, {
+            chrome.tabs.executeScript(tab.id, {
               allFrames: true,
               matchAboutBlank: true,
               code: 'if(window.SG) { if(window.SG.enabled()) window.SG.disable(); delete window.SG; }',
             });
             setTimeout(() => {
-              chrome.tabs.executeScript(e.id, {
+              chrome.tabs.executeScript(tab.id, {
                 allFrames: true,
                 matchAboutBlank: true,
                 file: 'js/gestures.js',
@@ -835,13 +815,13 @@ const connectExistingTabs = () => {
             }, 200);
           }
           setTimeout(() => {
-            refreshPageAction(e.id);
+            refreshPageAction(tab.id);
           }, 100);
-        })(e[x].tabs[y]);
+        })(wins[x].tabs[y]);
       }
     }
-    chrome.windows.getLastFocused((e) => {
-      b[e.id] = { focused: Date.now() };
+    chrome.windows.getLastFocused((win) => {
+      focusWindows[win.id] = { focused: Date.now() };
     });
   });
 };
@@ -860,8 +840,8 @@ const initialize = () => {
     e = e.split('.');
     t = t.split('.');
     for (let n = 0; n < e.length && n < t.length; n += 1) {
-      if (parseInt(e[n]) != parseInt(t[n])) {
-        return parseInt(e[n]) > parseInt(t[n]);
+      if (Number.parseInt(e[n]) != Number.parseInt(t[n])) {
+        return Number.parseInt(e[n]) > Number.parseInt(t[n]);
       }
     }
     return e.length > t.length;
@@ -874,17 +854,20 @@ const initialize = () => {
   chrome.runtime.sendMessage(id, { getexternalactions: true });
   setTimeout(connectExistingTabs, 0);
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
-    if (e.length) {
-      f.active = e[0].id;
+    if (e.length > 0) {
+      states.active = e[0].id;
     }
   });
 };
 
-window.defaults = defaults;
-window.categories = categories;
-window.contexts = contexts;
-window.getTabStatus = getTabStatus;
-window.connectNative = P;
-window.isNative = () => {
-  return !!m && (m.version ? { loaded: true, version: m.version } : { loaded: false });
+globalThis.defaults = defaults;
+globalThis.categories = categories;
+globalThis.contexts = contexts;
+globalThis.getTabStatus = getTabStatus;
+globalThis.connectNative = connectNative;
+globalThis.isNative = () => {
+  return (
+    !!nativePort &&
+    (nativePort.version ? { loaded: true, version: nativePort.version } : { loaded: false })
+  );
 };

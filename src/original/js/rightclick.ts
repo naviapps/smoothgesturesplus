@@ -11,17 +11,17 @@ chrome.storage.onChanged.addListener((changes, areaName) => {
   }
 });
 
-const i = (t, e) => {
-  const i = Date.now();
+const index = (t, e) => {
+  const index_ = Date.now();
   for (key in t) {
     settings[key] = t[key];
   }
   chrome.storage.local.set(t, e);
 };
 
-const isMac = navigator.userAgent.indexOf('Mac') !== -1;
-const isChromeOS = navigator.userAgent.indexOf('CrOS') !== -1;
-const isLinux = navigator.userAgent.indexOf('Linux') !== -1;
+const isMac = navigator.userAgent.includes('Mac');
+const isChromeOS = navigator.userAgent.includes('CrOS');
+const isLinux = navigator.userAgent.includes('Linux');
 chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (t) => {
   chrome.runtime.getBackgroundPage((t) => {
     t.connectNative();
@@ -31,15 +31,15 @@ chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (t) => {
 const l = () => {
   $(() => {
     $('#doubleclick, #chromeosdouble').click(() => {
-      i({ blockDoubleclickAlert: true });
+      index({ blockDoubleclickAlert: true });
       window.close();
     });
     $('#installplugin').click(() => {
-      i({ blockDoubleclickAlert: false });
+      index({ blockDoubleclickAlert: false });
       chrome.permissions.request({ permissions: ['nativeMessaging'] }, (t) => {
         if (t || settings.forceInstallRightclick) {
           if (settings.forceInstallRightclick) {
-            i({ forceInstallRightclick: false });
+            index({ forceInstallRightclick: false });
           }
           chrome.runtime.getBackgroundPage((t) => {
             t.connectNative(10);

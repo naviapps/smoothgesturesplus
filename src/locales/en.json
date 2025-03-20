@@ -1,681 +1,626 @@
 {
+   "name": {
+      "message": "Silky Gestures"
+   },
+   "options_about": {
+      "message": "About"
+   },
+   "options_gestures": {
+      "message": "Gestures"
+   },
+   "options_gestures_pages": {
+      "message": "Pages"
+   },
+   "options_gestures_tabs": {
+      "message": "Tabs"
+   },
+   "options_gestures_utilities": {
+      "message": "Utilities"
+   },
+   "options_gestures_others": {
+      "message": "Others"
+   },
+   "options_gestures_customs": {
+      "message": "Customs"
+   },
+   "options_settings": {
+      "message": "Settings"
+   },
+   "options_rightClick": {
+      "message": "Right Click"
+   },
+   "settings_newTabUrl": {
+      "message": "New Tab URL"
+   },
+   "settings_newTabUrl_description": {
+      "message": "Set the URL that the New Tab action goes to."
+   },
+   "settings_newTabRight": {
+      "message": "New Tabs Open Next to Current"
+   },
+   "settings_newTabRight_description": {
+      "message": "New tabs (not from links) open next to the current tab."
+   },
+   "settings_newTabLinkRight": {
+      "message": "Link-sourced New Tabs Open Next to Current"
+   },
+   "settings_newTabLinkRight_description": {
+      "message": "Similar to Chromium's default behavior when opening links in a new tab. This tends to group tabs together by topic. (Useful for Split and Merge Tabs; see above)"
+   },
+   "settings_stroke": {
+      "message": "Color of Trailing Line"
+   },
+   "settings_stroke_description": {
+      "message": "Adjust the color and transparency of the line drawn when you make a gesture."
+   },
+   "settings_strokeWidth": {
+      "message": "Width of Trailing Line"
+   },
+   "settings_strokeWidth_description": {
+      "message": "Adjust the width of the line drawn when you make a gesture."
+   },
+   "settings_contextOnLink": {
+      "message": "Force Context Menu on Links"
+   },
+   "settings_contextOnLink_description": {
+      "message": "Blocks gestures starting from links. On systems with context menu conflicts this allows the right mouse button to be clicked only once, instead of twice to get to the context menu. However, it also disables the New Tab from Link feature."
+   },
+   "settings_closeLastBlock": {
+      "message": "Don't Close Last Tab"
+   },
+   "settings_closeLastBlock_description": {
+      "message": "Don't close the last tab with the close tab gesture; instead, go to the New Tab URL."
+   },
+   "settings_selectToLink": {
+      "message": "Use Selected URLs to Link"
+   },
+   "settings_selectToLink_description": {
+      "message": "Select text with one or more urls as input to a linking gesture. For example: select 2 urls in text, perform the New Tab from Link gesture -- both urls will open in two new tabs."
+   },
+   "settings_blacklist": {
+      "message": "Blacklist"
+   },
+   "settings_blacklist_description": {
+      "message": "Disables gestures on domains included in the blacklist."
+   },
+   "settings_holdButton": {
+      "message": "Mouse Button to Start Gesture"
+   },
+   "settings_holdButton_description": {
+      "message": "Allows drawing gestures with the middle or left mouse button, instead of the right mouse button."
+   },
+   "settings_reset": {
+      "message": "Reset to default values"
+   },
+   "settings_reset_description": {
+      "message": "Set all gestures and settings to the default values"
+   },
+   "settings_import": {
+      "message": "Backup Settings"
+   },
+   "settings_import_description": {
+      "message": "Save your current settings (including gestures, custom actions, and options). Load the file to restore lost settings or move settings to another computer"
+   },
+   "settings_button_left": {
+      "message": "Left Button"
+   },
+   "settings_button_middle": {
+      "message": "Middle Button"
+   },
+   "settings_button_right": {
+      "message": "Right Button"
+   },
+   "settings_button_add": {
+      "message": "Add"
+   },
+   "settings_button_reset": {
+      "message": "Reset"
+   },
+   "settings_button_cancel": {
+      "message": "Cancel"
+   },
+   "settings_button_export": {
+      "message": "Save Settings"
+   },
+   "settings_button_import": {
+      "message": "Load Settings File"
+   },
+   "settings_warning_reset": {
+      "message": "Are you sure you want to reset? You will lose all of your custom settings."
+   },
    "_": {
       "message": "_"
    },
    "action_bookmark": {
-      "description": "Action title",
       "message": "Bookmark Page"
    },
    "action_clone_tab": {
-      "description": "Action title for clone_tab",
       "message": "Duplicate Tab"
    },
    "action_clone_tab_hack": {
-      "description": "Action title for clone_tab",
       "message": "Duplicate Tab (hack)"
    },
    "action_close_left_tabs": {
-      "description": "Action title",
       "message": "Close Left Tabs"
    },
    "action_close_other_tabs": {
-      "description": "Action title",
       "message": "Close All Other Tabs"
    },
    "action_close_right_tabs": {
-      "description": "Action title",
       "message": "Close Right Tabs"
    },
    "action_close_tab": {
-      "description": "Action title for close_tab",
       "message": "Close Tab"
    },
    "action_close_window": {
-      "description": "Action title for close_window",
       "message": "Close Window"
    },
    "action_copy": {
-      "description": "Action title",
       "message": "Copy Text to Clipboard"
    },
    "action_copy_link": {
-      "description": "Action title",
       "message": "Copy Link to Clipboard"
    },
    "action_find_next": {
-      "description": "Action title",
       "message": "Find Selection (Next)"
    },
    "action_find_prev": {
-      "description": "Action title",
       "message": "Find Selection (Previous)"
    },
    "action_fullscreen_window": {
-      "description": "Action title for fullscreen_window",
       "message": "Fullscreen Window"
    },
    "action_goto_bottom": {
-      "description": "Action title for goto_bottom",
       "message": "Go to Bottom"
    },
    "action_goto_top": {
-      "description": "Action title for goto_top",
       "message": "Go to Top"
    },
    "action_hide_image": {
-      "description": "Action title",
       "message": "Hide Image"
    },
    "action_maximize_window": {
-      "description": "Action title for maximize_window",
       "message": "Maximize Window"
    },
    "action_maximize_x": {
-      "description": "Action title for clone_tab",
       "message": "Maximize Window (hack)"
    },
    "action_merge_tabs": {
-      "description": "Action title for merge_tabs",
       "message": "Merge Tabs"
    },
    "action_minimize_window": {
-      "description": "Action title for minimize_window",
       "message": "Minimize Window"
    },
    "action_minimize_x": {
-      "description": "Action title for clone_tab",
       "message": "Minimize Window (hack)"
    },
    "action_navigate_tab": {
-      "description": "Action title for new_tab",
       "message": "Go to New Tab Page"
    },
    "action_new_tab": {
-      "description": "Action title for new_tab",
       "message": "New Tab"
    },
    "action_new_tab_back": {
-      "description": "Action title for new_tab_back",
       "message": "New Tab (Open Link in Background)"
    },
    "action_new_tab_link": {
-      "description": "Action title for new_tab_link",
       "message": "New Tab (Open Link)"
    },
    "action_new_window": {
-      "description": "Action title for new_window",
       "message": "New Window"
    },
    "action_new_window_link": {
-      "description": "Action title",
       "message": "New Window (Open Link)"
    },
    "action_next_tab": {
-      "description": "Action title for next_tab",
       "message": "Next Tab"
    },
    "action_next_window": {
-      "description": "Action title for clone_tab",
       "message": "Next Window (hack)"
    },
    "action_open_bookmarks": {
-      "description": "Action title",
       "message": "Open Bookmark Manager"
    },
    "action_open_downloads": {
-      "description": "Action title",
       "message": "Open Downloads"
    },
    "action_open_extensions": {
-      "description": "Action title",
       "message": "Open Extensions"
    },
    "action_open_history": {
-      "description": "Action title",
       "message": "Open History"
    },
    "action_open_image": {
-      "description": "Action title",
       "message": "Open Image"
    },
    "action_open_screenshot": {
-      "description": "Action title for open_screenshot",
       "message": "Tab Screenshot"
    },
    "action_open_screenshot_full": {
-      "description": "Action title for open_screenshot_full",
       "message": "Full Tab Screenshot"
    },
    "action_options": {
-      "description": "Action title for options",
       "message": "Open Options Page"
    },
    "action_page_back": {
-      "description": "Action title for page_back",
       "message": "History Back"
    },
    "action_page_back_close": {
-      "description": "Action title for page_back_close",
       "message": "History Back or Close"
    },
    "action_page_down": {
-      "description": "Action title for page_down",
       "message": "Page Down"
    },
    "action_page_forward": {
-      "description": "Action title for page_forward",
       "message": "History Forward"
    },
    "action_page_next": {
-      "description": "Action title for page_next",
       "message": "Next Page"
    },
    "action_page_prev": {
-      "description": "Action title for page_prev",
       "message": "Previous Page"
    },
    "action_page_up": {
-      "description": "Action title for page_up",
       "message": "Page Up"
    },
    "action_parent_dir": {
-      "description": "Action title",
       "message": "Parent Directory"
    },
    "action_pin": {
-      "description": "Action title",
       "message": "Pin Tab"
    },
    "action_prev_tab": {
-      "description": "Action title for prev_tab",
       "message": "Previous Tab"
    },
    "action_prev_window": {
-      "description": "Action title for clone_tab",
       "message": "Previous Window (hack)"
    },
    "action_print": {
-      "description": "Action title",
       "message": "Print Page"
    },
    "action_reload_all_tabs": {
-      "description": "Action title",
       "message": "Reload All Tabs"
    },
    "action_reload_tab": {
-      "description": "Action title for reload_tab",
       "message": "Reload Tab"
    },
    "action_reload_tab_full": {
-      "description": "Action title for reload_tab_full",
       "message": "Reload Tab (no cache)"
    },
    "action_save_image": {
-      "description": "Action title",
       "message": "Save Image"
    },
    "action_save_screenshot": {
-      "description": "Action title for save_screenshot",
       "message": "Save Tab Screenshot"
    },
    "action_save_screenshot_full": {
-      "description": "Action title for save_screenshot_full",
       "message": "Save Full Tab Screenshot"
    },
    "action_search_sel": {
-      "description": "Action title",
       "message": "Search Google"
    },
    "action_show_cookies": {
-      "description": "Action title",
       "message": "List Cookies"
    },
    "action_split_tabs": {
-      "description": "Action title for split_tabs",
       "message": "Split Tabs"
    },
    "action_status": {
-      "description": "Action title for status",
       "message": "Open Status Page"
    },
    "action_stop": {
-      "description": "Action title for stop",
       "message": "Stop Loading"
    },
    "action_tab_to_left": {
-      "description": "Action title",
       "message": "Move Tab Left"
    },
    "action_tab_to_right": {
-      "description": "Action title",
       "message": "Move Tab Right"
    },
    "action_toggle_bookmark": {
-      "description": "Action title",
       "message": "Toggle Bookmark"
    },
    "action_toggle_pin": {
-      "description": "Action title",
       "message": "Toggle Pin Tab"
    },
    "action_translate": {
-      "description": "Action title",
       "message": "Translate Selection"
    },
    "action_unbookmark": {
-      "description": "Action title",
       "message": "Remove Bookmark"
    },
    "action_undo_close": {
-      "description": "Action title for undo_close",
       "message": "Undo Close Tab"
    },
    "action_undo_close_hack": {
-      "description": "Action title for undo_close_hack",
       "message": "Undo Close Tab (hack)"
    },
    "action_unpin": {
-      "description": "Action title",
       "message": "Unpin Tab"
    },
    "action_view_source": {
-      "description": "Action title for view_source",
       "message": "View Page Source"
    },
    "action_zoom_img_in": {
-      "description": "Action title",
       "message": "Zoom In on Image"
    },
    "action_zoom_img_out": {
-      "description": "Action title",
       "message": "Zoom Out on Image"
    },
    "action_zoom_img_zero": {
-      "description": "Action title",
       "message": "Reset Zoom on Image"
    },
    "action_zoom_in": {
-      "description": "Action title",
       "message": "Zoom In on Page"
    },
    "action_zoom_out": {
-      "description": "Action title",
       "message": "Zoom Out on Page"
    },
    "action_zoom_zero": {
-      "description": "Action title",
       "message": "Reset Zoom on Page"
    },
-   "cat_custom": {
-      "description": "Name of category for all custom actions",
-      "message": "Custom Actions"
-   },
-   "cat_other": {
-      "description": "Name of category for actions that don't have a category",
-      "message": "Other Actions"
-   },
-   "cat_page_navigation": {
-      "description": "Name of category encompassing basic page navigation actions",
-      "message": "Page Navigation"
-   },
    "cat_settings": {
-      "description": "Title of the settings group",
       "message": "Other Settings"
    },
-   "cat_tab_management": {
-      "description": "Name of category encompassing tab manipulation actions",
-      "message": "Tab Management"
-   },
-   "cat_utilities": {
-      "description": "Name of category for general utility actions",
-      "message": "Utilities"
-   },
    "context_not_image": {
-      "description": "A short label for a gesture indicating that the gesture is not valid on an image",
       "message": "not on image"
    },
    "context_not_link": {
-      "description": "A short label for a gesture indicating that the gesture is not valid on a link",
       "message": "not on link"
    },
    "context_not_links_images": {
-      "description": "A short label for a gesture indicating that the gesture is not valid starting on a link or an image",
       "message": "not on links or images"
    },
    "context_not_selection": {
-      "description": "A short label for a gesture indicating that the gesture is not valid with a selection",
       "message": "not with selection"
    },
    "context_on_image": {
-      "description": "A short label for a gesture indicating that the gesture is only valid starting on an image",
       "message": "on image"
    },
    "context_on_link": {
-      "description": "A short label for a gesture indicating that the gesture is only valid starting on a link",
       "message": "on link"
    },
    "context_with_selection": {
-      "description": "A short label for a gesture indicating that the gesture is only valid with a selection",
       "message": "with selection"
    },
    "descrip_bookmark": {
-      "description": "Action description",
       "message": "Add a bookmark to the current page."
    },
    "descrip_clone_tab": {
-      "description": "Action description for clone_tab",
       "message": "Open a duplicate tab of the current page. The duplicate tab will not have the history of the original tab."
    },
    "descrip_clone_tab_hack": {
-      "description": "Action description for clone_tab",
       "message": "Open a duplicate tab of the current page. Load the history with an imperfect workaround"
    },
    "descrip_close_left_tabs": {
-      "description": "Action description",
       "message": "Close all tabs to the left of the current tab"
    },
    "descrip_close_other_tabs": {
-      "description": "Action description",
       "message": "Close all tabs in the current window, except for the selected tab"
    },
    "descrip_close_right_tabs": {
-      "description": "Action description",
       "message": "Close all tabs to the right of the current tab"
    },
    "descrip_close_tab": {
-      "description": "Action description for close_tab",
       "message": "Close the currently selected tab"
    },
    "descrip_close_window": {
-      "description": "Action description for close_window",
       "message": "Close all tabs in the currently selected window"
    },
    "descrip_copy": {
-      "description": "Action description",
       "message": "Copy selected text to the clipboard."
    },
    "descrip_copy_link": {
-      "description": "Action description",
       "message": "Start a gesture on a link to copy it to the clipboard."
    },
    "descrip_find_next": {
-      "description": "Action description",
       "message": "Find the next copy of the selected text"
    },
    "descrip_find_prev": {
-      "description": "Action description",
       "message": "Find a previous copy of the selected text"
    },
    "descrip_fullscreen_window": {
-      "description": "Action description for fullscreen_window",
       "message": "Toggle the fullscreen mode of the current window"
    },
    "descrip_goto_bottom": {
-      "description": "Action description for goto_bottom",
       "message": "Scroll page to the bottom"
    },
    "descrip_goto_top": {
-      "description": "Action description for goto_top",
       "message": "Scroll page to the top"
    },
    "descrip_hide_image": {
-      "description": "Action description",
       "message": "Remove the image that the mouse is over from the page"
    },
    "descrip_maximize_window": {
-      "description": "Action description for maximize_window",
       "message": "Toggle maximization of the current window"
    },
    "descrip_maximize_x": {
-      "description": "Action description for clone_tab",
       "message": "This is a messy hack to simulate maximizing a window"
    },
    "descrip_merge_tabs": {
-      "description": "Action description for merge_tabs",
       "message": "Merge all of the tabs of the current window with those of the last focused window"
    },
    "descrip_minimize_window": {
-      "description": "Action description for minimize_window",
       "message": "Minimize the current window"
    },
    "descrip_minimize_x": {
-      "description": "Action description for clone_tab",
       "message": "This is a _very_ messy hack to simulate minimizing a window"
    },
    "descrip_navigate_tab": {
-      "description": "Action description for new_tab",
       "message": "Navigate to the New Tab page (the URL can be set below)"
    },
    "descrip_new_tab": {
-      "description": "Action description for new_tab",
       "message": "Open a new tab in the current window (the URL can be set below)"
    },
    "descrip_new_tab_back": {
-      "description": "Action description for new_tab_back",
       "message": "Start a gesture on a link to open that link in a new tab, but don't view the new tab yet"
    },
    "descrip_new_tab_link": {
-      "description": "Action description for new_tab_link",
       "message": "Start a gesture on a link to open that link in a new tab"
    },
    "descrip_new_window": {
-      "description": "Action description for new_window",
       "message": "Open a new window with the one default tab"
    },
    "descrip_new_window_link": {
-      "description": "Action description",
       "message": "Start a gesture on a link to open that link in a new window"
    },
    "descrip_next_tab": {
-      "description": "Action description for next_tab",
       "message": "Select the tab to the right of the current tab"
    },
    "descrip_next_window": {
-      "description": "Action description for clone_tab",
       "message": "Select the window that was focused longest ago"
    },
    "descrip_open_bookmarks": {
-      "description": "Action description",
       "message": "Open the bookmark manager in a new tab"
    },
    "descrip_open_downloads": {
-      "description": "Action description",
       "message": "Open the downloads page in a new tab"
    },
    "descrip_open_extensions": {
-      "description": "Action description",
       "message": "Open the extensions page in a new tab"
    },
    "descrip_open_history": {
-      "description": "Action description",
       "message": "Open the history page in a new tab"
    },
    "descrip_open_image": {
-      "description": "Action description",
       "message": "Open the image that the mouse is over in a new tab"
    },
    "descrip_open_screenshot": {
-      "description": "Action description for open_screenshot",
       "message": "Take a screenshot of the current view and open in a new tab"
    },
    "descrip_open_screenshot_full": {
-      "description": "Action description for open_screenshot_full",
       "message": "Take a full-page screenshot of the current view and open in a new tab"
    },
    "descrip_options": {
-      "description": "Action description for options",
       "message": "Open this options page"
    },
    "descrip_page_back": {
-      "description": "Action description for page_back",
       "message": "Go back one page in history for the current tab"
    },
    "descrip_page_back_close": {
-      "description": "Action description for page_back_close",
       "message": "Go back one page in history for the current tab; or, if no history remains, close the tab"
    },
    "descrip_page_down": {
-      "description": "Action description for page_down",
       "message": "Scroll the page down 80%"
    },
    "descrip_page_forward": {
-      "description": "Action description for page_forward",
       "message": "Go forward one page for the current tab"
    },
    "descrip_page_next": {
-      "description": "Action description for page_next",
       "message": "Try to go to the next page by following a link with the text: 'next'"
    },
    "descrip_page_prev": {
-      "description": "Action description for page_prev",
       "message": "Try to go to the previous page by following a link with the text: 'previous'"
    },
    "descrip_page_up": {
-      "description": "Action description for page_up",
       "message": "Scroll the page up 80%"
    },
    "descrip_parent_dir": {
-      "description": "Action description",
       "message": "Navigate to the parent directory of the current page. If already at the root directory, try to remove subdomains."
    },
    "descrip_pin": {
-      "description": "Action description",
       "message": "Pin the current tab"
    },
    "descrip_prev_tab": {
-      "description": "Action description for prev_tab",
       "message": "Select the tab to the left of the current tab"
    },
    "descrip_prev_window": {
-      "description": "Action description for clone_tab",
       "message": "Select the window focused immediately before the current window"
    },
    "descrip_print": {
-      "description": "Action description",
       "message": "Print the current page"
    },
    "descrip_reload_all_tabs": {
-      "description": "Action description",
       "message": "Refresh all of the tabs in the current window"
    },
    "descrip_reload_tab": {
-      "description": "Action description for reload_tab",
       "message": "Refresh the contents of the current tab"
    },
    "descrip_reload_tab_full": {
-      "description": "Action description for reload_tab_full",
       "message": "Fully refresh the contents of the current tab (skip the cache)"
    },
    "descrip_save_image": {
-      "description": "Action description",
       "message": "Save the image that the mouse is over in a new tab"
    },
    "descrip_save_screenshot": {
-      "description": "Action description for save_screenshot",
       "message": "Take a screenshot of the current view and save to the computer"
    },
    "descrip_save_screenshot_full": {
-      "description": "Action description for save_screenshot_full",
       "message": "Take a full-page screenshot of the current view and save to the computer"
    },
    "descrip_search_sel": {
-      "description": "Action description",
       "message": "Search Google for the selected text"
    },
    "descrip_show_cookies": {
-      "description": "Action description",
       "message": "Show a list of all of the cookies for the current page"
    },
    "descrip_split_tabs": {
-      "description": "Action description for split_tabs",
       "message": "Split all tabs to the right of (and including) the current tab into a new window"
    },
    "descrip_status": {
-      "description": "Action description for status",
       "message": "Open the Smooth Gestures Plus extension status page"
    },
    "descrip_stop": {
-      "description": "Action description for stop",
       "message": "Stop loading the current tab. (May not work on some pages, like image pages)"
    },
    "descrip_tab_to_left": {
-      "description": "Action description",
       "message": "Move the current tab once to the left"
    },
    "descrip_tab_to_right": {
-      "description": "Action description",
       "message": "Move the current tab once to the right"
    },
    "descrip_toggle_bookmark": {
-      "description": "Action description",
       "message": "Removes a bookmark if one is already set. Adds a bookmark to current page if it isn't."
    },
    "descrip_toggle_pin": {
-      "description": "Action description",
       "message": "Toggle the pinned state of the tab"
    },
    "descrip_translate": {
-      "description": "Action description",
       "message": "Translate the selected text to Chrome's default language"
    },
    "descrip_unbookmark": {
-      "description": "Action description",
       "message": "Removes a bookmark to the current page, if one exists."
    },
    "descrip_undo_close": {
-      "description": "Action description for undo_close",
       "message": "Open the last closed tab. This only loads the URL of the page; For a more complete version install the Extras"
    },
    "descrip_undo_close_hack": {
-      "description": "Action description for undo_close",
       "message": "Open the last closed tab. Load the history through the use of an imperfect workaround"
    },
    "descrip_unpin": {
-      "description": "Action description",
       "message": "Unpin the current tab"
    },
    "descrip_view_source": {
-      "description": "Action description for view_source",
       "message": "View the source code of the current page"
    },
    "descrip_zoom_img_in": {
-      "description": "Action description",
       "message": "Zoom in on the image that the mouse is over"
    },
    "descrip_zoom_img_out": {
-      "description": "Action description",
       "message": "Zoom out on the image that the mouse is over"
    },
    "descrip_zoom_img_zero": {
-      "description": "Action description",
       "message": "Set the image to its original size before zoom"
    },
    "descrip_zoom_in": {
-      "description": "Action description",
       "message": "Zoom in on all of the content of the page. For a more complete version install the Extras"
    },
    "descrip_zoom_out": {
-      "description": "Action description",
       "message": "Zoom out on all of the content of the page. For a more complete version install the Extras"
    },
    "descrip_zoom_zero": {
-      "description": "Action description",
       "message": "Undo the previous zoom actions to the page. For a more complete version install the Extras"
    },
    "description": {
-      "description": "short extension description",
       "message": "The Complete Mouse Gestures solution"
    },
    "gesture_rLR": {
-      "description": "rocker right gesture title",
       "message": "Rocker Right"
    },
    "gesture_rRL": {
-      "description": "rocker left gesture title",
       "message": "Rocker Left"
    },
-   "gesture_rocker_descrip": {
-      "description": "rocker right gesture description",
+   "gesture_rocker_description": {
       "message": "Hold $BUTTON1$ button, Click $BUTTON2$",
       "placeholders": {
          "button1": {
@@ -689,35 +634,24 @@
       }
    },
    "gesture_wD": {
-      "description": "wheel down gesture title",
       "message": "Scroll Down"
    },
-   "gesture_wD_descrip": {
-      "description": "wheel down gesture description",
+   "gesture_wD_description": {
       "message": "Hold action button, Scroll down"
    },
    "gesture_wU": {
-      "description": "wheel up gesture title",
       "message": "Scroll Up"
    },
-   "gesture_wU_descrip": {
-      "description": "wheel up gesture description",
+   "gesture_wU_description": {
       "message": "Hold action button, Scroll up"
    },
    "long_description": {
-      "description": "complete extension description",
       "message": "This Mouse Gestures extension enables you to move the mouse while holding the right mouse button to trigger actions, such as page navigation or tab management. Supports click-and-drag (mouse gesture), click-and-scroll (scroll gesture), click-and-click (rocker gesture), and keyboard shortcuts!\n\n• Powerful customization of gestures (and custom actions!)\n• supports diagonal gestures, syncing/import/export of settings\n• Does not work on this extension website, or other built-in chrome pages due to security restrictions for extensions. But it does work on almost all http:// and https:// pages."
    },
-   "name": {
-      "description": "\"Smooth Gestures\" in your language",
-      "message": "Smooth Gestures"
-   },
    "options_addgesture_instruct_1": {
-      "description": "instructions for making a gesture (just before bullet point list)",
       "message": "Do one of the following gestures:"
    },
    "options_addgesture_instruct_2": {
-      "description": "[bullet point] instructions for making a gesture (mouse) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Mouse Gesture: Hold down the $BUTTON$ mouse button and draw a gesture by moving the mouse, then release",
       "placeholders": {
          "button": {
@@ -727,7 +661,6 @@
       }
    },
    "options_addgesture_instruct_3": {
-      "description": "[bullet point] instructions for making a gesture (scroll) ($BUTTON$ is replaced automatically by the appropriate button name--above--so insert it untranslated in the appropriate place in the translation)",
       "message": "Scroll Gesture: Hold down the $BUTTON$ mouse button and scroll the scroll-wheel",
       "placeholders": {
          "button": {
@@ -737,15 +670,12 @@
       }
    },
    "options_addgesture_instruct_4": {
-      "description": "[bullet point] instructions for making a gesture (rocker)",
       "message": "Rocker Gesture: Hold down any mouse button, then click another"
    },
    "options_addgesture_instruct_5": {
-      "description": "[bullet point] instructions for doing a keyboard shortcut",
       "message": "Keyboard Shortcut: Hold any modifier keys (or none), then press another key"
    },
    "options_addgesture_overwrite": {
-      "description": "warning message that a gesture will be overwritten ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "This gesture is already used by $ACTION$",
       "placeholders": {
          "action": {
@@ -755,7 +685,6 @@
       }
    },
    "options_addgesture_title": {
-      "description": "explanation of what you are doing (adding a gesture to a specific action) ($ACTION$ is replaced automatically by the action name, such as: History Back--so insert it untranslated in the appropriate place in the translation)",
       "message": "Set a gesture for the $ACTION$ action",
       "placeholders": {
          "action": {
@@ -765,75 +694,51 @@
       }
    },
    "options_button_addcustomaction": {
-      "description": "Label for a button to start setting up a new custom action",
       "message": "Add Custom Action"
    },
    "options_button_addgesture": {
-      "description": "button to add the new gesture to the action",
       "message": "Add this Gesture"
    },
    "options_button_overwrite": {
-      "description": "button to overwrite the gesture made to the new action",
       "message": "Overwrite Gesture"
    },
    "options_button_startaddgesture": {
-      "description": "Label for a button to start setting up a new gesture",
       "message": "Add Gesture"
    },
    "options_button_tryagain": {
-      "description": "button to reject the gesture made and try to make a new one",
       "message": "Try Again"
    },
-   "options_contents_actions": {
-      "description": "category type for all actions links",
-      "message": "Gesture Actions"
-   },
    "options_contents_more": {
-      "description": "category type for all external links",
       "message": "More"
    },
-   "options_contents_settings": {
-      "description": "category type for all settings links",
-      "message": "Settings"
-   },
    "options_contents_status": {
-      "description": "link to open the status page",
       "message": "View Status"
    },
    "options_externalactions": {
-      "description": "link to external actions",
       "message": "External Actions"
    },
    "options_moreactions": {
-      "description": "Link to access more actions. These actions don't currently have a gesture assigned",
       "message": "More Available Actions"
    },
    "options_mousebutton_0": {
-      "description": "name for the 'left' mouse button (To replace $BUTTON$ variables below)",
       "message": "left"
    },
    "options_mousebutton_1": {
-      "description": "name for the 'middle' mouse button (To replace $BUTTON$ variables below)",
       "message": "middle"
    },
    "options_mousebutton_2": {
-      "description": "name for the 'right' mouse button (To replace $BUTTON$ variables below)",
       "message": "right"
    },
    "options_note_hidepageaction_button": {
-      "description": "Label on the button to hide the Smooth Gestures Plus icon in the url bar",
       "message": "Hide Icon"
    },
    "options_note_print": {
-      "description": "Promote printing the page so users have a help sheet to remember all of the gestures",
       "message": "Having trouble remembering all of the gestures that you have set up? Just print this page for a cheatsheet!"
    },
    "options_note_print_button": {
-      "description": "Label on the button to print the page",
       "message": "Print"
    },
    "options_note_remindrate": {
-      "description": "Notify the user that they can rate this extension to help promote it",
       "message": "Do you like $SMOOTHGESTURES$?\u003Cbr>Please $LINK$!",
       "placeholders": {
          "link": {
@@ -847,11 +752,9 @@
       }
    },
    "options_note_remindrate_link": {
-      "description": "Text for the link leading to the extension's page",
       "message": "write a 5 star review"
    },
    "options_note_translate": {
-      "description": "Solicit translation requests",
       "message": "Do you know English? Help $LINK$",
       "placeholders": {
          "link": {
@@ -860,30 +763,10 @@
          }
       }
    },
-   "options_note_translate_link": {
-      "description": "Link for soliciting translation requests",
-      "message": "translate Smooth Gestures Plus into your language"
-   },
-   "options_note_updated": {
-      "description": "Notify that the extension has been updated",
-      "message": "$SMOOTHGESTURES$ has been updated to $VERSION$!",
-      "placeholders": {
-         "smoothgestures": {
-            "content": "$1",
-            "example": "Smooth Gestures Plus"
-         },
-         "version": {
-            "content": "$2",
-            "example": "0.13.1"
-         }
-      }
-   },
    "options_title": {
-      "description": "The title of the options page, at top and tab name",
       "message": "Options!"
    },
    "options_welcome_0": {
-      "description": "First just-installed line",
       "message": "Welcome to $SMOOTHGESTURES$!",
       "placeholders": {
          "smoothgestures": {
@@ -893,31 +776,24 @@
       }
    },
    "options_welcome_1": {
-      "description": "First just-installed bullet point",
       "message": "Ad-free and Privacy-friendly"
    },
    "options_welcome_3": {
-      "description": "Third just-installed bullet point",
       "message": "You can get back to this Options page by holding down the right mouse button and drawing an \"O\" (try: → ↓ ← ↑ → )"
    },
    "popup_button_hidepageaction": {
-      "description": "a button to hide the pageaction",
       "message": "Hide this icon"
    },
    "popup_button_options": {
-      "description": "a button to go to the options page",
       "message": "Options"
    },
    "popup_button_reload": {
-      "description": "a button to reload the current page",
       "message": "Reload"
    },
    "popup_status_blocked_1": {
-      "description": "text explaining a blocked tab",
       "message": "Chrome blocks extensions from running on this page as a security precaution."
    },
    "popup_status_blocked_file2": {
-      "description": "text explaining how to make a file:// tab work",
       "message": "To get Smooth Gestures Plus to work on file:// and ftp:// protocols, go to $LINK$ and mark \"Allow access to file URLs\" under the Smooth Gestures Plus entry.",
       "placeholders": {
          "link": {
@@ -927,11 +803,9 @@
       }
    },
    "popup_status_blocked_file2_link": {
-      "description": "text naming the link that goes to chrome://extensions/",
       "message": "Extensions"
    },
    "popup_status_blocked_newtab2": {
-      "description": "text explaining how to make a newtab page work",
       "message": "Try $LINK$ to enable gestures on the New Tab page.",
       "placeholders": {
          "link": {
@@ -941,279 +815,57 @@
       }
    },
    "popup_status_blocked_newtab2_link": {
-      "description": "text naming the extension that adds newtab functionality to Smooth Gestures Plus",
       "message": "Ultimate New Tab"
    },
    "popup_status_broken": {
-      "description": "text explaining a broken tab",
       "message": "Gestures are not working on this page right now."
    },
    "popup_status_broken_short": {
-      "description": "short text saying that gestures are broken on this page.",
       "message": "Gestures Broken"
    },
    "popup_status_unable_short": {
-      "description": "short text saying that gestures are blocked by this page.",
       "message": "Gestures Blocked"
    },
    "popup_status_working": {
-      "description": "text explaining a working tab",
       "message": "Gestures are working on this page."
    },
    "popup_status_working_short": {
-      "description": "short text saying that gestures are working on this page.",
       "message": "Gestures Working"
    },
-   "setting_blacklist": {
-      "description": "setting title",
-      "message": "Blacklist"
-   },
-   "setting_blacklist_descrip": {
-      "description": "setting description",
-      "message": "Disables gestures on domains included in the blacklist. Separate domains with commas. (Example: \"mail.google.com, www.example.com\")"
-   },
-   "setting_button_export": {
-      "description": "button to save settings as a backup file",
-      "message": "Save Settings"
-   },
-   "setting_button_import": {
-      "description": "button to load a settings file",
-      "message": "Load Settings File"
-   },
-   "setting_button_left": {
-      "description": "choose left mouse button",
-      "message": "Left Button"
-   },
-   "setting_button_middle": {
-      "description": "choose middle mouse button",
-      "message": "Middle Button"
-   },
-   "setting_button_off": {
-      "description": "setting label",
-      "message": "Off"
-   },
-   "setting_button_on": {
-      "description": "setting label",
-      "message": "On"
-   },
-   "setting_button_reset": {
-      "description": "button label",
-      "message": "Reset"
-   },
-   "setting_button_right": {
-      "description": "choose right mouse button",
-      "message": "Right Button"
-   },
-   "setting_button_update": {
-      "description": "button label",
-      "message": "Update"
-   },
-   "setting_closelastblock": {
-      "description": "setting title",
-      "message": "Don't Close Last Tab"
-   },
-   "setting_closelastblock_descrip": {
-      "description": "setting description",
-      "message": "Don't close the last tab with the close tab gesture; instead, go to the New Tab URL."
-   },
-   "setting_disabled": {
-      "description": "choose no mouse button (gestures are disabled)",
-      "message": "Disabled"
-   },
-   "setting_extras": {
-      "description": "setting title",
+   "settings_extras": {
       "message": "Use Extras"
    },
-   "setting_extras_descrip": {
-      "description": "setting description",
+   "settings_extras_description": {
       "message": "Extras are automatically set to be used. Disable if you don't want to use the Extras"
    },
-   "setting_force_context": {
-      "description": "setting title",
-      "message": "Force Context Menu on Links"
-   },
-   "setting_force_context2": {
-      "description": "setting title",
-      "message": "Force Context Menu"
-   },
-   "setting_force_context2_descrip": {
-      "description": "setting description",
-      "message": "Always show the context menu on right click. Useful for middle button activated gestures."
-   },
-   "setting_force_context_descrip": {
-      "description": "setting description",
-      "message": "Blocks gestures starting from links. On systems with context menu conflicts this allows the right mouse button to be clicked only once, instead of twice to get to the context menu. However, it also disables the New Tab from Link feature."
-   },
-   "setting_group_assorted": {
-      "description": "title of a group of settings",
-      "message": "Assorted Settings"
-   },
-   "setting_group_context": {
-      "description": "title of a group of settings",
-      "message": "Context Menu Settings"
-   },
-   "setting_group_hide": {
-      "description": "button to hide a group of settings",
-      "message": "hide"
-   },
-   "setting_group_newtab": {
-      "description": "title of a group of settings",
-      "message": "New Tab Settings"
-   },
-   "setting_group_show": {
-      "description": "button to show a group of settings",
-      "message": "show"
-   },
-   "setting_group_trail": {
-      "description": "title of a group of settings",
-      "message": "Trailing Line Settings"
-   },
-   "setting_hidepageaction": {
-      "description": "setting title",
-      "message": "Always Show Icon"
-   },
-   "setting_hidepageaction_descrip": {
-      "description": "setting description",
-      "message": "The icon in the URL bar enables quick access to this options page. Alternatively, you can find this page at Menu > Tools > Extensions > Smooth Gestures Plus > Options"
-   },
-   "setting_hold_button": {
-      "description": "setting title",
-      "message": "Mouse Button to Start Gesture"
-   },
-   "setting_hold_button_descrip": {
-      "description": "setting description",
-      "message": "Allows drawing gestures with the middle or left mouse button, instead of the right mouse button."
-   },
-   "setting_import": {
-      "description": "setting title",
-      "message": "Backup Settings"
-   },
-   "setting_import_descrip": {
-      "description": "setting description",
-      "message": "Save your current settings (including gestures, custom actions, and options). Load the file to restore lost settings or move settings to another computer"
-   },
-   "setting_newtab_linkright": {
-      "description": "setting title",
-      "message": "Link-sourced New Tabs Open Next to Current"
-   },
-   "setting_newtab_linkright_descrip": {
-      "description": "setting description",
-      "message": "Similar to Chromium's default behavior when opening links in a new tab. This tends to group tabs together by topic. (Useful for Split and Merge Tabs; see above)"
-   },
-   "setting_newtab_right": {
-      "description": "setting title",
-      "message": "New Tabs Open Next to Current"
-   },
-   "setting_newtab_right_descrip": {
-      "description": "setting description",
-      "message": "New tabs (not from links) open next to the current tab."
-   },
-   "setting_newtab_url": {
-      "description": "setting title",
-      "message": "New Tab URL"
-   },
-   "setting_newtab_url_descrip": {
-      "description": "setting description",
-      "message": "Set the URL that the New Tab action goes to."
-   },
-   "setting_reset": {
-      "description": "setting title",
-      "message": "Reset to default values"
-   },
-   "setting_reset_descrip": {
-      "description": "setting description",
-      "message": "Set all gestures and settings to the default values"
-   },
-   "setting_selecttolink": {
-      "description": "setting title",
-      "message": "Use Selected URLs to Link"
-   },
-   "setting_selecttolink_descrip": {
-      "description": "setting description",
-      "message": "Select text with one or more urls as input to a linking gesture. For example: select 2 urls in text, perform the New Tab from Link gesture -- both urls will open in two new tabs."
-   },
-   "setting_sendstats": {
-      "description": "setting title",
-      "message": "Submit Usage"
-   },
-   "setting_sendstats_descrip": {
-      "description": "setting description",
-      "message": "Send an anonymous gesture usage report to inform the program of the most commonly used gestures, thereby influencing the default gestures of future releases."
-   },
-   "setting_sync": {
-      "description": "setting title",
-      "message": "Synchronize"
-   },
-   "setting_sync_descrip": {
-      "description": "setting description",
-      "message": "Synchronize settings and gestures with other computers through bookmarks. To use this feature you must also enable bookmark synchronization."
-   },
-   "setting_trail_color": {
-      "description": "setting title",
-      "message": "Color of Trailing Line"
-   },
-   "setting_trail_color_descrip": {
-      "description": "setting description",
-      "message": "Adjust the color and transparency of the line drawn when you make a gesture."
-   },
-   "setting_trail_draw": {
-      "description": "setting title",
-      "message": "Draw a Trailing Line"
-   },
-   "setting_trail_draw_descrip": {
-      "description": "setting description",
-      "message": "Draw a trailing line to the screen whenever gestures are being drawn."
-   },
-   "setting_trail_width": {
-      "description": "setting title",
-      "message": "Width of Trailing Line"
-   },
-   "setting_trail_width_descrip": {
-      "description": "setting description",
-      "message": "Adjust the width of the line drawn when you make a gesture."
-   },
-   "setting_warning_reset": {
-      "description": "warn that setting will be lost during a reset",
-      "message": "Are you sure you want to reset? You will lose all of your custom settings."
-   },
    "status_button_reloadall": {
-      "description": "button to reload all broken pages",
       "message": "Reload All Not Working Pages"
    },
    "status_button_reloadone": {
-      "description": "button to reload single broken page",
       "message": "Reload Page"
    },
    "status_legend_blocked": {
-      "description": "status of a page",
       "message": "Blocked System Pages"
    },
    "status_legend_broken": {
-      "description": "status of a page",
       "message": "Not Working"
    },
    "status_legend_loading": {
-      "description": "status of a page",
       "message": "Loading"
    },
    "status_legend_working": {
-      "description": "status of a page",
       "message": "Working"
    },
    "status_link_options": {
-      "description": "Link to go to the options page",
       "message": "Set Options!"
    },
    "status_title": {
-      "description": "The title of the status page, at top and tab name",
       "message": "Status"
    },
    "status_window_other": {
-      "description": "title for a group of tab statuses",
       "message": "Other Window"
    },
    "status_window_this": {
-      "description": "title for a group of tab statuses",
       "message": "This Window"
    }
 }
