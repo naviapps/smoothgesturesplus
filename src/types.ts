@@ -3,7 +3,7 @@ export type RockerDirection = 'L' | 'M' | 'R';
 export type WheelDirection = 'U' | 'D';
 
 type ValidGestureTree<T extends string> = {
-  [dir in T]?: ValidGestureTree<T>;
+  [direction in T]?: ValidGestureTree<T>;
 };
 
 type ValidLineGestures = ValidGestureTree<LineDirection>;
@@ -27,34 +27,4 @@ export type LinkMessage = {
 export type ImageMessage = {
   src: string;
   gestureid?: string;
-};
-
-export type ContentMessage = {
-  gesture?: string;
-  startPoint?: Point;
-  targets?: { gestureid: string }[];
-  links?: LinkMessage[];
-  images?: ImageMessage[];
-  selection?: string;
-  line?: {
-    distance: number;
-    segments: number;
-  };
-  buttonDown?: Record<number, boolean>;
-  nativeport?: {
-    rightclick?: Point;
-  };
-  syncButton?: {
-    id: number;
-    down: boolean;
-  };
-};
-
-export type BackgroundMessage = {
-  chain?: {
-    startPoint?: Point;
-    rocker?: boolean;
-    wheel?: boolean;
-    buttonDown: Record<number, boolean>;
-  };
 };

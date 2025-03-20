@@ -3,7 +3,7 @@ import { useStore } from 'zustand/react';
 import { createStore } from 'zustand/vanilla';
 
 import { LineDirection, RockerDirection, ValidGestures, WheelDirection } from '@/types';
-import { isLineDirection, isRockerDirection, isWheelDirection } from '@/utils';
+import { isLineDirection, isRockerDirection, isWheelDirection } from '@/utilities';
 
 export type SettingsState = {
   holdButton: number;
@@ -52,30 +52,30 @@ const initialState: SettingsState = {
   selectToLink: true,
   closeLastBlock: false,
   gestures: {
-    U: 'new-tab',
-    lU: 'new-tab-link',
-    D: 'toggle-pin',
-    L: 'page-back',
-    rRL: 'page-back',
-    R: 'page-forward',
-    rLR: 'page-forward',
-    UL: 'prev-tab',
-    UR: 'next-tab',
-    wU: 'goto-top',
-    wD: 'goto-bottom',
-    DR: 'close-tab',
-    LU: 'undo-close',
-    DU: 'clone-tab',
-    lDU: 'new-tab-back',
-    UD: 'reload-tab',
-    UDU: 'reload-tab-full',
-    URD: 'view-source',
-    UDR: 'split-tabs',
-    UDL: 'merge-tabs',
-    LDR: 'show-cookies',
-    RULD: 'fullscreen-window',
-    DL: 'minimize-window',
-    RU: 'maximize-window',
+    U: 'newTab',
+    lU: 'newTabLink',
+    D: 'togglePin',
+    L: 'pageBack',
+    rRL: 'pageBack',
+    R: 'pageForward',
+    rLR: 'pageForward',
+    UL: 'previousTab',
+    UR: 'nextTab',
+    wU: 'gotoTop',
+    wD: 'gotoBottom',
+    DR: 'closeTab',
+    LU: 'undoClose',
+    DU: 'cloneTab',
+    lDU: 'newTabBack',
+    UD: 'reloadTab',
+    UDU: 'reloadTabFull',
+    URD: 'viewSource',
+    UDR: 'splitTabs',
+    UDL: 'mergeTabs',
+    LDR: 'showCookies',
+    RULD: 'fullscreenWindow',
+    DL: 'minimizeWindow',
+    RU: 'maximizeWindow',
     RDLUR: 'options',
   },
   validGestures: {},
@@ -98,44 +98,44 @@ export const settingsStore = createStore<SettingsStore>(
     updateValidGestures: () => {
       const validGestures: ValidGestures = {};
       const { gestures } = get();
-      Object.keys(gestures).forEach((gesture) => {
+      for (const gesture of Object.keys(gestures)) {
         const g = gesture.replace(/^[lis]/, '');
         if (g.startsWith('k')) {
-          const mod = g.slice(1, 5);
+          const module_ = g.slice(1, 5);
           validGestures.k ??= {};
-          validGestures.k[mod] ??= [];
-          validGestures.k[mod].push(g.slice(6));
+          validGestures.k[module_] ??= [];
+          validGestures.k[module_].push(g.slice(6));
         } else if (g.startsWith('r')) {
           validGestures.r ??= {};
-          let cur = validGestures.r;
-          for (let i = 1; i < g.length; i += 1) {
-            const dir = g[i] as RockerDirection;
-            if (isRockerDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
+          let current = validGestures.r;
+          for (let index = 1; index < g.length; index += 1) {
+            const direction = g[index] as RockerDirection;
+            if (isRockerDirection(direction)) {
+              current[direction] ??= {};
+              current = current[direction];
             }
           }
         } else if (g.startsWith('w')) {
           validGestures.w ??= {};
-          let cur = validGestures.w;
-          for (let i = 1; i < g.length; i += 1) {
-            const dir = g[i] as WheelDirection;
-            if (isWheelDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
+          let current = validGestures.w;
+          for (let index = 1; index < g.length; index += 1) {
+            const direction = g[index] as WheelDirection;
+            if (isWheelDirection(direction)) {
+              current[direction] ??= {};
+              current = current[direction];
             }
           }
         } else {
-          let cur = validGestures;
-          for (let i = 0; i < g.length; i += 1) {
-            const dir = g[i] as LineDirection;
-            if (isLineDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
+          let current = validGestures;
+          for (const element of g) {
+            const direction = element as LineDirection;
+            if (isLineDirection(direction)) {
+              current[direction] ??= {};
+              current = current[direction];
             }
           }
         }
-      });
+      }
       set({ validGestures });
     },
   })),

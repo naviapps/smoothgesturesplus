@@ -1,17 +1,11 @@
-import React from 'react';
+import { JSX } from 'react';
 
-import { useSettings } from '@/stores/settings-store';
-import {
-  BackgroundMessage,
-  ContentMessage,
-  LineDirection,
-  Point,
-  RockerDirection,
-  ValidGestures,
-  WheelDirection,
-} from '@/types';
-import { onMessage, removeAllListeners } from '@/messaging.ts';
+import { GestureMessage, sendMessage } from '@/entrypoints/background/messaging';
 import * as actions from '@/entrypoints/content/actions';
+import { pagePrevious } from '@/entrypoints/content/actions';
+import { onMessage, removeAllListeners } from '@/entrypoints/content/messaging';
+import { useSettings } from '@/stores/settings-store';
+import { LineDirection, Point, RockerDirection, ValidGestures, WheelDirection } from '@/types';
 
 type Gesture = {
   events?: boolean;
@@ -25,105 +19,38 @@ type Gesture = {
     points: Point[];
     dirPoints: Point[];
     possibleDirs?: ValidGestures;
-    distance: number;
   };
   rocker?: boolean;
   wheel?: boolean;
-  payload?: any;
 };
 
-export type SmoothGesturesProps = {
+export type SmoothGesturesProperties = {
   callback?: (code: string) => void;
 };
 
-export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNode {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+export function SmoothGestures({ callback }: SmoothGesturesProperties): JSX.Element | undefined {
+  const canvasReference = useRef<HTMLCanvasElement>(null);
   const { width, height } = useWindowSize();
   const { isOpen, open, close } = useDisclosure(false);
-  const {
-    holdButton,
-    contextOnLink,
-    trailColor,
-    trailWidth,
-    trailBlock,
-    selectToLink,
-    validGestures,
-  } = useSettings();
+  const { holdButton, contextOnLink, trailColor, trailWidth, trailBlock, selectToLink, validGestures } = useSettings();
 
   useEffect(() => {
     // gesture states
     let gesture: Gesture = {};
 
     // button syncing between tabs
-    let syncButtons: { timeout: number } | boolean = false;
+    let syncButtons: { timeout: NodeJS.Timeout } | boolean = false;
 
     // mouse event states
     let buttonDown: Record<number, boolean> = {};
-    const blockClick: Record<number, boolean> = {};
+    let blockClick: Record<number, boolean> = {};
     let blockContext: boolean = true;
     let forceContext: boolean = false;
     // key mod down states
-    let keyMod: string = '0000';
+    let keyModule: string = '0000';
     let keyEscape: boolean = false;
     // focus state
     let focus: EventTarget | undefined;
-
-    /*
-     * Extension Communication
-     */
-    // TODO
-    const handleMessage = (message: unknown): void => {
-      const mess = message as BackgroundMessage;
-      /*
-      if (message.windowBlurred) {
-        buttonDown = {};
-        blockClick = {};
-        blockContext = true;
-        endGesture();
-      }
-       */
-      if (mess.chain) {
-        /*
-        startGesture(
-          message.chain.startPoint,
-          message.chain.startPoint
-            ? document.elementFromPoint(message.chain.startPoint.x, message.chain.startPoint.y)
-            : undefined,
-          message.chain.line,
-          message.chain.rocker,
-          message.chain.wheel,
-        );
-        blockContext = true;
-       */
-        if (mess.chain.buttonDown) {
-          if (mess.chain.buttonDown[0]) {
-            blockClick[0] = true;
-          }
-          if (mess.chain.buttonDown[1]) {
-            blockClick[1] = true;
-          }
-          if (mess.chain.buttonDown[2]) {
-            blockClick[2] = true;
-          }
-          /*
-            if (buttonDown[0] === undefined) {
-              buttonDown[0] = message.chain.buttonDown[0];
-            }
-            if (buttonDown[1] === undefined) {
-              buttonDown[1] = message.chain.buttonDown[1];
-            }
-            if (buttonDown[2] === undefined) {
-              buttonDown[2] = message.chain.buttonDown[2];
-            }
-           */
-        }
-      }
-      /*
-      if (message.syncButton) {
-        buttonDown[message.syncButton.id] = message.syncButton.down;
-      }
-       */
-    };
 
     /*
      * Page Events
@@ -135,19 +62,15 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       // block scrollbars
       if (
         event.target instanceof HTMLElement &&
-        ((window.innerHeight < document.documentElement.scrollHeight &&
-          event.clientX > window.innerWidth - 17) ||
-          (window.innerWidth < document.documentElement.scrollWidth &&
-            event.clientY > window.innerHeight - 17))
+        ((window.innerHeight < document.documentElement.scrollHeight && event.clientX > window.innerWidth - 17) ||
+          (window.innerWidth < document.documentElement.scrollWidth && event.clientY > window.innerHeight - 17))
       ) {
         endGesture();
         return;
       }
 
       if (syncButtons) {
-        await browser.runtime.sendMessage<ContentMessage>({
-          syncButton: { id: event.button, down: true },
-        });
+        await sendMessage('syncButton', { id: event.button, down: true });
       }
       buttonDown[event.button] = true;
 
@@ -160,10 +83,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
 
       moveGesture(event);
-      if (
-        gesture.rocker &&
-        (buttonDown[0] ? 1 : 0) + (buttonDown[1] ? 1 : 0) + (buttonDown[2] ? 1 : 0) === 2
-      ) {
+      if (gesture.rocker && (buttonDown[0] ? 1 : 0) + (buttonDown[1] ? 1 : 0) + (buttonDown[2] ? 1 : 0) === 2) {
         let first: RockerDirection | undefined;
         let second: RockerDirection | undefined;
         if (buttonDown[0]) {
@@ -189,13 +109,13 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         }
         if (callback || (first && second && validGestures.r?.[first]?.[second])) {
           syncButtons = {
-            timeout: window.setTimeout(() => {
+            timeout: globalThis.setTimeout(() => {
               syncButtons = false;
             }, 500),
           };
           await sendGesture(`r${first}${second}`);
 
-          window.getSelection()?.removeAllRanges();
+          globalThis.getSelection()?.removeAllRanges();
           blockContext = true;
           blockClick[0] = true;
           blockClick[1] = true;
@@ -206,32 +126,20 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         }
       }
 
-      if (
-        contextOnLink &&
-        event.button === 2 &&
-        event.target instanceof Node &&
-        getLink(event.target)
-      ) {
+      if (contextOnLink && event.button === 2 && event.target instanceof Node && getLink(event.target)) {
         return;
       }
       if (holdButton === 0 && event.button === 0 && event.target instanceof HTMLSelectElement) {
         return;
       }
-      if (
-        holdButton === 0 &&
-        (keyMod[0] !== '0' || keyMod[1] !== '0' || keyMod[2] !== '0' || keyEscape)
-      ) {
+      if (holdButton === 0 && (keyModule[0] !== '0' || keyModule[1] !== '0' || keyModule[2] !== '0' || keyEscape)) {
         return; // allow selection
       }
       if (holdButton === 0 && event.button === 0 && event.target instanceof HTMLImageElement) {
         event.preventDefault();
       }
       // if windows and middle-clicked and (middle-click rocker set or options page is setting a gesture) then block auto scrolling with middle
-      if (
-        event.button === 1 &&
-        (validGestures.r?.M || callback) &&
-        navigator.userAgent.indexOf('Win') !== -1
-      ) {
+      if (event.button === 1 && (validGestures.r?.M || callback) && navigator.userAgent.includes('Win')) {
         event.preventDefault();
       }
 
@@ -257,7 +165,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           await sendGesture(gesture.line.code);
           event.preventDefault();
           if (event.button === 0) {
-            window.getSelection()?.removeAllRanges();
+            globalThis.getSelection()?.removeAllRanges();
           }
           if (event.button === 2) {
             blockContext = true;
@@ -277,25 +185,23 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         !blockContext &&
         !buttonDown[0] &&
         !buttonDown[1] &&
-        navigator.userAgent.indexOf('Win') === -1
+        !navigator.userAgent.includes('Win')
       ) {
         forceContext = true;
-        window.setTimeout(() => {
+        globalThis.setTimeout(() => {
           forceContext = false;
         }, 600);
         const point = { x: event.screenX, y: event.screenY };
         if (
-          navigator.userAgent.match(/linux/i) &&
-          (event.screenX <
-            window.screenLeft + Math.round(event.clientX * window.devicePixelRatio) ||
+          /linux/i.test(navigator.userAgent) &&
+          (event.screenX < window.screenLeft + Math.round(event.clientX * window.devicePixelRatio) ||
             (window.screenLeft === 0 &&
-              event.screenY <
-                55 + window.screenTop + Math.round(event.clientY * window.devicePixelRatio)))
+              event.screenY < 55 + window.screenTop + Math.round(event.clientY * window.devicePixelRatio)))
         ) {
           point.x += window.screenLeft;
           point.y += window.screenTop;
         }
-        await browser.runtime.sendMessage<ContentMessage>({ nativeport: { rightclick: point } });
+        await sendMessage('nativeport', { rightclick: point });
       }
 
       if (blockClick[event.button]) {
@@ -303,9 +209,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
       buttonDown[event.button] = false;
       if (syncButtons) {
-        await browser.runtime.sendMessage<ContentMessage>({
-          syncButton: { id: event.button, down: false },
-        });
+        await sendMessage('syncButton', { id: event.button, down: false });
       }
 
       if (!buttonDown[0] && !buttonDown[2]) {
@@ -329,10 +233,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     };
 
     const handleContextMenu = (event: MouseEvent): void => {
-      if (
-        (blockContext || (buttonDown[2] && (gesture.line || gesture.rocker || gesture.wheel))) &&
-        !forceContext
-      ) {
+      if ((blockContext || (buttonDown[2] && (gesture.line || gesture.rocker || gesture.wheel))) && !forceContext) {
         event.preventDefault();
         event.stopPropagation();
         blockContext = false;
@@ -344,14 +245,8 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     };
 
     const handleSelectStart = (): void => {
-      if (
-        holdButton === 0 &&
-        keyMod[0] === '0' &&
-        keyMod[1] === '0' &&
-        keyMod[2] === '0' &&
-        !keyEscape
-      ) {
-        window.getSelection()?.removeAllRanges();
+      if (holdButton === 0 && keyModule[0] === '0' && keyModule[1] === '0' && keyModule[2] === '0' && !keyEscape) {
+        globalThis.getSelection()?.removeAllRanges();
       }
     };
 
@@ -360,7 +255,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         endGesture();
         keyEscape = true;
       }
-      let mod =
+      let module_ =
         (event.ctrlKey ? '1' : '0') +
         (event.altKey ? '1' : '0') +
         (event.shiftKey ? '1' : '0') +
@@ -373,27 +268,38 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         event.key === 'Meta' ||
         event.key === 'ContextMenu'
       ) {
-        let i: number | undefined;
-        if (event.key === 'Shift') {
-          i = 2;
-        } else if (event.key === 'Control') {
-          i = 0;
-        } else if (event.key === 'Alt') {
-          i = 1;
+        let index: number | undefined;
+        switch (event.key) {
+          case 'Shift': {
+            index = 2;
+
+            break;
+          }
+          case 'Control': {
+            index = 0;
+
+            break;
+          }
+          case 'Alt': {
+            index = 1;
+
+            break;
+          }
+          // No default
         }
-        if (i !== undefined) {
-          mod = `${mod.slice(0, i)}1${mod.slice(i + 1)}`;
+        if (index !== undefined) {
+          module_ = `${module_.slice(0, index)}1${module_.slice(index + 1)}`;
         }
-        keyMod = mod;
+        keyModule = module_;
       } else if (
         callback ||
-        ((mod !== '0000' ||
+        ((module_ !== '0000' ||
           !focus ||
           (!(focus instanceof HTMLInputElement) && !(focus instanceof HTMLTextAreaElement))) &&
-          validGestures.k?.[mod].includes(`${event.key}:${event.code}`))
+          validGestures.k?.[module_].includes(`${event.key}:${event.code}`))
       ) {
         startGesture();
-        await sendGesture(`k${mod}:${event.key}:${event.code}`);
+        await sendGesture(`k${module_}:${event.key}:${event.code}`);
         event.preventDefault();
         event.stopPropagation();
       }
@@ -404,15 +310,15 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         keyEscape = false;
       }
       if (event.key === 'Shift' || event.key === 'Control' || event.key === 'Alt') {
-        let i: number;
+        let index: number;
         if (event.key === 'Shift') {
-          i = 2;
+          index = 2;
         } else if (event.key === 'Control') {
-          i = 0;
+          index = 0;
         } else {
-          i = 1;
+          index = 1;
         }
-        keyMod = `${keyMod.slice(0, i)}0${keyMod.slice(i + 1)}`;
+        keyModule = `${keyModule.slice(0, index)}0${keyModule.slice(index + 1)}`;
       }
     };
 
@@ -443,13 +349,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     /*
      * Start/End Gestures
      */
-    const startGesture = (
-      point?: Point,
-      target?: Element,
-      line?: boolean,
-      rocker?: boolean,
-      wheel?: boolean,
-    ): void => {
+    const startGesture = (point?: Point, target?: Element, line?: boolean, rocker?: boolean, wheel?: boolean): void => {
       endGesture();
       gesture.events = true;
       if (point) {
@@ -458,12 +358,12 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       if (target) {
         gesture.targets = [target];
       }
-      const selection = window.getSelection();
+      const selection = globalThis.getSelection();
       if (selection) {
         gesture.selection = selection.toString();
         gesture.ranges = [];
-        for (let i = 0; i < selection.rangeCount; i += 1) {
-          gesture.ranges.push(selection.getRangeAt(i));
+        for (let index = 0; index < selection.rangeCount; index += 1) {
+          gesture.ranges.push(selection.getRangeAt(index));
         }
       }
 
@@ -473,7 +373,6 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           points: [{ x: point.x, y: point.y }],
           dirPoints: [{ x: point.x, y: point.y }],
           possibleDirs: validGestures,
-          distance: 0,
         };
       }
       gesture.rocker = rocker;
@@ -487,8 +386,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
       if (
         (gesture.rocker || gesture.wheel) &&
-        (Math.abs(event.clientX - gesture.startPoint.x) > 0 ||
-          Math.abs(event.clientY - gesture.startPoint.y) > 2)
+        (Math.abs(event.clientX - gesture.startPoint.x) > 0 || Math.abs(event.clientY - gesture.startPoint.y) > 2)
       ) {
         gesture.rocker = undefined;
         gesture.wheel = undefined;
@@ -496,12 +394,10 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
       if (gesture.line) {
         const next = { x: event.clientX, y: event.clientY };
-        const prev = gesture.line.points[gesture.line.points.length - 1];
         gesture.line.points.push(next);
-        gesture.line.distance += Math.sqrt((next.x - prev.x) ** 2 + (next.y - prev.y) ** 2);
 
-        const diffx = next.x - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].x;
-        const diffy = next.y - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].y;
+        const diffx = next.x - gesture.line.dirPoints.at(-1)!.x;
+        const diffy = next.y - gesture.line.dirPoints.at(-1)!.y;
 
         if (!trailBlock) {
           refreshLineAsync();
@@ -511,13 +407,10 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         }
 
         const ldir = gesture.line.code === '' ? 'X' : gesture.line.code.slice(-1);
-        const ndir = getDirection(gesture.line.dirPoints[gesture.line.dirPoints.length - 1], next);
+        const ndir = getLineDirection(gesture.line.dirPoints.at(-1)!, next);
         if (ndir === ldir) {
           gesture.line.dirPoints[gesture.line.dirPoints.length - 1] = next;
-        } else if (
-          (Math.abs(diffx) > 25 || Math.abs(diffy) > 25) &&
-          (diagonal || ndir.match(/^[RLUD]$/))
-        ) {
+        } else if ((Math.abs(diffx) > 25 || Math.abs(diffy) > 25) && (diagonal || /^[RLUD]$/.test(ndir))) {
           if (gesture.line.possibleDirs) {
             gesture.line.possibleDirs = gesture.line.possibleDirs[ndir];
           }
@@ -532,9 +425,9 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
     };
 
-    const getDirection = (prev: Point, next: Point): LineDirection => {
-      const diffx = next.x - prev.x;
-      const diffy = next.y - prev.y;
+    const getLineDirection = (previous: Point, next: Point): LineDirection => {
+      const diffx = next.x - previous.x;
+      const diffy = next.y - previous.y;
       if (Math.abs(diffx) > 2 * Math.abs(diffy)) {
         return diffx > 0 ? 'R' : 'L';
       }
@@ -558,7 +451,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       const dir: WheelDirection = event.deltaY < 0 ? 'U' : 'D';
       if (callback || validGestures.w?.[dir]) {
         syncButtons = {
-          timeout: window.setTimeout(() => {
+          timeout: globalThis.setTimeout(() => {
             syncButtons = false;
           }, 500),
         };
@@ -568,7 +461,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           blockContext = true;
         }
         if (holdButton === 0) {
-          window.getSelection()?.removeAllRanges();
+          globalThis.getSelection()?.removeAllRanges();
         }
         blockClick[holdButton] = true;
         event.preventDefault();
@@ -581,7 +474,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         if (callback) {
           callback(code);
         } else {
-          const message: ContentMessage = {
+          const message: GestureMessage = {
             gesture: code,
             startPoint: gesture.startPoint,
             targets: [],
@@ -589,31 +482,21 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
             images: [],
             selection: gesture.selection,
           };
-          if (
-            message.targets === undefined ||
-            message.links === undefined ||
-            message.images === undefined
-          ) {
+          if (message.targets === undefined || message.links === undefined || message.images === undefined) {
             return;
-          }
-          if (gesture.line && code[0] !== 'w' && code[0] !== 'r') {
-            message.line = {
-              distance: gesture.line.distance,
-              segments: code.length,
-            };
           }
           if (selectToLink && gesture.selection) {
             const parts = gesture.selection.split('http');
-            for (let i = 1; i < parts.length; i += 1) {
-              const link = `http${parts[i]}`.split(/[\s"']/)[0];
-              if (link.match(/\/\/.+\..+/)) {
+            for (let index = 1; index < parts.length; index += 1) {
+              const link = `http${parts[index]}`.split(/[\s"']/)[0];
+              if (/\/\/.+\..+/.test(link)) {
                 message.links.push({ src: link });
               }
             }
           }
           if (gesture.targets) {
-            for (let i = 0; i < gesture.targets.length; i += 1) {
-              const element = gesture.targets[i];
+            for (let index = 0; index < gesture.targets.length; index += 1) {
+              const element = gesture.targets[index];
               const gestureid = Math.floor(Math.random() * 2 ** 30).toString(32);
               element.setAttribute('gestureid', gestureid);
 
@@ -630,7 +513,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           if (syncButtons) {
             message.buttonDown = buttonDown;
           }
-          await browser.runtime.sendMessage<ContentMessage>(message);
+          await sendMessage('gesture', message);
         }
       }
       if (code[0] === 'w') {
@@ -640,12 +523,12 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         gesture.line = undefined;
         gesture.wheel = undefined;
       } else {
-        const selection = window.getSelection();
+        const selection = globalThis.getSelection();
         if (selection) {
           selection.removeAllRanges();
           if (gesture.ranges) {
-            for (let i = 0; i < gesture.ranges.length; i += 1) {
-              selection.addRange(gesture.ranges[i]);
+            for (let index = 0; index < gesture.ranges.length; index += 1) {
+              selection.addRange(gesture.ranges[index]);
             }
           }
         }
@@ -655,12 +538,12 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
     const endGesture = (): void => {
       close();
-      if (canvasRef.current) {
-        const canvas = canvasRef.current;
+      if (canvasReference.current) {
+        const canvas = canvasReference.current;
         canvas.getContext('2d')?.clearRect(0, 0, canvas.width, canvas.height);
       }
 
-      window.clearTimeout(gesture.timeout);
+      globalThis.clearTimeout(gesture.timeout);
 
       gesture = {};
     };
@@ -669,24 +552,24 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
      * Helpers
      */
     const getLink = (element: Node): string | undefined => {
-      let node: Node | null = element;
+      let node: Node | undefined = element;
       while (node) {
         if (node instanceof HTMLAnchorElement) {
           return node.href;
         }
-        node = node.parentNode;
+        node = node.parentNode ?? undefined;
       }
       return undefined;
     };
 
-    const refreshLineAsync: { (): void; timeout?: number } = () => {
+    const refreshLineAsync: { (): void; timeout?: NodeJS.Timeout } = () => {
       if (!refreshLineAsync.timeout) {
         const elapsedTime = Date.now() - (refreshLine.lasttime ?? 0);
         const minTime = Math.min(500, 4 * (refreshLine.runtime ?? 0));
         if (minTime < elapsedTime) {
           refreshLine();
         } else {
-          refreshLineAsync.timeout = window.setTimeout(() => {
+          refreshLineAsync.timeout = globalThis.setTimeout(() => {
             refreshLine();
             refreshLineAsync.timeout = undefined;
           }, minTime - elapsedTime);
@@ -696,30 +579,30 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
     const refreshLine: { (): void; lasttime?: number; runtime?: number } = () => {
       const now = Date.now();
-      if (!canvasRef.current) {
+      if (!canvasReference.current) {
         return;
       }
-      const canvas = canvasRef.current;
-      const ctx = canvas.getContext('2d');
-      if (!ctx) {
+      const canvas = canvasReference.current;
+      const context = canvas.getContext('2d');
+      if (!context) {
         return;
       }
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      context.clearRect(0, 0, canvas.width, canvas.height);
       if (gesture.line) {
-        ctx.strokeStyle = trailColor;
-        ctx.lineWidth = trailWidth;
-        ctx.lineCap = 'butt';
-        ctx.lineJoin = 'round';
-        ctx.shadowBlur = trailWidth;
-        ctx.shadowColor = 'rgba(255,255,255,.3)';
+        context.strokeStyle = trailColor;
+        context.lineWidth = trailWidth;
+        context.lineCap = 'butt';
+        context.lineJoin = 'round';
+        context.shadowBlur = trailWidth;
+        context.shadowColor = 'rgba(255,255,255,.3)';
         let firstDirPoint = {
           x: gesture.line.dirPoints[0].x,
           y: gesture.line.dirPoints[0].y,
         };
-        const lastPoint = gesture.line.points[gesture.line.points.length - 1];
-        const lastDirPoint = gesture.line.dirPoints[gesture.line.dirPoints.length - 1];
-        const nextDir = getDirection(lastDirPoint, lastPoint);
-        ctx.beginPath();
+        const lastPoint = gesture.line.points.at(-1)!;
+        const lastDirPoint = gesture.line.dirPoints.at(-1)!;
+        const nextDir = getLineDirection(lastDirPoint, lastPoint);
+        context.beginPath();
         if (gesture.line.code.length > 0) {
           if (gesture.line.code[0] === 'L' || gesture.line.code[0] === 'R') {
             firstDirPoint.y = gesture.line.dirPoints[1].y;
@@ -727,12 +610,12 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
             firstDirPoint.x = gesture.line.dirPoints[1].x;
           }
         }
-        ctx.moveTo(firstDirPoint.x, firstDirPoint.y);
-        for (let i = 1; i < gesture.line.code.length; i += 1) {
-          const prevDir = gesture.line.code[i - 1];
-          const currDir = gesture.line.code[i];
-          const currDirPoint = gesture.line.dirPoints[i];
-          const nextDirPoint = gesture.line.dirPoints[i + 1];
+        context.moveTo(firstDirPoint.x, firstDirPoint.y);
+        for (let index = 1; index < gesture.line.code.length; index += 1) {
+          const prevDir = gesture.line.code[index - 1];
+          const currDir = gesture.line.code[index];
+          const currDirPoint = gesture.line.dirPoints[index];
+          const nextDirPoint = gesture.line.dirPoints[index + 1];
           let radius: number;
           if (prevDir === 'L' || prevDir === 'R') {
             if (currDir === 'L' || currDir === 'R') {
@@ -740,146 +623,161 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
                 Math.abs(currDirPoint.x - firstDirPoint.x),
                 Math.abs(nextDirPoint.y - firstDirPoint.y) / 2,
               );
-              ctx.arcTo(currDirPoint.x, firstDirPoint.y, currDirPoint.x, nextDirPoint.y, radius);
+              context.arcTo(currDirPoint.x, firstDirPoint.y, currDirPoint.x, nextDirPoint.y, radius);
               radius = Math.min(
                 Math.abs(nextDirPoint.x - currDirPoint.x),
                 Math.abs(nextDirPoint.y - firstDirPoint.y) - radius,
               );
-              ctx.arcTo(currDirPoint.x, nextDirPoint.y, nextDirPoint.x, nextDirPoint.y, radius);
+              context.arcTo(currDirPoint.x, nextDirPoint.y, nextDirPoint.x, nextDirPoint.y, radius);
               firstDirPoint.x = (currDirPoint.x + nextDirPoint.x) / 2;
               firstDirPoint.y = nextDirPoint.y;
-              ctx.lineTo(firstDirPoint.x, firstDirPoint.y);
+              context.lineTo(firstDirPoint.x, firstDirPoint.y);
             } else {
               let { y } = nextDirPoint;
-              if (gesture.line.code[i + 1] === 'L' || gesture.line.code[i + 1] === 'R') {
-                y = gesture.line.dirPoints[i + 2].y;
+              if (gesture.line.code[index + 1] === 'L' || gesture.line.code[index + 1] === 'R') {
+                y = gesture.line.dirPoints[index + 2].y;
               }
-              radius = Math.min(
-                Math.abs(nextDirPoint.x - firstDirPoint.x),
-                Math.abs(y - firstDirPoint.y) / 2,
-              );
-              ctx.arcTo(
-                nextDirPoint.x,
-                firstDirPoint.y,
-                nextDirPoint.x,
-                nextDirPoint.y,
-                0.8 * radius,
-              );
+              radius = Math.min(Math.abs(nextDirPoint.x - firstDirPoint.x), Math.abs(y - firstDirPoint.y) / 2);
+              context.arcTo(nextDirPoint.x, firstDirPoint.y, nextDirPoint.x, nextDirPoint.y, 0.8 * radius);
               firstDirPoint.x = nextDirPoint.x;
               firstDirPoint.y = (firstDirPoint.y + y) / 2;
-              ctx.lineTo(firstDirPoint.x, firstDirPoint.y);
+              context.lineTo(firstDirPoint.x, firstDirPoint.y);
             }
           } else if (currDir === 'L' || currDir === 'R') {
             let { x } = nextDirPoint;
-            if (gesture.line.code[i + 1] === 'U' || gesture.line.code[i + 1] === 'D') {
-              x = gesture.line.dirPoints[i + 2].x;
+            if (gesture.line.code[index + 1] === 'U' || gesture.line.code[index + 1] === 'D') {
+              x = gesture.line.dirPoints[index + 2].x;
             }
-            radius = Math.min(
-              Math.abs(x - firstDirPoint.x) / 2,
-              Math.abs(nextDirPoint.y - firstDirPoint.y),
-            );
-            ctx.arcTo(
-              firstDirPoint.x,
-              nextDirPoint.y,
-              nextDirPoint.x,
-              nextDirPoint.y,
-              0.8 * radius,
-            );
+            radius = Math.min(Math.abs(x - firstDirPoint.x) / 2, Math.abs(nextDirPoint.y - firstDirPoint.y));
+            context.arcTo(firstDirPoint.x, nextDirPoint.y, nextDirPoint.x, nextDirPoint.y, 0.8 * radius);
             firstDirPoint.x = (firstDirPoint.x + x) / 2;
             firstDirPoint.y = nextDirPoint.y;
-            ctx.lineTo(firstDirPoint.x, firstDirPoint.y);
+            context.lineTo(firstDirPoint.x, firstDirPoint.y);
           } else {
             radius = Math.min(
               Math.abs(nextDirPoint.x - firstDirPoint.x) / 2,
               Math.abs(currDirPoint.y - firstDirPoint.y),
             );
-            ctx.arcTo(firstDirPoint.x, currDirPoint.y, nextDirPoint.x, currDirPoint.y, radius);
+            context.arcTo(firstDirPoint.x, currDirPoint.y, nextDirPoint.x, currDirPoint.y, radius);
             radius = Math.min(
               Math.abs(nextDirPoint.x - firstDirPoint.x) - radius,
               Math.abs(nextDirPoint.y - currDirPoint.y),
             );
-            ctx.arcTo(nextDirPoint.x, currDirPoint.y, nextDirPoint.x, nextDirPoint.y, radius);
+            context.arcTo(nextDirPoint.x, currDirPoint.y, nextDirPoint.x, nextDirPoint.y, radius);
             firstDirPoint.x = nextDirPoint.x;
             firstDirPoint.y = (currDirPoint.y + nextDirPoint.y) / 2;
-            ctx.lineTo(firstDirPoint.x, firstDirPoint.y);
+            context.lineTo(firstDirPoint.x, firstDirPoint.y);
           }
         }
         if (gesture.line.code.length > 0) {
-          firstDirPoint = gesture.line.dirPoints[gesture.line.dirPoints.length - 1];
-          ctx.lineTo(firstDirPoint.x, firstDirPoint.y);
+          firstDirPoint = gesture.line.dirPoints.at(-1)!;
+          context.lineTo(firstDirPoint.x, firstDirPoint.y);
         }
-        ctx.stroke();
+        context.stroke();
         if ((gesture.line.possibleDirs && gesture.line.possibleDirs[nextDir]) || callback) {
           if (nextDir === '3' || nextDir === '7') {
-            ctx.lineTo(
+            context.lineTo(
               (firstDirPoint.x - firstDirPoint.y + lastPoint.x + lastPoint.y) / 2,
               (-firstDirPoint.x + firstDirPoint.y + lastPoint.x + lastPoint.y) / 2,
             );
           } else if (nextDir === '1' || nextDir === '9') {
-            ctx.lineTo(
+            context.lineTo(
               (firstDirPoint.x + firstDirPoint.y + lastPoint.x - lastPoint.y) / 2,
               (firstDirPoint.x + firstDirPoint.y - lastPoint.x + lastPoint.y) / 2,
             );
           }
-          ctx.stroke();
+          context.stroke();
         }
         refreshLine.lasttime = Date.now();
-        refreshLine.runtime =
-          0.9 * (refreshLine.runtime || 10) + 0.1 * (refreshLine.lasttime - now);
+        refreshLine.runtime = 0.9 * (refreshLine.runtime || 10) + 0.1 * (refreshLine.lasttime - now);
       }
     };
 
     /*
      * Enable/Disable
      */
-    window.addEventListener('mousedown', handleMouseDown, true);
-    window.addEventListener('mouseup', handleMouseUp, true);
-    window.addEventListener('dragend', handleDragEnd, true);
-    window.addEventListener('click', handleClick, true);
-    window.addEventListener('contextmenu', handleContextMenu, true);
-    window.addEventListener('selectstart', handleSelectStart, true);
-    window.addEventListener('keydown', handleKeyDown, true);
-    window.addEventListener('keyup', handleKeyUp, true);
+    globalThis.addEventListener('mousedown', handleMouseDown, true);
+    globalThis.addEventListener('mouseup', handleMouseUp, true);
+    globalThis.addEventListener('dragend', handleDragEnd, true);
+    globalThis.addEventListener('click', handleClick, true);
+    globalThis.addEventListener('contextmenu', handleContextMenu, true);
+    globalThis.addEventListener('selectstart', handleSelectStart, true);
+    globalThis.addEventListener('keydown', handleKeyDown, true);
+    globalThis.addEventListener('keyup', handleKeyUp, true);
     window.addEventListener('focus', handleFocus, true);
     window.addEventListener('blur', handleBlur, true);
-    window.addEventListener('mousemove', handleMouseMove, true);
+    globalThis.addEventListener('mousemove', handleMouseMove, true);
     window.addEventListener('wheel', handleWheel, true);
 
-    onMessage('action-stop', actions.stop);
-    onMessage('action-goto-top', actions.gotoTop);
-    onMessage('action-goto-bottom', actions.gotoBottom);
-    onMessage('action-page-up', actions.pageUp);
-    onMessage('action-page-down', actions.pageDown);
-    onMessage('action-page-next', actions.pageNext);
-    onMessage('action-page-prev', actions.pagePrev);
-    onMessage('action-zoom-img-in', ({ data }) => actions.zoomImgIn(data));
-    onMessage('action-zoom-img-out', ({ data }) => actions.zoomImgOut(data));
-    onMessage('action-zoom-img-zero', ({ data }) => actions.zoomImgZero(data));
-    onMessage('action-hide-image', ({ data }) => actions.hideImage(data));
-    onMessage('action-show-cookies', actions.showCookies);
-    onMessage('action-print', actions.print);
-    onMessage('action-copy', ({ data }) => actions.copy(data));
-    onMessage('action-copy-link', ({ data }) => actions.copyLink(data));
-    onMessage('action-find-prev', ({ data }) => actions.findPrev(data));
-    onMessage('action-find-next', ({ data }) => actions.findNext(data));
-    browser.runtime.onMessage.addListener(handleMessage);
+    /*
+     * Extension Communication
+     */
+    onMessage('stop', actions.stop);
+    onMessage('gotoTop', actions.gotoTop);
+    onMessage('gotoBottom', actions.gotoBottom);
+    onMessage('pageUp', actions.pageUp);
+    onMessage('pageDown', actions.pageDown);
+    onMessage('pageNext', actions.pageNext);
+    onMessage('pagePrevious', actions.pagePrevious);
+    onMessage('zoomImgIn', ({ data }) => actions.zoomImgIn(data));
+    onMessage('zoomImgOut', ({ data }) => actions.zoomImgOut(data));
+    onMessage('zoomImgZero', ({ data }) => actions.zoomImgZero(data));
+    onMessage('hideImage', ({ data }) => actions.hideImage(data));
+    onMessage('showCookies', actions.showCookies);
+    onMessage('print', actions.print);
+    onMessage('copy', ({ data }) => actions.copy(data));
+    onMessage('copyLink', ({ data }) => actions.copyLink(data));
+    onMessage('findPrevious', ({ data }) => actions.findPrevious(data));
+    onMessage('findNext', ({ data }) => actions.findNext(data));
+    onMessage('windowBlurred', () => {
+      buttonDown = {};
+      blockClick = {};
+      blockContext = true;
+      endGesture();
+    });
+    onMessage('chain', ({ data }) => {
+      startGesture(
+        data.startPoint,
+        data.startPoint ? (document.elementFromPoint(data.startPoint.x, data.startPoint.y) ?? undefined) : undefined,
+        false,
+        data.rocker,
+        data.wheel,
+      );
+      blockContext = true;
+      if (data.buttonDown) {
+        if (data.buttonDown[0]) {
+          blockClick[0] = true;
+        }
+        if (data.buttonDown[1]) {
+          blockClick[1] = true;
+        }
+        if (data.buttonDown[2]) {
+          blockClick[2] = true;
+        }
+        buttonDown[0] ??= data.buttonDown[0];
+        buttonDown[1] ??= data.buttonDown[1];
+        buttonDown[2] ??= data.buttonDown[2];
+      }
+    });
+    onMessage('syncButton', ({ data: { id, down } }) => {
+      buttonDown[id] = down;
+    });
 
     return () => {
-      window.removeEventListener('mousedown', handleMouseDown, true);
-      window.removeEventListener('mouseup', handleMouseUp, true);
-      window.removeEventListener('dragend', handleDragEnd, true);
-      window.removeEventListener('click', handleClick, true);
-      window.removeEventListener('contextmenu', handleContextMenu, true);
-      window.removeEventListener('selectstart', handleSelectStart, true);
-      window.removeEventListener('keydown', handleKeyDown, true);
-      window.removeEventListener('keyup', handleKeyUp, true);
+      globalThis.removeEventListener('mousedown', handleMouseDown, true);
+      globalThis.removeEventListener('mouseup', handleMouseUp, true);
+      globalThis.removeEventListener('dragend', handleDragEnd, true);
+      globalThis.removeEventListener('click', handleClick, true);
+      globalThis.removeEventListener('contextmenu', handleContextMenu, true);
+      globalThis.removeEventListener('selectstart', handleSelectStart, true);
+      globalThis.removeEventListener('keydown', handleKeyDown, true);
+      globalThis.removeEventListener('keyup', handleKeyUp, true);
       window.removeEventListener('focus', handleFocus, true);
       window.removeEventListener('blur', handleBlur, true);
-      window.removeEventListener('mousemove', handleMouseMove, true);
+      globalThis.removeEventListener('mousemove', handleMouseMove, true);
       window.removeEventListener('wheel', handleWheel, true);
 
       removeAllListeners();
-      browser.runtime.onMessage.removeListener(handleMessage);
     };
   }, [
     holdButton,
@@ -896,18 +794,18 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
   return isOpen ? (
     <canvas
-      ref={canvasRef}
+      ref={canvasReference}
       width={width}
       height={height}
       style={{
         position: 'fixed',
         top: 0,
         left: 0,
-        zIndex: 999999999,
+        zIndex: 999_999_999,
         background: 'transparent',
         margin: 0,
         padding: 0,
       }}
     />
-  ) : null;
+  ) : undefined;
 }

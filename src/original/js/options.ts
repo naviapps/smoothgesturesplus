@@ -1,5 +1,5 @@
 let settings = {};
-const i = (e) => {
+const index = (e) => {
   for (key in e) {
     settings[key] = e[key];
   }
@@ -20,23 +20,15 @@ const t = (changes, areaName) => {
 };
 
 const c = (e, t) => {
-  return chrome.i18n.getMessage(e.replace(/-/g, '_'), t);
+  return chrome.i18n.getMessage(e.replaceAll('-', '_'), t);
 };
-
-chrome.runtime.getBackgroundPage((e) => {
-  e.ping();
-});
 
 $(() => {
   const e = t.match(/__MSG_([a-zA-Z0-9_\-@]+)(\{\{([^|}]+(\|\|[^|}]+)*)\}\})?__/);
   let t = $('body').html();
   for (let n = 0; e; ) {
-    console.log(e);
     const s = [e[1], e[3] ? e[3].split('||') : undefined];
-    t = t.replace(
-      new RegExp(`__MSG_${e[1]}(\\{\\{([^|}]+(\\|\\|[^|}]+)*)\\}\\})?__`),
-      c.apply(null, s),
-    );
+    t = t.replace(new RegExp(`__MSG_${e[1]}(\\{\\{([^|}]+(\\|\\|[^|}]+)*)\\}\\})?__`), c.apply(null, s));
     if (++n > 500) {
       break;
     }
@@ -45,30 +37,30 @@ $(() => {
 });
 
 const n = () => {
-  v();
+  initialize();
   $('#newtab_url.setting select, #newtab_url.setting .button').on('change click', () => {
     let e = $('#newtab_url.setting select').val();
     if (e === 'custom') {
       e = $('#newtab_url.setting input[type=text]').val();
     }
-    if (!e.match(/:/) && e.match(/\./)) {
+    if (!/:/.test(e) && /\./.test(e)) {
       e = `http://${e}`;
     }
-    if (!e.match(/:/) && e !== 'homepage') {
+    if (!/:/.test(e) && e !== 'homepage') {
       e = 'http://www.google.com/';
     }
-    i({ newTabUrl: e });
-    v();
+    index({ newTabUrl: e });
+    initialize();
   });
   $('#newtab_right.setting select').on('change', () => {
-    i({ newTabRight: $(this).val() == 1 });
+    index({ newTabRight: $(this).val() == 1 });
   });
   $('#newtab_linkright.setting select').on('change', () => {
-    i({ newTabLinkRight: $(this).val() == 1 });
+    index({ newTabLinkRight: $(this).val() == 1 });
   });
   $('#trail_draw.setting select').on('change', () => {
-    i({ trailBlock: $(this).val() != 1 });
-    v();
+    index({ trailBlock: $(this).val() != 1 });
+    initialize();
   });
   let e = null;
   $(
@@ -76,7 +68,7 @@ const n = () => {
   ).on('change', () => {
     clearTimeout(e);
     e = setTimeout(() => {
-      i({
+      index({
         trailColor: {
           r: 1 * $('#trail_color_r input').val(),
           g: 1 * $('#trail_color_g input').val(),
@@ -85,7 +77,7 @@ const n = () => {
         },
       });
       setTimeout(() => {
-        v();
+        initialize();
         h();
       }, 100);
     }, 100);
@@ -94,46 +86,46 @@ const n = () => {
   $('#trail_width input[type=range]').on('change', () => {
     clearTimeout(t);
     t = setTimeout(() => {
-      i({ trailWidth: 1 * $('#trail_width input').val() });
-      v();
+      index({ trailWidth: 1 * $('#trail_width input').val() });
+      initialize();
     }, 100);
   });
   $('#trail_style select').on('change', () => {
-    i({ trailLegacy: $(this).val() === 'legacy' });
+    index({ trailLegacy: $(this).val() === 'legacy' });
   });
   $('#force_context.setting select').on('change', () => {
-    i({ contextOnLink: $(this).val() == 1 });
+    index({ contextOnLink: $(this).val() == 1 });
   });
   $('#closelastblock.setting select').on('change', () => {
-    i({ closeLastBlock: $(this).val() == 1 });
+    index({ closeLastBlock: $(this).val() == 1 });
   });
   $('#selecttolink.setting select').on('change', () => {
-    i({ selectToLink: $(this).val() == 1 });
+    index({ selectToLink: $(this).val() == 1 });
   });
   $('#blacklist.setting .button').on('click', () => {
     const e = $('#blacklist.setting textarea').val().split(/[\n,]/);
     for (let t = 0; t < e.length; t += 1) {
       e[t] = e[t].trim();
     }
-    i({ blacklist: e });
-    v();
+    index({ blacklist: e });
+    initialize();
   });
   $('#blacklist.setting textarea').on('keydown click', () => {
     $('#blacklist.setting .button').css({ visibility: 'visible' });
   });
   $('#hold_button.setting select').on('change', () => {
-    i({ holdButton: $(this).val() });
+    index({ holdButton: $(this).val() });
   });
   $('#reset.setting .button').on('click', () => {
     if (confirm(c('setting_warning_reset'))) {
-      chrome.runtime.getBackgroundPage((e) => {
-        i({ gestures: JSON.parse(e.defaults.gestures) });
+      chrome.runtime.getBackgroundPage((backgroundPage) => {
+        index({ gestures: JSON.parse(backgroundPage.defaults.gestures) });
         h();
-        v();
+        initialize();
       });
     }
   });
-  const a = [
+  const a = new Set([
     'gestures',
     'customactions',
     'blacklist',
@@ -147,10 +139,10 @@ const n = () => {
     'trailColor',
     'trailWidth',
     'trailLegacy',
-  ];
+  ]);
   $('#exportbutton.button').on('click', () => {
     let e = { version: chrome.runtime.getManifest().version, sgplus: {} };
-    for (label in settings) a.indexOf(label) !== -1 && (e.sgplus[label] = settings[label]);
+    for (label in settings) a.has(label) && (e.sgplus[label] = settings[label]);
     e = btoa(JSON.stringify(e));
     const t = new Blob([e], { type: 'text/plain;charset=utf-8' });
     const n = URL.createObjectURL(t);
@@ -158,36 +150,20 @@ const n = () => {
     s.href = n;
     s.download = 'Smooth Gestures Plus Settings.txt';
     const o = document.createEvent('MouseEvents');
-    o.initMouseEvent(
-      'click',
-      true,
-      false,
-      window,
-      0,
-      0,
-      0,
-      0,
-      0,
-      false,
-      false,
-      false,
-      false,
-      0,
-      null,
-    );
+    o.initMouseEvent('click', true, false, globalThis, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     s.dispatchEvent(o);
     URL.revokeObjectURL(n);
   });
   $('#importbutton.button input[type=file]').on('change', () => {
     if (!(this.files.length <= 0)) {
       const s = new FileReader();
-      s.onload = (e) => {
+      s.addEventListener('load', (e) => {
         $('#importbutton.button input[type=file]').val('');
         const t = s.result;
         let n = null;
         try {
           n = JSON.parse(atob(t));
-        } catch (e) {
+        } catch {
           ((e) => {
             let t;
             let n;
@@ -195,8 +171,8 @@ const n = () => {
               e = e.substring(e.indexOf('{'), e.lastIndexOf('}') + 1);
               t = e;
               n = document.createElement('div');
-              n.innerHTML = t.replace(/</g, '[leftangle]');
-              e = n.childNodes[0].nodeValue.replace(/\[leftangle\]/g, '<');
+              n.innerHTML = t.replaceAll('<', '[leftangle]');
+              e = n.childNodes[0].nodeValue.replaceAll('[leftangle]', '<');
               const s = JSON.parse(e);
               if (s.title !== 'Smooth Gestures Settings') {
                 return false;
@@ -205,29 +181,29 @@ const n = () => {
                 settings.gestures = s.gestures;
               }
               for (const o in s.settings) {
-                if (a.indexOf(o) !== -1) {
+                if (a.has(o)) {
                   settings[o] = s.settings[o];
                 }
               }
-              i(settings);
+              index(settings);
               alert('Import Successful');
               return true;
-            } catch (e) {}
+            } catch {}
             return false;
           })(t) || alert('Import Failed');
         }
         if (n) {
           for (label in n.sgplus) {
-            if (a.indexOf(label) !== -1) {
+            if (a.has(label)) {
               settings[label] = n.sgplus[label];
             }
           }
-          i(settings);
+          index(settings);
           alert('Import Successful');
         }
         h();
-        v();
-      };
+        initialize();
+      });
       s.readAsText(this.files[0]);
     }
   });
@@ -235,9 +211,9 @@ const n = () => {
 
 const s = () => {
   $('#extras.setting select').val(settings.blockDoubleclickAlert ? 0 : 1);
-  const n = navigator.platform.indexOf('Mac') !== -1 ? '0.7' : '0.6';
-  chrome.runtime.getBackgroundPage((e) => {
-    const t = e.isNative();
+  const n = navigator.platform.includes('Mac') ? '0.7' : '0.6';
+  chrome.runtime.getBackgroundPage((backgroundPage) => {
+    const t = backgroundPage.isNative();
     console.log('native', t);
     $('#note_extras_installed').css({
       display: t && (!t.loaded || t.version >= n) ? 'block' : 'none',
@@ -251,7 +227,7 @@ const s = () => {
 
 const o = () => {
   $(() => {
-    const e = window.location.hash.replace(/^#(.+)$/, '$1') || settings.lastpage || 'config';
+    const e = globalThis.location.hash.replace(/^#(.+)$/, '$1') || settings.lastpage || 'config';
     $.fx.off = true;
     pages.init();
     $('.upgradebutton').remove();
@@ -267,7 +243,7 @@ const o = () => {
             chrome.runtime.getManifest().version,
           ]),
         );
-        i({ showNoteUpdated: false });
+        index({ showNoteUpdated: false });
       } else {
         $('#note_updated').css({ display: 'none' });
       }
@@ -275,8 +251,7 @@ const o = () => {
       $('#expirein').append(
         $('<span>')
           .css({
-            'background-color':
-              e < 0 ? 'rgba(255,0,0,.2)' : e < 120 ? 'rgba(255,255,0,.2)' : 'rgba(0,255,0,.2)',
+            'background-color': e < 0 ? 'rgba(255,0,0,.2)' : e < 120 ? 'rgba(255,255,0,.2)' : 'rgba(0,255,0,.2)',
             'font-weight': 'bold',
           })
           .text(
@@ -284,26 +259,22 @@ const o = () => {
               e < 0
                 ? 'has expired'
                 : `will expire in ${
-                    e >= 24
-                      ? `${Math.round(e / 24)} days`
-                      : e > 0
-                        ? `${e} hours`
-                        : 'less than an hour'
+                    e >= 24 ? `${Math.round(e / 24)} days` : e > 0 ? `${e} hours` : 'less than an hour'
                   }`
             }`,
           ),
       );
       $('.note_remindrate .close').click(() => {
         $('.note_remindrate').css({ display: 'none' });
-        i({ hideNoteRemindRate: true });
+        index({ hideNoteRemindRate: true });
       });
       settings.hideNotePrint && $('#note_print').css({ display: 'none' });
       $('#note_print .close').click(() => {
         $('#note_print').css({ display: 'none' });
-        i({ hideNotePrint: true });
+        index({ hideNotePrint: true });
       });
       $('#note_print .button').click(() => {
-        window.print();
+        globalThis.print();
       });
     })();
     (() => {
@@ -339,23 +310,23 @@ const o = () => {
     n();
     (() => {
       s();
-      const e = navigator.platform.indexOf('Win') !== -1;
-      const n = navigator.platform.indexOf('Mac') !== -1;
-      const t = navigator.platform.indexOf('CrOS') !== -1;
+      const e = navigator.platform.includes('Win');
+      const n = navigator.platform.includes('Mac');
+      const t = navigator.platform.includes('CrOS');
       navigator.platform.indexOf('Linux');
       if (e || t) {
         $('.navbutton[nav=extras]').css({ display: 'none' });
         $('.page[page=extras]').css({ display: 'none' });
       }
       $('#extras.setting select').on('change', () => {
-        i({ blockDoubleclickAlert: $(this).val() === 0 });
+        index({ blockDoubleclickAlert: $(this).val() === 0 });
       });
       $('#installplugin,#updateplugin').click(() => {
-        i({ blockDoubleclickAlert: false });
+        index({ blockDoubleclickAlert: false });
         chrome.permissions.request({ permissions: ['nativeMessaging'] }, (e) => {
           if (e) {
-            chrome.runtime.getBackgroundPage((e) => {
-              e.connectNative(1000);
+            chrome.runtime.getBackgroundPage((backgroundPage) => {
+              backgroundPage.connectNative(1000);
             });
             const t = document.createElement('a');
             if (n) {
@@ -401,7 +372,7 @@ const a = () => {
   };
   const t = `custom${Math.floor(Math.random() * 2 ** 30).toString(32)}`;
   settings.customactions[t] = e;
-  i({ customactions: settings.customactions });
+  index({ customactions: settings.customactions });
   m();
   setTimeout(u.bind(null, t), 500);
 };
@@ -409,12 +380,12 @@ const a = () => {
 const r = (t) => {
   if (confirm('Delete this custom action?')) {
     delete settings.customactions[t];
-    i({ customactions: settings.customactions });
+    index({ customactions: settings.customactions });
     for (const e in settings.gestures) {
       settings.gestures[e] === t && p(e);
     }
-    chrome.runtime.getBackgroundPage((e) => {
-      delete e.contexts[t];
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      delete backgroundPage.contexts[t];
     });
     m();
   }
@@ -437,7 +408,7 @@ const u = (e) => {
             t.code = $('.customcode').val();
             t.context = $('.customcontext').val();
             settings.customactions[e] = t;
-            i({ customactions: settings.customactions });
+            index({ customactions: settings.customactions });
             $('#customedit').remove();
             $('.page[page=custom] .action').css({ display: '' });
             m();
@@ -466,7 +437,7 @@ var d = {
       $('#nowwhat').css({ display: 'none' });
       $('#canvasdescrip').css({ display: 'table' });
       setTimeout(() => {
-        window.SG.callback = d.gesturecallback;
+        globalThis.SG.callback = d.gesturecallback;
       }, 0);
     });
     $('#doaddgesture').on('click', d.choose);
@@ -474,22 +445,20 @@ var d = {
       d.action = $('#chooseaction').val();
       d.choose();
     });
-    chrome.runtime.getBackgroundPage((e) => {
-      for (const t in e.categories)
-        if (e.categories[t].actions) {
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      for (const t in backgroundPage.categories)
+        if (backgroundPage.categories[t].actions) {
           $('#chooseaction').append($('<option>').text(c(t)).prop('disabled', true));
-          for (let n = 0; n < e.categories[t].actions.length; n += 1)
+          for (let n = 0; n < backgroundPage.categories[t].actions.length; n += 1)
             $('#chooseaction').append(
               $('<option>')
-                .text(`- ${c(`action_${e.categories[t].actions[n]}`)}`)
-                .val(e.categories[t].actions[n]),
+                .text(`- ${c(`action_${backgroundPage.categories[t].actions[n]}`)}`)
+                .val(backgroundPage.categories[t].actions[n]),
             );
-        } else if (e.categories[t].customActions) {
+        } else if (backgroundPage.categories[t].customActions) {
           $('#chooseaction').append($('<option>').text('Custom Actions').prop('disabled', true));
           for (const s in settings.customactions) {
-            $('#chooseaction').append(
-              $('<option>').text(`- ${settings.customactions[s].title}`).val(s),
-            );
+            $('#chooseaction').append($('<option>').text(`- ${settings.customactions[s].title}`).val(s));
           }
         }
     });
@@ -497,9 +466,9 @@ var d = {
   close() {
     d.action = null;
     d.gesture = null;
-    window.SG.callback = null;
+    globalThis.SG.callback = null;
     $('#drawingcanvas').css({ display: 'none' });
-    window.removeEventListener('mousewheel', d.blockevent, false);
+    globalThis.removeEventListener('mousewheel', d.blockevent, false);
     document.removeEventListener('keydown', d.blockevent, true);
   },
   choose() {
@@ -508,15 +477,15 @@ var d = {
         p(d.gesture);
       }
       settings.gestures[d.gesture] = d.action;
-      i({ gestures: settings.gestures });
+      index({ gestures: settings.gestures });
       d.close();
       h();
     }
   },
   gesturecallback(s) {
-    chrome.runtime.getBackgroundPage((e) => {
-      e.contexts[d.action] && (s = e.contexts[d.action] + s);
-      window.SG.callback = null;
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      backgroundPage.contexts[d.action] && (s = backgroundPage.contexts[d.action] + s);
+      globalThis.SG.callback = null;
       d.gesture = s;
       let t = null;
       if (settings.gestures[s]) {
@@ -557,10 +526,10 @@ var d = {
     e.preventDefault();
   },
   open(e) {
-    if (window.SG && !window.SG.callback) {
+    if (globalThis.SG && !globalThis.SG.callback) {
       d.action = e;
       d.gesture = null;
-      window.addEventListener('mousewheel', d.blockevent, false);
+      globalThis.addEventListener('mousewheel', d.blockevent, false);
       document.addEventListener('keydown', d.blockevent, true);
       $('#canvastitle').text(
         c(
@@ -577,15 +546,15 @@ var d = {
       $('#drawingcanvas').css({ display: 'block' });
       $('#canvasdescrip').css({ display: 'table' });
       $('#nowwhat').css({ display: 'none' });
-      window.SG.callback = d.gesturecallback;
+      globalThis.SG.callback = d.gesturecallback;
     }
   },
 };
 
 const p = (e) => {
-  $(`.gesture[gesture=${e.replace(/\:/g, '\\:').replace(/\+/g, '\\+')}]`).remove();
+  $(`.gesture[gesture=${e.replaceAll(':', String.raw`\:`).replaceAll('+', String.raw`\+`)}]`).remove();
   delete settings.gestures[e];
-  i({ gestures: settings.gestures });
+  index({ gestures: settings.gestures });
   h();
 };
 
@@ -593,41 +562,41 @@ const g = [
   {
     id: 'page_navigation',
     actions: [
-      'page-back',
-      'page-forward',
-      'page-back-close',
-      'reload-tab',
-      'reload-tab-full',
-      'reload-all-tabs',
+      'pageBack',
+      'pageForward',
+      'pageBackClose',
+      'reloadTab',
+      'reloadTabFull',
+      'reloadAllTabs',
       'stop',
-      'parent-dir',
-      'page-next',
-      'page-prev',
+      'parentDirectory',
+      'pageNext',
+      'pagePrevious',
     ],
   },
   {
     id: 'tab_management',
     actions: [
-      'new-tab',
-      'new-tab-link',
-      'new-tab-back',
-      'navigate-tab',
-      'close-tab',
-      'close-other-tabs',
-      'close-left-tabs',
-      'close-right-tabs',
-      'undo-close',
-      'clone-tab',
-      'new-window',
-      'new-window-link',
-      'close-window',
-      'prev-tab',
-      'next-tab',
-      'split-tabs',
-      'merge-tabs',
-      'tab-to-left',
-      'tab-to-right',
-      'toggle-pin',
+      'newTab',
+      'newTabLink',
+      'newTabBack',
+      'navigateTab',
+      'closeTab',
+      'closeOtherTabs',
+      'closeLeftTabs',
+      'closeRightTabs',
+      'undoClose',
+      'cloneTab',
+      'newWindow',
+      'newWindowLink',
+      'closeWindow',
+      'previousTab',
+      'nextTab',
+      'splitTabs',
+      'mergeTabs',
+      'tabToLeft',
+      'tabToRight',
+      'togglePin',
       'pin',
       'unpin',
     ],
@@ -635,29 +604,29 @@ const g = [
   {
     id: 'utilities',
     actions: [
-      'goto-top',
-      'goto-bottom',
-      'page-up',
-      'page-down',
+      'gotoTop',
+      'gotoBottom',
+      'pageUp',
+      'pageDown',
       'print',
-      'parent-dir',
-      'view-source',
-      'show-cookies',
-      'search-sel',
-      'zoom-in',
-      'zoom-out',
-      'zoom-zero',
-      'open-image',
-      'save-image',
-      'hide-image',
-      'zoom-img-in',
-      'zoom-img-out',
-      'zoom-img-zero',
-      'find-prev',
-      'find-next',
+      'parentDirectory',
+      'viewSource',
+      'showCookies',
+      'searchSel',
+      'zoomIn',
+      'zoomOut',
+      'zoomZero',
+      'openImage',
+      'saveImage',
+      'hideImage',
+      'zoomImgIn',
+      'zoomImgOut',
+      'zoomImgZero',
+      'findPrevious',
+      'findNext',
       'copy',
-      'copy-link',
-      'toggle-bookmark',
+      'copyLink',
+      'toggleBookmark',
       'bookmark',
       'unbookmark',
     ],
@@ -666,47 +635,40 @@ const g = [
     id: 'other',
     actions: [
       'options',
-      'fullscreen-window',
-      'minimize-window',
-      'maximize-window',
-      'open-screenshot',
-      'save-screenshot',
-      'open-screenshot-full',
-      'save-screenshot-full',
-      'open-history',
-      'open-downloads',
-      'open-extensions',
-      'open-bookmarks',
+      'fullscreenWindow',
+      'minimizeWindow',
+      'maximizeWindow',
+      'openScreenshot',
+      'saveScreenshot',
+      'openScreenshotFull',
+      'saveScreenshotFull',
+      'openHistory',
+      'openDownloads',
+      'openExtensions',
+      'openBookmarks',
     ],
   },
 ];
 
 const m = () => {
-  chrome.runtime.getBackgroundPage((e) => {
+  chrome.runtime.getBackgroundPage((backgroundPage) => {
     for (var t = 0; t < g.length; t += 1) {
       var n = $(`.page[page=${g[t].id}]`);
       $('.action', n).remove();
       for (let s = 0; s < g[t].actions.length; s += 1) {
         var o = g[t].actions[s];
-        var a = e.contexts[o];
+        var a = backgroundPage.contexts[o];
         $('.actiongroup.disabled', n).append(
           $('<div class=action>')
             .attr('action', o)
             .attr('sectionindex', s)
             .append('<div class=gestures>')
-            .append(
-              $("<div class='button gray addactiongesture' tabindex=0>+</div>").on(
-                'click',
-                d.open.bind(null, o),
-              ),
-            )
+            .append($("<div class='button gray addactiongesture' tabindex=0>+</div>").on('click', d.open.bind(null, o)))
             .append(
               a
                 ? $('<img class=context>').attr(
                     'src',
-                    `/img/icon-${
-                      a === 'l' ? 'link' : a === 'i' ? 'image' : a === 's' ? 'selection' : ''
-                    }.png`,
+                    `/img/icon-${a === 'l' ? 'link' : a === 'i' ? 'image' : a === 's' ? 'selection' : ''}.png`,
                   )
                 : null,
             )
@@ -720,43 +682,26 @@ const m = () => {
     $('.action', n).remove();
     t = 0;
     for (var o in settings.customactions) {
-      const i = settings.customactions[o];
-      a = e.contexts[o];
+      const index = settings.customactions[o];
+      a = backgroundPage.contexts[o];
       $('.actiongroup.disabled', n).append(
         $('<div class=action>')
           .attr('action', o)
           .attr('sectionindex', t)
-          .append(
-            $("<div class='button gray delcustomaction' tabindex=0>&times;</div>").on(
-              'click',
-              r.bind(null, o),
-            ),
-          )
-          .append(
-            $("<div class='button gray editcustomaction' tabindex=0>edit</div>").on(
-              'click',
-              u.bind(null, o),
-            ),
-          )
+          .append($("<div class='button gray delcustomaction' tabindex=0>&times;</div>").on('click', r.bind(null, o)))
+          .append($("<div class='button gray editcustomaction' tabindex=0>edit</div>").on('click', u.bind(null, o)))
           .append('<div class=gestures>')
-          .append(
-            $("<div class='button gray addactiongesture' tabindex=0>+</div>").on(
-              'click',
-              d.open.bind(null, o),
-            ),
-          )
+          .append($("<div class='button gray addactiongesture' tabindex=0>+</div>").on('click', d.open.bind(null, o)))
           .append(
             a
               ? $('<img class=context alt="">').attr(
                   'src',
-                  `/img/icon-${
-                    a === 'l' ? 'link' : a === 'i' ? 'image' : a === 's' ? 'selection' : ''
-                  }.png`,
+                  `/img/icon-${a === 'l' ? 'link' : a === 'i' ? 'image' : a === 's' ? 'selection' : ''}.png`,
                 )
               : null,
           )
-          .append($('<div class=headtitle>').text(i.title))
-          .append($('<p class=sub>').text(i.descrip))
+          .append($('<div class=headtitle>').text(index.title))
+          .append($('<p class=sub>').text(index.descrip))
           .append('<div class=clear>'),
       );
       t += 1;
@@ -777,18 +722,13 @@ const e = (e) => {
   $('.gestures', n).append(
     $('<div class=gesture>')
       .attr('gesture', e)
-      .append(
-        $("<div class='button gray removegesture' tabindex=0>&times;</div>").on(
-          'click',
-          p.bind(null, e),
-        ),
-      )
+      .append($("<div class='button gray removegesture' tabindex=0>&times;</div>").on('click', p.bind(null, e)))
       .append(drawGesture(e, 100, 100)),
   );
   if (n.parent().hasClass('disabled')) {
     const t = $('.actiongroup.enabled', n.parent().parent());
     const s = $('.action', t);
-    if (s.length == 0) t.append(n);
+    if (s.length === 0) t.append(n);
     else {
       let o = null;
       s.each((e, t) => {
@@ -805,17 +745,17 @@ const e = (e) => {
   }
 };
 
-const v = () => {
+const initialize = () => {
   $('#newtab_url.setting select').val(settings.newTabUrl);
-  if ($('#newtab_url.setting select').val() !== settings.newTabUrl) {
+  if ($('#newtab_url.setting select').val() === settings.newTabUrl) {
+    $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({
+      display: 'none',
+    });
+  } else {
     $('#newtab_url.setting select').val('custom');
     $('#newtab_url.setting input[type=text]').val(settings.newTabUrl);
     $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({
       display: '',
-    });
-  } else {
-    $('#newtab_url.setting input[type=text], #newtab_url.setting .button').css({
-      display: 'none',
     });
   }
   $('#newtab_right.setting select').val(settings.newTabRight ? 1 : 0);
