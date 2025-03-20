@@ -1,826 +1,831 @@
 import { Runtime, Tabs, Windows } from 'wxt/browser';
 
 import { settingsStore } from '@/stores/settings-store';
-import { ContentMessage } from '@/types';
-import { sendMessage } from '@/messaging.ts';
+import { sendMessage } from '@/entrypoints/content/messaging';
+import { delay } from 'es-toolkit';
+import { GestureMessage } from '@/entrypoints/background/messaging';
+import { ImageMessage, LinkMessage } from '@/types.ts';
 
 const ZOOM_FACTORS = [
   0.25, 0.33, 0.5, 0.67, 0.75, 0.8, 0.9, 1, 1.1, 1.25, 1.5, 1.75, 2, 2.5, 3, 4, 5,
 ];
 
-const createActions = (message: ContentMessage, sender: Runtime.MessageSender) => {
-  const newTab = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId) {
-      return;
-    }
+export const newTab = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id || !tab.windowId) {
+    return;
+  }
+  const createProperties: Tabs.CreateCreatePropertiesType = {
+    openerTabId: tab.id,
+    windowId: tab.windowId,
+  };
+  if (settingsStore.getState().newTabUrl !== 'homepage') {
+    createProperties.url = settingsStore.getState().newTabUrl;
+  }
+  if (settingsStore.getState().newTabRight) {
+    createProperties.index = tab.index + 1;
+  }
+  await browser.tabs.create(createProperties);
+};
+
+export const newTabLink = async (tab: Tabs.Tab, links: LinkMessage[]): Promise<void> => {
+  if (!tab.id || !tab.windowId || !links.length) {
+    return;
+  }
+  const promises: Promise<Tabs.Tab>[] = [];
+  for (let i = 0; i < links.length; i += 1) {
     const createProperties: Tabs.CreateCreatePropertiesType = {
-      openerTabId: sender.tab.id,
-      windowId: sender.tab.windowId,
+      openerTabId: tab.id,
+      windowId: tab.windowId,
+      url: links[i].src,
     };
-    if (settingsStore.getState().newTabUrl !== 'homepage') {
-      createProperties.url = settingsStore.getState().newTabUrl;
+    if (settingsStore.getState().newTabLinkRight) {
+      createProperties.index = tab.index + 1 + i;
     }
-    if (settingsStore.getState().newTabRight) {
-      createProperties.index = sender.tab.index + 1;
-    }
-    await browser.tabs.create(createProperties);
-  };
+    promises.push(browser.tabs.create(createProperties));
+  }
+  await Promise.all(promises);
+};
 
-  const newTabLink = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId || !message.links?.length) {
-      return;
+export const newTabBack = async (tab: Tabs.Tab, links: LinkMessage[]): Promise<void> => {
+  if (!tab.id || !tab.windowId || !links.length) {
+    return;
+  }
+  const promises: Promise<Tabs.Tab>[] = [];
+  for (let i = 0; i < links.length; i += 1) {
+    const createProperties: Tabs.CreateCreatePropertiesType = {
+      openerTabId: tab.id,
+      windowId: tab.windowId,
+      url: links[i].src,
+      active: false,
+    };
+    if (settingsStore.getState().newTabLinkRight) {
+      createProperties.index = tab.index + 1 + i;
     }
-    const promises: Promise<Tabs.Tab>[] = [];
-    for (let i = 0; i < message.links.length; i += 1) {
-      const createProperties: Tabs.CreateCreatePropertiesType = {
-        openerTabId: sender.tab.id,
-        windowId: sender.tab.windowId,
-        url: message.links[i].src,
-      };
-      if (settingsStore.getState().newTabLinkRight) {
-        createProperties.index = sender.tab.index + 1 + i;
-      }
-      promises.push(browser.tabs.create(createProperties));
-    }
-    await Promise.all(promises);
-  };
+    promises.push(browser.tabs.create(createProperties));
+  }
+  await Promise.all(promises);
+};
 
-  const newTabBack = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId || !message.links?.length) {
-      return;
-    }
-    const promises: Promise<Tabs.Tab>[] = [];
-    for (let i = 0; i < message.links.length; i += 1) {
-      const createProperties: Tabs.CreateCreatePropertiesType = {
-        openerTabId: sender.tab.id,
-        windowId: sender.tab.windowId,
-        url: message.links[i].src,
-        active: false,
-      };
-      if (settingsStore.getState().newTabLinkRight) {
-        createProperties.index = sender.tab.index + 1 + i;
-      }
-      promises.push(browser.tabs.create(createProperties));
-    }
-    await Promise.all(promises);
-  };
+export const navigateTab = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.update(tab.id, {
+    url:
+      settingsStore.getState().newTabUrl !== 'homepage'
+        ? settingsStore.getState().newTabUrl
+        : undefined,
+  });
+};
 
-  const navigateTab = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.update(sender.tab.id, {
-      url:
-        settingsStore.getState().newTabUrl !== 'homepage'
-          ? settingsStore.getState().newTabUrl
-          : undefined,
-    });
-  };
-
-  const closeTab = async (): Promise<void> => {
-    if (!sender.tab?.id || sender.tab.pinned) {
-      return;
-    }
-    if (settingsStore.getState().closeLastBlock) {
-      const wins = await browser.windows.getAll({ populate: true });
-      if (wins.length === 1 && wins[0].tabs && wins[0].tabs.length === 1) {
-        await browser.tabs.update(sender.tab.id, {
-          url:
-            settingsStore.getState().newTabUrl !== 'homepage'
-              ? settingsStore.getState().newTabUrl
-              : undefined,
-        });
-        return;
-      }
-    }
-    await browser.tabs.remove(sender.tab.id);
-  };
-
-  const closeOtherTabs = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    const promises: Promise<void>[] = [];
-    for (let i = 0; i < tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id && tab.id !== sender.tab.id && !tab.pinned) {
-        promises.push(browser.tabs.remove(tab.id));
-      }
-    }
-    await Promise.all(promises);
-  };
-
-  const closeLeftTabs = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    const promises: Promise<void>[] = [];
-    for (let i = 0; i < tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id && tab.index < sender.tab.index && !tab.pinned) {
-        promises.push(browser.tabs.remove(tab.id));
-      }
-    }
-    await Promise.all(promises);
-  };
-
-  const closeRightTabs = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    const promises: Promise<void>[] = [];
-    for (let i = 0; i < tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id && tab.index > sender.tab.index && !tab.pinned) {
-        promises.push(browser.tabs.remove(tab.id));
-      }
-    }
-    await Promise.all(promises);
-  };
-
-  const undoClose = async (): Promise<void> => {
-    const sessions = await browser.sessions.getRecentlyClosed();
-    let sessionId: string | undefined;
-    for (let i = 0; i < sessions.length; i += 1) {
-      const session = sessions[i];
-      if (session.tab?.sessionId) {
-        sessionId = session.tab.sessionId;
-        break;
-      }
-    }
-    if (!sessionId) {
-      return;
-    }
-    await browser.sessions.restore(sessionId);
-  };
-
-  const reloadTab = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.reload(sender.tab.id, { bypassCache: false });
-  };
-
-  const reloadTabFull = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.reload(sender.tab.id, { bypassCache: true });
-  };
-
-  const reloadAllTabs = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    const promises: Promise<void>[] = [];
-    for (let i = 0; i < tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id) {
-        promises.push(browser.tabs.reload(tab.id));
-      }
-    }
-    await Promise.all(promises);
-  };
-
-  const stop = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-stop', undefined, sender.tab.id);
-  };
-
-  const viewSource = async (): Promise<void> => {
-    if (!sender.tab?.windowId || !sender.url) {
-      return;
-    }
-    await browser.tabs.create({
-      url: `view-source:${sender.url}`,
-      windowId: sender.tab.windowId,
-      index: sender.tab.index + 1,
-    });
-  };
-
-  const prevTab = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    let tabId: number | undefined;
-    for (let i = tabs.length - 1; i >= 0; i -= 1) {
-      const tab = tabs[i];
-      if (tab.id && tab.index < sender.tab.index) {
-        tabId = tab.id;
-        break;
-      }
-    }
-    if (!tabId) {
-      return;
-    }
-    await browser.tabs.update(tabId, { active: true });
-  };
-
-  const nextTab = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    let tabId: number | undefined;
-    for (let i = 1; i <= tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id && sender.tab.index < tab.index) {
-        tabId = tab.id;
-        break;
-      }
-    }
-    if (!tabId) {
-      return;
-    }
-    await browser.tabs.update(tabId, { active: true });
-  };
-
-  const pageBack = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    try {
-      await browser.tabs.goBack(sender.tab.id);
-    } catch (error) {
-      /* empty */
-    }
-  };
-
-  const pageForward = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    try {
-      await browser.tabs.goForward(sender.tab.id);
-    } catch (error) {
-      /* empty */
-    }
-  };
-
-  const newWindow = async (): Promise<void> => {
-    await browser.windows.create({
-      url:
-        settingsStore.getState().newTabUrl !== 'homepage'
-          ? settingsStore.getState().newTabUrl
-          : undefined,
-    });
-  };
-
-  const newWindowLink = async (): Promise<void> => {
-    if (!message.links?.length) {
-      return;
-    }
-    const promises: Promise<Windows.Window>[] = [];
-    for (let i = 0; i < message.links.length; i += 1) {
-      promises.push(browser.windows.create({ url: message.links[i].src }));
-    }
-    await Promise.all(promises);
-  };
-
-  const closeWindow = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.windows.remove(sender.tab.windowId);
-  };
-
-  const splitTabs = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId) {
-      return;
-    }
-    const tabs = await browser.tabs.query({ windowId: sender.tab.windowId });
-    if (!tabs.length) {
-      return;
-    }
-    const win = await browser.windows.create({
-      tabId: sender.tab.id,
-      focused: true,
-      incognito: sender.tab.incognito,
-    });
-    if (!win.id) {
-      return;
-    }
-    const promises: Promise<Tabs.Tab | Tabs.Tab[]>[] = [];
-    for (let i = sender.tab.index + 1; i < tabs.length; i += 1) {
-      const tab = tabs[i];
-      if (tab.id) {
-        promises.push(
-          browser.tabs.move(tab.id, {
-            windowId: win.id,
-            index: i - sender.tab.index,
-          }),
-        );
-      }
-    }
-    await Promise.all(promises);
-  };
-
-  const options = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.tabs.create({
-      url: browser.runtime.getURL('/options.html'),
-      windowId: sender.tab.windowId,
-    });
-  };
-
-  const pageBackClose = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    const tabId = sender.tab.id;
-    try {
-      await browser.tabs.goBack(tabId);
-    } catch (error) {
-      /* empty */
-    }
-    setTimeout(async () => {
-      const tab = await browser.tabs.get(tabId);
-      if (tab.id && tab.url === sender.url) {
-        await browser.tabs.remove(tab.id);
-      }
-    }, 400);
-  };
-
-  const gotoTop = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-goto-top', undefined, sender.tab.id);
-  };
-
-  const gotoBottom = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-goto-bottom', undefined, sender.tab.id);
-  };
-
-  const pageUp = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-page-up', undefined, sender.tab.id);
-  };
-
-  const pageDown = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-page-down', undefined, sender.tab.id);
-  };
-
-  const pageNext = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-page-next', undefined, sender.tab.id);
-  };
-
-  const pagePrev = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-page-prev', undefined, sender.tab.id);
-  };
-
-  const fullscreenWindow = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const win = await browser.windows.get(sender.tab.windowId);
-    if (!win.id) {
-      return;
-    }
-    await browser.windows.update(win.id, {
-      state: win.state !== 'fullscreen' ? 'fullscreen' : 'normal',
-    });
-  };
-
-  const minimizeWindow = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const win = await browser.windows.get(sender.tab.windowId);
-    if (!win.id) {
-      return;
-    }
-    await browser.windows.update(win.id, {
-      state: win.state !== 'minimized' ? 'minimized' : 'normal',
-    });
-  };
-
-  const maximizeWindow = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    const win = await browser.windows.get(sender.tab.windowId);
-    if (!win.id) {
-      return;
-    }
-    await browser.windows.update(win.id, {
-      state: win.state !== 'maximized' ? 'maximized' : 'normal',
-    });
-  };
-
-  const openScreenshot = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId) {
-      return;
-    }
-    const { windowId } = sender.tab;
-    await browser.tabs.update(sender.tab.id, { active: true });
-    setTimeout(async () => {
-      const dataUrl = await browser.tabs.captureVisibleTab(windowId, {
-        format: 'png',
+export const closeTab = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id || tab.pinned) {
+    return;
+  }
+  if (settingsStore.getState().closeLastBlock) {
+    const wins = await browser.windows.getAll({ populate: true });
+    if (wins.length === 1 && wins[0].tabs && wins[0].tabs.length === 1) {
+      await browser.tabs.update(tab.id, {
+        url:
+          settingsStore.getState().newTabUrl !== 'homepage'
+            ? settingsStore.getState().newTabUrl
+            : undefined,
       });
-      await browser.tabs.create({ url: dataUrl });
-    }, 100);
-  };
+      return;
+    }
+  }
+  await browser.tabs.remove(tab.id);
+};
 
-  const saveScreenshot = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
+export const closeOtherTabs = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  const promises: Promise<void>[] = [];
+  for (let i = 0; i < tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id && tab.id !== senderTab.id && !tab.pinned) {
+      promises.push(browser.tabs.remove(tab.id));
     }
-    const { windowId } = sender.tab;
-    await browser.tabs.update(sender.tab.id, { active: true });
-    setTimeout(async () => {
-      const dataUrl = await browser.tabs.captureVisibleTab(windowId, {
-        format: 'png',
-      });
-      await browser.downloads.download({
-        filename: `screenshot${sender.url ? `-${new URL(sender.url).hostname}` : ''}.png`,
-        url: dataUrl,
-      });
-    }, 100);
-  };
+  }
+  await Promise.all(promises);
+};
 
-  const cloneTab = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
+export const closeLeftTabs = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  const promises: Promise<void>[] = [];
+  for (let i = 0; i < tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id && tab.index < senderTab.index && !tab.pinned) {
+      promises.push(browser.tabs.remove(tab.id));
     }
-    await browser.tabs.duplicate(sender.tab.id);
-  };
+  }
+  await Promise.all(promises);
+};
 
-  const zoomIn = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
+export const closeRightTabs = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  const promises: Promise<void>[] = [];
+  for (let i = 0; i < tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id && tab.index > senderTab.index && !tab.pinned) {
+      promises.push(browser.tabs.remove(tab.id));
     }
-    const currZoomFactor = (await browser.tabs.getZoom(sender.tab.id)) + Number.EPSILON;
-    const nextZoomFactor = ZOOM_FACTORS.slice().find((zoomFactor) => currZoomFactor < zoomFactor);
-    if (!nextZoomFactor) {
-      return;
-    }
-    await browser.tabs.setZoom(sender.tab.id, nextZoomFactor);
-  };
+  }
+  await Promise.all(promises);
+};
 
-  const zoomOut = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
+export const undoClose = async (): Promise<void> => {
+  const sessions = await browser.sessions.getRecentlyClosed();
+  let sessionId: string | undefined;
+  for (let i = 0; i < sessions.length; i += 1) {
+    const session = sessions[i];
+    if (session.tab?.sessionId) {
+      sessionId = session.tab.sessionId;
+      break;
     }
-    const currZoomFactor = (await browser.tabs.getZoom(sender.tab.id)) - Number.EPSILON;
-    const nextZoomFactor = ZOOM_FACTORS.slice()
-      .reverse()
-      .find((zoomFactor) => zoomFactor < currZoomFactor);
-    if (!nextZoomFactor) {
-      return;
-    }
-    await browser.tabs.setZoom(sender.tab.id, nextZoomFactor);
-  };
+  }
+  if (!sessionId) {
+    return;
+  }
+  await browser.sessions.restore(sessionId);
+};
 
-  const zoomZero = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.setZoom(sender.tab.id, 0);
-  };
+export const reloadTab = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.reload(tab.id, { bypassCache: false });
+};
 
-  const zoomImgIn = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.images?.length) {
-      return;
-    }
-    await sendMessage('action-zoom-img-in', message.images, sender.tab.id);
-  };
+export const reloadTabFull = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.reload(tab.id, { bypassCache: true });
+};
 
-  const zoomImgOut = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.images?.length) {
-      return;
+export const reloadAllTabs = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  const promises: Promise<void>[] = [];
+  for (let i = 0; i < tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id) {
+      promises.push(browser.tabs.reload(tab.id));
     }
-    await sendMessage('action-zoom-img-out', message.images, sender.tab.id);
-  };
+  }
+  await Promise.all(promises);
+};
 
-  const zoomImgZero = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.images?.length) {
-      return;
-    }
-    await sendMessage('action-zoom-img-zero', message.images, sender.tab.id);
-  };
+export const stop = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionStop', undefined, tab.id);
+};
 
-  const tabToLeft = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.move(sender.tab.id, { index: Math.max(sender.tab.index - 1, 0) });
-  };
+export const viewSource = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId || !tab.url) {
+    return;
+  }
+  await browser.tabs.create({
+    url: `view-source:${tab.url}`,
+    windowId: tab.windowId,
+    index: tab.index + 1,
+  });
+};
 
-  const tabToRight = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
+export const prevTab = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.id || !senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  let tabId: number | undefined;
+  for (let i = tabs.length - 1; i >= 0; i -= 1) {
+    const tab = tabs[i];
+    if (tab.id && tab.index < senderTab.index) {
+      tabId = tab.id;
+      break;
     }
-    await browser.tabs.move(sender.tab.id, { index: sender.tab.index + 1 });
-  };
+  }
+  if (!tabId) {
+    return;
+  }
+  await browser.tabs.update(tabId, { active: true });
+};
 
-  const parentDir = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.url) {
-      return;
+export const nextTab = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.id || !senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  let tabId: number | undefined;
+  for (let i = 1; i <= tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id && senderTab.index < tab.index) {
+      tabId = tab.id;
+      break;
     }
-    const parts = sender.url.split('#')[0].split('?')[0].split('/');
-    if (parts[parts.length - 1] === '') {
-      parts.pop();
-    }
-    const url = parts.length > 3 ? `${parts.slice(0, -1).join('/')}/` : `${parts.join('/')}/`;
-    await browser.tabs.update(sender.tab.id, { url });
-  };
+  }
+  if (!tabId) {
+    return;
+  }
+  await browser.tabs.update(tabId, { active: true });
+};
 
-  const openHistory = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.tabs.create({
-      url: 'chrome://history/',
-      windowId: sender.tab.windowId,
-    });
-  };
+export const pageBack = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  try {
+    await browser.tabs.goBack(tab.id);
+  } catch (error) {
+    /* empty */
+  }
+};
 
-  const openDownloads = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.tabs.create({
-      url: 'chrome://downloads/',
-      windowId: sender.tab.windowId,
-    });
-  };
+export const pageForward = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  try {
+    await browser.tabs.goForward(tab.id);
+  } catch (error) {
+    /* empty */
+  }
+};
 
-  const openExtensions = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.tabs.create({
-      url: 'chrome://extensions/',
-      windowId: sender.tab.windowId,
-    });
-  };
+export const newWindow = async (): Promise<void> => {
+  await browser.windows.create({
+    url:
+      settingsStore.getState().newTabUrl !== 'homepage'
+        ? settingsStore.getState().newTabUrl
+        : undefined,
+  });
+};
 
-  const openBookmarks = async (): Promise<void> => {
-    if (!sender.tab?.windowId) {
-      return;
-    }
-    await browser.tabs.create({
-      url: 'chrome://bookmarks/',
-      windowId: sender.tab.windowId,
-    });
-  };
+export const newWindowLink = async (links: LinkMessage[]): Promise<void> => {
+  if (!links.length) {
+    return;
+  }
+  const promises: Promise<Windows.Window>[] = [];
+  for (let i = 0; i < links.length; i += 1) {
+    promises.push(browser.windows.create({ url: links[i].src }));
+  }
+  await Promise.all(promises);
+};
 
-  const openImage = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId || !message.images?.length) {
-      return;
-    }
-    const promises: Promise<Tabs.Tab>[] = [];
-    for (let i = 0; i < message.images.length; i += 1) {
+export const closeWindow = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.windows.remove(tab.windowId);
+};
+
+export const splitTabs = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.id || !senderTab.windowId) {
+    return;
+  }
+  const tabs = await browser.tabs.query({ windowId: senderTab.windowId });
+  if (!tabs.length) {
+    return;
+  }
+  const win = await browser.windows.create({
+    tabId: senderTab.id,
+    focused: true,
+    incognito: senderTab.incognito,
+  });
+  if (!win.id) {
+    return;
+  }
+  const promises: Promise<Tabs.Tab | Tabs.Tab[]>[] = [];
+  for (let i = senderTab.index + 1; i < tabs.length; i += 1) {
+    const tab = tabs[i];
+    if (tab.id) {
       promises.push(
-        browser.tabs.create({
-          url: message.images[i].src,
-          openerTabId: sender.tab.id,
-          windowId: sender.tab.windowId,
+        browser.tabs.move(tab.id, {
+          windowId: win.id,
+          index: i - senderTab.index,
         }),
       );
     }
-    await Promise.all(promises);
-  };
+  }
+  await Promise.all(promises);
+};
 
-  const saveImage = async (): Promise<void> => {
-    if (!message.images?.length) {
-      return;
-    }
-    const promises: Promise<number>[] = [];
-    for (let i = 0; i < message.images.length; i += 1) {
-      promises.push(browser.downloads.download({ url: message.images[i].src }));
-    }
-    await Promise.all(promises);
-  };
+export const options = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.tabs.create({
+    url: browser.runtime.getURL('/options.html'),
+    windowId: tab.windowId,
+  });
+};
 
-  const hideImage = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.images?.length) {
-      return;
-    }
-    await sendMessage('action-hide-image', message.images, sender.tab.id);
-  };
+export const pageBackClose = async (senderTab: Tabs.Tab): Promise<void> => {
+  if (!senderTab.id || !senderTab.url) {
+    return;
+  }
+  const tabId = senderTab.id;
+  try {
+    await browser.tabs.goBack(tabId);
+  } catch (error) {
+    /* empty */
+  }
+  await delay(400);
+  const tab = await browser.tabs.get(tabId);
+  if (tab.id && tab.url === senderTab.url) {
+    await browser.tabs.remove(tab.id);
+  }
+};
 
-  const showCookies = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-show-cookies', undefined, sender.tab.id);
-  };
+export const gotoTop = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionGotoTop', undefined, tab.id);
+};
 
-  const searchSel = async (): Promise<void> => {
-    if (!sender.tab?.id || !sender.tab.windowId || !message.selection) {
-      return;
-    }
-    await browser.tabs.create({
-      url: `https://www.google.com/search?q=${message.selection}`,
-      openerTabId: sender.tab.id,
-      windowId: sender.tab.windowId,
-      index: sender.tab.index + 1,
-    });
-  };
+export const gotoBottom = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionGotoBottom', undefined, tab.id);
+};
 
-  const print = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await sendMessage('action-print', undefined, sender.tab.id);
-  };
+export const pageUp = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionPageUp', undefined, tab.id);
+};
 
-  const togglePin = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.update(sender.tab.id, { pinned: !sender.tab.pinned });
-  };
+export const pageDown = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionPageDown', undefined, tab.id);
+};
 
-  const pin = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.update(sender.tab.id, { pinned: true });
-  };
+export const pageNext = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionPageNext', undefined, tab.id);
+};
 
-  const unpin = async (): Promise<void> => {
-    if (!sender.tab?.id) {
-      return;
-    }
-    await browser.tabs.update(sender.tab.id, { pinned: false });
-  };
+export const pagePrev = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionPagePrev', undefined, tab.id);
+};
 
-  const copy = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.selection) {
-      return;
-    }
-    await sendMessage('action-copy', message.selection, sender.tab.id);
-  };
+export const fullscreenWindow = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  const win = await browser.windows.get(tab.windowId);
+  if (!win.id) {
+    return;
+  }
+  await browser.windows.update(win.id, {
+    state: win.state !== 'fullscreen' ? 'fullscreen' : 'normal',
+  });
+};
 
-  const copyLink = async (): Promise<void> => {
-    if (!sender.tab?.id || !message.links?.length) {
-      return;
-    }
-    await sendMessage('action-copy-link', message.links, sender.tab.id);
-  };
+export const minimizeWindow = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  const win = await browser.windows.get(tab.windowId);
+  if (!win.id) {
+    return;
+  }
+  await browser.windows.update(win.id, {
+    state: win.state !== 'minimized' ? 'minimized' : 'normal',
+  });
+};
 
-  const findPrev = async () => {
-    if (!sender.tab || !sender.tab.id || !message.selection) {
-      return;
-    }
-    await sendMessage('action-find-prev', message.selection, sender.tab.id);
-  };
+export const maximizeWindow = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  const win = await browser.windows.get(tab.windowId);
+  if (!win.id) {
+    return;
+  }
+  await browser.windows.update(win.id, {
+    state: win.state !== 'maximized' ? 'maximized' : 'normal',
+  });
+};
 
-  const findNext = async () => {
-    if (!sender.tab || !sender.tab.id || !message.selection) {
-      return;
-    }
-    await sendMessage('action-find-next', message.selection, sender.tab.id);
-  };
+export const openScreenshot = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id || !tab.windowId) {
+    return;
+  }
+  await browser.tabs.update(tab.id, { active: true });
+  await delay(100);
+  const dataUrl = await browser.tabs.captureVisibleTab(tab.windowId, {
+    format: 'png',
+  });
+  await browser.tabs.create({ url: dataUrl });
+};
 
-  const toggleBookmark = async (): Promise<void> => {
-    if (!sender.tab || !sender.url) {
-      return;
-    }
-    const results = await browser.bookmarks.search(sender.url);
-    if (!results.length) {
-      await browser.bookmarks.create({
-        parentId: '2',
-        title: sender.tab.title,
-        url: sender.url,
-      });
-    } else {
-      await browser.bookmarks.remove(results[0].id);
-    }
-  };
+export const saveScreenshot = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.update(tab.id, { active: true });
+  await delay(100);
+  const dataUrl = await browser.tabs.captureVisibleTab(tab.windowId, {
+    format: 'png',
+  });
+  await browser.downloads.download({
+    filename: `screenshot${tab.url ? `-${new URL(tab.url).hostname}` : ''}.png`,
+    url: dataUrl,
+  });
+};
 
-  const bookmark = async (): Promise<void> => {
-    if (!sender.tab || !sender.url) {
-      return;
-    }
+export const cloneTab = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.duplicate(tab.id);
+};
+
+export const zoomIn = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  const currZoomFactor = (await browser.tabs.getZoom(tab.id)) + Number.EPSILON;
+  const nextZoomFactor = ZOOM_FACTORS.slice().find((zoomFactor) => currZoomFactor < zoomFactor);
+  if (!nextZoomFactor) {
+    return;
+  }
+  await browser.tabs.setZoom(tab.id, nextZoomFactor);
+};
+
+export const zoomOut = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  const currZoomFactor = (await browser.tabs.getZoom(tab.id)) - Number.EPSILON;
+  const nextZoomFactor = ZOOM_FACTORS.slice()
+    .reverse()
+    .find((zoomFactor) => zoomFactor < currZoomFactor);
+  if (!nextZoomFactor) {
+    return;
+  }
+  await browser.tabs.setZoom(tab.id, nextZoomFactor);
+};
+
+export const zoomZero = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.setZoom(tab.id, 0);
+};
+
+export const zoomImgIn = async (tab: Tabs.Tab, images: ImageMessage[]): Promise<void> => {
+  if (!tab.id || !images.length) {
+    return;
+  }
+  await sendMessage('actionZoomImgIn', images, tab.id);
+};
+
+export const zoomImgOut = async (tab: Tabs.Tab, images: ImageMessage[]): Promise<void> => {
+  if (!tab.id || !images.length) {
+    return;
+  }
+  await sendMessage('actionZoomImgOut', images, tab.id);
+};
+
+export const zoomImgZero = async (tab: Tabs.Tab, images: ImageMessage[]): Promise<void> => {
+  if (!tab.id || !images.length) {
+    return;
+  }
+  await sendMessage('actionZoomImgZero', images, tab.id);
+};
+
+export const tabToLeft = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.move(tab.id, { index: Math.max(tab.index - 1, 0) });
+};
+
+export const tabToRight = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.move(tab.id, { index: tab.index + 1 });
+};
+
+export const parentDir = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id || !tab.url) {
+    return;
+  }
+  const parts = tab.url.split('#')[0].split('?')[0].split('/');
+  if (parts[parts.length - 1] === '') {
+    parts.pop();
+  }
+  const url = parts.length > 3 ? `${parts.slice(0, -1).join('/')}/` : `${parts.join('/')}/`;
+  await browser.tabs.update(tab.id, { url });
+};
+
+export const openHistory = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.tabs.create({
+    url: 'chrome://history/',
+    windowId: tab.windowId,
+  });
+};
+
+export const openDownloads = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.tabs.create({
+    url: 'chrome://downloads/',
+    windowId: tab.windowId,
+  });
+};
+
+export const openExtensions = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.tabs.create({
+    url: 'chrome://extensions/',
+    windowId: tab.windowId,
+  });
+};
+
+export const openBookmarks = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.windowId) {
+    return;
+  }
+  await browser.tabs.create({
+    url: 'chrome://bookmarks/',
+    windowId: tab.windowId,
+  });
+};
+
+export const openImage = async (tab: Tabs.Tab, images: ImageMessage[]): Promise<void> => {
+  if (!tab.id || !tab.windowId || !images.length) {
+    return;
+  }
+  const promises: Promise<Tabs.Tab>[] = [];
+  for (let i = 0; i < images.length; i += 1) {
+    promises.push(
+      browser.tabs.create({
+        url: images[i].src,
+        openerTabId: tab.id,
+        windowId: tab.windowId,
+      }),
+    );
+  }
+  await Promise.all(promises);
+};
+
+export const saveImage = async (images: ImageMessage[]): Promise<void> => {
+  if (!images.length) {
+    return;
+  }
+  const promises: Promise<number>[] = [];
+  for (let i = 0; i < images.length; i += 1) {
+    promises.push(browser.downloads.download({ url: images[i].src }));
+  }
+  await Promise.all(promises);
+};
+
+export const hideImage = async (tab: Tabs.Tab, images: ImageMessage[]): Promise<void> => {
+  if (!tab.id || !images.length) {
+    return;
+  }
+  await sendMessage('actionHideImage', images, tab.id);
+};
+
+export const showCookies = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionShowCookies', undefined, tab.id);
+};
+
+export const searchSel = async (tab: Tabs.Tab, selection?: string): Promise<void> => {
+  if (!tab.id || !tab.windowId || !selection) {
+    return;
+  }
+  await browser.tabs.create({
+    url: `https://www.google.com/search?q=${selection}`,
+    openerTabId: tab.id,
+    windowId: tab.windowId,
+    index: tab.index + 1,
+  });
+};
+
+export const print = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await sendMessage('actionPrint', undefined, tab.id);
+};
+
+export const togglePin = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.update(tab.id, { pinned: !tab.pinned });
+};
+
+export const pin = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.update(tab.id, { pinned: true });
+};
+
+export const unpin = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.id) {
+    return;
+  }
+  await browser.tabs.update(tab.id, { pinned: false });
+};
+
+export const copy = async (tab: Tabs.Tab, selection?: string): Promise<void> => {
+  if (!tab.id || !selection) {
+    return;
+  }
+  await sendMessage('actionCopy', selection, tab.id);
+};
+
+export const copyLink = async (tab: Tabs.Tab, links: LinkMessage[]): Promise<void> => {
+  if (!tab.id || !links.length) {
+    return;
+  }
+  await sendMessage('actionCopyLink', links, tab.id);
+};
+
+export const findPrev = async (tab: Tabs.Tab, selection?: string) => {
+  if (!tab.id || !selection) {
+    return;
+  }
+  await sendMessage('actionFindPrev', selection, tab.id);
+};
+
+export const findNext = async (tab: Tabs.Tab, selection?: string) => {
+  if (!tab.id || !selection) {
+    return;
+  }
+  await sendMessage('actionFindNext', selection, tab.id);
+};
+
+export const toggleBookmark = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.url) {
+    return;
+  }
+  const results = await browser.bookmarks.search(tab.url);
+  if (!results.length) {
     await browser.bookmarks.create({
       parentId: '2',
-      title: sender.tab.title,
-      url: sender.url,
+      title: tab.title,
+      url: tab.url,
     });
-  };
-
-  const unbookmark = async (): Promise<void> => {
-    if (!sender.url) {
-      return;
-    }
-    const results = await browser.bookmarks.search(sender.url);
-    if (!results.length) {
-      return;
-    }
+  } else {
     await browser.bookmarks.remove(results[0].id);
-  };
+  }
+};
+
+export const bookmark = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.url) {
+    return;
+  }
+  await browser.bookmarks.create({
+    parentId: '2',
+    title: tab.title,
+    url: tab.url,
+  });
+};
+
+export const unbookmark = async (tab: Tabs.Tab): Promise<void> => {
+  if (!tab.url) {
+    return;
+  }
+  const results = await browser.bookmarks.search(tab.url);
+  if (!results.length) {
+    return;
+  }
+  await browser.bookmarks.remove(results[0].id);
+};
+
+const createActions = (
+  { links, images, selection }: GestureMessage,
+  sender: Runtime.MessageSender,
+) => {
+  if (!sender.tab) {
+    return;
+  }
+  const senderTab = sender.tab;
 
   return {
-    'new-tab': newTab,
-    'new-tab-link': newTabLink,
-    'new-tab-back': newTabBack,
-    'navigate-tab': navigateTab,
-    'close-tab': closeTab,
-    'close-other-tabs': closeOtherTabs,
-    'close-left-tabs': closeLeftTabs,
-    'close-right-tabs': closeRightTabs,
-    'undo-close': undoClose,
-    'reload-tab': reloadTab,
-    'reload-tab-full': reloadTabFull,
-    'reload-all-tabs': reloadAllTabs,
-    stop,
-    'view-source': viewSource,
-    'prev-tab': prevTab,
-    'next-tab': nextTab,
-    'page-back': pageBack,
-    'page-forward': pageForward,
-    'new-window': newWindow,
-    'new-window-link': newWindowLink,
-    'close-window': closeWindow,
-    'split-tabs': splitTabs,
-    options,
-    'page-back-close': pageBackClose,
-    'goto-top': gotoTop,
-    'goto-bottom': gotoBottom,
-    'page-up': pageUp,
-    'page-down': pageDown,
-    'page-next': pageNext,
-    'page-prev': pagePrev,
-    'fullscreen-window': fullscreenWindow,
-    'minimize-window': minimizeWindow,
-    'maximize-window': maximizeWindow,
-    'open-screenshot': openScreenshot,
-    'save-screenshot': saveScreenshot,
-    'clone-tab': cloneTab,
-    'zoom-in': zoomIn,
-    'zoom-out': zoomOut,
-    'zoom-zero': zoomZero,
-    'zoom-img-in': zoomImgIn,
-    'zoom-img-out': zoomImgOut,
-    'zoom-img-zero': zoomImgZero,
-    'tab-to-left': tabToLeft,
-    'tab-to-right': tabToRight,
-    'parent-dir': parentDir,
-    'open-history': openHistory,
-    'open-downloads': openDownloads,
-    'open-extensions': openExtensions,
-    'open-bookmarks': openBookmarks,
-    'open-image': openImage,
-    'save-image': saveImage,
-    'hide-image': hideImage,
-    'show-cookies': showCookies,
-    'search-sel': searchSel,
-    print,
-    'toggle-pin': togglePin,
-    pin,
-    unpin,
-    copy,
-    'copy-link': copyLink,
-    'find-prev': findPrev,
-    'find-next': findNext,
-    'toggle-bookmark': toggleBookmark,
-    bookmark,
-    unbookmark,
+    'new-tab': () => newTab(senderTab),
+    'new-tab-link': () => newTabLink(senderTab, links),
+    'new-tab-back': () => newTabBack(senderTab, links),
+    'navigate-tab': () => navigateTab(senderTab),
+    'close-tab': () => closeTab(senderTab),
+    'close-other-tabs': () => closeOtherTabs(senderTab),
+    'close-left-tabs': () => closeLeftTabs(senderTab),
+    'close-right-tabs': () => closeRightTabs(senderTab),
+    'undo-close': () => undoClose(),
+    'reload-tab': () => reloadTab(senderTab),
+    'reload-tab-full': () => reloadTabFull(senderTab),
+    'reload-all-tabs': () => reloadAllTabs(senderTab),
+    stop: () => stop(senderTab),
+    'view-source': () => viewSource(senderTab),
+    'prev-tab': () => prevTab(senderTab),
+    'next-tab': () => nextTab(senderTab),
+    'page-back': () => pageBack(senderTab),
+    'page-forward': () => pageForward(senderTab),
+    'new-window': () => newWindow(),
+    'new-window-link': () => newWindowLink(links),
+    'close-window': () => closeWindow(senderTab),
+    'split-tabs': () => splitTabs(senderTab),
+    options: () => options(senderTab),
+    'page-back-close': () => pageBackClose(senderTab),
+    'goto-top': () => gotoTop(senderTab),
+    'goto-bottom': () => gotoBottom(senderTab),
+    'page-up': () => pageUp(senderTab),
+    'page-down': () => pageDown(senderTab),
+    'page-next': () => pageNext(senderTab),
+    'page-prev': () => pagePrev(senderTab),
+    'fullscreen-window': () => fullscreenWindow(senderTab),
+    'minimize-window': () => minimizeWindow(senderTab),
+    'maximize-window': () => maximizeWindow(senderTab),
+    'open-screenshot': () => openScreenshot(senderTab),
+    'save-screenshot': () => saveScreenshot(senderTab),
+    'clone-tab': () => cloneTab(senderTab),
+    'zoom-in': () => zoomIn(senderTab),
+    'zoom-out': () => zoomOut(senderTab),
+    'zoom-zero': () => zoomZero(senderTab),
+    'zoom-img-in': () => zoomImgIn(senderTab, images),
+    'zoom-img-out': () => zoomImgOut(senderTab, images),
+    'zoom-img-zero': () => zoomImgZero(senderTab, images),
+    'tab-to-left': () => tabToLeft(senderTab),
+    'tab-to-right': () => tabToRight(senderTab),
+    'parent-dir': () => parentDir(senderTab),
+    'open-history': () => openHistory(senderTab),
+    'open-downloads': () => openDownloads(senderTab),
+    'open-extensions': () => openExtensions(senderTab),
+    'open-bookmarks': () => openBookmarks(senderTab),
+    'open-image': () => openImage(senderTab, images),
+    'save-image': () => saveImage(images),
+    'hide-image': () => hideImage(senderTab, images),
+    'show-cookies': () => showCookies(senderTab),
+    'search-sel': () => searchSel(senderTab, selection),
+    print: () => print(senderTab),
+    'toggle-pin': () => togglePin(senderTab),
+    pin: () => pin(senderTab),
+    unpin: () => unpin(senderTab),
+    copy: () => copy(senderTab, selection),
+    'copy-link': () => copyLink(senderTab, links),
+    'find-prev': () => findPrev(senderTab, selection),
+    'find-next': () => findNext(senderTab, selection),
+    'toggle-bookmark': () => toggleBookmark(senderTab),
+    bookmark: () => bookmark(senderTab),
+    unbookmark: () => unbookmark(senderTab),
   };
 };
 

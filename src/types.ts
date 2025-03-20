@@ -36,25 +36,8 @@ export type ContentMessage = {
   links?: LinkMessage[];
   images?: ImageMessage[];
   selection?: string;
-  line?: {
-    distance: number;
-    segments: number;
-  };
   buttonDown?: Record<number, boolean>;
   nativeport?: {
     rightclick?: Point;
-  };
-  syncButton?: {
-    id: number;
-    down: boolean;
-  };
-};
-
-export type BackgroundMessage = {
-  chain?: {
-    startPoint?: Point;
-    rocker?: boolean;
-    wheel?: boolean;
-    buttonDown: Record<number, boolean>;
   };
 };

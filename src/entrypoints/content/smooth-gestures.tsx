@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { JSX } from 'react';
 
 import { useSettings } from '@/stores/settings-store';
 import {
-  BackgroundMessage,
   ContentMessage,
   LineDirection,
   Point,
@@ -10,8 +9,9 @@ import {
   ValidGestures,
   WheelDirection,
 } from '@/types';
-import { onMessage, removeAllListeners } from '@/messaging.ts';
+import { onMessage, removeAllListeners } from '@/entrypoints/content/messaging';
 import * as actions from '@/entrypoints/content/actions';
+import { GestureMessage, sendMessage } from '@/entrypoints/background/messaging';
 
 type Gesture = {
   events?: boolean;
@@ -25,18 +25,16 @@ type Gesture = {
     points: Point[];
     dirPoints: Point[];
     possibleDirs?: ValidGestures;
-    distance: number;
   };
   rocker?: boolean;
   wheel?: boolean;
-  payload?: any;
 };
 
 export type SmoothGesturesProps = {
   callback?: (code: string) => void;
 };
 
-export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNode {
+export function SmoothGestures({ callback }: SmoothGesturesProps): JSX.Element | null {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { width, height } = useWindowSize();
   const { isOpen, open, close } = useDisclosure(false);
@@ -59,7 +57,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
     // mouse event states
     let buttonDown: Record<number, boolean> = {};
-    const blockClick: Record<number, boolean> = {};
+    let blockClick: Record<number, boolean> = {};
     let blockContext: boolean = true;
     let forceContext: boolean = false;
     // key mod down states
@@ -67,63 +65,6 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     let keyEscape: boolean = false;
     // focus state
     let focus: EventTarget | undefined;
-
-    /*
-     * Extension Communication
-     */
-    // TODO
-    const handleMessage = (message: unknown): void => {
-      const mess = message as BackgroundMessage;
-      /*
-      if (message.windowBlurred) {
-        buttonDown = {};
-        blockClick = {};
-        blockContext = true;
-        endGesture();
-      }
-       */
-      if (mess.chain) {
-        /*
-        startGesture(
-          message.chain.startPoint,
-          message.chain.startPoint
-            ? document.elementFromPoint(message.chain.startPoint.x, message.chain.startPoint.y)
-            : undefined,
-          message.chain.line,
-          message.chain.rocker,
-          message.chain.wheel,
-        );
-        blockContext = true;
-       */
-        if (mess.chain.buttonDown) {
-          if (mess.chain.buttonDown[0]) {
-            blockClick[0] = true;
-          }
-          if (mess.chain.buttonDown[1]) {
-            blockClick[1] = true;
-          }
-          if (mess.chain.buttonDown[2]) {
-            blockClick[2] = true;
-          }
-          /*
-            if (buttonDown[0] === undefined) {
-              buttonDown[0] = message.chain.buttonDown[0];
-            }
-            if (buttonDown[1] === undefined) {
-              buttonDown[1] = message.chain.buttonDown[1];
-            }
-            if (buttonDown[2] === undefined) {
-              buttonDown[2] = message.chain.buttonDown[2];
-            }
-           */
-        }
-      }
-      /*
-      if (message.syncButton) {
-        buttonDown[message.syncButton.id] = message.syncButton.down;
-      }
-       */
-    };
 
     /*
      * Page Events
@@ -145,9 +86,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
 
       if (syncButtons) {
-        await browser.runtime.sendMessage<ContentMessage>({
-          syncButton: { id: event.button, down: true },
-        });
+        await sendMessage('syncButton', { id: event.button, down: true });
       }
       buttonDown[event.button] = true;
 
@@ -303,9 +242,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
       buttonDown[event.button] = false;
       if (syncButtons) {
-        await browser.runtime.sendMessage<ContentMessage>({
-          syncButton: { id: event.button, down: false },
-        });
+        await sendMessage('syncButton', { id: event.button, down: false });
       }
 
       if (!buttonDown[0] && !buttonDown[2]) {
@@ -473,7 +410,6 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           points: [{ x: point.x, y: point.y }],
           dirPoints: [{ x: point.x, y: point.y }],
           possibleDirs: validGestures,
-          distance: 0,
         };
       }
       gesture.rocker = rocker;
@@ -496,9 +432,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
 
       if (gesture.line) {
         const next = { x: event.clientX, y: event.clientY };
-        const prev = gesture.line.points[gesture.line.points.length - 1];
         gesture.line.points.push(next);
-        gesture.line.distance += Math.sqrt((next.x - prev.x) ** 2 + (next.y - prev.y) ** 2);
 
         const diffx = next.x - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].x;
         const diffy = next.y - gesture.line.dirPoints[gesture.line.dirPoints.length - 1].y;
@@ -511,7 +445,10 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         }
 
         const ldir = gesture.line.code === '' ? 'X' : gesture.line.code.slice(-1);
-        const ndir = getDirection(gesture.line.dirPoints[gesture.line.dirPoints.length - 1], next);
+        const ndir = getLineDirection(
+          gesture.line.dirPoints[gesture.line.dirPoints.length - 1],
+          next,
+        );
         if (ndir === ldir) {
           gesture.line.dirPoints[gesture.line.dirPoints.length - 1] = next;
         } else if (
@@ -532,7 +469,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       }
     };
 
-    const getDirection = (prev: Point, next: Point): LineDirection => {
+    const getLineDirection = (prev: Point, next: Point): LineDirection => {
       const diffx = next.x - prev.x;
       const diffy = next.y - prev.y;
       if (Math.abs(diffx) > 2 * Math.abs(diffy)) {
@@ -581,7 +518,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         if (callback) {
           callback(code);
         } else {
-          const message: ContentMessage = {
+          const message: GestureMessage = {
             gesture: code,
             startPoint: gesture.startPoint,
             targets: [],
@@ -595,12 +532,6 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
             message.images === undefined
           ) {
             return;
-          }
-          if (gesture.line && code[0] !== 'w' && code[0] !== 'r') {
-            message.line = {
-              distance: gesture.line.distance,
-              segments: code.length,
-            };
           }
           if (selectToLink && gesture.selection) {
             const parts = gesture.selection.split('http');
@@ -630,7 +561,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
           if (syncButtons) {
             message.buttonDown = buttonDown;
           }
-          await browser.runtime.sendMessage<ContentMessage>(message);
+          await sendMessage('gesture', message);
         }
       }
       if (code[0] === 'w') {
@@ -669,12 +600,12 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
      * Helpers
      */
     const getLink = (element: Node): string | undefined => {
-      let node: Node | null = element;
+      let node: Node | undefined = element;
       while (node) {
         if (node instanceof HTMLAnchorElement) {
           return node.href;
         }
-        node = node.parentNode;
+        node = node.parentNode ?? undefined;
       }
       return undefined;
     };
@@ -718,7 +649,7 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
         };
         const lastPoint = gesture.line.points[gesture.line.points.length - 1];
         const lastDirPoint = gesture.line.dirPoints[gesture.line.dirPoints.length - 1];
-        const nextDir = getDirection(lastDirPoint, lastPoint);
+        const nextDir = getLineDirection(lastDirPoint, lastPoint);
         ctx.beginPath();
         if (gesture.line.code.length > 0) {
           if (gesture.line.code[0] === 'L' || gesture.line.code[0] === 'R') {
@@ -845,24 +776,61 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
     window.addEventListener('mousemove', handleMouseMove, true);
     window.addEventListener('wheel', handleWheel, true);
 
-    onMessage('action-stop', actions.stop);
-    onMessage('action-goto-top', actions.gotoTop);
-    onMessage('action-goto-bottom', actions.gotoBottom);
-    onMessage('action-page-up', actions.pageUp);
-    onMessage('action-page-down', actions.pageDown);
-    onMessage('action-page-next', actions.pageNext);
-    onMessage('action-page-prev', actions.pagePrev);
-    onMessage('action-zoom-img-in', ({ data }) => actions.zoomImgIn(data));
-    onMessage('action-zoom-img-out', ({ data }) => actions.zoomImgOut(data));
-    onMessage('action-zoom-img-zero', ({ data }) => actions.zoomImgZero(data));
-    onMessage('action-hide-image', ({ data }) => actions.hideImage(data));
-    onMessage('action-show-cookies', actions.showCookies);
-    onMessage('action-print', actions.print);
-    onMessage('action-copy', ({ data }) => actions.copy(data));
-    onMessage('action-copy-link', ({ data }) => actions.copyLink(data));
-    onMessage('action-find-prev', ({ data }) => actions.findPrev(data));
-    onMessage('action-find-next', ({ data }) => actions.findNext(data));
-    browser.runtime.onMessage.addListener(handleMessage);
+    /*
+     * Extension Communication
+     */
+    onMessage('actionStop', actions.stop);
+    onMessage('actionGotoTop', actions.gotoTop);
+    onMessage('actionGotoBottom', actions.gotoBottom);
+    onMessage('actionPageUp', actions.pageUp);
+    onMessage('actionPageDown', actions.pageDown);
+    onMessage('actionPageNext', actions.pageNext);
+    onMessage('actionPagePrev', actions.pagePrev);
+    onMessage('actionZoomImgIn', ({ data }) => actions.zoomImgIn(data));
+    onMessage('actionZoomImgOut', ({ data }) => actions.zoomImgOut(data));
+    onMessage('actionZoomImgZero', ({ data }) => actions.zoomImgZero(data));
+    onMessage('actionHideImage', ({ data }) => actions.hideImage(data));
+    onMessage('actionShowCookies', actions.showCookies);
+    onMessage('actionPrint', actions.print);
+    onMessage('actionCopy', ({ data }) => actions.copy(data));
+    onMessage('actionCopyLink', ({ data }) => actions.copyLink(data));
+    onMessage('actionFindPrev', ({ data }) => actions.findPrev(data));
+    onMessage('actionFindNext', ({ data }) => actions.findNext(data));
+    onMessage('windowBlurred', () => {
+      buttonDown = {};
+      blockClick = {};
+      blockContext = true;
+      endGesture();
+    });
+    onMessage('chain', ({ data }) => {
+      startGesture(
+        data.startPoint,
+        data.startPoint
+          ? (document.elementFromPoint(data.startPoint.x, data.startPoint.y) ?? undefined)
+          : undefined,
+        false,
+        data.rocker,
+        data.wheel,
+      );
+      blockContext = true;
+      if (data.buttonDown) {
+        if (data.buttonDown[0]) {
+          blockClick[0] = true;
+        }
+        if (data.buttonDown[1]) {
+          blockClick[1] = true;
+        }
+        if (data.buttonDown[2]) {
+          blockClick[2] = true;
+        }
+        buttonDown[0] ??= data.buttonDown[0];
+        buttonDown[1] ??= data.buttonDown[1];
+        buttonDown[2] ??= data.buttonDown[2];
+      }
+    });
+    onMessage('syncButton', ({ data: { id, down } }) => {
+      buttonDown[id] = down;
+    });
 
     return () => {
       window.removeEventListener('mousedown', handleMouseDown, true);
@@ -879,7 +847,6 @@ export function SmoothGestures({ callback }: SmoothGesturesProps): React.ReactNo
       window.removeEventListener('wheel', handleWheel, true);
 
       removeAllListeners();
-      browser.runtime.onMessage.removeListener(handleMessage);
     };
   }, [
     holdButton,
