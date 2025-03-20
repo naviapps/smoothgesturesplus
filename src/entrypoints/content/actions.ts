@@ -1,4 +1,4 @@
-import { ImageMessage, LinkMessage } from '@/types.ts';
+import { ImageMessage, LinkMessage } from '@/types';
 
 export const stop = (): void => {
   window.stop();
@@ -33,107 +33,104 @@ export const pageDown = (): void => {
 };
 
 export const pageNext = (): void => {
-  const rel = document.querySelector<HTMLLinkElement | HTMLAnchorElement>(
+  const relationship = document.querySelector<HTMLLinkElement | HTMLAnchorElement>(
     'link[rel="next"][href], a[rel="next"][href]',
   );
-  if (rel) {
-    window.location.href = rel.href;
+  if (relationship) {
+    globalThis.location.href = relationship.href;
     return;
   }
   const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href]');
-  for (let i = 0; i < anchors.length; i += 1) {
-    const anchor = anchors[i];
-    if (/(next|次|下一页)/i.test(anchor.innerText)) {
-      window.location.href = anchor.href;
+  for (const anchor of anchors) {
+    if (anchor.textContent && /(next|次|下一页)/i.test(anchor.textContent)) {
+      globalThis.location.href = anchor.href;
       return;
     }
   }
 };
 
-export const pagePrev = (): void => {
-  const rel = document.querySelector<HTMLLinkElement | HTMLAnchorElement>(
+export const pagePrevious = (): void => {
+  const relationship = document.querySelector<HTMLLinkElement | HTMLAnchorElement>(
     'link[rel="prev"][href], a[rel="prev"][href]',
   );
-  if (rel) {
-    window.location.href = rel.href;
+  if (relationship) {
+    globalThis.location.href = relationship.href;
     return;
   }
   const anchors = document.querySelectorAll<HTMLAnchorElement>('a[href]');
-  for (let i = 0; i < anchors.length; i += 1) {
-    const anchor = anchors[i];
-    if (/(prev|前|上一页)/i.test(anchor.innerText)) {
-      window.location.href = anchor.href;
+  for (const anchor of anchors) {
+    if (anchor.textContent && /(prev|前|上一页)/i.test(anchor.textContent)) {
+      globalThis.location.href = anchor.href;
       return;
     }
   }
 };
 
 export const zoomImgIn = (images: ImageMessage[]): void => {
-  images.forEach((image) => {
+  for (const image of images) {
     const img = document.querySelector<HTMLImageElement>(`img[gestureid="${image.gestureid}"]`);
     if (!img) {
-      return;
+      continue;
     }
     if (!img.getAttribute('origsize')) {
       img.setAttribute('origsize', `${img.clientWidth}x${img.clientHeight}`);
     }
     img.style.width = `${img.clientWidth * 1.2}px`;
     img.style.height = `${img.clientHeight * 1.2}px`;
-  });
+  }
 };
 
 export const zoomImgOut = (images: ImageMessage[]): void => {
-  images.forEach((image) => {
+  for (const image of images) {
     const img = document.querySelector<HTMLImageElement>(`img[gestureid="${image.gestureid}"]`);
     if (!img) {
-      return;
+      continue;
     }
     if (!img.getAttribute('origsize')) {
       img.setAttribute('origsize', `${img.clientWidth}x${img.clientHeight}`);
     }
     img.style.width = `${img.clientWidth / 1.2}px`;
     img.style.height = `${img.clientHeight / 1.2}px`;
-  });
+  }
 };
 
 export const zoomImgZero = (images: ImageMessage[]): void => {
-  images.forEach((image) => {
+  for (const image of images) {
     const img = document.querySelector<HTMLImageElement>(`img[gestureid="${image.gestureid}"]`);
     if (!img) {
-      return;
+      continue;
     }
     const origsize = img.getAttribute('origsize');
     if (!origsize) {
-      return;
+      continue;
     }
     const size = origsize.split('x');
     img.style.width = `${size[0]}px`;
     img.style.height = `${size[1]}px`;
-  });
+  }
 };
 
 export const hideImage = (images: ImageMessage[]): void => {
-  images.forEach((image) => {
+  for (const image of images) {
     const img = document.querySelector<HTMLImageElement>(`img[gestureid="${image.gestureid}"]`);
     if (!img) {
-      return;
+      continue;
     }
     img.style.display = 'none';
-  });
+  }
 };
 
 export const showCookies = (): void => {
-  // eslint-disable-next-line no-alert
-  window.alert(
+  globalThis.alert(
     `Cookies stored by this host or domain:\n${`\n${document.cookie}`
-      .replace(/; /g, ';\n')
-      .replace(/\n(.{192})([^\\n]{5})/gm, '\n$1\n        $2')
-      .replace(/\n(.{100})([^\\n]{5})/gm, '\n$1\n        $2')}`,
+      .replaceAll('; ', ';\n')
+      .replaceAll(/\n(.{192})([^\\n]{5})/gm, '\n$1\n        $2')
+      .replaceAll(/\n(.{100})([^\\n]{5})/gm, '\n$1\n        $2')}`,
   );
 };
 
 export const print = (): void => {
-  window.print();
+  globalThis.print();
 };
 
 export const copy = async (selection: string): Promise<void> => {
@@ -144,7 +141,7 @@ export const copyLink = async (links: LinkMessage[]): Promise<void> => {
   await navigator.clipboard.writeText(links[0].src);
 };
 
-export const findPrev = async (selection: string): Promise<void> => {
+export const findPrevious = async (selection: string): Promise<void> => {
   // TODO
 };
 

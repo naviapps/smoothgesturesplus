@@ -1,237 +1,321 @@
-import React, { ComponentPropsWithoutRef, CSSProperties, JSX } from 'react';
+import React, { ComponentPropsWithoutRef, JSX } from 'react';
 
 import { useSettings } from '@/stores/settings-store';
 
 type RockerGesture = 'rLR' | 'rRL';
 type WheelGesture = 'wD' | 'wU';
 
-type LineProps = ComponentPropsWithoutRef<'canvas'> & {
+type LineProperties = ComponentPropsWithoutRef<'canvas'> & {
   gesture: string;
   width: number;
   height: number;
   lineWidth?: number;
 };
 
-function Line({ gesture, width, height, lineWidth = 3, style }: LineProps): JSX.Element {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const { trailColor } = useSettings();
+function Line({ gesture, width, height, lineWidth = 3, style }: LineProperties): JSX.Element {
+  const canvasReference = useRef<HTMLCanvasElement>(null);
+  const { stroke } = useSettings();
 
   useEffect(() => {
-    const c = canvasRef.current;
+    const c = canvasReference.current;
     if (!c) {
       return;
     }
-    const ctx = c.getContext('2d');
-    if (!ctx) {
+    const context = c.getContext('2d');
+    if (!context) {
       return;
     }
-    if (trailColor) {
-      ctx.strokeStyle = trailColor;
+    if (stroke) {
+      context.strokeStyle = stroke;
     }
-    ctx.lineWidth = lineWidth;
-    ctx.lineCap = 'butt';
+    context.lineWidth = lineWidth;
+    context.lineCap = 'butt';
     let step = 10;
     let tight = 2;
-    let sep = 3;
+    let separator = 3;
 
-    let prev = { x: 0, y: 0 };
-    let curr = { x: 0, y: 0 };
+    let previous = { x: 0, y: 0 };
+    let current = { x: 0, y: 0 };
     const max = { x: 0, y: 0 };
     const min = { x: 0, y: 0 };
 
     const minmax = (): void => {
-      if (max.x < curr.x) {
-        max.x = curr.x;
+      if (max.x < current.x) {
+        max.x = current.x;
       }
-      if (max.y < curr.y) {
-        max.y = curr.y;
+      if (max.y < current.y) {
+        max.y = current.y;
       }
-      if (curr.x < min.x) {
-        min.x = curr.x;
+      if (current.x < min.x) {
+        min.x = current.x;
       }
-      if (curr.y < min.y) {
-        min.y = curr.y;
+      if (current.y < min.y) {
+        min.y = current.y;
       }
     };
-    const tip = (dir: string): void => {
-      prev = curr;
-      ctx.lineTo(prev.x, prev.y);
-      if (dir === 'U') {
-        curr = { x: prev.x, y: prev.y - step * 0.75 };
-      } else if (dir === 'D') {
-        curr = { x: prev.x, y: prev.y + step * 0.75 };
-      } else if (dir === 'L') {
-        curr = { x: prev.x - step * 0.75, y: prev.y };
-      } else if (dir === 'R') {
-        curr = { x: prev.x + step * 0.75, y: prev.y };
-      } else if (dir === '1') {
-        curr = { x: prev.x - step * 0.5, y: prev.y + step * 0.5 };
-      } else if (dir === '3') {
-        curr = { x: prev.x + step * 0.5, y: prev.y + step * 0.5 };
-      } else if (dir === '7') {
-        curr = { x: prev.x - step * 0.5, y: prev.y - step * 0.5 };
-      } else if (dir === '9') {
-        curr = { x: prev.x + step * 0.5, y: prev.y - step * 0.5 };
+    const tip = (direction: string): void => {
+      previous = current;
+      context.lineTo(previous.x, previous.y);
+      switch (direction) {
+        case 'U': {
+          current = { x: previous.x, y: previous.y - step * 0.75 };
+          break;
+        }
+        case 'D': {
+          current = { x: previous.x, y: previous.y + step * 0.75 };
+          break;
+        }
+        case 'L': {
+          current = { x: previous.x - step * 0.75, y: previous.y };
+          break;
+        }
+        case 'R': {
+          current = { x: previous.x + step * 0.75, y: previous.y };
+          break;
+        }
+        case '1': {
+          current = { x: previous.x - step * 0.5, y: previous.y + step * 0.5 };
+          break;
+        }
+        case '3': {
+          current = { x: previous.x + step * 0.5, y: previous.y + step * 0.5 };
+          break;
+        }
+        case '7': {
+          current = { x: previous.x - step * 0.5, y: previous.y - step * 0.5 };
+          break;
+        }
+        case '9': {
+          current = { x: previous.x + step * 0.5, y: previous.y - step * 0.5 };
+          break;
+        }
+        // No default
       }
-      ctx.lineTo(curr.x, curr.y);
+      context.lineTo(current.x, current.y);
       minmax();
     };
-    const curve = (dir: string): void => {
-      prev = curr;
-      ctx.lineTo(prev.x, prev.y);
-      if (dir === 'UD') {
-        curr = { x: prev.x, y: prev.y - step };
-        minmax();
-        ctx.lineTo(prev.x, prev.y - step);
-        ctx.arc(prev.x + tight, prev.y - step, tight, Math.PI, 0, false);
-        ctx.lineTo(prev.x + tight * 2, prev.y);
-      } else if (dir === 'UL') {
-        ctx.arc(prev.x - step, prev.y, step, 0, -Math.PI / 2, true);
-      } else if (dir === 'UR') {
-        ctx.arc(prev.x + step, prev.y, step, Math.PI, -Math.PI / 2, false);
-      } else if (dir === 'DU') {
-        curr = { x: prev.x, y: prev.y + step };
-        minmax();
-        ctx.lineTo(prev.x, prev.y + step);
-        ctx.arc(prev.x + tight, prev.y + step, tight, Math.PI, 0, true);
-        ctx.lineTo(prev.x + tight * 2, prev.y);
-      } else if (dir === 'DL') {
-        ctx.arc(prev.x - step, prev.y, step, 0, Math.PI / 2, false);
-      } else if (dir === 'DR') {
-        ctx.arc(prev.x + step, prev.y, step, Math.PI, Math.PI / 2, true);
-      } else if (dir === 'LU') {
-        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, Math.PI, false);
-      } else if (dir === 'LD') {
-        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, Math.PI, true);
-      } else if (dir === 'LR') {
-        curr = { x: prev.x - step, y: prev.y };
-        minmax();
-        ctx.lineTo(prev.x - step, prev.y);
-        ctx.arc(prev.x - step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, true);
-        ctx.lineTo(prev.x, prev.y + tight * 2);
-      } else if (dir === 'RU') {
-        ctx.arc(prev.x, prev.y - step, step, Math.PI / 2, 0, true);
-      } else if (dir === 'RD') {
-        ctx.arc(prev.x, prev.y + step, step, -Math.PI / 2, 0, false);
-      } else if (dir === 'RL') {
-        curr = { x: prev.x + step, y: prev.y };
-        minmax();
-        ctx.lineTo(prev.x + step, prev.y);
-        ctx.arc(prev.x + step, prev.y + tight, tight, -Math.PI / 2, Math.PI / 2, false);
-        ctx.lineTo(prev.x, prev.y + tight * 2);
-      } else {
-        tip(dir[0]);
-        tip(dir[1]);
+    const curve = (direction: string): void => {
+      previous = current;
+      context.lineTo(previous.x, previous.y);
+      switch (direction) {
+        case 'UD': {
+          current = { x: previous.x, y: previous.y - step };
+          minmax();
+          context.lineTo(previous.x, previous.y - step);
+          context.arc(previous.x + tight, previous.y - step, tight, Math.PI, 0, false);
+          context.lineTo(previous.x + tight * 2, previous.y);
+          break;
+        }
+        case 'UL': {
+          context.arc(previous.x - step, previous.y, step, 0, -Math.PI / 2, true);
+          break;
+        }
+        case 'UR': {
+          context.arc(previous.x + step, previous.y, step, Math.PI, -Math.PI / 2, false);
+          break;
+        }
+        case 'DU': {
+          current = { x: previous.x, y: previous.y + step };
+          minmax();
+          context.lineTo(previous.x, previous.y + step);
+          context.arc(previous.x + tight, previous.y + step, tight, Math.PI, 0, true);
+          context.lineTo(previous.x + tight * 2, previous.y);
+          break;
+        }
+        case 'DL': {
+          context.arc(previous.x - step, previous.y, step, 0, Math.PI / 2, false);
+          break;
+        }
+        case 'DR': {
+          context.arc(previous.x + step, previous.y, step, Math.PI, Math.PI / 2, true);
+          break;
+        }
+        case 'LU': {
+          context.arc(previous.x, previous.y - step, step, Math.PI / 2, Math.PI, false);
+          break;
+        }
+        case 'LD': {
+          context.arc(previous.x, previous.y + step, step, -Math.PI / 2, Math.PI, true);
+          break;
+        }
+        case 'LR': {
+          current = { x: previous.x - step, y: previous.y };
+          minmax();
+          context.lineTo(previous.x - step, previous.y);
+          context.arc(
+            previous.x - step,
+            previous.y + tight,
+            tight,
+            -Math.PI / 2,
+            Math.PI / 2,
+            true,
+          );
+          context.lineTo(previous.x, previous.y + tight * 2);
+          break;
+        }
+        case 'RU': {
+          context.arc(previous.x, previous.y - step, step, Math.PI / 2, 0, true);
+          break;
+        }
+        case 'RD': {
+          context.arc(previous.x, previous.y + step, step, -Math.PI / 2, 0, false);
+          break;
+        }
+        case 'RL': {
+          current = { x: previous.x + step, y: previous.y };
+          minmax();
+          context.lineTo(previous.x + step, previous.y);
+          context.arc(
+            previous.x + step,
+            previous.y + tight,
+            tight,
+            -Math.PI / 2,
+            Math.PI / 2,
+            false,
+          );
+          context.lineTo(previous.x, previous.y + tight * 2);
+          break;
+        }
+        default: {
+          tip(direction[0]);
+          tip(direction[1]);
+        }
       }
-      if (dir === 'UD') {
-        curr = { x: prev.x + tight * 2, y: prev.y + sep };
-      } else if (dir === 'UL') {
-        curr = { x: prev.x - step, y: prev.y - step };
-      } else if (dir === 'UR') {
-        curr = { x: prev.x + step + sep, y: prev.y - step };
-      } else if (dir === 'DU') {
-        curr = { x: prev.x + tight * 2, y: prev.y };
-      } else if (dir === 'DL') {
-        curr = { x: prev.x - step, y: prev.y + step };
-      } else if (dir === 'DR') {
-        curr = { x: prev.x + step + sep, y: prev.y + step };
-      } else if (dir === 'LU') {
-        curr = { x: prev.x - step, y: prev.y - step };
-      } else if (dir === 'LD') {
-        curr = { x: prev.x - step, y: prev.y + step + sep };
-      } else if (dir === 'LR') {
-        curr = { x: prev.x + sep, y: prev.y + tight * 2 };
-      } else if (dir === 'RU') {
-        curr = { x: prev.x + step, y: prev.y - step };
-      } else if (dir === 'RD') {
-        curr = { x: prev.x + step, y: prev.y + step + sep };
-      } else if (dir === 'RL') {
-        curr = { x: prev.x, y: prev.y + tight * 2 };
+      switch (direction) {
+        case 'UD': {
+          current = { x: previous.x + tight * 2, y: previous.y + separator };
+          break;
+        }
+        case 'UL': {
+          current = { x: previous.x - step, y: previous.y - step };
+          break;
+        }
+        case 'UR': {
+          current = { x: previous.x + step + separator, y: previous.y - step };
+          break;
+        }
+        case 'DU': {
+          current = { x: previous.x + tight * 2, y: previous.y };
+          break;
+        }
+        case 'DL': {
+          current = { x: previous.x - step, y: previous.y + step };
+          break;
+        }
+        case 'DR': {
+          current = { x: previous.x + step + separator, y: previous.y + step };
+          break;
+        }
+        case 'LU': {
+          current = { x: previous.x - step, y: previous.y - step };
+          break;
+        }
+        case 'LD': {
+          current = { x: previous.x - step, y: previous.y + step + separator };
+          break;
+        }
+        case 'LR': {
+          current = { x: previous.x + separator, y: previous.y + tight * 2 };
+          break;
+        }
+        case 'RU': {
+          current = { x: previous.x + step, y: previous.y - step };
+          break;
+        }
+        case 'RD': {
+          current = { x: previous.x + step, y: previous.y + step + separator };
+          break;
+        }
+        case 'RL': {
+          current = { x: previous.x, y: previous.y + tight * 2 };
+          break;
+        }
+        // No default
       }
       minmax();
     };
 
-    ctx.beginPath();
+    context.beginPath();
     tip(gesture[0]);
-    for (let i = 0; i < gesture.length - 1; i += 1) {
-      curve(gesture[i] + gesture[i + 1]);
+    for (let index = 0; index < gesture.length - 1; index += 1) {
+      curve(gesture[index] + gesture[index + 1]);
     }
-    tip(gesture[gesture.length - 1]);
-    ctx.stroke();
+    tip(gesture.at(-1)!);
+    context.stroke();
 
     const center = { x: (max.x + min.x) / 2, y: (max.y + min.y) / 2 };
     const wr = (max.x - min.x + step) / width;
     const hr = (max.y - min.y + step) / height;
-    const ratio = wr < hr ? hr : wr;
+    const ratio = Math.max(wr, hr);
     step /= ratio;
-    sep /= ratio;
+    separator /= ratio;
     tight /= ratio;
     if (tight > 6) {
       tight = 6;
     }
-    curr = { x: 0, y: 0 };
+    current = { x: 0, y: 0 };
 
-    ctx.clearRect(0, 0, c.width, c.height);
-    ctx.save();
-    ctx.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio);
-    ctx.beginPath();
+    context.clearRect(0, 0, c.width, c.height);
+    context.save();
+    context.translate(width / 2 - center.x / ratio, height / 2 - center.y / ratio);
+    context.beginPath();
     tip(gesture[0]);
-    for (let i = 0; i < gesture.length - 1; i += 1) {
-      curve(gesture[i] + gesture[i + 1]);
+    for (let index = 0; index < gesture.length - 1; index += 1) {
+      curve(gesture[index] + gesture[index + 1]);
     }
-    tip(gesture[gesture.length - 1]);
-    ctx.stroke();
-    if (trailColor) {
-      ctx.fillStyle = trailColor;
+    tip(gesture.at(-1)!);
+    context.stroke();
+    if (stroke) {
+      context.fillStyle = stroke;
     }
-    ctx.beginPath();
-    if (gesture[gesture.length - 1] === 'U') {
-      ctx.moveTo(curr.x - 5, curr.y + 2);
-      ctx.lineTo(curr.x + 5, curr.y + 2);
-      ctx.lineTo(curr.x, curr.y - 3);
-    } else if (gesture[gesture.length - 1] === 'D') {
-      ctx.moveTo(curr.x - 5, curr.y - 2);
-      ctx.lineTo(curr.x + 5, curr.y - 2);
-      ctx.lineTo(curr.x, curr.y + 3);
-    } else if (gesture[gesture.length - 1] === 'L') {
-      ctx.moveTo(curr.x + 2, curr.y - 5);
-      ctx.lineTo(curr.x + 2, curr.y + 5);
-      ctx.lineTo(curr.x - 3, curr.y);
-    } else if (gesture[gesture.length - 1] === 'R') {
-      ctx.moveTo(curr.x - 2, curr.y - 5);
-      ctx.lineTo(curr.x - 2, curr.y + 5);
-      ctx.lineTo(curr.x + 3, curr.y);
-    } else if (gesture[gesture.length - 1] === '1') {
-      ctx.moveTo(curr.x - 2, curr.y - 6);
-      ctx.lineTo(curr.x + 6, curr.y + 2);
-      ctx.lineTo(curr.x - 2, curr.y + 2);
-    } else if (gesture[gesture.length - 1] === '3') {
-      ctx.moveTo(curr.x + 2, curr.y - 6);
-      ctx.lineTo(curr.x - 6, curr.y + 2);
-      ctx.lineTo(curr.x + 2, curr.y + 2);
-    } else if (gesture[gesture.length - 1] === '7') {
-      ctx.moveTo(curr.x - 2, curr.y + 6);
-      ctx.lineTo(curr.x + 6, curr.y - 2);
-      ctx.lineTo(curr.x - 2, curr.y - 2);
-    } else if (gesture[gesture.length - 1] === '9') {
-      ctx.moveTo(curr.x + 2, curr.y + 6);
-      ctx.lineTo(curr.x - 6, curr.y - 2);
-      ctx.lineTo(curr.x + 2, curr.y - 2);
+    context.beginPath();
+    if (gesture.at(-1) === 'U') {
+      context.moveTo(current.x - 5, current.y + 2);
+      context.lineTo(current.x + 5, current.y + 2);
+      context.lineTo(current.x, current.y - 3);
+    } else if (gesture.at(-1) === 'D') {
+      context.moveTo(current.x - 5, current.y - 2);
+      context.lineTo(current.x + 5, current.y - 2);
+      context.lineTo(current.x, current.y + 3);
+    } else if (gesture.at(-1) === 'L') {
+      context.moveTo(current.x + 2, current.y - 5);
+      context.lineTo(current.x + 2, current.y + 5);
+      context.lineTo(current.x - 3, current.y);
+    } else if (gesture.at(-1) === 'R') {
+      context.moveTo(current.x - 2, current.y - 5);
+      context.lineTo(current.x - 2, current.y + 5);
+      context.lineTo(current.x + 3, current.y);
+    } else if (gesture.at(-1) === '1') {
+      context.moveTo(current.x - 2, current.y - 6);
+      context.lineTo(current.x + 6, current.y + 2);
+      context.lineTo(current.x - 2, current.y + 2);
+    } else if (gesture.at(-1) === '3') {
+      context.moveTo(current.x + 2, current.y - 6);
+      context.lineTo(current.x - 6, current.y + 2);
+      context.lineTo(current.x + 2, current.y + 2);
+    } else if (gesture.at(-1) === '7') {
+      context.moveTo(current.x - 2, current.y + 6);
+      context.lineTo(current.x + 6, current.y - 2);
+      context.lineTo(current.x - 2, current.y - 2);
+    } else if (gesture.at(-1) === '9') {
+      context.moveTo(current.x + 2, current.y + 6);
+      context.lineTo(current.x - 6, current.y - 2);
+      context.lineTo(current.x + 2, current.y - 2);
     }
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }, [gesture, width, height, lineWidth, trailColor]);
+    context.closePath();
+    context.fill();
+    context.restore();
+  }, [gesture, width, height, lineWidth, stroke]);
 
-  return <canvas ref={canvasRef} width={width} height={height} style={style} />;
+  return <canvas ref={canvasReference} width={width} height={height} style={style} />;
 }
 
-type RockerProps = ComponentPropsWithoutRef<'div'> & {
+type RockerProperties = ComponentPropsWithoutRef<'div'> & {
   gesture: RockerGesture;
   width: number;
 };
 
-function Rocker({ gesture, width, style }: RockerProps): JSX.Element {
+function Rocker({ gesture, width, style }: RockerProperties): JSX.Element {
   let first: 0 | 1 | 2;
   if (gesture[1] === 'L') {
     first = 0;
@@ -268,7 +352,7 @@ function Rocker({ gesture, width, style }: RockerProps): JSX.Element {
           textAlign: 'center',
         }}
       >
-        {i18n.t('gesture_rocker_descrip', [
+        {i18n.t('gesture_rocker_description', [
           i18n.t(`options_mousebutton_${first}`),
           i18n.t(`options_mousebutton_${second}`),
         ])}
@@ -277,12 +361,12 @@ function Rocker({ gesture, width, style }: RockerProps): JSX.Element {
   );
 }
 
-type WheelProps = ComponentPropsWithoutRef<'div'> & {
+type WheelProperties = ComponentPropsWithoutRef<'div'> & {
   gesture: WheelGesture;
   width: number;
 };
 
-function Wheel({ gesture, width, style }: WheelProps): JSX.Element {
+function Wheel({ gesture, width, style }: WheelProperties): JSX.Element {
   return (
     <div style={{ ...style, width: `${width - 2}px`, padding: '5px 1px' }}>
       <div
@@ -302,7 +386,7 @@ function Wheel({ gesture, width, style }: WheelProps): JSX.Element {
           textAlign: 'center',
         }}
       >
-        {i18n.t(`gesture_${gesture}_descrip`)}
+        {i18n.t(`gesture_${gesture}_description`)}
       </div>
     </div>
   );
@@ -363,12 +447,12 @@ const codeButton = (gesture: string): string => {
   return key;
 };
 
-type KeyProps = ComponentPropsWithoutRef<'div'> & {
+type KeyProperties = ComponentPropsWithoutRef<'div'> & {
   gesture: string;
   width: number;
 };
 
-function Key({ gesture, width, style }: KeyProps): JSX.Element {
+function Key({ gesture, width, style }: KeyProperties): JSX.Element {
   return (
     <div style={{ ...style, width: `${width - 2}px`, padding: '5px 1px' }}>
       <div
@@ -389,64 +473,83 @@ function Key({ gesture, width, style }: KeyProps): JSX.Element {
   );
 }
 
-export type GestureProps = {
+export type GestureProperties = {
   gesture: string;
   width: number;
   height: number;
   lineWidth?: number;
 };
 
-export function Gesture({ gesture, width, height, lineWidth }: GestureProps): JSX.Element {
+export function Gesture({ gesture, width, height, lineWidth }: GestureProperties): JSX.Element {
   const { gestures } = useSettings();
 
   let context = '';
-  let newGesture = gesture;
-  if (gesture[0] === 's') {
-    context = 's';
-    newGesture = gesture.slice(1);
-  } else if (gesture[0] === 'l') {
-    context = 'l';
-    newGesture = gesture.slice(1);
-  } else if (gesture[0] === 'i') {
-    context = 'i';
-    newGesture = gesture.slice(1);
+  switch (gesture[0]) {
+    case 's': {
+      context = 's';
+      gesture = gesture.slice(1);
+      break;
+    }
+    case 'l': {
+      context = 'l';
+      gesture = gesture.slice(1);
+      break;
+    }
+    case 'i': {
+      context = 'i';
+      gesture = gesture.slice(1);
+      break;
+    }
+    // No default
   }
 
   let c: JSX.Element;
   const style: React.CSSProperties = { minHeight: '2em', overflow: 'hidden' };
-  if (gesture[0] === 'r') {
-    c = <Rocker gesture={newGesture as RockerGesture} width={width} style={style} />;
-  } else if (gesture[0] === 'w') {
-    c = <Wheel gesture={newGesture as WheelGesture} width={width} style={style} />;
-  } else if (gesture[0] === 'k') {
-    c = <Key gesture={newGesture} width={width} style={style} />;
-  } else {
-    c = (
-      <Line
-        gesture={newGesture}
-        width={width}
-        height={height}
-        lineWidth={lineWidth}
-        style={style}
-      />
-    );
+  switch (gesture[0]) {
+    case 'r': {
+      c = <Rocker gesture={gesture as RockerGesture} width={width} style={style} />;
+      break;
+    }
+    case 'w': {
+      c = <Wheel gesture={gesture as WheelGesture} width={width} style={style} />;
+      break;
+    }
+    case 'k': {
+      c = <Key gesture={gesture} width={width} style={style} />;
+      break;
+    }
+    default: {
+      c = (
+        <Line gesture={gesture} width={width} height={height} lineWidth={lineWidth} style={style} />
+      );
+    }
   }
 
   let message: string | undefined;
-  if (context === 's') {
-    message = `* ${i18n.t('context_with_selection')}`;
-  } else if (context === 'l') {
-    message = `* ${i18n.t('context_on_link')}`;
-  } else if (context === 'i') {
-    message = `* ${i18n.t('context_on_image')}`;
-  } else if (gestures[`s${gesture}`]) {
-    message = `* ${i18n.t('context_not_selection')}`;
-  } else if (gestures[`l${gesture}`] && gestures[`i${gesture}`]) {
-    message = `* ${i18n.t('context_not_links_images')}`;
-  } else if (gestures[`l${gesture}`]) {
-    message = `* ${i18n.t('context_not_link')}`;
-  } else if (gestures[`i${gesture}`]) {
-    message = `* ${i18n.t('context_not_image')}`;
+  switch (context) {
+    case 's': {
+      message = `* ${i18n.t('context_with_selection')}`;
+      break;
+    }
+    case 'l': {
+      message = `* ${i18n.t('context_on_link')}`;
+      break;
+    }
+    case 'i': {
+      message = `* ${i18n.t('context_on_image')}`;
+      break;
+    }
+    default: {
+      if (gestures[`s${gesture}`]) {
+        message = `* ${i18n.t('context_not_selection')}`;
+      } else if (gestures[`l${gesture}`] && gestures[`i${gesture}`]) {
+        message = `* ${i18n.t('context_not_links_images')}`;
+      } else if (gestures[`l${gesture}`]) {
+        message = `* ${i18n.t('context_not_link')}`;
+      } else if (gestures[`i${gesture}`]) {
+        message = `* ${i18n.t('context_not_image')}`;
+      }
+    }
   }
 
   if (!message) {

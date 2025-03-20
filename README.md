@@ -1,1 +1,1 @@
-# smoothgesturesplus
+# Silky Gestures

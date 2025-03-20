@@ -1,11 +1,14 @@
 import ReactDOM from 'react-dom/client';
-import { SmoothGestures } from './smooth-gestures';
+
+import App from './app';
 
 export default defineContentScript({
   matches: ['*://*/*'],
+  cssInjectionMode: 'ui',
+
   async main(ctx) {
     const ui = await createShadowRootUi(ctx, {
-      name: 'smooth-gestures-plus',
+      name: 'silky-gestures',
       position: 'inline',
       anchor: 'body',
       append: 'first',
@@ -15,7 +18,7 @@ export default defineContentScript({
         container.append(wrapper);
 
         const root = ReactDOM.createRoot(wrapper);
-        root.render(<SmoothGestures />);
+        root.render(<App />);
         return { root, wrapper };
       },
       onRemove: (elements) => {

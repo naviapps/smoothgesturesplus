@@ -58,7 +58,7 @@ const init = () => {
               ),
             );
           }
-          if (t.url.match(/^file:\/\//)) {
+          if (/^file:\/\//.test(t.url)) {
             $('body').append(
               $('<p>').html(
                 chrome.i18n.getMessage(

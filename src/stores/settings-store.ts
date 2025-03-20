@@ -1,146 +1,219 @@
-import { combine } from 'zustand/middleware';
+import { isFQDN, isRgbColor } from 'validator';
+import { z } from 'zod';
+import { combine, createJSONStorage, persist, StateStorage } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 import { useStore } from 'zustand/react';
 import { createStore } from 'zustand/vanilla';
 
-import { LineDirection, RockerDirection, ValidGestures, WheelDirection } from '@/types';
-import { isLineDirection, isRockerDirection, isWheelDirection } from '@/utils';
+// Tabs
+export enum NewTabPage {
+  StartPage = 'start-page',
+  Homepage = 'homepage',
+  BlankPage = 'blank-page',
+  SpecificPage = 'specific-page',
+}
 
-export type SettingsState = {
-  holdButton: number;
-  contextOnLink: boolean;
-  newTabUrl: string;
-  newTabRight: boolean;
-  newTabLinkRight: boolean;
-  trailColor: string;
-  trailWidth: number;
-  trailBlock: boolean;
-  blacklist: string[];
-  selectToLink: boolean;
-  closeLastBlock: boolean;
-  gestures: Record<string, string>;
-  validGestures: ValidGestures;
-};
+export enum NewTabPosition {
+  AfterRelatedTabs = 'after-related-tabs',
+  AfterActiveTab = 'after-active-tab',
+  AsLastTab = 'as-last-tab',
+  AsTabStackWithRelatedTab = 'as-tab-stack-with-related-tab',
+}
+
+export enum DuplicatedTabPosition {
+  NextToOriginalTab = 'next-to-original-tab',
+  AsLastTab = 'as-last-tab',
+}
+
+export enum CloseTabActivation {
+  ActivateInRecentlyUsedOrder = 'activate-in-recently-used-order',
+  ActivateLeftInTabOrder = 'activate-left-in-tab-order',
+  ActivateRightInTabOrder = 'activate-right-in-tab-order',
+}
+
+// Settings
+export const SettingsStateSchema = z.object({
+  gestureMapping: z.record(z.string(), z.string()).default({
+    U: 'new-tab',
+    lU: 'open-link-in-new-tab',
+    D: 'pin-unpin-tab',
+    L: 'history-back',
+    rRL: 'history-back',
+    R: 'history-forward',
+    rLR: 'history-forward',
+    UL: 'previous-tab-by-order',
+    UR: 'next-tab-by-order',
+    //wU: 'page-up',
+    //wD: 'page-down',
+    wU: 'previous-tab-by-order',
+    wD: 'next-tab-by-order',
+    DR: 'close-tab',
+    LU: 'reopen-closed-tab',
+    DU: 'duplicate-selected-tabs',
+    lDU: 'open-link-in-background-tab',
+    UD: 'reload-page',
+    UDU: 'force-page-reload',
+    URD: 'view-page-source',
+    RULD: 'fullscreen-mode',
+    DL: 'minimize',
+    RDLUR: 'options',
+  }),
+  lineStroke: z
+    .string()
+    .refine((str) => isRgbColor(str, { allowSpaces: true }))
+    .default('rgb(0,0,255)'),
+  lineStrokeWidth: z.number().int().min(1).max(4).default(2),
+  blacklists: z.array(z.string().refine((str) => isFQDN(str))).default([]),
+  // Tabs
+  newTabPage: z.nativeEnum(NewTabPage).default(NewTabPage.StartPage),
+  specificPage: z.string().url().optional(),
+  newTabPosition: z.nativeEnum(NewTabPosition).default(NewTabPosition.AfterRelatedTabs),
+  newTabFromLinkOpensInBackground: z.boolean().default(false),
+  duplicateTabPosition: z
+    .nativeEnum(DuplicatedTabPosition)
+    .default(DuplicatedTabPosition.NextToOriginalTab),
+  alwaysActivateRelatedTab: z.boolean().default(true),
+  closeTabActivation: z
+    .nativeEnum(CloseTabActivation)
+    .default(CloseTabActivation.ActivateInRecentlyUsedOrder),
+  keepWindowOpenWhenLastTabIsClosed: z.boolean().default(false),
+  focusPageContentOnNewTab: z.boolean().default(false),
+  // Mouse
+  performGesturesWithAltKey: z.boolean().default(false),
+  gestureSensitivity: z.number().int().min(5).max(100).default(20),
+});
+
+export type SettingsState = z.infer<typeof SettingsStateSchema>;
 
 export type SettingsActions = {
-  setHoldButton: (holdButton: number) => void;
-  setContextOnLink: (contextOnLink: boolean) => void;
-  setNewTabUrl: (newTabUrl: string) => void;
-  setNewTabRight: (newTabRight: boolean) => void;
-  setNewTabLinkRight: (newTabLinkRight: boolean) => void;
-  setTrailColor: (trailColor: string) => void;
-  setTrailWidth: (trailWidth: number) => void;
-  setTrailBlock: (trailBlock: boolean) => void;
-  setBlacklist: (blacklist: string[]) => void;
-  setSelectToLink: (selectToLink: boolean) => void;
-  setCloseLastBlock: (closeLastBlock: boolean) => void;
-  setGestures: (gestures: Record<string, string>) => void;
-  updateValidGestures: () => void;
+  setGestureMapping: (gesture: string, action: string) => void;
+  removeGestureMapping: (gesture: string) => void;
+  setLineStroke: (lineStroke: string) => void;
+  setLineStrokeWidth: (lineStrokeWidth: number) => void;
+  addBlacklist: (blacklist: string) => void;
+  removeBlacklist: (blacklist: string) => void;
+  restore: (data: unknown) => void;
+  reset: () => void;
+  // Tabs
+  setNewTabPage: (newTabPage: NewTabPage) => void;
+  setSpecificPage: (specificPage: string) => void;
+  setNewTabPosition: (newTabPosition: NewTabPosition) => void;
+  setNewTabFromLinkOpensInBackground: (newTabFromLinkOpensInBackground: boolean) => void;
+  setDuplicateTabPosition: (duplicateTabPosition: DuplicatedTabPosition) => void;
+  setAlwaysActivateRelatedTab: (alwaysActivateRelatedTab: boolean) => void;
+  setCloseTabActivation: (closeTabActivation: CloseTabActivation) => void;
+  setKeepWindowOpenWhenLastTabIsClosed: (keepWindowOpenWhenLastTabIsClosed: boolean) => void;
+  setFocusPageContentOnNewTab: (focusPageContentOnNewTab: boolean) => void;
+  // Mouse
+  setPerformGesturesWithAltKey: (performGesturesWithAltKey: boolean) => void;
+  setGestureSensitivity: (gestureSensitivity: number) => void;
 };
 
-export type SettingsStore = SettingsState & SettingsActions;
+const initialState = SettingsStateSchema.parse({});
 
-const initialState: SettingsState = {
-  holdButton: 2,
-  contextOnLink: false,
-  newTabUrl: 'chrome://newtab/',
-  newTabRight: false,
-  newTabLinkRight: true,
-  trailColor: 'rgba(255, 0, 0, 1)',
-  trailWidth: 2,
-  trailBlock: false,
-  blacklist: [],
-  selectToLink: true,
-  closeLastBlock: false,
-  gestures: {
-    U: 'new-tab',
-    lU: 'new-tab-link',
-    D: 'toggle-pin',
-    L: 'page-back',
-    rRL: 'page-back',
-    R: 'page-forward',
-    rLR: 'page-forward',
-    UL: 'prev-tab',
-    UR: 'next-tab',
-    wU: 'goto-top',
-    wD: 'goto-bottom',
-    DR: 'close-tab',
-    LU: 'undo-close',
-    DU: 'clone-tab',
-    lDU: 'new-tab-back',
-    UD: 'reload-tab',
-    UDU: 'reload-tab-full',
-    URD: 'view-source',
-    UDR: 'split-tabs',
-    UDL: 'merge-tabs',
-    LDR: 'show-cookies',
-    RULD: 'fullscreen-window',
-    DL: 'minimize-window',
-    RU: 'maximize-window',
-    RDLUR: 'options',
+const storage: StateStorage = {
+  getItem: async (name) => {
+    const result = await browser.storage.local.get(name);
+    return result[name] ?? null;
   },
-  validGestures: {},
+  setItem: async (name, value) => {
+    await browser.storage.local.set({ [name]: value });
+  },
+  removeItem: async (name) => {
+    await browser.storage.local.remove(name);
+  },
 };
 
-export const settingsStore = createStore<SettingsStore>(
-  combine(initialState, (set, get) => ({
-    setHoldButton: (holdButton) => set({ holdButton }),
-    setContextOnLink: (contextOnLink) => set({ contextOnLink }),
-    setNewTabUrl: (newTabUrl) => set({ newTabUrl }),
-    setNewTabRight: (newTabRight) => set({ newTabRight }),
-    setNewTabLinkRight: (newTabLinkRight) => set({ newTabLinkRight }),
-    setTrailColor: (trailColor) => set({ trailColor }),
-    setTrailWidth: (trailWidth) => set({ trailWidth }),
-    setTrailBlock: (trailBlock) => set({ trailBlock }),
-    setBlacklist: (blacklist) => set({ blacklist }),
-    setSelectToLink: (selectToLink) => set({ selectToLink }),
-    setCloseLastBlock: (closeLastBlock) => set({ closeLastBlock }),
-    setGestures: (gestures) => set({ gestures }),
-    updateValidGestures: () => {
-      const validGestures: ValidGestures = {};
-      const { gestures } = get();
-      Object.keys(gestures).forEach((gesture) => {
-        const g = gesture.replace(/^[lis]/, '');
-        if (g.startsWith('k')) {
-          const mod = g.slice(1, 5);
-          validGestures.k ??= {};
-          validGestures.k[mod] ??= [];
-          validGestures.k[mod].push(g.slice(6));
-        } else if (g.startsWith('r')) {
-          validGestures.r ??= {};
-          let cur = validGestures.r;
-          for (let i = 1; i < g.length; i += 1) {
-            const dir = g[i] as RockerDirection;
-            if (isRockerDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
+export const settingsStore = createStore<SettingsState & SettingsActions>()(
+  persist(
+    immer(
+      combine(initialState, (set) => ({
+        setGestureMapping: (gesture: string, action: string) =>
+          set((state) => {
+            state.gestureMapping[gesture] = action;
+          }),
+        removeGestureMapping: (gesture: string) =>
+          set((state) => {
+            delete state.gestureMapping[gesture];
+          }),
+        setLineStroke: (lineStroke: string) =>
+          set((state) => {
+            state.lineStroke = lineStroke;
+          }),
+        setLineStrokeWidth: (lineStrokeWidth: number) =>
+          set((state) => {
+            state.lineStrokeWidth = lineStrokeWidth;
+          }),
+        addBlacklist: (blacklist) =>
+          set((state) => {
+            if (!state.blacklists.includes(blacklist)) {
+              state.blacklists.push(blacklist);
             }
+          }),
+        removeBlacklist: (blacklist) =>
+          set((state) => {
+            state.blacklists = state.blacklists.filter((b) => b !== blacklist);
+          }),
+        restore: (data) => {
+          const parsed = SettingsStateSchema.safeParse(data);
+          if (parsed.success) {
+            set((state) => Object.assign(state, parsed.data));
           }
-        } else if (g.startsWith('w')) {
-          validGestures.w ??= {};
-          let cur = validGestures.w;
-          for (let i = 1; i < g.length; i += 1) {
-            const dir = g[i] as WheelDirection;
-            if (isWheelDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
-            }
-          }
-        } else {
-          let cur = validGestures;
-          for (let i = 0; i < g.length; i += 1) {
-            const dir = g[i] as LineDirection;
-            if (isLineDirection(dir)) {
-              cur[dir] ??= {};
-              cur = cur[dir];
-            }
-          }
-        }
-      });
-      set({ validGestures });
+        },
+        reset: () => set(() => initialState),
+        // Tabs
+        setNewTabPage: (newTabPage: NewTabPage) =>
+          set((state) => {
+            state.newTabPage = newTabPage;
+          }),
+        setSpecificPage: (specificPage: string) =>
+          set((state) => {
+            state.specificPage = specificPage;
+          }),
+        setNewTabPosition: (newTabPosition: NewTabPosition) =>
+          set((state) => {
+            state.newTabPosition = newTabPosition;
+          }),
+        setNewTabFromLinkOpensInBackground: (newTabFromLinkOpensInBackground: boolean) =>
+          set((state) => {
+            state.newTabFromLinkOpensInBackground = newTabFromLinkOpensInBackground;
+          }),
+        setDuplicateTabPosition: (duplicateTabPosition: DuplicatedTabPosition) =>
+          set((state) => {
+            state.duplicateTabPosition = duplicateTabPosition;
+          }),
+        setAlwaysActivateRelatedTab: (alwaysActivateRelatedTab: boolean) =>
+          set((state) => {
+            state.alwaysActivateRelatedTab = alwaysActivateRelatedTab;
+          }),
+        setCloseTabActivation: (closeTabActivation: CloseTabActivation) =>
+          set((state) => {
+            state.closeTabActivation = closeTabActivation;
+          }),
+        setKeepWindowOpenWhenLastTabIsClosed: (keepWindowOpenWhenLastTabIsClosed: boolean) =>
+          set((state) => {
+            state.keepWindowOpenWhenLastTabIsClosed = keepWindowOpenWhenLastTabIsClosed;
+          }),
+        setFocusPageContentOnNewTab: (focusPageContentOnNewTab: boolean) =>
+          set((state) => {
+            state.focusPageContentOnNewTab = focusPageContentOnNewTab;
+          }),
+        // Mouse
+        setPerformGesturesWithAltKey: (performGesturesWithAltKey: boolean) =>
+          set((state) => {
+            state.performGesturesWithAltKey = performGesturesWithAltKey;
+          }),
+        setGestureSensitivity: (gestureSensitivity: number) =>
+          set((state) => {
+            state.gestureSensitivity = gestureSensitivity;
+          }),
+      })),
+    ),
+    {
+      name: 'settings',
+      storage: createJSONStorage(() => storage),
     },
-  })),
+  ),
 );
-
-settingsStore.getState().updateValidGestures();
 
 export const useSettings = () => useStore(settingsStore);

@@ -46,8 +46,8 @@ export const createActions = (
     if (!sender.tab || !sender.tab.windowId) {
       return;
     }
-    const currWin = await browser.windows.get(sender.tab.windowId);
-    if (!currWin.tabs) {
+    const currentWin = await browser.windows.get(sender.tab.windowId);
+    if (!currentWin.tabs) {
       return;
     }
     //
@@ -61,10 +61,10 @@ export const createActions = (
       t.sort((e, t) => {
         return t.focused < e.focused ? 1 : e.focused < t.focused ? -1 : 0;
       });
-      const o = parseInt(t[t.length - 2][0]);
+      const o = Number.parseInt(t.at(-2)[0]);
       if (o) {
-        for (let i = 0; i < tabs.length; i += 1) {
-          await browser.tabs.move(tabs[i].id, { windowId: o, index: 1000000 });
+        for (const tab of tabs) {
+          await browser.tabs.move(tab.id, { windowId: o, index: 1_000_000 });
         }
         await browser.tabs.update(sender.tab.id, { active: true });
         await browser.windows.update(o, { focused: true });
@@ -83,23 +83,7 @@ export const createActions = (
     n.href = e;
     n.download = t || 'download';
     const o = document.createEvent('MouseEvents');
-    o.initMouseEvent(
-      'click',
-      true,
-      false,
-      window,
-      0,
-      0,
-      0,
-      0,
-      0,
-      false,
-      false,
-      false,
-      false,
-      0,
-      null,
-    );
+    o.initMouseEvent('click', true, false, globalThis, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     n.dispatchEvent(o);
   };
 
@@ -135,17 +119,17 @@ export const createActions = (
       return;
     }
     const canvas = document.createElement('canvas');
-    canvas.height = Math.min(ssf.height, 32768);
-    canvas.width = Math.min(ssf.width, 32768);
+    canvas.height = Math.min(ssf.height, 32_768);
+    canvas.width = Math.min(ssf.width, 32_768);
     const img = document.createElement('img');
-    const ctx = canvas.getContext('2d');
-    let hNum = 0;
-    let wNum = 0;
+    const context = canvas.getContext('2d');
+    let hNumber = 0;
+    let wNumber = 0;
     const captureTab = async () => {
       await browser.scripting.executeScript({
         target: { tabId: tab.id },
         func: () => {
-          window.scrollTo(hNum * ssf.screenh, wNum * ssf.screenw);
+          window.scrollTo(hNumber * ssf.screenh, wNumber * ssf.screenw);
         },
       });
       setTimeout(async () => {
@@ -154,23 +138,23 @@ export const createActions = (
       }, 80);
     };
     img.addEventListener('load', async () => {
-      ctx.drawImage(
+      context.drawImage(
         img,
         0,
         0,
         img.width,
         img.height,
-        Math.min(wNum * img.width, ssf.width - ssf.screenw),
-        Math.min(hNum * img.height, ssf.height - ssf.screenh),
+        Math.min(wNumber * img.width, ssf.width - ssf.screenw),
+        Math.min(hNumber * img.height, ssf.height - ssf.screenh),
         img.width,
         img.height,
       );
-      if (hNum + 1 < canvas.height / ssf.screenh) {
-        hNum += 1;
+      if (hNumber + 1 < canvas.height / ssf.screenh) {
+        hNumber += 1;
         await captureTab();
-      } else if (wNum + 1 < canvas.width / ssf.screenw) {
-        hNum = 0;
-        wNum += 1;
+      } else if (wNumber + 1 < canvas.width / ssf.screenw) {
+        hNumber = 0;
+        wNumber += 1;
         await captureTab();
       } else {
         await browser.scripting.executeScript({
@@ -189,12 +173,12 @@ export const createActions = (
 
   const S = (e) => {
     const t = e.indexOf(',');
-    const n = e.substr(0, t).match(/^data:([^;]+)(;.*)?$/);
-    let o = e.substr(t + 1);
+    const n = e.slice(0, Math.max(0, t)).match(/^data:([^;]+)(;.*)?$/);
+    let o = e.slice(t + 1);
     if (n[2] === ';base64') {
       o = ((e) => {
         const t = atob(e);
-        const n = new Array(t.length);
+        const n = Array.from({ length: t.length });
         for (let o = 0; o < t.length; o += 1) {
           n[o] = t.charCodeAt(o);
         }
