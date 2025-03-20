@@ -28,7 +28,7 @@ module.exports = {
         es6: true,
       },
       extends: [
-        './.wxt/eslintrc-auto-import.js',
+        // './.wxt/eslintrc-auto-import.js',
         'airbnb',
         'airbnb-typescript',
         'airbnb/hooks',
@@ -47,6 +47,8 @@ module.exports = {
         'import/no-extraneous-dependencies': 'off',
         eqeqeq: ['error', 'always'],
         '@typescript-eslint/no-use-before-define': 'off',
+        'no-await-in-loop': 'off',
+        'no-restricted-syntax': 'off',
         //
         'import/no-cycle': 'error',
         'linebreak-style': ['error', 'unix'],

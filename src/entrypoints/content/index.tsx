@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom/client';
+
 import { SmoothGestures } from './smooth-gestures';
 
 export default defineContentScript({

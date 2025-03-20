@@ -146,11 +146,11 @@ l.localChanged = (e) => {
   }
 };
 
-const isMac = navigator.platform.indexOf('Mac') !== -1;
-const isLinux = navigator.platform.indexOf('Linux') !== -1;
-let m = null;
+const navMac = navigator.userAgent.includes('Mac');
+const navLinux = navigator.userAgent.includes('Linux');
+let nativePort = null;
 const contents = {};
-const f = { active: null, prevActive: null, closed: [], tab: {} };
+const states = { active: null, prevActive: null, closed: [], tab: {} };
 const b = {};
 const w = null;
 let chainGesture = null;
@@ -161,7 +161,7 @@ const v = Date.now() / 1000 > 1745208e3;
  * System Defaults
  */
 const defaults = {
-  settings: JSON.stringify({
+  settings: {
     holdButton: 2,
     contextOnLink: false,
     newTabUrl: 'chrome://newtab/',
@@ -172,101 +172,101 @@ const defaults = {
     trailBlock: false,
     blacklist: [],
     selectToLink: true,
-  }),
-  gestures: JSON.stringify({
-    U: 'new-tab',
-    lU: 'new-tab-link',
-    D: 'toggle-pin',
-    L: 'page-back',
-    rRL: 'page-back',
-    R: 'page-forward',
-    rLR: 'page-forward',
-    UL: 'prev-tab',
-    UR: 'next-tab',
-    wU: 'goto-top',
-    wD: 'goto-bottom',
-    DR: 'close-tab',
-    LU: 'undo-close',
-    DU: 'clone-tab',
-    lDU: 'new-tab-back',
-    UD: 'reload-tab',
-    UDU: 'reload-tab-full',
-    URD: 'view-source',
-    UDR: 'split-tabs',
-    UDL: 'merge-tabs',
-    LDR: 'show-cookies',
-    RULD: 'fullscreen-window',
-    DL: 'minimize-window',
-    RU: 'maximize-window',
+  },
+  gestures: {
+    U: 'newTab',
+    lU: 'newTabLink',
+    D: 'togglePin',
+    L: 'pageBack',
+    rRL: 'pageBack',
+    R: 'pageForward',
+    rLR: 'pageForward',
+    UL: 'prevTab',
+    UR: 'nextTab',
+    wU: 'gotoTop',
+    wD: 'gotoBottom',
+    DR: 'closeTab',
+    LU: 'undoClose',
+    DU: 'cloneTab',
+    lDU: 'newTabBack',
+    UD: 'reloadTab',
+    UDU: 'reloadTabFull',
+    URD: 'viewSource',
+    UDR: 'splitTabs',
+    UDL: 'mergeTabs',
+    LDR: 'showCookies',
+    RULD: 'fullscreenWindow',
+    DL: 'minimizeWindow',
+    RU: 'maximizeWindow',
     RDLUR: 'options',
-  }),
+  },
 };
 
 const categories = {
   cat_page_navigation: {
     actions: [
-      'page-back',
-      'page-forward',
-      'page-back-close',
-      'reload-tab',
-      'reload-tab-full',
-      'reload-all-tabs',
+      'pageBack',
+      'pageForward',
+      'pageBackClose',
+      'reloadTab',
+      'reloadTabFull',
+      'reloadAllTabs',
       'stop',
-      'parent-dir',
-      'page-next',
-      'page-prev',
+      'parentDir',
+      'pageNext',
+      'pagePrev',
     ],
   },
   cat_tab_management: {
     actions: [
-      'new-tab',
-      'new-tab-link',
-      'new-tab-back',
-      'navigate-tab',
-      'close-tab',
-      'close-other-tabs',
-      'close-left-tabs',
-      'close-right-tabs',
-      'undo-close',
-      'clone-tab',
-      'new-window',
-      'new-window-link',
-      'close-window',
-      'prev-tab',
-      'next-tab',
-      'split-tabs',
-      'merge-tabs',
-      'tab-to-left',
-      'tab-to-right',
-      'toggle-pin',
+      'newTab',
+      'newTabLink',
+      'newTabBack',
+      'navigateTab',
+      'closeTab',
+      'closeOtherTabs',
+      'closeLeftTabs',
+      'closeRightTabs',
+      'undoClose',
+      'cloneTab',
+      'newWindow',
+      'newWindowLink',
+      'closeWindow',
+      'prevTab',
+      'nextTab',
+      'splitTabs',
+      'mergeTabs',
+      'tabToLeft',
+      'tabToRight',
+      'togglePin',
       'pin',
       'unpin',
     ],
   },
   cat_utilities: {
     actions: [
-      'goto-top',
-      'goto-bottom',
-      'page-up',
-      'page-down',
+      'gotoTop',
+      'gotoBottom',
+      'pageUp',
+      'pageDown',
       'print',
-      'view-source',
-      'show-cookies',
-      'search-sel',
-      'zoom-in',
-      'zoom-out',
-      'zoom-zero',
-      'open-image',
-      'save-image',
-      'hide-image',
-      'zoom-img-in',
-      'zoom-img-out',
-      'zoom-img-zero',
-      'find-prev',
-      'find-next',
+      'viewSource',
+      'showCookies',
+      'searchSel',
+      'zoomIn',
+      'zoomOut',
+      'zoomZero',
+      'openImage',
+      'saveImage',
+      'hideImage',
+      'zoomImgIn',
+      'zoomImgOut',
+      'zoomImgZero',
+      'findPrev',
+      'findNext',
       'copy',
-      'copy-link',
-      'toggle-bookmark',
+      'copyLink',
+      'toggleBookmark',
       'bookmark',
       'unbookmark',
     ],
@@ -274,17 +274,17 @@ const categories = {
   cat_other: {
     actions: [
       'options',
-      'fullscreen-window',
-      'minimize-window',
-      'maximize-window',
-      'open-screenshot',
-      'save-screenshot',
-      'open-screenshot-full',
-      'save-screenshot-full',
-      'open-history',
-      'open-downloads',
-      'open-extensions',
-      'open-bookmarks',
+      'fullscreenWindow',
+      'minimizeWindow',
+      'maximizeWindow',
+      'openScreenshot',
+      'saveScreenshot',
+      'openScreenshotFull',
+      'saveScreenshotFull',
+      'openHistory',
+      'openDownloads',
+      'openExtensions',
+      'openBookmarks',
     ],
   },
   cat_custom: { customActions: true },
@@ -296,20 +296,20 @@ const categories = {
  * Action Functions
  */
 const contexts = {
-  'new-tab-link': 'l',
-  'new-tab-back': 'l',
-  'new-window-link': 'l',
-  'copy-link': 'l',
-  'zoom-img-in': 'i',
-  'zoom-img-out': 'i',
-  'zoom-img-zero': 'i',
-  'open-image': 'i',
-  'save-image': 'i',
-  'hide-image': 'i',
-  'search-sel': 's',
+  newTabLink: 'l',
+  newTabBack: 'l',
+  newWindowLink: 'l',
+  copyLink: 'l',
+  zoomImgIn: 'i',
+  zoomImgOut: 'i',
+  zoomImgZero: 'i',
+  openImage: 'i',
+  saveImage: 'i',
+  hideImage: 'i',
+  searchSel: 's',
   copy: 's',
-  'find-prev': 's',
-  'find-next': 's',
+  findPrev: 's',
+  findNext: 's',
 };
 
 const R = null;
@@ -335,6 +335,105 @@ chrome.runtime.onConnect.addListener((e) => {
   }
 });
 
+const handleMessage = function (id, data) {
+  if (data.selection && settings.gestures[`s${data.gesture}`]) {
+    data.gesture = `s${data.gesture}`;
+  } else if (data.links && data.links.length > 0 && settings.gestures[`l${data.gesture}`]) {
+    data.gesture = `l${data.gesture}`;
+  } else if (data.images && data.images.length > 0 && settings.gestures[`i${data.gesture}`]) {
+    data.gesture = `i${data.gesture}`;
+  }
+
+  if (data.gesture && settings.gestures[data.gesture]) {
+    const e = settings.gestures[data.gesture];
+    if (chainGesture) {
+      clearTimeout(chainGesture.timeout);
+    }
+    chainGesture = null;
+    if (data.gesture[0] === 'r') {
+      chainGesture = {
+        rocker: true,
+        timeout: window.setTimeout(() => {
+          chainGesture = null;
+        }, 2000),
+      };
+    }
+
+    if (data.gesture[0] === 'w') {
+      chainGesture = {
+        wheel: true,
+        timeout: window.setTimeout(() => {
+          chainGesture = null;
+        }, 2000),
+      };
+    }
+
+    if (chainGesture && data.buttonDown) {
+      chainGesture.buttonDown = data.buttonDown;
+    }
+
+    if (chainGesture && data.startPoint) {
+      chainGesture.startPoint = data.startPoint;
+    }
+
+    const call = chainGesture
+      ? async () => {
+          if (!chainGesture) {
+            return;
+          }
+          const tabs = await browser.tabs.query({ active: true, lastFocusedWindow: true });
+          if (!tabs.length) {
+            return;
+          }
+          chainGesture.tabId = tabs[0].id;
+          for (id in contents) {
+            if (tabs[0].id === contents[id].detail.tabId) {
+              contents[id].postMessage({ chain: chainGesture });
+            }
+          }
+        }
+      : () => {};
+
+    try {
+      const actions = createActions(id, call, data, settings);
+      if (actions[e]) {
+        actions[e]();
+      } else if (settings.externalactions[e.substr(0, 32)]) {
+        chrome.runtime.sendMessage(e.substr(0, 32), {
+          doaction: e.substr(33),
+        });
+      } else if (settings.customactions[e]) {
+        const i = settings.customactions[e];
+        if (i.env === 'page') {
+          O(id, i.code, call);
+        }
+      }
+    } catch (err) {}
+  }
+};
+
+const handleNativeport = async (mess) => {
+  if (mess && mess.rightclick) {
+    if (typeof mess.rightclick.x !== 'number' || typeof mess.rightclick.y !== 'number') {
+      return;
+    }
+    if (nativePort) {
+      nativePort.postMessage({
+        click: {
+          x: mess.rightclick.x,
+          y: mess.rightclick.y,
+          b: 2,
+        },
+        timestamp: Date.now(),
+      });
+    } else if (!settings.blockDoubleclickAlert && (navMac || navLinux)) {
+      const a = screen.availHeight / 2 - 320 / 1.5;
+      const r = screen.availWidth / 2 - 375;
+      window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${a},left=${r}`);
+    }
+  }
+};
+
 /*
  * Connect Tabs
  */
@@ -345,124 +444,7 @@ const initConnectTab = (port) => {
   const { tab } = port.sender;
   const { id } = port.detail;
   contents[id] = port;
-  contents[id].onMessage.addListener(
-    function (id, mess) {
-      console.log('content_message', JSON.stringify(mess));
-      if (mess.selection && mess.selection.length > 0 && settings.gestures[`s${mess.gesture}`]) {
-        mess.gesture = `s${mess.gesture}`;
-      } else if (mess.links && mess.links.length > 0 && settings.gestures[`l${mess.gesture}`]) {
-        mess.gesture = `l${mess.gesture}`;
-      } else if (mess.images && mess.images.length > 0 && settings.gestures[`i${mess.gesture}`]) {
-        mess.gesture = `i${mess.gesture}`;
-      }
-
-      if (mess.gesture && settings.gestures[mess.gesture]) {
-        const e = settings.gestures[mess.gesture];
-        console.log('gesture', mess.gesture, e);
-        if (chainGesture) {
-          clearTimeout(chainGesture.timeout);
-        }
-        chainGesture = null;
-        if (mess.gesture[0] === 'r') {
-          chainGesture = {
-            rocker: true,
-            timeout: setTimeout(() => {
-              chainGesture = null;
-            }, 2e3),
-          };
-        }
-
-        if (mess.gesture[0] === 'w') {
-          chainGesture = {
-            wheel: true,
-            timeout: setTimeout(() => {
-              chainGesture = null;
-            }, 2e3),
-          };
-        }
-
-        if (chainGesture && mess.buttonDown) {
-          chainGesture.buttonDown = mess.buttonDown;
-        }
-
-        if (chainGesture && mess.startPoint) {
-          chainGesture.startPoint = mess.startPoint;
-        }
-
-        const call = chainGesture
-          ? () => {
-              chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
-                if (chainGesture && e.length) {
-                  chainGesture.tabId = e[0].id;
-                  for (id in contents) {
-                    if (e[0].id === contents[id].detail.tabId) {
-                      contents[id].postMessage({ chain: chainGesture });
-                    }
-                  }
-                }
-              });
-            }
-          : () => {};
-
-        try {
-          const actions = createActions(id, call, mess, settings);
-          if (actions[e]) {
-            actions[e]();
-          } else if (settings.externalactions[e.substr(0, 32)]) {
-            chrome.runtime.sendMessage(e.substr(0, 32), {
-              doaction: e.substr(33),
-            });
-          } else if (settings.customactions[e]) {
-            const i = settings.customactions[e];
-            if (i.env === 'page') {
-              O(id, i.code, call);
-            }
-          }
-        } catch (err) {}
-      }
-      if (mess.syncButton) {
-        if (chainGesture) {
-          if (chainGesture.buttonDown) {
-            chainGesture.buttonDown = {};
-          }
-          chainGesture.buttonDown[mess.syncButton.id] = mess.syncButton.down;
-        }
-
-        setTimeout(() => {
-          chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tab) => {
-            for (id in contents) {
-              if (tab[0].id === contents[id].detail.tabId) {
-                contents[id].postMessage({ syncButton: mess.syncButton });
-              }
-            }
-          });
-        }, 20);
-      }
-
-      if (mess.nativeport && mess.nativeport.rightclick) {
-        if (
-          typeof mess.nativeport.rightclick.x !== 'number' ||
-          typeof mess.nativeport.rightclick.y !== 'number'
-        ) {
-          return;
-        }
-        if (m) {
-          m.postMessage({
-            click: {
-              x: mess.nativeport.rightclick.x,
-              y: mess.nativeport.rightclick.y,
-              b: 2,
-            },
-            timestamp: Date.now(),
-          });
-        } else if (!settings.blockDoubleclickAlert && (isMac || isLinux)) {
-          const a = screen.availHeight / 2 - 320 / 1.5;
-          const r = screen.availWidth / 2 - 375;
-          window.open('rightclick.html', 'rightclick', `width=750,height=320,top=${a},left=${r}`);
-        }
-      }
-    }.bind(null, id),
-  );
+  contents[id].onMessage.addListener(handleMessage.bind(null, id));
   contents[id].onDisconnect.addListener(() => {
     delete contents[id];
   });
@@ -526,14 +508,14 @@ const O = (e, t, n, o) => {
 };
 
 const n = (e) => {
-  if (f.active != e) {
+  if (states.active != e) {
     for (id in contents) {
-      if (f.active == contents[id].detail.tabId) {
+      if (states.active == contents[id].detail.tabId) {
         contents[id].postMessage({ windowBlurred: true });
       }
     }
-    f.prevActive = f.active;
-    f.active = e;
+    states.prevActive = states.active;
+    states.active = e;
   }
 };
 
@@ -578,8 +560,8 @@ const z = (d, u) => {
           e.title += String.fromCharCode(i[r].charCodeAt(s) - 10);
         }
       }
-      f.tab[d] || (f.tab[d] = { history: [], titles: [] });
-      const c = f.tab[d];
+      states.tab[d] || (states.tab[d] = { history: [], titles: [] });
+      const c = states.tab[d];
       c.winId = e.windowId;
       c.index = e.index;
       const l = c.history.indexOf(e.url);
@@ -616,13 +598,13 @@ chrome.tabs.onUpdated.addListener(z);
 chrome.tabs.onMoved.addListener(z);
 chrome.tabs.onAttached.addListener(z);
 chrome.tabs.onRemoved.addListener((e) => {
-  if (f.tab[e]) {
-    f.closed.push(f.tab[e]);
+  if (states.tab[e]) {
+    states.closed.push(states.tab[e]);
   }
-  while (f.closed.length > 50) {
-    f.closed.shift();
+  while (states.closed.length > 50) {
+    states.closed.shift();
   }
-  delete f.tab[e];
+  delete states.tab[e];
 });
 chrome.windows.onRemoved.addListener((e) => {
   delete b[e];
@@ -750,35 +732,35 @@ window.addEventListener('online', E, true);
 
 let B = null;
 
-const P = (o) => {
-  m ||
+const connectNative = (o) => {
+  nativePort ||
     chrome.permissions.contains({ permissions: ['nativeMessaging'] }, (e) => {
       console.log('connectNative', e);
       if (e) {
         B = true;
         try {
-          m = chrome.runtime.connectNative('com.smoothgesturesplus.extras');
-          m.onMessage.addListener((e) => {
+          nativePort = chrome.runtime.connectNative('com.smoothgesturesplus.extras');
+          nativePort.onMessage.addListener((e) => {
             console.log('nativemessage', e);
-            if (m) {
+            if (nativePort) {
               if (n) {
                 clearTimeout(n);
                 n = null;
                 t();
               }
               if (e.version) {
-                m.version = e.version;
+                nativePort.version = e.version;
               }
             }
           });
-          m.onDisconnect.addListener(() => {
-            if (m) {
-              m = null;
+          nativePort.onDisconnect.addListener(() => {
+            if (nativePort) {
+              nativePort = null;
               console.log('nativedisconnect: retryTimeout: ', o);
               clearTimeout(n);
               n = null;
               if (o > 0 && o < 6e4) {
-                setTimeout(P, o, 1.01 * o);
+                setTimeout(connectNative, o, 1.01 * o);
               }
             }
           });
@@ -802,7 +784,7 @@ const P = (o) => {
     });
 };
 
-P(1000);
+connectNative(1000);
 
 const connectExistingTabs = () => {
   chrome.windows.getAll({ populate: true }, (e) => {
@@ -810,7 +792,7 @@ const connectExistingTabs = () => {
       b[e[x].id] = {};
       for (y in e[x].tabs) {
         ((e) => {
-          f.tab[e.id] = {
+          states.tab[e.id] = {
             winId: e.windowId,
             index: e.index,
             history: [e.url],
@@ -875,7 +857,7 @@ const initialize = () => {
   setTimeout(connectExistingTabs, 0);
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, (e) => {
     if (e.length) {
-      f.active = e[0].id;
+      states.active = e[0].id;
     }
   });
 };
@@ -884,7 +866,10 @@ window.defaults = defaults;
 window.categories = categories;
 window.contexts = contexts;
 window.getTabStatus = getTabStatus;
-window.connectNative = P;
+window.connectNative = connectNative;
 window.isNative = () => {
-  return !!m && (m.version ? { loaded: true, version: m.version } : { loaded: false });
+  return (
+    !!nativePort &&
+    (nativePort.version ? { loaded: true, version: nativePort.version } : { loaded: false })
+  );
 };

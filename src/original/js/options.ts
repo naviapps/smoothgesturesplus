@@ -23,10 +23,6 @@ const c = (e, t) => {
   return chrome.i18n.getMessage(e.replace(/-/g, '_'), t);
 };
 
-chrome.runtime.getBackgroundPage((e) => {
-  e.ping();
-});
-
 $(() => {
   const e = t.match(/__MSG_([a-zA-Z0-9_\-@]+)(\{\{([^|}]+(\|\|[^|}]+)*)\}\})?__/);
   let t = $('body').html();
@@ -126,8 +122,8 @@ const n = () => {
   });
   $('#reset.setting .button').on('click', () => {
     if (confirm(c('setting_warning_reset'))) {
-      chrome.runtime.getBackgroundPage((e) => {
-        i({ gestures: JSON.parse(e.defaults.gestures) });
+      chrome.runtime.getBackgroundPage((backgroundPage) => {
+        i({ gestures: JSON.parse(backgroundPage.defaults.gestures) });
         h();
         v();
       });
@@ -236,8 +232,8 @@ const n = () => {
 const s = () => {
   $('#extras.setting select').val(settings.blockDoubleclickAlert ? 0 : 1);
   const n = navigator.platform.indexOf('Mac') !== -1 ? '0.7' : '0.6';
-  chrome.runtime.getBackgroundPage((e) => {
-    const t = e.isNative();
+  chrome.runtime.getBackgroundPage((backgroundPage) => {
+    const t = backgroundPage.isNative();
     console.log('native', t);
     $('#note_extras_installed').css({
       display: t && (!t.loaded || t.version >= n) ? 'block' : 'none',
@@ -354,8 +350,8 @@ const o = () => {
         i({ blockDoubleclickAlert: false });
         chrome.permissions.request({ permissions: ['nativeMessaging'] }, (e) => {
           if (e) {
-            chrome.runtime.getBackgroundPage((e) => {
-              e.connectNative(1000);
+            chrome.runtime.getBackgroundPage((backgroundPage) => {
+              backgroundPage.connectNative(1000);
             });
             const t = document.createElement('a');
             if (n) {
@@ -413,8 +409,8 @@ const r = (t) => {
     for (const e in settings.gestures) {
       settings.gestures[e] === t && p(e);
     }
-    chrome.runtime.getBackgroundPage((e) => {
-      delete e.contexts[t];
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      delete backgroundPage.contexts[t];
     });
     m();
   }
@@ -474,17 +470,17 @@ var d = {
       d.action = $('#chooseaction').val();
       d.choose();
     });
-    chrome.runtime.getBackgroundPage((e) => {
-      for (const t in e.categories)
-        if (e.categories[t].actions) {
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      for (const t in backgroundPage.categories)
+        if (backgroundPage.categories[t].actions) {
           $('#chooseaction').append($('<option>').text(c(t)).prop('disabled', true));
-          for (let n = 0; n < e.categories[t].actions.length; n += 1)
+          for (let n = 0; n < backgroundPage.categories[t].actions.length; n += 1)
             $('#chooseaction').append(
               $('<option>')
-                .text(`- ${c(`action_${e.categories[t].actions[n]}`)}`)
-                .val(e.categories[t].actions[n]),
+                .text(`- ${c(`action_${backgroundPage.categories[t].actions[n]}`)}`)
+                .val(backgroundPage.categories[t].actions[n]),
             );
-        } else if (e.categories[t].customActions) {
+        } else if (backgroundPage.categories[t].customActions) {
           $('#chooseaction').append($('<option>').text('Custom Actions').prop('disabled', true));
           for (const s in settings.customactions) {
             $('#chooseaction').append(
@@ -514,8 +510,8 @@ var d = {
     }
   },
   gesturecallback(s) {
-    chrome.runtime.getBackgroundPage((e) => {
-      e.contexts[d.action] && (s = e.contexts[d.action] + s);
+    chrome.runtime.getBackgroundPage((backgroundPage) => {
+      backgroundPage.contexts[d.action] && (s = backgroundPage.contexts[d.action] + s);
       window.SG.callback = null;
       d.gesture = s;
       let t = null;
@@ -593,41 +589,41 @@ const g = [
   {
     id: 'page_navigation',
     actions: [
-      'page-back',
-      'page-forward',
-      'page-back-close',
-      'reload-tab',
-      'reload-tab-full',
-      'reload-all-tabs',
+      'pageBack',
+      'pageForward',
+      'pageBackClose',
+      'reloadTab',
+      'reloadTabFull',
+      'reloadAllTabs',
       'stop',
-      'parent-dir',
-      'page-next',
-      'page-prev',
+      'parentDir',
+      'pageNext',
+      'pagePrev',
     ],
   },
   {
     id: 'tab_management',
     actions: [
-      'new-tab',
-      'new-tab-link',
-      'new-tab-back',
-      'navigate-tab',
-      'close-tab',
-      'close-other-tabs',
-      'close-left-tabs',
-      'close-right-tabs',
-      'undo-close',
-      'clone-tab',
-      'new-window',
-      'new-window-link',
-      'close-window',
-      'prev-tab',
-      'next-tab',
-      'split-tabs',
-      'merge-tabs',
-      'tab-to-left',
-      'tab-to-right',
-      'toggle-pin',
+      'newTab',
+      'newTabLink',
+      'newTabBack',
+      'navigateTab',
+      'closeTab',
+      'closeOtherTabs',
+      'closeLeftTabs',
+      'closeRightTabs',
+      'undoClose',
+      'cloneTab',
+      'newWindow',
+      'newWindowLink',
+      'closeWindow',
+      'prevTab',
+      'nextTab',
+      'splitTabs',
+      'mergeTabs',
+      'tabToLeft',
+      'tabToRight',
+      'togglePin',
       'pin',
       'unpin',
     ],
@@ -635,29 +631,29 @@ const g = [
   {
     id: 'utilities',
     actions: [
-      'goto-top',
-      'goto-bottom',
-      'page-up',
-      'page-down',
+      'gotoTop',
+      'gotoBottom',
+      'pageUp',
+      'pageDown',
       'print',
-      'parent-dir',
-      'view-source',
-      'show-cookies',
-      'search-sel',
-      'zoom-in',
-      'zoom-out',
-      'zoom-zero',
-      'open-image',
-      'save-image',
-      'hide-image',
-      'zoom-img-in',
-      'zoom-img-out',
-      'zoom-img-zero',
-      'find-prev',
-      'find-next',
+      'parentDir',
+      'viewSource',
+      'showCookies',
+      'searchSel',
+      'zoomIn',
+      'zoomOut',
+      'zoomZero',
+      'openImage',
+      'saveImage',
+      'hideImage',
+      'zoomImgIn',
+      'zoomImgOut',
+      'zoomImgZero',
+      'findPrev',
+      'findNext',
       'copy',
-      'copy-link',
-      'toggle-bookmark',
+      'copyLink',
+      'toggleBookmark',
       'bookmark',
       'unbookmark',
     ],
@@ -666,29 +662,29 @@ const g = [
     id: 'other',
     actions: [
       'options',
-      'fullscreen-window',
-      'minimize-window',
-      'maximize-window',
-      'open-screenshot',
-      'save-screenshot',
-      'open-screenshot-full',
-      'save-screenshot-full',
-      'open-history',
-      'open-downloads',
-      'open-extensions',
-      'open-bookmarks',
+      'fullscreenWindow',
+      'minimizeWindow',
+      'maximizeWindow',
+      'openScreenshot',
+      'saveScreenshot',
+      'openScreenshotFull',
+      'saveScreenshotFull',
+      'openHistory',
+      'openDownloads',
+      'openExtensions',
+      'openBookmarks',
     ],
   },
 ];
 
 const m = () => {
-  chrome.runtime.getBackgroundPage((e) => {
+  chrome.runtime.getBackgroundPage((backgroundPage) => {
     for (var t = 0; t < g.length; t += 1) {
       var n = $(`.page[page=${g[t].id}]`);
       $('.action', n).remove();
       for (let s = 0; s < g[t].actions.length; s += 1) {
         var o = g[t].actions[s];
-        var a = e.contexts[o];
+        var a = backgroundPage.contexts[o];
         $('.actiongroup.disabled', n).append(
           $('<div class=action>')
             .attr('action', o)
@@ -721,7 +717,7 @@ const m = () => {
     t = 0;
     for (var o in settings.customactions) {
       const i = settings.customactions[o];
-      a = e.contexts[o];
+      a = backgroundPage.contexts[o];
       $('.actiongroup.disabled', n).append(
         $('<div class=action>')
           .attr('action', o)

@@ -1,4 +1,4 @@
-import { ImageMessage, LinkMessage } from '@/types.ts';
+import { ImageMessage, LinkMessage } from '@/types';
 
 export const stop = (): void => {
   window.stop();
